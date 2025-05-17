@@ -18,3 +18,5 @@ https://github.com/IoTAccessControl/ArkTSAnalysis/tree/main/TestApps
 2. 对比 ohos-typescript 和 原版typescript 的差异  
 https://www.npmjs.com/package/ohos-typescript?activeTab=readme  
 如果没有差异，我们基于Go的TypeScript编译器开发  
+以下是源码，npm包有一年没更新了，北航的ArkAnalyzer是基于这个库来做ArkTS语法分析：  
+https://gitee.com/openharmony/third_party_typescript
