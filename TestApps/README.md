@@ -1,7 +1,7 @@
 ### 项目说明
 
 1. codeLab_API  
-
+   https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_scenariofusionkit-arkts-components
 2. device-security-kit  
 
 3. NewsData  
