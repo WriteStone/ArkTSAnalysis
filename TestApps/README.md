@@ -36,5 +36,7 @@
     
    [实现应用免密登录的功能](https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_NEXT-WebCookie)
 
-10. 
+10. IntentsKit-codelab-Clientdemo-ArkTS
+
+    [意图框架服务（ArkTS）](https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_IntentsKit-codelab-Clientdemo-ArkTS)
 
