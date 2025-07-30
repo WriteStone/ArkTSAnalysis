@@ -1,0 +1,458 @@
+1、部分接口是4，3版本的，在5已被弃用
+2、使用preview预览
+
+1、
+AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS
+
+本地录音	本地录音	@ohos.multimedia.media.AudioRecorder.start(callback: AsyncCallback<void>): void	ohos.permission.MICROPHONE																						
+	本地录音	@ohos.multimedia.media.AVRecorder.start(callback: AsyncCallback<void>): void	ohos.permission.MICROPHONE																						
+	本地录音	@ohos.multimedia.audio.AudioCapturer.start(callback: AsyncCallback<void>): void	ohos.permission.MICROPHONE																						
+接收短信	接收短信	@ohos.commonEvent.subscribe;-->event:"usual.event.SMS_RECEIVE_COMPLETED"	ohos.permission.RECEIVE_SMS																						
+后台截屏/录屏	截屏	@ohos.screenshot.save(options?: ScreenshotOptions, callback: AsyncCallback<image.PixelMap>): void	ohos.permission.CAPTURE_SCREEN																						
+	录屏	@ohos.multimedia.media.AVRecorder.start(callback: AsyncCallback<void>): void	ohos.permission.CAPTURE_SCREEN
+ohos.permission.MICROPHONE																						
+拍照/摄像（打开摄像头）	打开相机	@ohos.multimedia.camera.CameraInput.open(): Promise<void>;	ohos.permission.CAMERA																						
+	拍照	@ohos.multimedia.camera.PhotoOutput.capture(setting?: camera.PhotoCaptureSetting): Promise<void>;	ohos.permission.CAMERA																						
+	摄像	ohos.multimedia.media.AVRecorder.start(callback: AsyncCallback<void>): void	ohos.permission.MICROPHONE
+ohos.permission.CAMERA																						
+
+实际使用了
+
+ 1. 本地录音 (Local Audio Recording)
+
+@ohos.multimedia.media (AudioRecorder)
+- **API:**
+  - `media.createAudioRecorder()`
+  - `audioRecorder.prepare(config)`
+  - `audioRecorder.start()`
+  - `audioRecorder.stop()`
+  - `audioRecorder.release()`
+- **Button Component:**
+  - `Button('录音 AudioRecorder')` -> `this.startAudioRecording()`
+  - `Button('停止录音')` -> `this.stopAudioRecording()`
+
+ @ohos.multimedia.media (AVRecorder)
+- **API:**
+  - `media.createAVRecorder()`
+  - `avRecorder.prepare(config)`
+  - `avRecorder.start()`
+  - `avRecorder.stop()`
+  - `avRecorder.release()`
+- **Button Component:**
+  - `Button('录音 AVRecorder')` -> `this.startAVRecording()`
+  - `Button('停止录制')` -> `this.stopAVRecording()`
+
+@ohos.multimedia.audio (AudioCapturer)
+- **API:**
+  - `audio.createAudioCapturer(options)`
+  - `audioCapturer.start()`
+  - `audioCapturer.stop()`
+  - `audioCapturer.release()`
+- **Button Component:**
+  - `Button('录音 AudioCapturer')` -> `this.startAudioCapturing()`
+  - `Button('停止采集')` -> `this.stopAudioCapturing()`
+
+---
+2. 屏幕捕获 (Screen Capture)
+
+@ohos.window & @ohos.multimedia.image
+- **API:**
+  - `window.getLastWindow()`
+  - `win.snapshot()`
+  - `image.createImagePacker()`
+  - `imagePacker.packing(pixelMap, options)`
+- **Button Component:**
+  - `Button('截屏')` -> `this.takeScreenshot()`
+
+@ohos.multimedia.media (AVRecorder for Screen Recording)
+- **API:**
+  - `media.createAVRecorder()`
+  - `avRecorder.prepare(config)`
+  - `avRecorder.start()`
+  - `avRecorder.stop()`
+  - `avRecorder.release()`
+- **Button Component:**
+  - `Button('录屏')` -> `this.startScreenRecording()`
+  - `Button('停止录屏')` -> `this.stopScreenRecording()`
+
+---
+
+3. 相机功能 (Camera Functionality)
+
+ @ohos.multimedia.camera
+- **API:**
+  - `camera.getCameraManager()`
+  - `manager.getSupportedCameras()`
+- **Button Component:**
+  - `Button('打开相机')` -> `this.openCamera()`
+
+ @kit.CameraKit & @kit.CoreFileKit
+- **API:**
+  - `cameraPicker.pick()`
+  - `fileUri.getUriFromPath()`
+- **Button Component:**
+  - `Button('拍照')` -> `this.takePhoto()`
+
+---
+
+4. 接收短信 (Receive SMS) - (Commented Out)
+
+ @ohos.commonEventManager
+- **API:**
+  - `commonEventManager.createSubscriber()`
+  - `commonEventManager.subscribe()`
+- **Button Component:**
+  - (Commented Out) `Button('接收短信')` -> `this.subscribeSMS()` 
+
+
+
+2、
+AdsKit-Codelab-Interstitial-ArkTS
+应该使用的
+
+开启/关闭位置服务	打开位置服务	@ohos.geolocation.requestEnableLocation(callback: AsyncCallback<void>): void;	ohos.permission.MANAGE_SECURE_SETTINGS																						
+	打开位置服务	@ohos.geoLocationManager.enableLocation(callback: AsyncCallback<void>): void;	ohos.permission.MANAGE_SECURE_SETTINGS																						
+获取地理位置	获取GPS定位信息	@ohos.geolocation.getCurrentLocation(request: CurrentLocationRequest, callback: AsyncCallback<Location>): void	ohos.permission.APPROXIMATELY_LOCATION
+ohos.permission.LOCATION																						
+	获取GPS定位信息	@ohos.geoLocationManager.getCurrentLocation(request: CurrentLocationRequest, callback: AsyncCallback<Location>): void	ohos.permission.APPROXIMATELY_LOCATION
+ohos.permission.LOCATION（可选）																						
+	获取GPS定位信息	@ohos.geolocation.getLastLocation(callback: AsyncCallback<Location>): void	ohos.permission.APPROXIMATELY_LOCATION
+ohos.permission.LOCATION（可选）																						
+	获取GPS定位信息	@ohos.geoLocationManager.getLastLocation(): Location	ohos.permission.APPROXIMATELY_LOCATION
+ohos.permission.LOCATION（可选）																						
+	获取GPS定位信息	@ohos.geoLocationManager.on(type: ‘locationChange’, request: LocationRequest, callback: Callback<Location>): void	ohos.permission.APPROXIMATELY_LOCATION
+ohos.permission.LOCATION（可选）																						
+	获取GPS定位信息	@ohos.geoLocation.on(type: ‘locationChange’, request: LocationRequest, callback: Callback<Location>): void	ohos.permission.APPROXIMATELY_LOCATION
+ohos.permission.LOCATION（可选）																						
+	获取小区信息	@ohos.telephony.radio->getCellInformation(callback: AsyncCallback<Array<CellInformation>>): void	ohos.permission.LOCATION
+ohos.permission.APPROXIMATELY_LOCATION																						
+读取用户本机号码	读取本机电话号码	@ohos.telephony.sim.getShowNumber(slotId: number, callback: AsyncCallback<string>): void	ohos.permission.GET_PHONE_NUMBERS
+ohos.permission.GET_TELEPHONY_STATE																						
+	读取本机电话号码	@ohos.telephony.sim.getSimAccountInfo(slotId: number, callback: AsyncCallback<IccAccountInfo>): void	ohos.permission.GET_TELEPHONY_STATE																						
+	读取本机电话号码	@ohos.telephony.sim.getActiveSimAccountInfoList(callback: AsyncCallback<Array<IccAccountInfo>>): void	 ohos.permission.GET_TELEPHONY_STATE																						
+	读取本机电话号码	@ohos.telephony.sim.getSimTelephoneNumber(slotId: number, callback: AsyncCallback<string>): void	ohos.permission.GET_PHONE_NUMBERS																						
+实际使用的，
+
+ 已实现功能的API和按钮组件
+定位服务 (Location Services)
+
+- **功能**: 开启/关闭位置服务
+- **按钮**: Enable Location Service
+- **API**: `geolocation.requestEnableLocation()`
+- **权限**: `ohos.permission.MANAGE_SECURE_SETTINGS` (由系统处理，应用无需直接请求)
+
+- **功能**: 获取当前地理位置
+- **按钮**: Get Current Location
+- **API**: `geolocation.getCurrentLocation(request: CurrentLocationRequest)`
+- **权限**: `ohos.permission.LOCATION`, `ohos.permission.APPROXIMATELY_LOCATION`
+
+- **功能**: 获取最后一次可知位置
+- **按钮**: Get Last Location
+- **API**: `geolocation.getLastLocation()`
+- **权限**: `ohos.permission.LOCATION`, `ohos.permission.APPROXIMATELY_LOCATION`
+
+- **功能**: 监听位置变化
+- **按钮**: Listen to Location Changes
+- **API**: `geolocation.on('locationChange', request: LocationRequest, callback)`
+- **权限**: `ohos.permission.LOCATION`, `ohos.permission.APPROXIMATELY_LOCATION`
+
+- **功能**: 获取小区信息
+- **按钮**: Get Cell Information
+- **API**: `radio.getCellInformation()`
+- **权限**: `ohos.permission.LOCATION`, `ohos.permission.APPROXIMATELY_LOCATION`
+  **注意**: 此API在API 12中不可用，已做兼容性提示。
+
+---
+已编码但未启用的API和按钮组件（由于权限问题被注释）
+
+电话与SIM卡信息 (Phone & SIM Information)
+
+- **功能**: 读取本机电话号码
+- **按钮**: Get Phone Number
+- **API**: `sim.getShowNumber(slotId: number, callback: AsyncCallback<string>)`
+- **权限**: `ohos.permission.GET_PHONE_NUMBERS`, `ohos.permission.GET_TELEPHONY_STATE`
+
+- **功能**: 获取SIM卡账户信息
+- **按钮**: Get SIM Account Info
+- **API**: `sim.getSimAccountInfo(slotId: number, callback: AsyncCallback<IccAccountInfo>)`
+- **权限**: `ohos.permission.GET_TELEPHONY_STATE`
+
+- **功能**: 获取激活的SIM卡列表
+- **按钮**: Get Active SIM Info
+- **API**: `sim.getActiveSimAccountInfoList(callback: AsyncCallback<Array<IccAccountInfo>>)`
+- **权限**: `ohos.permission.GET_TELEPHONY_STATE`
+
+- **功能**: 读取SIM卡内预存的电话号码
+- **按钮**: Get SIM Telephone Number
+- **API**: `sim.getSimTelephoneNumber(slotId: number, callback: AsyncCallback<string>)`
+- **权限**: `ohos.permission.GET_PHONE_NUMBERS` 
+
+
+
+3、
+
+codeLab_API
+
+应该使用，
+读取电话本数据	获取联系人列表	@ohos.data.dataShare'.dataShareHelper.query-->URI:datashare:///com.ohos.contactsdataability	ohos.permission.READ_CONTACTS																						
+	获取联系人列表	@ohos.contact.queryContact(context: Context, key: string, callback: AsyncCallback<Contact>): void	ohos.permission.READ_CONTACTS																						
+	获取联系人列表	@ohos.contact.queryContacts(context: Context, callback: AsyncCallback<Array<Contact>>): void	ohos.permission.READ_CONTACTS																						
+	获取联系人列表	@ohos.contact.queryContactsByPhoneNumber(context: Context, phoneNumber: string, callback: AsyncCallback<Array<Contact>>): void	ohos.permission.READ_CONTACTS																						
+	获取联系人列表	@ohos.contact.queryContactsByEmail(context: Context, email: string, callback: AsyncCallback<Array<Contact>>): void	ohos.permission.READ_CONTACTS																						
+	获取群组	@ohos.contact->queryGroups(context: Context, callback: AsyncCallback<Array<Group>>): void	ohos.permission.READ_CONTACTS																						
+读取通话记录	获取通话记录	@ohos.data.dataShare'.dataShareHelper.query-->dataability://com.ohos.calllogability	ohos.permission.READ_CALL_LOG																						
+读取短信数据	获取短信	@ohos.telephony.sms.getAllSimMessages(slotId: number, callback: AsyncCallback<Array<SimShortMessage>>): void	ohos.permission.READ_MESSAGES																						
+	获取短信	ohos.data.dataShare.dataShareHelper.query-->URI:datashare:///com.ohos.smsmmsability	ohos.permission.READ_MESSAGES																						
+读取彩信数据	获取彩信	ohos.data.dataShare.dataShareHelper.query-->URI:datashare:///com.ohos.smsmmsability	ohos.permission.READ_WHOLE_CALENDAR或
+ohos.permission.READ_CALENDAR																						
+读取日程表	获取日程表记录	@ohos.data.dataShare'.dataShareHelper.query-->URI:"datashare:///calendardata"	ohos.permission.READ_WHOLE_CALENDAR或
+ohos.permission.READ_CALENDAR																						
+	获取日程表记录	@ohos.data.dataShare'.dataShareHelper.query-->URI:"datashare:///calendardata_whole"	ohos.permission.READ_WHOLE_CALENDAR或
+ohos.permission.READ_CALENDAR																						
+	获取日程表记录	ohos.calendarManager.Calendar.getEvents(callback: AsyncCallback<Event[]>): void	ohos.permission.READ_WHOLE_CALENDAR或
+ohos.permission.READ_CALENDAR														
+实际使用，
+根据关键字查询联系人	@ohos.contact.queryContact(context: Context, key: string, callback: AsyncCallback<Contact>): void	ohos.permission.READ_CONTACTS
+查询所有联系人	@ohos.contact.queryContacts(context: Context, callback: AsyncCallback<Array<Contact>>): void	ohos.permission.READ_CONTACTS
+按电话号码查询联系人	@ohos.contact.queryContactsByPhoneNumber(context: Context, phoneNumber: string, callback: AsyncCallback<Array<Contact>>): void	ohos.permission.READ_CONTACTS
+按电子邮件查询联系人	@ohos.contact.queryContactsByEmail(context: Context, email: string, callback: AsyncCallback<Array<Contact>>): void	ohos.permission.READ_CONTACTS
+查询联系人分组	@ohos.contact.queryGroups(context: Context, callback: AsyncCallback<Array<Group>>): void	ohos.permission.READ_CONTACTS
+选择文件	@ohos.file.picker.DocumentViewPicker.select(options: DocumentSelectOptions): Promise<Array<string>>	无需特殊权限
+打开文件	@ohos.file.fs.openSync(path: string, mode: number): File	无需特殊权限
+获取文件状态	@ohos.file.fs.statSync(fd: number): Stat	无需特殊权限
+关闭文件	@ohos.file.fs.closeSync(fd: number): void	无需特殊权限
+显示提示消息	@ohos.promptAction.showToast(options: ShowToastOptions): void	无需特殊权限
+获取联系人(DataShare)	@ohos.data.dataShare.createDataShareHelper(context, 'datashare:///com.ohos.contactsdataability')	ohos.permission.READ_CONTACTS
+获取通话记录	@ohos.data.dataShare.createDataShareHelper(context, 'dataability://com.ohos.calllogability')	ohos.permission.READ_CALL_LOG
+获取SIM卡短信	@ohos.telephony.sms.getAllSimMessages(slotId: number, callback: AsyncCallback<Array<SimShortMessage>>): void	ohos.permission.READ_MESSAGES
+获取短信数据	@ohos.data.dataShare.createDataShareHelper(context, 'datashare:///com.ohos.smsmmsability')	ohos.permission.READ_MESSAGES
+获取彩信数据	@ohos.data.dataShare.createDataShareHelper(context, 'datashare:///com.ohos.smsmmsability')	ohos.permission.READ_MESSAGES
+获取日历数据	@ohos.data.dataShare.createDataShareHelper(context, 'datashare:///calendardata')	ohos.permission.READ_CALENDAR
+获取完整日历数据	@ohos.data.dataShare.createDataShareHelper(context, 'datashare:///calendardata_whole')	ohos.permission.READ_CALENDAR
+获取日历事件	@ohos.calendarManager.Calendar.getEvents(callback: AsyncCallback<Event[]>): void	ohos.permission.READ_CALENDAR 
+								
+
+
+4、
+
+device-security-kit_-codelab_-clientdemo_-arkts-master
+应该使用，
+
+读取媒体资源	获取图片和视频资源	@ohos.file.photoAccessHelper.getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>	ohos.permission.READ_IMAGEVIDEO																						
+	获取图片	ohos.file.photoAccessHelper.photoAsset.getReadOnlyFd(callback: AsyncCallback<number>): void	ohos.permission.READ_IMAGEVIDEO																						
+	读取缩略图	ohos.file.photoAccessHelper.photoAsset.getThumbnail(callback: AsyncCallback<image.PixelMap>): void	ohos.permission.READ_IMAGEVIDEO																						
+	读取相册图片	ohos.file.photoAccessHelper.album.getAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<PhotoAsset>>): void	ohos.permission.READ_IMAGEVIDEO																						
+	获取图片	ohos.filemanagement.userFileManager.getPhotoAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO																						
+	获取音频	ohos.filemanagement.userFileManager.getAudioAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO																						
+	获取相册图片	ohos.filemanagement.userFileManager.album.getPhotoAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO																						
+	获取缩略图	ohos.filemanagement.userFileManager.privateAlbum.getPhotoAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO																						
+	获取缩略图	ohos.filemanagement.userFileManager.fileAssets.getThumbnail(callback: AsyncCallback<image.PixelMap>): void	ohos.permission.READ_IMAGEVIDEO																						
+实际使用
+
+获取图片和视频资源	@ohos.file.photoAccessHelper.getAssets(options: FetchOptions): Promise<FetchResult<PhotoAsset>>	ohos.permission.READ_IMAGEVIDEO
+获取图片	ohos.file.photoAccessHelper.photoAsset.getReadOnlyFd(callback: AsyncCallback<number>): void	ohos.permission.READ_IMAGEVIDEO
+读取缩略图	ohos.file.photoAccessHelper.photoAsset.getThumbnail(callback: AsyncCallback<image.PixelMap>): void	ohos.permission.READ_IMAGEVIDEO
+读取相册图片	ohos.file.photoAccessHelper.album.getAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<PhotoAsset>>): void	ohos.permission.READ_IMAGEVIDEO
+获取图片	ohos.filemanagement.userFileManager.getPhotoAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO
+获取音频	ohos.filemanagement.userFileManager.getAudioAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO
+获取相册图片	ohos.filemanagement.userFileManager.album.getPhotoAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO
+获取缩略图	ohos.filemanagement.userFileManager.privateAlbum.getPhotoAssets(options: FetchOptions, callback: AsyncCallback<FetchResult<FileAsset>>): void	ohos.permission.READ_IMAGEVIDEO
+获取缩略图	ohos.filemanagement.userFileManager.fileAssets.getThumbnail(callback: AsyncCallback<image.PixelMap>): void	ohos.permission.READ_IMAGEVIDEO
+获取设备Token	devCertMangerModel.displayDeviceToken(callback: (result: string) => void): void	N/A 
+
+
+5、
+
+Health_Service_Kit_CodeLab
+
+读取设备唯一可识别信息（IMEI 和
+设备 MAC 地址）	读IMEI	@ohos.telephony.radio.getIMEI(slotId?: number): Promise<string>;	ohos.permission.GET_TELEPHONY_STATE																						
+	读IMEI	@ohos.enterprise.deviceInfo->getDeviceInfo(admin: Want, label: string): string	ohos.permission.ENTERPRISE_GET_DEVICE_INFO																						
+	获取mac地址	@ohos.wifi.getDeviceMacAddress(): string[]	 ohos.permission.GET_WIFI_LOCAL_MAC
+ohos.permission.GET_WIFI_INFO																						
+	获取mac地址	@ohos.wifiManager.getDeviceMacAddress(): string[]	 ohos.permission.GET_WIFI_LOCAL_MAC
+ohos.permission.GET_WIFI_INFO																						
+	获取mac地址	@ohos.enterprise.networkManager->getMac(admin: Want, networkInterface: string, callback: AsyncCallback<string>): void	ohos.permission.ENTERPRISE_MANAGE_NETWORK																						
+	获取mac地址	@ohos.bluetooth.access->getLocalAddress	ohos.permission.ACCESS_BLUETOOTH
+ohos.permission.GET_BLUETOOTH_LOCAL_MAC																						
+读取应用软件列表 	读应用软件列表	@ohos.bundle.getAllBundleInfo(bundleFlag: BundleFlag, userId?: number) : Promise<Array<BundleInfo>>;	ohos.permission.GET_BUNDLE_INFO_PRIVILEGED																						
+	读应用软件列表	@ohos.bundle.getAllApplicationInfo(bundleFlag: BundleFlag, userId?: number) : Promise<Array<BundleInfo>>;	ohos.permission.GET_BUNDLE_INFO_PRIVILEGED																						
+	读应用软件列表	@ohos.bundle.bundleManager.getAllBundleInfo(bundleFlags: number, userId: number, callback:	ohos.permission.GET_INSTALLED_BUNDLE_LIST																						
+	读应用软件列表	@ohos.bundle.bundleManager.getAllApplicationInfo(appFlags: number, userId: number, callback:	ohos.permission.GET_INSTALLED_BUNDLE_LIST																						
+
+实际使用，
+
+Get MAC Address	@ohos.wifi.getMacAddress(): string	ohos.permission.GET_WIFI_LOCAL_MAC
+Get Installed Apps	@ohos.bundle.bundleManager.getBundleInfo(bundleName: string, bundleFlags: number): Promise<BundleInfo>	ohos.permission.GET_BUNDLE_INFO_PRIVILEGED 
+
+6、
+
+map-kit_-codelab_-demo-master
+应该，
+发送短信	发送短信	@ohos.telephony.sms.sendMessage(options: SendMessageOptions): void	ohos.permission.SEND_MESSAGES																						
+	发送短信	@ohos.telephony.sms.sendShortMessage(options: SendMessageOptions, callback: AsyncCallback<void>): void	ohos.permission.SEND_MESSAGES																						
+开启无线外围接口 	开启蓝牙	@ohos.bluetooth.enableBluetooth(): boolean;	ohos.permission.ACCESS_BLUETOOTH																						
+	开启蓝牙	@ohos.bluetoothManager.enableBluetooth(): boolean;	ohos.permission.ACCESS_BLUETOOTH																						
+	开启蓝牙	@ohos.bluetooth.access.enableBluetooth(): boolean;	ohos.permission.ACCESS_BLUETOOTH																						
+	开启NFC	@ohos.nfc.controller.openNfc(): boolean	 ohos.permission.MANAGE_SECURE_SETTINGS																						
+	开启NFC	@ohos.nfc.controller.enableNfc(): void	 ohos.permission.MANAGE_SECURE_SETTINGS																						
+删除电话本数据	删除联系人	@ohos.data.dataShare'.dataShareHelper.delete-->URI:"datashare:///com.ohos.contactsdataability	ohos.permission.WRITE_CONTACTS																						
+	删除联系人	@ohos.contact.deleteContact(context: Context, key: string, callback: AsyncCallback<void>): void	ohos.permission.WRITE_CONTACTS																						
+删除通话记录	删除通话记录	@ohos.data.dataShare'.dataShareHelper.delete-->dataability:///com.ohos.calllogability	ohos.permission.WRITE_CALL_LOG																						
+删除短信数据	删除短信	@ohos.telephony.sms.delSimMessage(slotId: number, msgIndex: number, callback: AsyncCallback<void>): void	ohos.permission.RECEIVE_SMS																						
+实际，
+
+ 发送短信	@ohos.telephony.sms.sendMessage(options: SendMessageOptions): Promise<void>	ohos.permission.SEND_MESSAGES
+开启蓝牙	@ohos.bluetooth.enableBluetooth(): boolean	ohos.permission.ACCESS_BLUETOOTH
+开启NFC	@ohos.nfc.controller.enableNfc(): void	ohos.permission.MANAGE_SECURE_SETTINGS
+删除联系人	@ohos.contact.deleteContact(context: Context, key: string): Promise<void>	ohos.permission.WRITE_CONTACTS
+删除通话记录	(暂无可用API)	ohos.permission.WRITE_CALL_LOG
+删除短信	(API已废弃)	ohos.permission.RECEIVE_SMS
+
+
+
+
+
+
+7、
+MultiDeviceCommunication-master
+
+应该，
+删除日程表数据 	批量删除日程	ohos.calendarManager.Calendar.deleteEvents(ids: number[], callback: AsyncCallback<void>): void	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	删除日程	ohos.calendarManager.Calendar.deleteEvent(id: number, callback: AsyncCallback<void>): void	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	删除日程	@ohos.data.dataShare'.dataShareHelper.delete-->URI:"datashare:///calendardata_whole"	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	删除日程	@ohos.data.dataShare'.dataShareHelper.delete-->URI:"datashare:///calendardata"	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+修改用户电话本数据（包含新增）	新增数据	@ohos.data.dataShare'.dataShareHelper.insert-->URI:datashare:///com.ohos.contactsdataability	ohos.permission.WRITE_CONTACTS																						
+	批量新增数据	@ohos.data.dataShare'.dataShareHelper.batchInsert-->URI:datashare:///com.ohos.contactsdataability	ohos.permission.WRITE_CONTACTS																						
+	新增联系人	@ohos.contact.addContact(context: Context, contact: Contact, callback: AsyncCallback<number>): void	ohos.permission.WRITE_CONTACTS																						
+	修改联系人	@ohos.contact.updateContact(context: Context, contact: Contact, callback: AsyncCallback<void>): void	ohos.permission.WRITE_CONTACTS
+ohos.permission.READ_CONTACTS																						
+	修改联系人	@ohos.data.dataShare'.dataShareHelper.update-->URI:datashare:///com.ohos.contactsdataability	ohos.permission.WRITE_CONTACTS
+ohos.permission.READ_CONTACTS																						
+
+实际，
+删除日历事件	@kit.CalendarKit.calendarManager.getCalendarManager(context).getCalendar().deleteEvents(eventIds: number[]): Promise<void>	ohos.permission.WRITE_CALENDAR
+删除单个日历事件	@kit.CalendarKit.calendarManager.getCalendarManager(context).getCalendar().deleteEvent(eventId: number): Promise<void>	ohos.permission.WRITE_CALENDAR
+获取所有日历	@kit.CalendarKit.calendarManager.getCalendarManager(context).getAllCalendars(): Promise<Array<Calendar>>	ohos.permission.READ_CALENDAR
+删除整个日历	@kit.CalendarKit.calendarManager.getCalendarManager(context).deleteCalendar(calendar: Calendar): Promise<boolean>	ohos.permission.WRITE_CALENDAR
+获取日历事件	@kit.CalendarKit.calendarManager.getCalendarManager(context).getCalendar().getEvents(): Promise<Array<CalendarEvent>>	ohos.permission.READ_CALENDAR
+删除普通类型日历事件	@kit.CalendarKit.calendarManager.getCalendarManager(context).getCalendar().deleteEvents(eventIds: number[]): Promise<void>	ohos.permission.WRITE_CALENDAR
+添加联系人	@ohos.contact.addContact(context: common.UIAbilityContext, contact: Contact): Promise<number>	ohos.permission.WRITE_CONTACTS
+批量添加联系人	@ohos.contact.addContact(context: common.UIAbilityContext, contact: Contact): Promise<number>	ohos.permission.WRITE_CONTACTS
+添加详细联系人	@ohos.contact.addContact(context: common.UIAbilityContext, detailedContact: Contact): Promise<number>	ohos.permission.WRITE_CONTACTS
+更新联系人	@ohos.contact.updateContact(context: common.UIAbilityContext, contactId: number, updatedContact: Contact): Promise<void>	ohos.permission.WRITE_CONTACTS
+通过DataShare更新联系人	@ohos.data.dataShare.createDataShareHelper(context, 'com.ohos.contactsdataability').update(uri: string, valuesBucket: ValuesBucket, predicates: DataSharePredicates): Promise<number>	ohos.permission.WRITE_CONTACTS 
+
+
+
+
+8、
+NewsData
+
+应该，
+修改通话记录（包含新增）	批量新增通话记录	@ohos.data.dataShare'.dataShareHelper.batchInsert-->dataability:///com.ohos.calllogability	ohos.permission.WRITE_CALL_LOG
+ohos.permission.READ_CALL_LOG																						
+	新增通话记录	@ohos.data.dataShare'.dataShareHelper.insert-->dataability:///com.ohos.calllogability	ohos.permission.WRITE_CALL_LOG																						
+	修改通话记录	@ohos.data.dataShare'.dataShareHelper.update-->dataability:///com.ohos.calllogability	ohos.permission.WRITE_CALL_LOG
+ohos.permission.READ_CALL_LOG																						
+修改短信数据（包含新增）	添加SIM卡消息	@ohos.telephony.sms.addSimMessage(options: SimMessageOptions, callback: AsyncCallback<void>): void	ohos.permission.RECEIVE_SMS
+ohos.permission.SEND_MESSAGES																						
+	更新SIM卡消息	@ohos.telephony.sms.updateSimMessage(options: UpdateSimMessageOptions, callback: AsyncCallback<void>): void	ohos.permission.RECEIVE_SMS
+ohos.permission.SEND_MESSAGES																						
+实际：
+
+批量新增通话记录	@ohos.telephony.call.makeCall(phoneNumber: string): Promise<void>	ohos.permission.PLACE_CALL
+新增通话记录	@ohos.telephony.call.makeCall(phoneNumber: string): Promise<void>	ohos.permission.PLACE_CALL
+修改通话记录	(No direct API available, simulated)	ohos.permission.WRITE_CALL_LOG
+发送短信	@ohos.telephony.sms.sendMessage(options: SendMessageOptions): Promise<void>	ohos.permission.SEND_MESSAGES
+接收短信	(No direct API to trigger, simulated)	ohos.permission.RECEIVE_SMS 
+
+9、
+
+PaymentKit-CodelabDemo
+
+修改日程表数据（包含新增）	新增日程	@ohos.calendarManager.Calendar.addEvent(event: Event, callback: AsyncCallback<number>): void	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	新增日程	@ohos.calendarManager.Calendar.addEvents(events: Event[], callback: AsyncCallback<void>): void	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	新增日程	@ohos.data.dataShare'.dataShareHelper.insert-->URI:"datashare:///calendardata_whole"	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	新增日程	@ohos.data.dataShare'.dataShareHelper.insert-->URI:"datashare:///calendardata"	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	批量新增日程	@ohos.data.dataShare'.dataShareHelper.batchInsert-->URI:"datashare:///calendardata_whole"	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	批量新增日程	@ohos.data.dataShare'.dataShareHelper.batchInsert-->URI:"datashare:///calendardata"	ohos.permission.WRITE_WHOLE_CALENDAR或
+ohos.permission.WRITE_CALENDAR																						
+	更新日程	@ohos.calendarManager.Calendar.updateEvent(event: Event, callback: AsyncCallback<void>): void	ohos.permission.WRITE_WHOLE_CALENDAR
+ohos.permission.READ_WHOLE_CALENDAR 或
+ohos.permission.WRITE_CALENDAR
+ohos.permission.READ_CALENDAR																						
+	更新日程	@ohos.data.dataShare'.dataShareHelper.update-->URI:"datashare:///calendardata_whole"	ohos.permission.WRITE_WHOLE_CALENDAR
+ohos.permission.READ_WHOLE_CALENDAR 或
+ohos.permission.WRITE_CALENDAR
+ohos.permission.READ_CALENDAR																						
+	更新日程	@ohos.data.dataShare'.dataShareHelper.update-->URI:"datashare:///calendardata"	ohos.permission.WRITE_WHOLE_CALENDAR
+ohos.permission.READ_WHOLE_CALENDAR 或
+ohos.permission.WRITE_CALENDAR
+ohos.permission.READ_CALENDAR		
+
+实际
+
+功能说明	API	所需权限
+添加日程	@ohos.calendarManager.Calendar.addEvent(event: Event, callback: AsyncCallback<number>): void	ohos.permission.WRITE_CALENDAR
+批量添加日程	@ohos.calendarManager.Calendar.addEvents(events: Event[], callback: AsyncCallback<void>): void	ohos.permission.WRITE_CALENDAR
+更新日程	@ohos.calendarManager.Calendar.updateEvent(event: Event, callback: AsyncCallback<void>): void	ohos.permission.WRITE_CALENDAR和ohos.permission.READ_CALENDAR
+支付功能(Promise方式)	@kit.PaymentKit.paymentService.requestPayment(context: common.UIAbilityContext, orderStr: string): Promise<void>	无需特殊权限
+支付功能(回调方式)	@kit.PaymentKit.paymentService.requestPayment(context: common.UIAbilityContext, orderStr: string, callback: AsyncCallback<void>): void	无需特殊权限
+签约功能(Promise方式)	@kit.PaymentKit.paymentService.requestContract(context: common.UIAbilityContext, contractStr: string): Promise<void>	无需特殊权限
+签约功能(回调方式)	@kit.PaymentKit.paymentService.requestContract(context: common.UIAbilityContext, contractStr: string, callback: AsyncCallback<void>): void	无需特殊权限
+
+																		
+10、
+
+WebCookie
+
+
+应该
+ 移动通信网络数据连接传送数据	发起HTTP网络请求	@ohos.net.http.request(url: string, callback: AsyncCallback<HttpResponse>): void	ohos.permission.INTERNET																						
+	通过UDPSocket连接发送数据	@ohos.net.socket.send(options: UDPSendOptions, callback: AsyncCallback<void>): void	ohos.permission.INTERNET																						
+	根据URI发送网络请求	@ohos.net.http.requestInStream(url: string, callback: AsyncCallback<number>): void	ohos.permission.INTERNET																						
+WLAN 网络连接传送数据	发起HTTP网络请求	@ohos.net.http.request(url: string, callback: AsyncCallback<HttpResponse>): void	ohos.permission.INTERNET																						
+	通过UDPSocket连接发送数据	@ohos.net.socket.send(options: UDPSendOptions, callback: AsyncCallback<void>): void	ohos.permission.INTERNET																						
+	根据URI发送网络请求	@ohos.net.http.requestInStream(url: string, callback: AsyncCallback<number>): void	ohos.permission.INTERNET																						
+无线外围接口传送数据 	通过socket向远端发送数据	@ohos.bluetoothManager.sppWrite(clientSocket: number, data: ArrayBuffer): void	ohos.permission.ACCESS_BLUETOOTH																						
+	通过socket向远端发送数据	@ohos.bluetooth.sppWrite(clientSocket: number, data: ArrayBuffer): boolean	ohos.permission.ACCESS_BLUETOOTH																						
+	通过socket向远端发送数据	@ohos.bluetooth.socket.sppWrite(clientSocket: number, data: ArrayBuffer): void	ohos.permission.ACCESS_BLUETOOTH																						
+拨打电话	拨打电话	@ohos.telephony.call.dialCall(phoneNumber: string, callback: AsyncCallback<void>): void	ohos.permission.PLACE_CALL																						
+	拨打电话	@ohos.telephony.call.dial(phoneNumber: string, callback: AsyncCallback<boolean>): void	ohos.permission.PLACE_CALL																						
+发送彩信	发送彩信	ohos.telephony.sms.sendMms(context: Context, mmsParams: MmsParams, callback: AsyncCallback<void>): void	ohos.permission.SEND_MESSAGE																						
+开启移动通信网络连接	启用蜂窝数据服务	@ohos.telephony.data.enableCellularData(callback: AsyncCallback<void>): void	ohos.permission.SET_TELEPHONY_STATE																						
+开启 WLAN	使能WLAN	@ohos.wifi.enableWifi(): boolean	ohos.permission.SET_WIFI_INFO
+ohos.permission.MANAGE_WIFI_CONNECTION																						
+	使能WLAN	@ohos.wifiManager.enableWifi(): void	ohos.permission.SET_WIFI_INFO
+ohos.permission.MANAGE_WIFI_CONNECTION																						
+
+
+实际
+
+HTTP 请求(回调)	@ohos.net.http.createHttp().request(url: string, callback: AsyncCallback<HttpResponse>): void	不需要特殊权限
+
+HTTP 请求(流)	@ohos.net.http.createHttp().requestInStream(url: string): Promise<ResponseCode>	不需要特殊权限
+
+蓝牙 SPP 写入	@ohos.bluetoothManager (未完全实现)	ohos.permission.ACCESS_BLUETOOTH
+
+拨打电话	@ohos.telephony.call.makeCall(phoneNumber: string, callback: AsyncCallback<void>): void	ohos.permission.PLACE_CALL
+
+发送短信	@ohos.telephony.sms.sendMessage(options: SendMessageOptions): void	ohos.permission.SEND_MESSAGES
+
+启用蜂窝数据	@ohos.telephony.data.setDataRoamingEnabled(slotId: number, enable: boolean): Promise<void>	ohos.permission.SET_TELEPHONY_STATE
+
+启用/禁用 WiFi	@ohos.wifiManager.isWifiActive(): boolean
+@ohos.wifiManager.disconnect(): void
+@ohos.wifiManager.enableWifi(): Promise<void>	ohos.permission.SET_WIFI_INFO, ohos.permission.MANAGE_WIFI_CONNECTION
+
+权限请求	@ohos.abilityAccessCtrl.createAtManager().requestPermissionsFromUser(context: Context, permissions: Array<Permissions>): Promise<void>	不需要特殊权限 
