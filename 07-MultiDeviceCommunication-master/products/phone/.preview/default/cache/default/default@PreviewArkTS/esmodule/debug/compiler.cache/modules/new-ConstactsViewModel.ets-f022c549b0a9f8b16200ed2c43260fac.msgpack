@@ -1,0 +1,93 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ1const ContactsListData = [
+    { name: { "id": 50331728, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: '#Alan', icon: { "id": 50331713, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331727, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'AQin', icon: { "id": 50331713, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331729, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'CaiLan', icon: { "id": 50331871, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331731, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'Deng', icon: { "id": 50331720, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331742, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'excel', icon: { "id": 50331871, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331732, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'FanYi', icon: { "id": 50331871, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331733, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'FenFen', icon: { "id": 50331871, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331743, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'ge', icon: { "id": 50331873, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331743, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'Idea', icon: { "id": 50331873, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331733, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'jack', icon: { "id": 50331713, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331729, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'kat', icon: { "id": 50331713, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331734, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'lily', icon: { "id": 50331891, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331734, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'LiX', icon: { "id": 50331898, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331735, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'Ma', icon: { "id": 50331891, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331735, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'nie', icon: { "id": 50331723, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331732, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'tom', icon: { "id": 50331712, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331731, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'Zhang', icon: { "id": 50331766, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331729, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'Wang', icon: { "id": 50331714, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+    { name: { "id": 50331729, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, en_name: 'Zo', icon: { "id": 50331709, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } },
+];
+const Alphabets = ['#', 'â˜†', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+    'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+export { ContactsListData, Alphabets };
+//# sourceMappingURL=ConstactsViewModel.js.mapÂÙŠC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\viewmodel\ConstactsViewModel.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¤homeÃÂÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeÙNC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master¤home¥1.0.0ÔrC’§pkgNameªpkgVersion¤home¥1.0.0‘ÔrD’²hostDependencyName®hostModuleName¿../viewmodel/ConstactsViewModel¤homeÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeÃÃÚ
+?/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+interface ContactsDataInterface {
+  name: Resource;
+  en_name: string;
+  icon: Resource;
+}
+
+const ContactsListData: ContactsDataInterface[] = [
+  { name: $r('app.string.Alan'), en_name: '#Alan', icon: $r('app.media.avatar1') },
+  { name: $r('app.string.AQin'), en_name: 'AQin', icon: $r('app.media.avatar1') },
+  { name: $r('app.string.CaiLan'), en_name: 'CaiLan', icon: $r('app.media.avatar2') },
+  { name: $r('app.string.Deng'), en_name: 'Deng', icon: $r('app.media.avatar3') },
+  { name: $r('app.string.excel'), en_name: 'excel', icon: $r('app.media.avatar2') },
+  { name: $r('app.string.FanYi'), en_name: 'FanYi', icon: $r('app.media.avatar2') },
+  { name: $r('app.string.FenFen'), en_name: 'FenFen', icon: $r('app.media.avatar2') },
+  { name: $r('app.string.ge'), en_name: 'ge', icon: $r('app.media.avatar4') },
+  { name: $r('app.string.ge'), en_name: 'Idea', icon: $r('app.media.avatar4') },
+  { name: $r('app.string.FenFen'), en_name: 'jack', icon: $r('app.media.avatar1') },
+  { name: $r('app.string.CaiLan'), en_name: 'kat', icon: $r('app.media.avatar1') },
+  { name: $r('app.string.LiX'), en_name: 'lily', icon: $r('app.media.avatar11') },
+  { name: $r('app.string.LiX'), en_name: 'LiX', icon: $r('app.media.avatar8') },
+  { name: $r('app.string.Ma'), en_name: 'Ma', icon: $r('app.media.avatar11') },
+  { name: $r('app.string.Ma'), en_name: 'nie', icon: $r('app.media.avatar5') },
+  { name: $r('app.string.FanYi'), en_name: 'tom', icon: $r('app.media.avatar10') },
+  { name: $r('app.string.Deng'), en_name: 'Zhang', icon: $r('app.media.avatar6') },
+  { name: $r('app.string.CaiLan'), en_name: 'Wang', icon: $r('app.media.avatar7') },
+  { name: $r('app.string.CaiLan'), en_name: 'Zo', icon: $r('app.media.avatar9') },
+];
+
+const Alphabets: string[] = ['#', 'â˜†', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+  'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+export { ContactsDataInterface, ContactsListData, Alphabets };ÀA“ÔrE–§version¤fileªsourceRoot§sources¥names¨mappingsµConstactsViewModel.js ‘¶ConstactsViewModel.etsÜ ””   ” ” ” 2œ” ” ”
+ ”Ì… ”Ì‡ !”Ì (”Ì *”Ì— 1”Ì™ 3”Ì 7”Í ÌP”Í ÌRœ” ” ”
+ ”Ì… ”Ì‡ !”Ì (”Ì *”Ì– 0”Ì˜ 2”Ìœ 6”Í ÌO”Í ÌQœ” ” ”
+ ”Ì… !”Ì‡ #”Ì *”Ì ,”Ì˜ 4”Ìš 6”Ì :”Í ÌS”Í ÌUœ” ” ”
+ ”Ì… ”Ì‡ !”Ì (”Ì *”Ì– 0”Ì˜ 2”Ìœ 6”Í ÌO”Í ÌQœ” ” ”
+ ”Ì…  ”Ì‡ "”Ì )”Ì +”Ì— 2”Ì™ 4”Ì 8”Í ÌQ”Í ÌSœ” ” ”
+ ”Ì…  ”Ì‡ "”Ì )”Ì +”Ì— 2”Ì™ 4”Ì 8”Í ÌQ”Í ÌSœ” ” ”
+ ”Ì… !”Ì‡ #”Ì *”Ì ,”Ì˜ 4”Ìš 6”Ì :”Í ÌS”Í ÌUœ” ” ”
+ ”Ì… ”Ì‡ ”Ì &”Ì (”Ì” ,”Ì– .”Ìš 2”Í ÌK”Í ÌMœ” ” ”
+ ”Ì… ”Ì‡ ”Ì &”Ì (”Ì– .”Ì˜ 0”Ìœ 4”Í ÌM”Í ÌOœ” ” ”
+ ”Ì… !”Ì‡ #”Ì *”Ì ,”Ì– 2”Ì˜ 4”Ìœ 8”Í ÌQ”Í ÌSœ”  ”  ”
+  ”Ì…  !”Ì‡  #”Ì  *”Ì  ,”Ì•  1”Ì—  3”Ì›  7”Í  ÌP”Í  ÌRœ” !” !”
+ !”Ì… !”Ì‡ ! ”Ì !'”Ì !)”Ì– !/”Ì˜ !1”Ìœ !5”Í !ÌO”Í !ÌQœ” "” "”
+ "”Ì… "”Ì‡ " ”Ì "'”Ì ")”Ì• ".”Ì— "0”Ì› "4”Í "ÌM”Í "ÌOœ” #” #”
+ #”Ì… #”Ì‡ #”Ì #&”Ì #(”Ì” #,”Ì– #.”Ìš #2”Í #ÌL”Í #ÌNœ” $” $”
+ $”Ì… $”Ì‡ $”Ì $&”Ì $(”Ì• $-”Ì— $/”Ì› $3”Í $ÌL”Í $ÌNœ” %” %”
+ %”Ì… % ”Ì‡ %"”Ì %)”Ì %+”Ì• %0”Ì— %2”Ì› %6”Í %ÌP”Í %ÌRœ” &” &”
+ &”Ì… &”Ì‡ &!”Ì &(”Ì &*”Ì— &1”Ì™ &3”Ì &7”Í &ÌP”Í &ÌRœ” '” '”
+ '”Ì… '!”Ì‡ '#”Ì '*”Ì ',”Ì– '2”Ì˜ '4”Ìœ '8”Í 'ÌQ”Í 'ÌSœ” (” (”
+ (”Ì… (!”Ì‡ (#”Ì (*”Ì (,”Ì” (0”Ì– (2”Ìš (6”Í (ÌO”Í (ÌQ’” )” )Ü ”  + ” +” +” +” +” + ” +"” +%” +'”  +*”" +,”% +/”' +1”* +4”, +6”/ +9”1 +;”4 +>”6 +Ì@”9 +ÌC”; +ÌE”> +ÌH”Ì@ +ÌJ”ÌC +ÌM”ÌE +ÌO”ÌH +ÌR”ÌJ +ÌT”ÌM +ÌW”ÌO +ÌY”ÌR +Ì\Ü  ” ,” ,”	 ,” ,
+” ,” ,” ,” ,” ,” ,” ,”  ,”" , ”% ,#”' ,%”* ,(”, ,*”/ ,-”1 ,/”4 ,2”6 ,4”9 ,7”; ,9”> ,<”Ì@ ,>”ÌC ,ÌA”ÌE ,ÌC”ÌH ,ÌF”ÌJ ,ÌH”ÌM ,ÌK”ÌN ,ÌL”ÌO ,ÌM˜”  . ” .”	 . ” .0” .2”$ .;”& .=”' .>ÔrF–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ÔrG’§missing¦pluginÃ¦genAbcÂÔ  ÔrH”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache‘ÔrI–¤type¥start£end«declarationªspecifiers¦source¶ExportNamedDeclarationÍØÍÿÀ’ÔrJ•¤type¥start£end¥local¨exported¯ExportSpecifierÍáÍñÔrK”¤type¥start£end¤nameªIdentifierÍáÍñ°ContactsListDataKªIdentifierÍáÍñ°ContactsListDataJ¯ExportSpecifierÍóÍüKªIdentifierÍóÍü©AlphabetsKªIdentifierÍóÍü©AlphabetsÀ

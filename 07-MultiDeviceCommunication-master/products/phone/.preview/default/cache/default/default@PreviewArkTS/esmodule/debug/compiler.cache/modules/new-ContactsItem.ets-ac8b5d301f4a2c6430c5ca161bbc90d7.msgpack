@@ -1,0 +1,211 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ¦if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { BaseConstants, BreakpointConstants } from '@ohos/base';
+export class ContactsItem extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__currentBreakpoint = this.createStorageProp('currentBreakpoint', BreakpointConstants.BREAKPOINT_SM, "currentBreakpoint");
+        this.name = undefined;
+        this.icon = undefined;
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.name !== undefined) {
+            this.name = params.name;
+        }
+        if (params.icon !== undefined) {
+            this.icon = params.icon;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__currentBreakpoint.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__currentBreakpoint.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get currentBreakpoint() {
+        return this.__currentBreakpoint.get();
+    }
+    set currentBreakpoint(newValue) {
+        this.__currentBreakpoint.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Flex.create({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween });
+            Flex.debugLine("features/home/src/main/ets/views/Contacts/ContactsItem.ets(25:5)", "home");
+            Flex.height(BaseConstants.FULL_HEIGHT);
+            Flex.width(BaseConstants.FULL_WIDTH);
+        }, Flex);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("features/home/src/main/ets/views/Contacts/ContactsItem.ets(26:7)", "home");
+            Column.width({ "id": 50331674, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" });
+            Column.margin({ left: { "id": 50331692, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, right: { "id": 50331691, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create(this.icon);
+            Image.debugLine("features/home/src/main/ets/views/Contacts/ContactsItem.ets(27:9)", "home");
+            Image.height({ "id": 50331674, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" });
+            Image.width({ "id": 50331674, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" });
+        }, Image);
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("features/home/src/main/ets/views/Contacts/ContactsItem.ets(34:7)", "home");
+            Column.flexShrink(BaseConstants.FLEX_SHRINK_ONE);
+            Column.margin({ left: { "id": 50331691, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" } });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.name);
+            Text.debugLine("features/home/src/main/ets/views/Contacts/ContactsItem.ets(35:9)", "home");
+            Text.fontSize(BaseConstants.FONT_SIZE_SIXTEEN);
+            Text.fontWeight(BaseConstants.FONT_WEIGHT_FIVE);
+            Text.lineHeight({ "id": 50331702, "type": 10002, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" });
+            Text.fontFamily(BaseConstants.FONT_FAMILY_MEDIUM);
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.debugLine("features/home/src/main/ets/views/Contacts/ContactsItem.ets(44:7)", "home");
+        }, Blank);
+        Blank.pop();
+        Flex.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+//# sourceMappingURL=ContactsItem.js.mapÂ‘ÙdC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\common\base\Index.etsÙ‰C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\views\Contacts\ContactsItem.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¤homeÃÂÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeÙNC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master¤home¥1.0.0ÔrC’§pkgNameªpkgVersion¤home¥1.0.0‘ÔrD’²hostDependencyName®hostModuleName¾../views/Contacts/ContactsItem¤homeÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeÃÃÚ/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { BaseConstants, BreakpointConstants } from '@ohos/base';
+
+@Component
+export struct ContactsItem {
+  @StorageProp('currentBreakpoint') currentBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  private name?: Resource;
+  private icon?: Resource;
+
+  build() {
+    Flex({ alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween }) {
+      Column() {
+        Image(this.icon)
+          .height($r('app.float.avatar_image_size'))
+          .width($r('app.float.avatar_image_size'))
+      }
+      .width($r('app.float.avatar_image_size'))
+      .margin({ left: $r('app.float.icon_margin_two'), right: $r('app.float.icon_margin_one') })
+
+      Column() {
+        Text(this.name)
+          .fontSize(BaseConstants.FONT_SIZE_SIXTEEN)
+          .fontWeight(BaseConstants.FONT_WEIGHT_FIVE)
+          .lineHeight($r('app.float.text_line_height_two'))
+          .fontFamily(BaseConstants.FONT_FAMILY_MEDIUM)
+      }
+      .flexShrink(BaseConstants.FLEX_SHRINK_ONE)
+      .margin({ left: $r('app.float.icon_margin_one') })
+
+      Blank()
+    }
+    .height(BaseConstants.FULL_HEIGHT)
+    .width(BaseConstants.FULL_WIDTH)
+  }
+}ÀÔrE‘ª@ohos/baseÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙdC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\common\base\Index.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings¯ContactsItem.js ‘°ContactsItem.etsÜ a‘”    ‘” š”   ” ”	 	” ” ”+ +”- -”3 3”? ?”Ì@ Ì@””   ” ” ” ‘”  –”: ”ÌM "”ÌO Ì@”Ìb ÌS”Ìc ÌT”Ìp Ìa‘” Ì@’” $” 5’” $” 5‘” Ü ” ” ” 	” ”$ ”& ”/  ”0 !”6 '”8 )”ÌF 7”ÌH 9”ÌQ ÌB”ÌR ÌC”Ì^ ÌO”Ì` ÌQ˜” ” ” -” -” -”% -”& -”1 -%˜” ” ” .” .
+” .”$ .”% .”/ .#’” ” ”” ” ” ” œ” ” ” ” ” ” ”  ”Ì› 5”Ì 7”Ì¢ <”Í Ì]”Í Ì_–” ” ” ” ” ”" ”” ” ” ” ”” ” ” ” ’” ” ’” !” !˜” !” !” (” (” (”+ (”, ( ”; (/™” !” !” )” )” )” )”  )”Ì› )5”Ì )7–” "” "” "” "” "”! "˜” "” "” #” #” #”' #!”( #"”9 #3˜” "” "” $” $” $”) $#”* $$”: $4”” "” "” %” %˜” "” "” &” &” &”) &#”* &$”< &6’” "” "’” !” !’” +” +’” +” +’” ” ‘” /ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ f‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache‘ÔrK–¤type¥start£end«declarationªspecifiers¦source¶ExportNamedDeclarationÍ0Í|ÔrL–¤type¥start£end¢idªsuperClass¤body°ClassDeclarationÍ7Í|ÔrM”¤type¥start£end¤nameªIdentifierÍ=ÍI¬ContactsItemMªIdentifierÍRÍX¦ViewPUÔrN”¤type¥start£end¤body©ClassBodyÍYÍ|™ÔrO˜¤type¥start£end¦static¨computed£key¤kind¥value°MethodDefinitionÍ`Í’ÂÂMªIdentifierÍ`Ík«constructor«constructorÔrP™¤type¥start£end¢idªexpression©generator¥async¦params¤body²FunctionExpressionÍkÍ’ÀÂÂÂ–MªIdentifierÍlÍr¦parentMªIdentifierÍtÍz¦paramsMªIdentifierÍ|ÍŠ®__localStorageÔrQ•¤type¥start£end¤left¥right±AssignmentPatternÍŒÍ—MªIdentifierÍŒÍ’¦elmtIdÔrR–¤type¥start£end¨operator¦prefix¨argument¯UnaryExpressionÍ•Í—¡-ÃÔrS•¤type¥start£end¥value£raw§LiteralÍ–Í—¡1Q±AssignmentPatternÍ™Í±MªIdentifierÍ™Í¥¬paramsLambdaMªIdentifierÍ¨Í±©undefinedMªIdentifierÍ³Í¼©extraInfoN®BlockStatementÍ¾Í’—ÔrT”¤type¥start£endªexpression³ExpressionStatementÍÉÍúÔrU–¤type¥start£end¦callee©arguments¨optional®CallExpressionÍÉÍùÔrV“¤type¥start£end¥SuperÍÉÍÎ”MªIdentifierÍÏÍÕ¦parentMªIdentifierÍ×Íå®__localStorageMªIdentifierÍçÍí¦elmtIdMªIdentifierÍïÍø©extraInfoÂÔrW–¤type¥start£end¤testªconsequent©alternate«IfStatementÍÍkÔrX–¤type¥start£end¤left¨operator¥right°BinaryExpressionÍÍ*R¯UnaryExpressionÍÍ¦typeofÃMªIdentifierÍÍ¬paramsLambda£===S§LiteralÍ Í*¨functionª"function"N®BlockStatementÍ,Ík‘T³ExpressionStatementÍ;Í`ÔrY–¤type¥start£end¨operator¤left¥right´AssignmentExpressionÍ;Í_¡=ÔrZ—¤type¥start£end¦object¨property¨computed¨optional°MemberExpressionÍ;ÍPV®ThisExpressionÍ;Í?MªIdentifierÍ@ÍP°paramsGenerator_ÂÂMªIdentifierÍSÍ_¬paramsLambdaÀT³ExpressionStatementÍuÍôY´AssignmentExpressionÍuÍó¡=Z°MemberExpressionÍuÍV®ThisExpressionÍuÍyMªIdentifierÍzÍ³__currentBreakpointÂÂU®CallExpressionÍÍóZ°MemberExpressionÍÍ¦V®ThisExpressionÍÍ”MªIdentifierÍ•Í¦±createStoragePropÂÂ“S§LiteralÍ§Íº±currentBreakpoint³'currentBreakpoint'Z°MemberExpressionÍ¼ÍİMªIdentifierÍ¼ÍÏ³BreakpointConstantsMªIdentifierÍĞÍİ­BREAKPOINT_SMÂÂS§LiteralÍßÍò±currentBreakpoint³"currentBreakpoint"ÂT³ExpressionStatementÍşÍY´AssignmentExpressionÍşÍ¡=Z°MemberExpressionÍşÍV®ThisExpressionÍşÍMªIdentifierÍÍ¤nameÂÂMªIdentifierÍ
+Í©undefinedT³ExpressionStatementÍÍ4Y´AssignmentExpressionÍÍ3¡=Z°MemberExpressionÍÍ'V®ThisExpressionÍÍ"MªIdentifierÍ#Í'¤iconÂÂMªIdentifierÍ*Í3©undefinedT³ExpressionStatementÍ>ÍeU®CallExpressionÍ>ÍdZ°MemberExpressionÍ>Í\V®ThisExpressionÍ>ÍBMªIdentifierÍCÍ\¹setInitiallyProvidedValueÂÂ‘MªIdentifierÍ]Íc¦paramsÂT³ExpressionStatementÍoÍ‹U®CallExpressionÍoÍŠZ°MemberExpressionÍoÍˆV®ThisExpressionÍoÍsMªIdentifierÍtÍˆ´finalizeConstructionÂÂÂO°MethodDefinitionÍ˜ÍxÂÂMªIdentifierÍ˜Í±¹setInitiallyProvidedValue¦methodP²FunctionExpressionÍ±ÍxÀÂÂÂ‘MªIdentifierÍ²Í¸¦paramsN®BlockStatementÍºÍx’W«IfStatementÍÅÍX°BinaryExpressionÍÉÍâZ°MemberExpressionÍÉÍÔMªIdentifierÍÉÍÏ¦paramsMªIdentifierÍĞÍÔ¤nameÂÂ£!==MªIdentifierÍÙÍâ©undefinedN®BlockStatementÍäÍ‘T³ExpressionStatementÍóÍY´AssignmentExpressionÍóÍ
+¡=Z°MemberExpressionÍóÍüV®ThisExpressionÍóÍ÷MªIdentifierÍøÍü¤nameÂÂZ°MemberExpressionÍÿÍ
+MªIdentifierÍÿÍ¦paramsMªIdentifierÍÍ
+¤nameÂÂÀW«IfStatementÍ ÍqX°BinaryExpressionÍ$Í=Z°MemberExpressionÍ$Í/MªIdentifierÍ$Í*¦paramsMªIdentifierÍ+Í/¤iconÂÂ£!==MªIdentifierÍ4Í=©undefinedN®BlockStatementÍ?Íq‘T³ExpressionStatementÍNÍfY´AssignmentExpressionÍNÍe¡=Z°MemberExpressionÍNÍWV®ThisExpressionÍNÍRMªIdentifierÍSÍW¤iconÂÂZ°MemberExpressionÍZÍeMªIdentifierÍZÍ`¦paramsMªIdentifierÍaÍe¤iconÂÂÀO°MethodDefinitionÍ~ÍÂÂMªIdentifierÍ~Í¯updateStateVars¦methodP²FunctionExpressionÍÍÀÂÂÂ‘MªIdentifierÍÍ”¦paramsN®BlockStatementÍ–ÍO°MethodDefinitionÍ¤ÍÂÂMªIdentifierÍ¤ÍÅÙ!purgeVariableDependenciesOnElmtId¦methodP²FunctionExpressionÍÅÍÀÂÂÂ‘MªIdentifierÍÆÍÎ¨rmElmtIdN®BlockStatementÍĞÍ‘T³ExpressionStatementÍÛÍU®CallExpressionÍÛÍZ°MemberExpressionÍÛÍZ°MemberExpressionÍÛÍóV®ThisExpressionÍÛÍßMªIdentifierÍàÍó³__currentBreakpointÂÂMªIdentifierÍôÍ·purgeDependencyOnElmtIdÂÂ‘MªIdentifierÍÍ¨rmElmtIdÂO°MethodDefinitionÍ#ÍÔÂÂMªIdentifierÍ#Í3°aboutToBeDeleted¦methodP²FunctionExpressionÍ3ÍÔÀÂÂÂN®BlockStatementÍ6ÍÔ“T³ExpressionStatementÍAÍmU®CallExpressionÍAÍlZ°MemberExpressionÍAÍjZ°MemberExpressionÍAÍYV®ThisExpressionÍAÍEMªIdentifierÍFÍY³__currentBreakpointÂÂMªIdentifierÍZÍj°aboutToBeDeletedÂÂÂT³ExpressionStatementÍwÍ£U®CallExpressionÍwÍ¢Z°MemberExpressionÍwÍ•U®CallExpressionÍwÍZ°MemberExpressionÍwÍŒMªIdentifierÍwÍˆ±SubscriberManagerMªIdentifierÍ‰ÍŒ£GetÂÂÂMªIdentifierÍÍ•¦deleteÂÂ‘U®CallExpressionÍ–Í¡Z°MemberExpressionÍ–ÍŸV®ThisExpressionÍ–ÍšMªIdentifierÍ›ÍŸ¤id__ÂÂÂÂT³ExpressionStatementÍ­ÍÍU®CallExpressionÍ­ÍÌZ°MemberExpressionÍ­ÍÊV®ThisExpressionÍ­Í±MªIdentifierÍ²ÍÊ¸aboutToBeDeletedInternalÂÂÂO°MethodDefinitionÍÚÍ*ÂÂMªIdentifierÍŞÍï±currentBreakpoint£getP²FunctionExpressionÍïÍ*ÀÂÂÂN®BlockStatementÍòÍ*‘Ôr[”¤type¥start£end¨argument¯ReturnStatementÍıÍ#U®CallExpressionÍÍ"Z°MemberExpressionÍÍ Z°MemberExpressionÍÍV®ThisExpressionÍÍMªIdentifierÍ	Í³__currentBreakpointÂÂMªIdentifierÍÍ £getÂÂÂO°MethodDefinitionÍ0Í‰ÂÂMªIdentifierÍ4ÍE±currentBreakpoint£setP²FunctionExpressionÍEÍ‰ÀÂÂÂ‘MªIdentifierÍFÍN¨newValueN®BlockStatementÍPÍ‰‘T³ExpressionStatementÍ[Í‚U®CallExpressionÍ[ÍZ°MemberExpressionÍ[ÍwZ°MemberExpressionÍ[ÍsV®ThisExpressionÍ[Í_MªIdentifierÍ`Ís³__currentBreakpointÂÂMªIdentifierÍtÍw£setÂÂ‘MªIdentifierÍxÍ€¨newValueÂO°MethodDefinitionÍÍ;ÂÂMªIdentifierÍÍœ­initialRender¦methodP²FunctionExpressionÍœÍ;ÀÂÂÂN®BlockStatementÍŸÍ;›T³ExpressionStatementÍªÍ
+/U®CallExpressionÍªÍ
+.Z°MemberExpressionÍªÍÈV®ThisExpressionÍªÍ®MªIdentifierÍ¯ÍÈ¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍÉÍ
+'ÀÂÂÂ’MªIdentifierÍÊÍĞ¦elmtIdMªIdentifierÍÒÍá¯isInitialRenderN®BlockStatementÍæÍ
+'”T³ExpressionStatementÍõÍ	KU®CallExpressionÍõÍ	JZ°MemberExpressionÍõÍ	 MªIdentifierÍõÍù¤FlexMªIdentifierÍúÍ	 ¦createÂÂ‘Ôr\”¤type¥start£endªproperties°ObjectExpressionÍ	Í	I’Ôr]™¤type¥start£end¦method©shorthand¨computed£key¥value¤kind¨PropertyÍ	Í	ÂÂÂMªIdentifierÍ	Í	ªalignItemsZ°MemberExpressionÍ	Í	MªIdentifierÍ	Í	©ItemAlignMªIdentifierÍ	Í	¦CenterÂÂ¤init]¨PropertyÍ	!Í	GÂÂÂMªIdentifierÍ	!Í	/®justifyContentZ°MemberExpressionÍ	1Í	GMªIdentifierÍ	1Í	:©FlexAlignMªIdentifierÍ	;Í	G¬SpaceBetweenÂÂ¤initÂT³ExpressionStatementÍ	YÍ	´U®CallExpressionÍ	YÍ	³Z°MemberExpressionÍ	YÍ	gMªIdentifierÍ	YÍ	]¤FlexMªIdentifierÍ	^Í	g©debugLineÂÂ’S§LiteralÍ	hÍ	ªÙ@features/home/src/main/ets/views/Contacts/ContactsItem.ets(25:5)ÙB"features/home/src/main/ets/views/Contacts/ContactsItem.ets(25:5)"S§LiteralÍ	¬Í	²¤home¦"home"ÂT³ExpressionStatementÍ	ÂÍ	éU®CallExpressionÍ	ÂÍ	èZ°MemberExpressionÍ	ÂÍ	ÍMªIdentifierÍ	ÂÍ	Æ¤FlexMªIdentifierÍ	ÇÍ	Í¦heightÂÂ‘Z°MemberExpressionÍ	ÎÍ	çMªIdentifierÍ	ÎÍ	Û­BaseConstantsMªIdentifierÍ	ÜÍ	ç«FULL_HEIGHTÂÂÂT³ExpressionStatementÍ	÷Í
+U®CallExpressionÍ	÷Í
+Z°MemberExpressionÍ	÷Í
+MªIdentifierÍ	÷Í	û¤FlexMªIdentifierÍ	üÍ
+¥widthÂÂ‘Z°MemberExpressionÍ
+Í
+MªIdentifierÍ
+Í
+­BaseConstantsMªIdentifierÍ
+Í
+ªFULL_WIDTHÂÂÂMªIdentifierÍ
+)Í
+-¤FlexÂT³ExpressionStatementÍ
+9ÍÍU®CallExpressionÍ
+9ÍÌZ°MemberExpressionÍ
+9Í
+WV®ThisExpressionÍ
+9Í
+=MªIdentifierÍ
+>Í
+W¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍ
+XÍÃÀÂÂÂ’MªIdentifierÍ
+YÍ
+_¦elmtIdMªIdentifierÍ
+aÍ
+p¯isInitialRenderN®BlockStatementÍ
+uÍÃ”T³ExpressionStatementÍ
+„Í
+”U®CallExpressionÍ
+„Í
+“Z°MemberExpressionÍ
+„Í
+‘MªIdentifierÍ
+„Í
+Š¦ColumnMªIdentifierÍ
+‹Í
+‘¦createÂÂÂT³ExpressionStatementÍ
+¢Í
+ÿU®CallExpressionÍ
+¢Í
+şZ°MemberExpressionÍ
+¢Í
+²MªIdentifierÍ
+¢Í
+¨¦ColumnMªIdentifierÍ
+©Í
+²©debugLineÂÂ’S§LiteralÍ
+³Í
+õÙ@features/home/src/main/ets/views/Contacts/ContactsItem.ets(26:7)ÙB"features/home/src/main/ets/views/Contacts/ContactsItem.ets(26:7)"S§LiteralÍ
+÷Í
+ı¤home¦"home"ÂT³ExpressionStatementÍÍ•U®CallExpressionÍÍ”Z°MemberExpressionÍÍMªIdentifierÍÍ¦ColumnMªIdentifierÍÍ¥widthÂÂ‘\°ObjectExpressionÍÍ“•]¨PropertyÍÍ*ÂÂÂS§LiteralÍÍ ¢id¤"id"S§LiteralÍ"Í*Î  ¨50331674¤init]¨PropertyÍ,Í9ÂÂÂS§LiteralÍ,Í2¤type¦"type"S§LiteralÍ4Í9Í'¥10002¤init]¨PropertyÍ;ÍEÂÂÂMªIdentifierÍ;ÍA¦paramsÔr^”¤type¥start£end¨elements¯ArrayExpressionÍCÍE¤init]¨PropertyÍGÍzÂÂÂS§LiteralÍGÍSªbundleName¬"bundleName"S§LiteralÍUÍzÙ#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍ|Í‘ÂÂÂS§LiteralÍ|ÍˆªmoduleName¬"moduleName"S§LiteralÍŠÍ‘¥phone§"phone"¤initÂT³ExpressionStatementÍ£Í¸U®CallExpressionÍ£Í·Z°MemberExpressionÍ£Í°MªIdentifierÍ£Í©¦ColumnMªIdentifierÍªÍ°¦marginÂÂ‘\°ObjectExpressionÍ±Í¶’]¨PropertyÍ³Í2ÂÂÂMªIdentifierÍ³Í·¤left\°ObjectExpressionÍ¹Í2•]¨PropertyÍ»ÍÉÂÂÂS§LiteralÍ»Í¿¢id¤"id"S§LiteralÍÁÍÉÎ  ,¨50331692¤init]¨PropertyÍËÍØÂÂÂS§LiteralÍËÍÑ¤type¦"type"S§LiteralÍÓÍØÍ'¥10002¤init]¨PropertyÍÚÍäÂÂÂMªIdentifierÍÚÍà¦params^¯ArrayExpressionÍâÍä¤init]¨PropertyÍæÍÂÂÂS§LiteralÍæÍòªbundleName¬"bundleName"S§LiteralÍôÍÙ#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍÍ0ÂÂÂS§LiteralÍÍ'ªmoduleName¬"moduleName"S§LiteralÍ)Í0¥phone§"phone"¤init¤init]¨PropertyÍ4Í´ÂÂÂMªIdentifierÍ4Í9¥right\°ObjectExpressionÍ;Í´•]¨PropertyÍ=ÍKÂÂÂS§LiteralÍ=ÍA¢id¤"id"S§LiteralÍCÍKÎ  +¨50331691¤init]¨PropertyÍMÍZÂÂÂS§LiteralÍMÍS¤type¦"type"S§LiteralÍUÍZÍ'¥10002¤init]¨PropertyÍ\ÍfÂÂÂMªIdentifierÍ\Íb¦params^¯ArrayExpressionÍdÍf¤init]¨PropertyÍhÍ›ÂÂÂS§LiteralÍhÍtªbundleName¬"bundleName"S§LiteralÍvÍ›Ù#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍÍ²ÂÂÂS§LiteralÍÍ©ªmoduleName¬"moduleName"S§LiteralÍ«Í²¥phone§"phone"¤init¤initÂMªIdentifierÍÅÍË¦ColumnÂT³ExpressionStatementÍ×ÍãU®CallExpressionÍ×ÍâZ°MemberExpressionÍ×ÍõV®ThisExpressionÍ×ÍÛMªIdentifierÍÜÍõ¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍöÍÚÀÂÂÂ’MªIdentifierÍ÷Íı¦elmtIdMªIdentifierÍÿÍ¯isInitialRenderN®BlockStatementÍÍÚ”T³ExpressionStatementÍ"Í:U®CallExpressionÍ"Í9Z°MemberExpressionÍ"Í.MªIdentifierÍ"Í'¥ImageMªIdentifierÍ(Í.¦createÂÂ‘Z°MemberExpressionÍ/Í8V®ThisExpressionÍ/Í3MªIdentifierÍ4Í8¤iconÂÂÂT³ExpressionStatementÍHÍ¤U®CallExpressionÍHÍ£Z°MemberExpressionÍHÍWMªIdentifierÍHÍM¥ImageMªIdentifierÍNÍW©debugLineÂÂ’S§LiteralÍXÍšÙ@features/home/src/main/ets/views/Contacts/ContactsItem.ets(27:9)ÙB"features/home/src/main/ets/views/Contacts/ContactsItem.ets(27:9)"S§LiteralÍœÍ¢¤home¦"home"ÂT³ExpressionStatementÍ²Í:U®CallExpressionÍ²Í9Z°MemberExpressionÍ²Í¾MªIdentifierÍ²Í·¥ImageMªIdentifierÍ¸Í¾¦heightÂÂ‘\°ObjectExpressionÍ¿Í8•]¨PropertyÍÁÍÏÂÂÂS§LiteralÍÁÍÅ¢id¤"id"S§LiteralÍÇÍÏÎ  ¨50331674¤init]¨PropertyÍÑÍŞÂÂÂS§LiteralÍÑÍ×¤type¦"type"S§LiteralÍÙÍŞÍ'¥10002¤init]¨PropertyÍàÍêÂÂÂMªIdentifierÍàÍæ¦params^¯ArrayExpressionÍèÍê¤init]¨PropertyÍìÍÂÂÂS§LiteralÍìÍøªbundleName¬"bundleName"S§LiteralÍúÍÙ#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍ!Í6ÂÂÂS§LiteralÍ!Í-ªmoduleName¬"moduleName"S§LiteralÍ/Í6¥phone§"phone"¤initÂT³ExpressionStatementÍHÍÏU®CallExpressionÍHÍÎZ°MemberExpressionÍHÍSMªIdentifierÍHÍM¥ImageMªIdentifierÍNÍS¥widthÂÂ‘\°ObjectExpressionÍTÍÍ•]¨PropertyÍVÍdÂÂÂS§LiteralÍVÍZ¢id¤"id"S§LiteralÍ\ÍdÎ  ¨50331674¤init]¨PropertyÍfÍsÂÂÂS§LiteralÍfÍl¤type¦"type"S§LiteralÍnÍsÍ'¥10002¤init]¨PropertyÍuÍÂÂÂMªIdentifierÍuÍ{¦params^¯ArrayExpressionÍ}Í¤init]¨PropertyÍÍ´ÂÂÂS§LiteralÍÍªbundleName¬"bundleName"S§LiteralÍÍ´Ù#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍ¶ÍËÂÂÂS§LiteralÍ¶ÍÂªmoduleName¬"moduleName"S§LiteralÍÄÍË¥phone§"phone"¤initÂMªIdentifierÍÜÍá¥ImageÂT³ExpressionStatementÍíÍúU®CallExpressionÍíÍùZ°MemberExpressionÍíÍ÷MªIdentifierÍíÍó¦ColumnMªIdentifierÍôÍ÷£popÂÂÂT³ExpressionStatementÍÍ¿U®CallExpressionÍÍ¾Z°MemberExpressionÍÍ"V®ThisExpressionÍÍMªIdentifierÍ	Í"¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍ#ÍµÀÂÂÂ’MªIdentifierÍ$Í*¦elmtIdMªIdentifierÍ,Í;¯isInitialRenderN®BlockStatementÍ@Íµ”T³ExpressionStatementÍOÍ_U®CallExpressionÍOÍ^Z°MemberExpressionÍOÍ\MªIdentifierÍOÍU¦ColumnMªIdentifierÍVÍ\¦createÂÂÂT³ExpressionStatementÍmÍÊU®CallExpressionÍmÍÉZ°MemberExpressionÍmÍ}MªIdentifierÍmÍs¦ColumnMªIdentifierÍtÍ}©debugLineÂÂ’S§LiteralÍ~ÍÀÙ@features/home/src/main/ets/views/Contacts/ContactsItem.ets(34:7)ÙB"features/home/src/main/ets/views/Contacts/ContactsItem.ets(34:7)"S§LiteralÍÂÍÈ¤home¦"home"ÂT³ExpressionStatementÍØÍ	U®CallExpressionÍØÍZ°MemberExpressionÍØÍéMªIdentifierÍØÍŞ¦ColumnMªIdentifierÍßÍéªflexShrinkÂÂ‘Z°MemberExpressionÍêÍMªIdentifierÍêÍ÷­BaseConstantsMªIdentifierÍøÍ¯FLEX_SHRINK_ONEÂÂÂT³ExpressionStatementÍÍªU®CallExpressionÍÍ©Z°MemberExpressionÍÍ$MªIdentifierÍÍ¦ColumnMªIdentifierÍÍ$¦marginÂÂ‘\°ObjectExpressionÍ%Í¨‘]¨PropertyÍ'Í¦ÂÂÂMªIdentifierÍ'Í+¤left\°ObjectExpressionÍ-Í¦•]¨PropertyÍ/Í=ÂÂÂS§LiteralÍ/Í3¢id¤"id"S§LiteralÍ5Í=Î  +¨50331691¤init]¨PropertyÍ?ÍLÂÂÂS§LiteralÍ?ÍE¤type¦"type"S§LiteralÍGÍLÍ'¥10002¤init]¨PropertyÍNÍXÂÂÂMªIdentifierÍNÍT¦params^¯ArrayExpressionÍVÍX¤init]¨PropertyÍZÍÂÂÂS§LiteralÍZÍfªbundleName¬"bundleName"S§LiteralÍhÍÙ#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍÍ¤ÂÂÂS§LiteralÍÍ›ªmoduleName¬"moduleName"S§LiteralÍÍ¤¥phone§"phone"¤init¤initÂMªIdentifierÍ·Í½¦ColumnÂT³ExpressionStatementÍÉÍûU®CallExpressionÍÉÍúZ°MemberExpressionÍÉÍçV®ThisExpressionÍÉÍÍMªIdentifierÍÎÍç¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍèÍóÀÂÂÂ’MªIdentifierÍéÍï¦elmtIdMªIdentifierÍñÍ ¯isInitialRenderN®BlockStatementÍÍó–T³ExpressionStatementÍÍ+U®CallExpressionÍÍ*Z°MemberExpressionÍÍMªIdentifierÍÍ¤TextMªIdentifierÍÍ¦createÂÂ‘Z°MemberExpressionÍ Í)V®ThisExpressionÍ Í$MªIdentifierÍ%Í)¤nameÂÂÂT³ExpressionStatementÍ9Í”U®CallExpressionÍ9Í“Z°MemberExpressionÍ9ÍGMªIdentifierÍ9Í=¤TextMªIdentifierÍ>ÍG©debugLineÂÂ’S§LiteralÍHÍŠÙ@features/home/src/main/ets/views/Contacts/ContactsItem.ets(35:9)ÙB"features/home/src/main/ets/views/Contacts/ContactsItem.ets(35:9)"S§LiteralÍŒÍ’¤home¦"home"ÂT³ExpressionStatementÍ¢ÍÑU®CallExpressionÍ¢ÍĞZ°MemberExpressionÍ¢Í¯MªIdentifierÍ¢Í¦¤TextMªIdentifierÍ§Í¯¨fontSizeÂÂ‘Z°MemberExpressionÍ°ÍÏMªIdentifierÍ°Í½­BaseConstantsMªIdentifierÍ¾ÍÏ±FONT_SIZE_SIXTEENÂÂÂT³ExpressionStatementÍßÍU®CallExpressionÍßÍZ°MemberExpressionÍßÍîMªIdentifierÍßÍã¤TextMªIdentifierÍäÍîªfontWeightÂÂ‘Z°MemberExpressionÍïÍMªIdentifierÍïÍü­BaseConstantsMªIdentifierÍıÍ°FONT_WEIGHT_FIVEÂÂÂT³ExpressionStatementÍÍ¨U®CallExpressionÍÍ§Z°MemberExpressionÍÍ,MªIdentifierÍÍ!¤TextMªIdentifierÍ"Í,ªlineHeightÂÂ‘\°ObjectExpressionÍ-Í¦•]¨PropertyÍ/Í=ÂÂÂS§LiteralÍ/Í3¢id¤"id"S§LiteralÍ5Í=Î  6¨50331702¤init]¨PropertyÍ?ÍLÂÂÂS§LiteralÍ?ÍE¤type¦"type"S§LiteralÍGÍLÍ'¥10002¤init]¨PropertyÍNÍXÂÂÂMªIdentifierÍNÍT¦params^¯ArrayExpressionÍVÍX¤init]¨PropertyÍZÍÂÂÂS§LiteralÍZÍfªbundleName¬"bundleName"S§LiteralÍhÍÙ#com.example.multdevicecommunicationÙ%"com.example.multdevicecommunication"¤init]¨PropertyÍÍ¤ÂÂÂS§LiteralÍÍ›ªmoduleName¬"moduleName"S§LiteralÍÍ¤¥phone§"phone"¤initÂT³ExpressionStatementÍ¶ÍèU®CallExpressionÍ¶ÍçZ°MemberExpressionÍ¶ÍÅMªIdentifierÍ¶Íº¤TextMªIdentifierÍ»ÍÅªfontFamilyÂÂ‘Z°MemberExpressionÍÆÍæMªIdentifierÍÆÍÓ­BaseConstantsMªIdentifierÍÔÍæ²FONT_FAMILY_MEDIUMÂÂÂMªIdentifierÍõÍù¤TextÂT³ExpressionStatementÍÍU®CallExpressionÍÍZ°MemberExpressionÍÍMªIdentifierÍÍ	¤TextMªIdentifierÍ
+Í£popÂÂÂT³ExpressionStatementÍÍ'U®CallExpressionÍÍ&Z°MemberExpressionÍÍ$MªIdentifierÍÍ ¦ColumnMªIdentifierÍ!Í$£popÂÂÂT³ExpressionStatementÍ1Í	U®CallExpressionÍ1ÍZ°MemberExpressionÍ1ÍOV®ThisExpressionÍ1Í5MªIdentifierÍ6ÍO¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍPÍ ÀÂÂÂ’MªIdentifierÍQÍW¦elmtIdMªIdentifierÍYÍh¯isInitialRenderN®BlockStatementÍmÍ ’T³ExpressionStatementÍ|Í‹U®CallExpressionÍ|ÍŠZ°MemberExpressionÍ|ÍˆMªIdentifierÍ|Í¥BlankMªIdentifierÍ‚Íˆ¦createÂÂÂT³ExpressionStatementÍ™ÍõU®CallExpressionÍ™ÍôZ°MemberExpressionÍ™Í¨MªIdentifierÍ™Í¥BlankMªIdentifierÍŸÍ¨©debugLineÂÂ’S§LiteralÍ©ÍëÙ@features/home/src/main/ets/views/Contacts/ContactsItem.ets(44:7)ÙB"features/home/src/main/ets/views/Contacts/ContactsItem.ets(44:7)"S§LiteralÍíÍó¤home¦"home"ÂMªIdentifierÍÍ¥BlankÂT³ExpressionStatementÍÍU®CallExpressionÍÍZ°MemberExpressionÍÍMªIdentifierÍÍ¥BlankMªIdentifierÍÍ£popÂÂÂT³ExpressionStatementÍ)Í4U®CallExpressionÍ)Í3Z°MemberExpressionÍ)Í1MªIdentifierÍ)Í-¤FlexMªIdentifierÍ.Í1£popÂÂÂO°MethodDefinitionÍAÍyÂÂMªIdentifierÍAÍI¨rerender¦methodP²FunctionExpressionÍIÍyÀÂÂÂN®BlockStatementÍLÍy‘T³ExpressionStatementÍWÍrU®CallExpressionÍWÍqZ°MemberExpressionÍWÍoV®ThisExpressionÍWÍ[MªIdentifierÍ\Ío³updateDirtyElementsÂÂÂÀ‘Ôr_•¤type¥start£endªspecifiers¦source±ImportDeclarationÍîÍ.’Ôr`•¤type¥start£end¨imported¥local¯ImportSpecifierÍ÷ÍMªIdentifierÍ÷Í­BaseConstantsMªIdentifierÍ÷Í­BaseConstants`¯ImportSpecifierÍÍMªIdentifierÍÍ³BreakpointConstantsMªIdentifierÍÍ³BreakpointConstantsS§LiteralÍ!Í-ª@ohos/base¬'@ohos/base'

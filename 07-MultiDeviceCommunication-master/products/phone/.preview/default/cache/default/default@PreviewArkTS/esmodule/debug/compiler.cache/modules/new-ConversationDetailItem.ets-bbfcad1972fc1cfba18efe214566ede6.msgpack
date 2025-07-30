@@ -1,0 +1,153 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚoif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { HomeConstants } from '../../constants/HomeConstants';
+import { MessageBubble } from '../MessageBubble';
+export default class ConversationDetailItem extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__currentFeatureIndex = new SynchedPropertySimpleTwoWayPU(params.currentFeatureIndex, this, "currentFeatureIndex");
+        this.__receivedName = new SynchedPropertySimpleTwoWayPU(params.receivedName, this, "receivedName");
+        this.isReceived = !HomeConstants.IS_RECEIVED;
+        this.content = '';
+        this.isAppletMsg = undefined;
+        this.isDocumentMsg = undefined;
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.isReceived !== undefined) {
+            this.isReceived = params.isReceived;
+        }
+        if (params.content !== undefined) {
+            this.content = params.content;
+        }
+        if (params.isAppletMsg !== undefined) {
+            this.isAppletMsg = params.isAppletMsg;
+        }
+        if (params.isDocumentMsg !== undefined) {
+            this.isDocumentMsg = params.isDocumentMsg;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__currentFeatureIndex.purgeDependencyOnElmtId(rmElmtId);
+        this.__receivedName.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__currentFeatureIndex.aboutToBeDeleted();
+        this.__receivedName.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get currentFeatureIndex() {
+        return this.__currentFeatureIndex.get();
+    }
+    set currentFeatureIndex(newValue) {
+        this.__currentFeatureIndex.set(newValue);
+    }
+    get receivedName() {
+        return this.__receivedName.get();
+    }
+    set receivedName(newValue) {
+        this.__receivedName.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Flex.create({ justifyContent: FlexAlign.End, alignItems: ItemAlign.End });
+            Flex.debugLine("features/home/src/main/ets/views/Conversation/ConversationDetailItem.ets(29:5)", "home");
+        }, Flex);
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new MessageBubble(this, {
+                        receivedName: this.__receivedName,
+                        currentFeatureIndex: this.__currentFeatureIndex,
+                        isReceived: this.isReceived,
+                        content: this.content,
+                        isAppletMsg: this.isAppletMsg,
+                        isDocumentMsg: this.isDocumentMsg
+                    }, undefined, elmtId, () => { }, { page: "features/home/src/main/ets/views/Conversation/ConversationDetailItem.ets", line: 30, col: 7 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            receivedName: this.receivedName,
+                            currentFeatureIndex: this.currentFeatureIndex,
+                            isReceived: this.isReceived,
+                            content: this.content,
+                            isAppletMsg: this.isAppletMsg,
+                            isDocumentMsg: this.isDocumentMsg
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {});
+                }
+            }, { name: "MessageBubble" });
+        }
+        Flex.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+//# sourceMappingURL=ConversationDetailItem.js.mapÂ’Ù…C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\constants\HomeConstants.etsÙC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\views\MessageBubble.etsÙ—C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\views\Conversation\ConversationDetailItem.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¤homeÃÂÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeÙNC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master¤home¥1.0.0ÔrC’§pkgNameªpkgVersion¤home¥1.0.0‘ÔrD’²hostDependencyName®hostModuleNameÙ,../views/Conversation/ConversationDetailItem¤homeÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeÃÃÚ‰/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { HomeConstants } from '../../constants/HomeConstants';
+import { MessageBubble } from '../MessageBubble';
+
+@Component
+export default struct ConversationDetailItem {
+  @Link currentFeatureIndex: number;
+  @Link receivedName: string;
+  private isReceived: boolean = !HomeConstants.IS_RECEIVED;
+  private content: ResourceStr = '';
+  private isAppletMsg?: boolean;
+  private isDocumentMsg?: boolean;
+
+  build() {
+    Flex({ justifyContent: FlexAlign.End, alignItems: ItemAlign.End }) {
+      MessageBubble({
+        receivedName: $receivedName,
+        currentFeatureIndex: $currentFeatureIndex,
+        isReceived: this.isReceived,
+        content: this.content,
+        isAppletMsg: this.isAppletMsg,
+        isDocumentMsg: this.isDocumentMsg
+      })
+    }
+  }
+}ÀÔrE’½../../constants/HomeConstants°../MessageBubbleÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙ…C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\constants\HomeConstants.etsAÃªoh-resolveÂFAÂÙC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\views\MessageBubble.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings¹ConversationDetailItem.js ‘ºConversationDetailItem.etsÜ l‘”    ‘” ˜”   ” ”	 	” ” ” ”= =”> >˜”   ” ”	 	” ” ” ”0 0”1 1–”   ” ” ” ” ”+ ,‘”  •”  ” !”( .”) /”4 :’” !” #‘” 1’” ” ’” ” ’” ” ’” ” ‘” Ü ” ” ” 	” ”( ”* ”3 $”4 %”7 (”9 *”ÌC 4”ÌE 6”ÌN ?”ÌO Ì@”ÌR ÌC”ÌT ÌE“”, ”9 ”Ì@ “” ”$ ”9 #“” ”+ ”ÌG 1–”  ”"  ”$  ”(  ”)  ”3  #–” !” !”! !”% !”& !”- !–” "”# "”% "”) "”* "”5 "%–” #”% #”' #”+ #”, #”9 #)‘” $’” ”( ’” ”/ –”  ”&  ”(  ”,  ”-  ”7  #–” !”# !”% !”) !”* !”1 !–” "”' "”) "”- "”. "”9 "%–” #”) #”+ #”/ #”0 #”= #)’” ” ‘” &ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ q‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍîÍ,‘ÔrL•¤type¥start£end¨imported¥local¯ImportSpecifierÍ÷ÍÔrM”¤type¥start£end¤nameªIdentifierÍ÷Í­HomeConstantsMªIdentifierÍ÷Í­HomeConstantsÔrN•¤type¥start£end¥value£raw§LiteralÍÍ+½../../constants/HomeConstants¿'../../constants/HomeConstants'K±ImportDeclarationÍ.Í_‘L¯ImportSpecifierÍ7ÍDMªIdentifierÍ7ÍD­MessageBubbleMªIdentifierÍ7ÍD­MessageBubbleN§LiteralÍLÍ^°../MessageBubble²'../MessageBubble'

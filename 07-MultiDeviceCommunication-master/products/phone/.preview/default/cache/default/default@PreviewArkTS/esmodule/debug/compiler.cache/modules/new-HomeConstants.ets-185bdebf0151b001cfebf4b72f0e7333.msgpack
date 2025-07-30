@@ -1,0 +1,192 @@
+‘r@ü™assertions§code¥customTransformCache¨dependencies¢id§meta±moduleSideEffects¨originalCode±originalSourcemap´resolvedIdsÆsourcemapChainµsyntheticNamedExportsµtransformDependenciesÆtransformFiles®cacheAst‘rAê⁄v/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+export class HomeConstants {
+}
+/**
+ * Grid row column list.
+ */
+HomeConstants.GRID_ROW_COLUMNS = [1, 2, 3, 4, 5];
+HomeConstants.GRID_COL_COLUMNS = [0, 1, 2, 3, 4, 5];
+HomeConstants.TAB_MESSAGE_INDEX = 0;
+/**
+ * Index of CONTACTS tab.
+ */
+HomeConstants.TAB_CONTACTS_INDEX = 1;
+/**
+ * Index of SOCIAL_CIRCLE tab.
+ */
+HomeConstants.TAB_SOCIAL_CIRCLE_INDEX = 2;
+/**
+ * Index of ME tab.
+ */
+HomeConstants.TAB_ME_INDEX = 3;
+HomeConstants.CONTACTS_DETAIL_AVATAR_Z_INDEX = 2;
+/**
+ * Image message
+ */
+HomeConstants.USER_PHONE = '15988880000';
+HomeConstants.LAST_POST = { "id": 50331748, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+HomeConstants.IMAGES_SCOPE = 2;
+HomeConstants.IMAGE_ASPECT_RATIO = 1;
+/**
+ * Contacts list detail
+ */
+HomeConstants.CONTACTS_NAME = { "id": 50331730, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+HomeConstants.CONTACTS_LIST = [{ "id": 50331744, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, { "id": 50331740, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }];
+HomeConstants.CONTACTS_DEFAULT_SELECTED_INDEX = 0;
+HomeConstants.CONTACTS_DEFAULT_SELECTED_NAME = { "id": 50331728, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+/**
+ * Conversation detail
+ */
+HomeConstants.CONVERSATION_LIST_APPLET = [{ "id": 50331747, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, { "id": 50331739, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, { "id": 50331745, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }];
+HomeConstants.CONVERSATION_LIST_DOCUMENT = [{ "id": 50331751, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, { "id": 50331746, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }, { "id": 50331749, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" }];
+HomeConstants.IS_APPLET_CONVERSATION = true;
+HomeConstants.IS_DOCUMENT_CONVERSATION = true;
+HomeConstants.IS_RECEIVED = true;
+HomeConstants.CONVERSATION_DEFAULT_SIZE = 3;
+HomeConstants.CONVERSATION_TITLE = { "id": 50331737, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+/**
+ * Conversation top search
+ */
+HomeConstants.SEARCH_TEXT_FLEX_BASIS = 150;
+HomeConstants.SEARCH_TEXT_INPUT = { "id": 50331752, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+HomeConstants.ENABLE_KEY_BOARD_ON_FOCUS = false;
+HomeConstants.FLEX_BASIS_AUTO = 'auto';
+/**
+ * Conversation detail
+ */
+HomeConstants.CONVERSATION_DETAIL_BOTTOM_TEXT_RADIUS = 20;
+HomeConstants.CONVERSATION_DETAIL_TOP_TITLE = 'Ëä¨Ëä¨';
+HomeConstants.CONVERSATION_DETAIL_MAX_LINE = 1;
+HomeConstants.CONVERSATION_DETAIL_FILL_OPACITY = 1;
+HomeConstants.CONVERSATION_DETAIL_STROKE_WIDTH = 1;
+HomeConstants.PATH_BORDER_RADIUS = 8;
+/**
+ * Applet detail
+ */
+HomeConstants.APPLET_TITLE = 'Â•∂Ëå∂';
+HomeConstants.APPLET_DESCRIBE = 'Â∫îÁî®';
+/**
+ * Document detail
+ */
+HomeConstants.DOCUMENT_SIZE = '24KB';
+HomeConstants.DOCUMENT_INTRODUCE = { "id": 50331741, "type": 10003, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+HomeConstants.DOCUMENT_DIVIDER_WIDTH = 1;
+/**
+ * Default avatar
+ */
+HomeConstants.DEFAULT_AVATAR = { "id": 50331713, "type": 20000, params: [], "bundleName": "com.example.multdevicecommunication", "moduleName": "phone" };
+/**
+ * Navigation navBarWidth percent
+ */
+HomeConstants.NAVIGATION_NAV_BAR_WIDTH_MD = '50%';
+HomeConstants.NAVIGATION_NAV_BAR_WIDTH_LG = '44.5%';
+//# sourceMappingURL=HomeConstants.js.map¬êŸÖC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home\src\main\ets\constants\HomeConstants.ets‘rBõ™moduleName±isLocalDependencyØisNodeEntryFileßpkgPath±belongProjectPathßpkgName™pkgVersion±dependencyPkgInfoØhostModulesInfo∞belongModulePath¨shouldEmitJs§home√¬Ÿ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\homeŸNC:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master§home•1.0.0‘rCíßpkgName™pkgVersion§home•1.0.0õ‘rDí≤hostDependencyNameÆhostModuleName∫../constants/HomeConstants§homeD∫../constants/HomeConstants§homeD∫../constants/HomeConstants§homeD∫../constants/HomeConstants§homeD∫../constants/HomeConstants§homeDΩ../../constants/HomeConstants§homeDΩ../../constants/HomeConstants§homeDΩ../../constants/HomeConstants§homeDΩ../../constants/HomeConstants§homeDΩ../../constants/HomeConstants§homeD∫../constants/HomeConstants§homeŸ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\MultiDeviceCommunication-master\features\home√√⁄Ä/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+export class HomeConstants {
+  /**
+   * Grid row column list.
+   */
+  static readonly GRID_ROW_COLUMNS: number[] = [1, 2, 3, 4, 5];
+  static readonly GRID_COL_COLUMNS: number[] = [0, 1, 2, 3, 4, 5];
+  static readonly TAB_MESSAGE_INDEX = 0;
+  /**
+   * Index of CONTACTS tab.
+   */
+  static readonly TAB_CONTACTS_INDEX = 1;
+  /**
+   * Index of SOCIAL_CIRCLE tab.
+   */
+  static readonly TAB_SOCIAL_CIRCLE_INDEX = 2;
+  /**
+   * Index of ME tab.
+   */
+  static readonly TAB_ME_INDEX = 3;
+  static readonly CONTACTS_DETAIL_AVATAR_Z_INDEX = 2;
+  /**
+   * Image message
+   */
+  static readonly USER_PHONE = '15988880000';
+  static readonly LAST_POST = $r('app.string.news');
+  static readonly IMAGES_SCOPE = 2;
+  static readonly IMAGE_ASPECT_RATIO = 1;
+  /**
+   * Contacts list detail
+   */
+  static readonly CONTACTS_NAME = $r('app.string.Contacts');
+  static readonly CONTACTS_LIST = [$r('app.string.group'), $r('app.string.card')];
+  static readonly CONTACTS_DEFAULT_SELECTED_INDEX = 0;
+  static readonly CONTACTS_DEFAULT_SELECTED_NAME = $r('app.string.Alan');
+  /**
+   * Conversation detail
+   */
+  static readonly CONVERSATION_LIST_APPLET = [$r('app.string.milk'), $r('app.string.Speed'), $r('app.string.happy')];
+  static readonly CONVERSATION_LIST_DOCUMENT = [$r('app.string.plan'), $r('app.string.jack'), $r('app.string.ok')];
+  static readonly IS_APPLET_CONVERSATION = true;
+  static readonly IS_DOCUMENT_CONVERSATION = true;
+  static readonly IS_RECEIVED = true;
+  static readonly CONVERSATION_DEFAULT_SIZE = 3;
+  static readonly CONVERSATION_TITLE = $r('app.string.Message');
+  /**
+   * Conversation top search
+   */
+  static readonly SEARCH_TEXT_FLEX_BASIS = 150;
+  static readonly SEARCH_TEXT_INPUT = $r('app.string.search');
+  static readonly ENABLE_KEY_BOARD_ON_FOCUS = false;
+  static readonly FLEX_BASIS_AUTO = 'auto';
+  /**
+   * Conversation detail
+   */
+  static readonly CONVERSATION_DETAIL_BOTTOM_TEXT_RADIUS = 20;
+  static readonly CONVERSATION_DETAIL_TOP_TITLE = 'Ëä¨Ëä¨';
+  static readonly CONVERSATION_DETAIL_MAX_LINE = 1;
+  static readonly CONVERSATION_DETAIL_FILL_OPACITY = 1;
+  static readonly CONVERSATION_DETAIL_STROKE_WIDTH = 1;
+  static readonly PATH_BORDER_RADIUS = 8;
+  /**
+   * Applet detail
+   */
+  static readonly APPLET_TITLE = 'Â•∂Ëå∂';
+  static readonly APPLET_DESCRIBE = 'Â∫îÁî®';
+  /**
+   * Document detail
+   */
+  static readonly DOCUMENT_SIZE = '24KB';
+  static readonly DOCUMENT_INTRODUCE = $r('app.string.document');
+  static readonly DOCUMENT_DIVIDER_WIDTH = 1;
+  /**
+   * Default avatar
+   */
+  static readonly DEFAULT_AVATAR = $r('app.media.avatar1')
+  /**
+   * Navigation navBarWidth percent
+   */
+  static readonly NAVIGATION_NAV_BAR_WIDTH_MD = '50%'
+  static readonly NAVIGATION_NAV_BAR_WIDTH_LG = '44.5%'
+}¿Aì‘rEñßversion§file™sourceRootßsources•names®mappings∞HomeConstants.js†ë±HomeConstants.etsê‹ _ëî    êêêêêêêêêêêêëî îî   î î î êëî  êëî üî  î "î! /î" 0î# 1î% 3î& 4î( 6î) 7î+ 9î, :î. <î/ =î0 >î1 ?‹ î  î "î! /î" 0î# 1î% 3î& 4î( 6î) 7î+ 9î, :î. <î/ =î1 ?î2 Ã@î3 ÃAî4 ÃBïî  î #î" &î# 'î$ (ëî  êëî ïî  î  $î# 'î$ (î% )ëî  êëî ïî  î% )î( ,î) -î* .ëî  êëî  ïî  !î !î !!î !"î !#ïî  "î, "0î/ "3î0 "4î1 "5ëî  #êëî %ïî  &î &î &î( &,î) &-ìî  'î 'îÃî '4ïî  (î (î (!î ("î (#ïî  )î  )$î# )'î$ )(î% ))ëî  *êëî ,ìî  -î -îÃò -<ïî  .î .î ."îÕ .ÃQîÕ .ÃRïî  /î- /1î0 /4î1 /5î2 /6ìî  0î, 00îÃ© 0ÃIëî  1êëî 3ïî  4î& 4*î) 4-îÕö 4ÃtîÕõ 4Ãuïî  5î( 5,î+ 5/îÕú 5ÃrîÕù 5Ãsïî  6î$ 6(î' 6+î+ 6/î, 60ïî  7î& 7*î) 7-î- 71î. 72ïî  8î 8î 8 î  8$î! 8%ïî  9î' 9+î* 9.î+ 9/î, 90ìî  :î  :$îÃù :Ã@ëî  ;êëî =ïî  >î$ >(î' >+î* >.î+ >/ìî  ?î ?#îÃú ?>ïî  Ã@î' Ã@+î* Ã@.î/ Ã@3î0 Ã@4ïî  ÃAî ÃA!î  ÃA$î& ÃA*î' ÃA+ëî  ÃBêëî ÃDïî  ÃEî4 ÃE8î7 ÃE;î9 ÃE=î: ÃE>ïî  ÃFî+ ÃF/î. ÃF2î2 ÃF6î3 ÃF7ïî  ÃGî* ÃG.î- ÃG1î. ÃG2î/ ÃG3ïî  ÃHî. ÃH2î1 ÃH5î2 ÃH6î3 ÃH7ïî  ÃIî. ÃI2î1 ÃI5î2 ÃI6î3 ÃI7ïî  ÃJî  ÃJ$î# ÃJ'î$ ÃJ(î% ÃJ)ëî  ÃKêëî ÃMïî  ÃNî ÃNî ÃN!î! ÃN%î" ÃN&ïî  ÃOî ÃO!î  ÃO$î$ ÃO(î% ÃO)ëî  ÃPêëî ÃRïî  ÃSî ÃSî ÃS"î$ ÃS(î% ÃS)ìî  ÃTî  ÃT$îÃù ÃTÃAïî  ÃUî$ ÃU(î' ÃU+î( ÃU,î) ÃU-ëî  ÃVêëî ÃXìî  ÃYî ÃY îÃô ÃY:ëî  ÃZêëî Ã\ïî  Ã]î) Ã]-î, Ã]0î1 Ã]5î2 Ã]5ïî  Ã^î) Ã^-î, Ã^0î3 Ã^7î4 Ã^7‘rFñßversion§fileßsourcesÆsourcesContent•names®mappings¿ë¿ë¿ê‹ `ëî    ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî  	 ëî  
+ ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî   ëî    ëî  ! ëî  " ëî  # ëî  $ ëî  % ëî  & ëî  ' ëî  ( ëî  ) ëî  * ëî  + ëî  , ëî  - ëî  . ëî  / ëî  0 ëî  1 ëî  2 ëî  3 ëî  4 ëî  5 ëî  6 ëî  7 ëî  8 ëî  9 ëî  : ëî  ; ëî  < ëî  = ëî  > ëî  ? ëî  Ã@ ëî  ÃA ëî  ÃB ëî  ÃC ëî  ÃD ëî  ÃE ëî  ÃF ëî  ÃG ëî  ÃH ëî  ÃI ëî  ÃJ ëî  ÃK ëî  ÃL ëî  ÃM ëî  ÃN ëî  ÃO ëî  ÃP ëî  ÃQ ëî  ÃR ëî  ÃS ëî  ÃT ëî  ÃU ëî  ÃV ëî  ÃW ëî  ÃX ëî  ÃY ëî  ÃZ ëî  Ã[ ëî  Ã\ ëî  Ã] ëî  Ã^ ëî  Ã_ ‘rGíßmissing¶plugin√¶genAbc¬ê‘  ‘rHî≤dynamicImportCacheπexportAllDeclarationCacheªexportNamedDeclarationCache´importCacheêêë‘rIñ§type•start£end´declaration™specifiers¶source∂ExportNamedDeclarationÕnÕç‘rJñ§type•start£end¢id™superClass§body∞ClassDeclarationÕuÕç‘rKî§type•start£end§name™IdentifierÕ{Õà≠HomeConstants¿‘rLî§type•start£end§body©ClassBodyÕâÕçêê¿ê
