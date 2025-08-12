@@ -1,0 +1,101 @@
+{
+  "lockVersion": "1.0",
+  "settings": {
+    "resolveConflict": true,
+    "resolveConflictStrict": false,
+    "installAll": true
+  },
+  "overrides": {},
+  "overrideDependencyMap": {},
+  "modules": {
+    ".": {
+      "name": "",
+      "dependencies": {},
+      "devDependencies": {},
+      "dynamicDependencies": {},
+      "maskedByOverrideDependencyMap": false
+    },
+    "common/base": {
+      "name": "base",
+      "dependencies": {},
+      "devDependencies": {},
+      "dynamicDependencies": {},
+      "maskedByOverrideDependencyMap": false
+    },
+    "features/home": {
+      "name": "home",
+      "dependencies": {
+        "@ohos/base": {
+          "specifier": "file:common/base",
+          "version": "file:common/base"
+        },
+        "@ohos/socialcircle": {
+          "specifier": "file:features/socialCircle",
+          "version": "file:features/socialCircle"
+        }
+      },
+      "devDependencies": {},
+      "dynamicDependencies": {},
+      "maskedByOverrideDependencyMap": false
+    },
+    "features/socialCircle": {
+      "name": "socialCircle",
+      "dependencies": {
+        "@ohos/base": {
+          "specifier": "file:common/base",
+          "version": "file:common/base"
+        }
+      },
+      "devDependencies": {},
+      "dynamicDependencies": {},
+      "maskedByOverrideDependencyMap": false
+    },
+    "products/phone": {
+      "name": "phone",
+      "dependencies": {
+        "@ohos/base": {
+          "specifier": "file:common/base",
+          "version": "file:common/base"
+        },
+        "@ohos/home": {
+          "specifier": "file:features/home",
+          "version": "file:features/home"
+        }
+      },
+      "devDependencies": {},
+      "dynamicDependencies": {},
+      "maskedByOverrideDependencyMap": false
+    }
+  },
+  "packages": {
+    "@ohos/base@file:common/base": {
+      "storePath": "common/base",
+      "dependencies": {},
+      "dynamicDependencies": {},
+      "dev": false,
+      "dynamic": false,
+      "maskedByOverrideDependencyMap": false
+    },
+    "@ohos/socialcircle@file:features/socialCircle": {
+      "storePath": "features/socialCircle",
+      "dependencies": {
+        "@ohos/base": "common/base"
+      },
+      "dynamicDependencies": {},
+      "dev": false,
+      "dynamic": false,
+      "maskedByOverrideDependencyMap": false
+    },
+    "@ohos/home@file:features/home": {
+      "storePath": "features/home",
+      "dependencies": {
+        "@ohos/base": "common/base",
+        "@ohos/socialcircle": "features/socialCircle"
+      },
+      "dynamicDependencies": {},
+      "dev": false,
+      "dynamic": false,
+      "maskedByOverrideDependencyMap": false
+    }
+  }
+}

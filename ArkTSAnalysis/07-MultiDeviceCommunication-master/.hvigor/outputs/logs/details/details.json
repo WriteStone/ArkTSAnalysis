@@ -1,0 +1,104 @@
+{
+  "HVIGOR_OHOS_PLUGIN": {
+    "MODULES": [
+      {
+        "MODULE_NAME": "f7a42fe7211f98ac7a60a285ac3a9e87",
+        "API_TYPE": "stageMode"
+      },
+      {
+        "MODULE_NAME": "106a6c241b8797f52e1e77317b96a201",
+        "API_TYPE": "stageMode"
+      },
+      {
+        "MODULE_NAME": "071144c83e77b730ff2e28ca1d27fe24",
+        "API_TYPE": "stageMode"
+      },
+      {
+        "MODULE_NAME": "593616de15330c0fb2d55e55410bf994",
+        "API_TYPE": "stageMode"
+      }
+    ],
+    "NATIVE_COMPILER": "Default",
+    "BUILD_MODE": "debug"
+  },
+  "HVIGOR": {
+    "IS_INCREMENTAL": true,
+    "IS_DAEMON": true,
+    "IS_PARALLEL": true,
+    "IS_HVIGORFILE_TYPE_CHECK": false,
+    "TASK_TIME": {
+      "f7a42fe7211f98ac7a60a285ac3a9e87": {
+        "init": 1889200,
+        "PreBuild": 483546200,
+        "CreateModuleInfo": 3305200,
+        "PreCheckSyscap": 2929500,
+        "GeneratePkgContextInfo": 44107000,
+        "ProcessRouterMap": 9107700,
+        "ProcessStartupConfig": 5308100,
+        "GenerateLoaderJson": 45919800,
+        "CreateBuildProfile": 5898200,
+        "MergeProfile": 40675800,
+        "ProcessProfile": 1035372500,
+        "PreviewProcessResource": 12446800,
+        "PreviewCompileResource": 953800800,
+        "PreviewHookCompileResource": 1510400,
+        "CopyPreviewProfile": 19398500,
+        "ReplacePreviewerPage": 3311100,
+        "buildPreviewerResource": 1465100,
+        "PreviewUpdateAssets": 8390800,
+        "PreviewArkTS": 29763712200,
+        "PreviewBuild": 717400
+      },
+      "106a6c241b8797f52e1e77317b96a201": {
+        "init": 632900,
+        "PreBuild": 30630500,
+        "CreateHarBuildProfile": 3859900,
+        "MergeProfile": 11622900
+      },
+      "071144c83e77b730ff2e28ca1d27fe24": {
+        "init": 557400,
+        "PreBuild": 24847100,
+        "CreateHarBuildProfile": 5317100,
+        "MergeProfile": 8289100
+      },
+      "593616de15330c0fb2d55e55410bf994": {
+        "init": 9066100,
+        "PreBuild": 272032200,
+        "CreateHarBuildProfile": 6192700,
+        "MergeProfile": 14719600
+      },
+      "APP": {
+        "init": 1716600
+      }
+    },
+    "APIS": [
+      "getHvigorConfig",
+      "getRootNodeDescriptor",
+      "getChildNode",
+      "getNodeByName",
+      "getAllNodes",
+      "getRootNode",
+      "getNodeName",
+      "getStartParams",
+      "buildFinished",
+      "getNodePath",
+      "subNodes",
+      "getExtraOption",
+      "getExtParam",
+      "getExtParams",
+      "getProperty",
+      "getProperties",
+      "getProductName",
+      "nodesEvaluated",
+      "getParameter",
+      "getCommandEntryTask"
+    ],
+    "CONFIG_PROPERTIES": {
+      "enableSignTask": true,
+      "skipNativeIncremental": false,
+      "hvigor_keepDependency": true
+    },
+    "BUILD_ID": "202508032304527890",
+    "TOTAL_TIME": 33885141300
+  }
+}

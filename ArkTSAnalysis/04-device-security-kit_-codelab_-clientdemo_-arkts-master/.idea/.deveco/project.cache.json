@@ -1,0 +1,16 @@
+{
+	"CommonInfo":{
+		"project.ide.version":"5.1.0.840",
+		"current.select.product":"default",
+		"current.select.buildMode":"",
+		"crossplatform.projectType":""
+	},
+	"BuildOptions":{
+		"SELECT_BUILD_PRODUCT":"default",
+		"BUNDLE_NAME":"com.example.device_security_sample_code",
+		"BUILD_PATH":{
+			"OUTPUT_PATH":"C:\\Users\\DELL\\lee\\ArkTSAnalysis\\04-device-security-kit_-codelab_-clientdemo_-arkts-master\\build\\outputs\\default"
+		},
+		"SELECT_BUILD_MODE":""
+	}
+}
