@@ -1,0 +1,658 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚGÆif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { abilityAccessCtrl } from '@kit.AbilityKit';
+import { geoLocationManager } from '@kit.LocationKit';
+import { sensor } from '@kit.SensorServiceKit';
+import { i18n } from '@kit.LocalizationKit';
+import { BackgroundUtil } from '../common/utils/BackgroundUtil';
+import { CompletionStatus } from '../view/CompletionStatus';
+import { CommonConstants } from '../common/constants/CommonConstants';
+import { CurrentSituation } from '../view/CurrentSituation';
+import LocationUtil from '../common/utils/LocationUtil';
+import Logger from '../common/utils/Logger';
+import NumberUtil from '../common/utils/NumberUtil';
+import StepsUtil from '../common/utils/StepsUtil';
+const TAG = 'HomePage';
+const uiContext = AppStorage.get('uiContext');
+class HomePage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__currentSteps = new ObservedPropertySimplePU(CommonConstants.INITIALIZATION_VALUE, this, "currentSteps");
+        this.__stepGoal = new ObservedPropertySimplePU('', this, "stepGoal");
+        this.addProvidedVar("stepGoal", this.__stepGoal, false);
+        this.__oldSteps = new ObservedPropertySimplePU('', this, "oldSteps");
+        this.__startPosition = new ObservedPropertySimplePU('', this, "startPosition");
+        this.__currentLocation = new ObservedPropertySimplePU('', this, "currentLocation");
+        this.__locale = new ObservedPropertySimplePU(i18n.System.getAppPreferredLanguage(), this, "locale");
+        this.__latitude = new ObservedPropertySimplePU(0, this, "latitude");
+        this.__longitude = new ObservedPropertySimplePU(0, this, "longitude");
+        this.__progressValue = new ObservedPropertySimplePU(0, this, "progressValue");
+        this.__isStart = new ObservedPropertySimplePU(false, this, "isStart");
+        this.context = uiContext?.getHostContext();
+        this.sensorCallback = (data) => {
+            try {
+                if (this.isStart) {
+                    if (StepsUtil.checkStrIsEmpty(this.oldSteps)) {
+                        this.oldSteps = data.steps.toString();
+                        StepsUtil.putStorageValue(CommonConstants.OLD_STEPS, this.oldSteps);
+                    }
+                    else {
+                        this.currentSteps = (data.steps - NumberUtil._parseInt(this.oldSteps, 10)).toString();
+                    }
+                }
+                else {
+                    this.currentSteps = data.steps.toString();
+                }
+                if (StepsUtil.checkStrIsEmpty(this.stepGoal) || !this.isStart) {
+                    return;
+                }
+                StepsUtil.putStorageValue(CommonConstants.CURRENT_STEPS, this.currentSteps);
+                this.progressValue = StepsUtil.getProgressValue(NumberUtil._parseInt(this.stepGoal, 10), NumberUtil._parseInt(this.currentSteps, 10));
+                StepsUtil.putStorageValue(CommonConstants.PROGRESS_VALUE_TAG, String(this.progressValue));
+            }
+            catch (err) {
+                Logger.error(TAG, 'Sensor on err' + JSON.stringify(err));
+            }
+        };
+        this.getGeolocation = (location) => {
+            if (this.latitude === location.latitude && this.longitude === location.longitude) {
+                return;
+            }
+            this.latitude = location.latitude;
+            this.longitude = location.longitude;
+            let reverseGeocodeRequest = {
+                'locale': this.locale.toString().includes('zh') ? 'zh' : 'en',
+                'latitude': this.latitude,
+                'longitude': this.longitude,
+                'maxItems': 1
+            };
+            geoLocationManager.getAddressesFromLocation(reverseGeocodeRequest).then(data => {
+                if (data[0].placeName) {
+                    this.currentLocation = data[0].placeName;
+                }
+            }).catch((err) => {
+                Logger.error(TAG, 'GetAddressesFromLocation err ' + JSON.stringify(err));
+            });
+        };
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.currentSteps !== undefined) {
+            this.currentSteps = params.currentSteps;
+        }
+        if (params.stepGoal !== undefined) {
+            this.stepGoal = params.stepGoal;
+        }
+        if (params.oldSteps !== undefined) {
+            this.oldSteps = params.oldSteps;
+        }
+        if (params.startPosition !== undefined) {
+            this.startPosition = params.startPosition;
+        }
+        if (params.currentLocation !== undefined) {
+            this.currentLocation = params.currentLocation;
+        }
+        if (params.locale !== undefined) {
+            this.locale = params.locale;
+        }
+        if (params.latitude !== undefined) {
+            this.latitude = params.latitude;
+        }
+        if (params.longitude !== undefined) {
+            this.longitude = params.longitude;
+        }
+        if (params.progressValue !== undefined) {
+            this.progressValue = params.progressValue;
+        }
+        if (params.isStart !== undefined) {
+            this.isStart = params.isStart;
+        }
+        if (params.context !== undefined) {
+            this.context = params.context;
+        }
+        if (params.sensorCallback !== undefined) {
+            this.sensorCallback = params.sensorCallback;
+        }
+        if (params.getGeolocation !== undefined) {
+            this.getGeolocation = params.getGeolocation;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__currentSteps.purgeDependencyOnElmtId(rmElmtId);
+        this.__stepGoal.purgeDependencyOnElmtId(rmElmtId);
+        this.__oldSteps.purgeDependencyOnElmtId(rmElmtId);
+        this.__startPosition.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentLocation.purgeDependencyOnElmtId(rmElmtId);
+        this.__locale.purgeDependencyOnElmtId(rmElmtId);
+        this.__latitude.purgeDependencyOnElmtId(rmElmtId);
+        this.__longitude.purgeDependencyOnElmtId(rmElmtId);
+        this.__progressValue.purgeDependencyOnElmtId(rmElmtId);
+        this.__isStart.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__currentSteps.aboutToBeDeleted();
+        this.__stepGoal.aboutToBeDeleted();
+        this.__oldSteps.aboutToBeDeleted();
+        this.__startPosition.aboutToBeDeleted();
+        this.__currentLocation.aboutToBeDeleted();
+        this.__locale.aboutToBeDeleted();
+        this.__latitude.aboutToBeDeleted();
+        this.__longitude.aboutToBeDeleted();
+        this.__progressValue.aboutToBeDeleted();
+        this.__isStart.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get currentSteps() {
+        return this.__currentSteps.get();
+    }
+    set currentSteps(newValue) {
+        this.__currentSteps.set(newValue);
+    }
+    get stepGoal() {
+        return this.__stepGoal.get();
+    }
+    set stepGoal(newValue) {
+        this.__stepGoal.set(newValue);
+    }
+    get oldSteps() {
+        return this.__oldSteps.get();
+    }
+    set oldSteps(newValue) {
+        this.__oldSteps.set(newValue);
+    }
+    get startPosition() {
+        return this.__startPosition.get();
+    }
+    set startPosition(newValue) {
+        this.__startPosition.set(newValue);
+    }
+    get currentLocation() {
+        return this.__currentLocation.get();
+    }
+    set currentLocation(newValue) {
+        this.__currentLocation.set(newValue);
+    }
+    get locale() {
+        return this.__locale.get();
+    }
+    set locale(newValue) {
+        this.__locale.set(newValue);
+    }
+    get latitude() {
+        return this.__latitude.get();
+    }
+    set latitude(newValue) {
+        this.__latitude.set(newValue);
+    }
+    get longitude() {
+        return this.__longitude.get();
+    }
+    set longitude(newValue) {
+        this.__longitude.set(newValue);
+    }
+    get progressValue() {
+        return this.__progressValue.get();
+    }
+    set progressValue(newValue) {
+        this.__progressValue.set(newValue);
+    }
+    get isStart() {
+        return this.__isStart.get();
+    }
+    set isStart(newValue) {
+        this.__isStart.set(newValue);
+    }
+    onPageShow() {
+        this.init();
+        this.requestPermissions();
+    }
+    onPageHide() {
+        sensor.off(sensor.SensorId.PEDOMETER);
+    }
+    init() {
+        StepsUtil.getStorageValue(CommonConstants.IS_START).then((res) => {
+            if (res === CommonConstants.TRUE) {
+                this.isStart = true;
+                StepsUtil.getStorageValue(CommonConstants.CURRENT_STEPS).then((res) => {
+                    if (StepsUtil.checkStrIsEmpty(res)) {
+                        return;
+                    }
+                    this.currentSteps = res;
+                });
+                StepsUtil.getStorageValue(CommonConstants.PROGRESS_VALUE_TAG).then((res) => {
+                    if (StepsUtil.checkStrIsEmpty(res)) {
+                        return;
+                    }
+                    this.progressValue = NumberUtil._parseInt(res, 10);
+                });
+                StepsUtil.getStorageValue(CommonConstants.START_POSITION).then((res) => {
+                    if (StepsUtil.checkStrIsEmpty(res)) {
+                        return;
+                    }
+                    this.startPosition = res;
+                });
+                StepsUtil.getStorageValue(CommonConstants.OLD_STEPS).then((res) => {
+                    if (StepsUtil.checkStrIsEmpty(res)) {
+                        return;
+                    }
+                    this.oldSteps = res;
+                });
+            }
+            else {
+                this.isStart = false;
+            }
+        });
+        StepsUtil.getStorageValue(CommonConstants.STEP_GOAL).then((res) => {
+            if (StepsUtil.checkStrIsEmpty(res)) {
+                return;
+            }
+            this.stepGoal = res;
+        });
+    }
+    requestPermissions() {
+        let atManager = abilityAccessCtrl.createAtManager();
+        try {
+            atManager.requestPermissionsFromUser(this.context, CommonConstants.REQUEST_PERMISSIONS).then((data) => {
+                if (data.authResults[0] !== 0 || data.authResults[1] !== 0) {
+                    return;
+                }
+                const that = this;
+                try {
+                    sensor.on(sensor.SensorId.PEDOMETER, this.sensorCallback, { interval: CommonConstants.SENSOR_INTERVAL });
+                }
+                catch (err) {
+                    console.error('On fail, errCode: ' + JSON.stringify(err));
+                }
+                LocationUtil.geolocationOn(this.getGeolocation);
+            }).catch((err) => {
+                Logger.error(TAG, 'requestPermissionsFromUser err' + JSON.stringify(err));
+            });
+        }
+        catch (err) {
+            Logger.error(TAG, 'requestPermissionsFromUser err' + JSON.stringify(err));
+        }
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create({ alignContent: Alignment.TopStart });
+            Stack.debugLine("entry/src/main/ets/pages/HomePage.ets(171:5)", "entry");
+            Stack.width(CommonConstants.FULL_WIDTH);
+            Stack.height(CommonConstants.FULL_HEIGHT);
+            Stack.backgroundColor(Color.White);
+        }, Stack);
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new CompletionStatus(this, {
+                        progressValue: this.__progressValue
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/HomePage.ets", line: 172, col: 7 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            progressValue: this.progressValue
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {});
+                }
+            }, { name: "CompletionStatus" });
+        }
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new CurrentSituation(this, {
+                        currentSteps: this.currentSteps,
+                        startPosition: this.startPosition,
+                        currentLocation: this.currentLocation
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/HomePage.ets", line: 176, col: 7 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            currentSteps: this.currentSteps,
+                            startPosition: this.startPosition,
+                            currentLocation: this.currentLocation
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        currentSteps: this.currentSteps,
+                        startPosition: this.startPosition,
+                        currentLocation: this.currentLocation
+                    });
+                }
+            }, { name: "CurrentSituation" });
+        }
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.debugLine("entry/src/main/ets/pages/HomePage.ets(182:7)", "entry");
+            Row.width(CommonConstants.FULL_WIDTH);
+            Row.height({ "id": 16777218, "type": 10002, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Row.margin({ top: { "id": 16777219, "type": 10002, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" } });
+            Row.justifyContent(FlexAlign.Center);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel(this.isStart ? { "id": 16777317, "type": 10003, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" } : { "id": 16777313, "type": 10003, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Button.debugLine("entry/src/main/ets/pages/HomePage.ets(183:9)", "entry");
+            Button.width({ "id": 16777265, "type": 10002, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Button.height({ "id": 16777263, "type": 10002, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Button.borderRadius({ "id": 16777264, "type": 10002, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Button.backgroundColor({ "id": 16777289, "type": 10001, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Button.fontSize({ "id": 16777266, "type": 10002, params: [], "bundleName": "com.example.pedometerapp", "moduleName": "entry" });
+            Button.fontColor(Color.White);
+            Button.fontWeight(CommonConstants.BIG_FONT_WEIGHT);
+            Button.onClick(() => {
+                if (this.isStart) {
+                    this.isStart = false;
+                    this.oldSteps = '';
+                    StepsUtil.CleanStepsData();
+                    BackgroundUtil.stopContinuousTask(this.context);
+                }
+                else {
+                    if (this.stepGoal === '' || this.currentLocation === '') {
+                        this.getUIContext().getPromptAction().showToast({ message: CommonConstants.WAIT });
+                    }
+                    else {
+                        this.isStart = true;
+                        this.startPosition = this.currentLocation;
+                        StepsUtil.putStorageValue(CommonConstants.START_POSITION, this.startPosition);
+                        this.currentSteps = CommonConstants.INITIALIZATION_VALUE;
+                        this.progressValue = 0;
+                        BackgroundUtil.startContinuousTask(this.context);
+                    }
+                }
+                StepsUtil.putStorageValue(CommonConstants.IS_START, String(this.isStart));
+            });
+        }, Button);
+        Button.pop();
+        Row.pop();
+        Stack.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "HomePage";
+    }
+}
+registerNamedRoute(() => new HomePage(undefined, {}), "", { bundleName: "com.example.pedometerapp", moduleName: "entry", pagePath: "pages/HomePage", pageFullPath: "entry/src/main/ets/pages/HomePage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=HomePage.js.mapÂœÙj hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.AbilityKit.d.tsÙk hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.LocationKit.d.tsÙp hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.SensorServiceKit.d.tsÙo hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.LocalizationKit.d.tsÙkC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\BackgroundUtil.etsÙeC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\view\CompletionStatus.etsÙpC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\constants\CommonConstants.etsÙeC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\view\CurrentSituation.etsÙiC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\LocationUtil.etsÙcC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\Logger.etsÙgC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\NumberUtil.etsÙfC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\StepsUtil.etsÙ^C:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¯hostModulesInfo¥entryÃÂÙ>C:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entryÙ8C:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer¥entry¥1.0.0Ô  Ù>C:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entryÃÃÚ /*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+import { abilityAccessCtrl } from '@kit.AbilityKit';
+import { common } from '@kit.AbilityKit';
+import { geoLocationManager } from '@kit.LocationKit';
+import { sensor } from '@kit.SensorServiceKit';
+import { i18n } from '@kit.LocalizationKit';
+import { BackgroundUtil } from '../common/utils/BackgroundUtil';
+import { CompletionStatus } from '../view/CompletionStatus';
+import { CommonConstants } from '../common/constants/CommonConstants';
+import { CurrentSituation } from '../view/CurrentSituation';
+import LocationUtil from '../common/utils/LocationUtil';
+import Logger from '../common/utils/Logger';
+import NumberUtil from '../common/utils/NumberUtil';
+import StepsUtil from '../common/utils/StepsUtil';
+
+const TAG: string = 'HomePage';
+const uiContext: UIContext | undefined = AppStorage.get('uiContext');
+
+@Entry
+@Component
+struct HomePage {
+  @State currentSteps: string = CommonConstants.INITIALIZATION_VALUE;
+  @Provide stepGoal: string = '';
+  @State oldSteps: string = '';
+  @State startPosition: string = '';
+  @State currentLocation: string = '';
+  @State locale: string = i18n.System.getAppPreferredLanguage();
+  @State latitude: number = 0;
+  @State longitude: number = 0;
+  @State progressValue: number = 0;
+  @State isStart: boolean = false;
+  private context: common.UIAbilityContext = uiContext?.getHostContext() as common.UIAbilityContext;
+  private sensorCallback: (data: sensor.PedometerResponse) => void = (data: sensor.PedometerResponse) => {
+    try {
+      if (this.isStart) {
+        if (StepsUtil.checkStrIsEmpty(this.oldSteps)) {
+          this.oldSteps = data.steps.toString();
+          StepsUtil.putStorageValue(CommonConstants.OLD_STEPS, this.oldSteps);
+        } else {
+          this.currentSteps = (data.steps - NumberUtil._parseInt(this.oldSteps, 10)).toString();
+        }
+      } else {
+        this.currentSteps = data.steps.toString();
+      }
+
+      if (StepsUtil.checkStrIsEmpty(this.stepGoal) || !this.isStart) {
+        return;
+      }
+      StepsUtil.putStorageValue(CommonConstants.CURRENT_STEPS, this.currentSteps);
+      this.progressValue = StepsUtil.getProgressValue(NumberUtil._parseInt(this.stepGoal, 10),
+        NumberUtil._parseInt(this.currentSteps, 10));
+      StepsUtil.putStorageValue(CommonConstants.PROGRESS_VALUE_TAG, String(this.progressValue));
+    } catch (err) {
+      Logger.error(TAG, 'Sensor on err' + JSON.stringify(err));
+    }
+  }
+  private getGeolocation: (location: geoLocationManager.Location) => void = (location: geoLocationManager.Location) => {
+    if (this.latitude === location.latitude && this.longitude === location.longitude) {
+      return;
+    }
+    this.latitude = location.latitude;
+    this.longitude = location.longitude;
+    let reverseGeocodeRequest: geoLocationManager.ReverseGeoCodeRequest = {
+      'locale': this.locale.toString().includes('zh') ? 'zh' : 'en',
+      'latitude': this.latitude,
+      'longitude': this.longitude,
+      'maxItems': 1
+    };
+    geoLocationManager.getAddressesFromLocation(reverseGeocodeRequest).then(data => {
+      if (data[0].placeName) {
+        this.currentLocation = data[0].placeName;
+      }
+    }).catch((err: Error) => {
+      Logger.error(TAG, 'GetAddressesFromLocation err ' + JSON.stringify(err));
+    });
+  }
+
+  onPageShow() {
+    this.init();
+    this.requestPermissions();
+  }
+
+  onPageHide() {
+    sensor.off(sensor.SensorId.PEDOMETER);
+  }
+
+  init() {
+    StepsUtil.getStorageValue(CommonConstants.IS_START).then((res: string) => {
+      if (res === CommonConstants.TRUE) {
+        this.isStart = true;
+        StepsUtil.getStorageValue(CommonConstants.CURRENT_STEPS).then((res: string) => {
+          if (StepsUtil.checkStrIsEmpty(res)) {
+            return;
+          }
+          this.currentSteps = res;
+        });
+
+        StepsUtil.getStorageValue(CommonConstants.PROGRESS_VALUE_TAG).then((res: string) => {
+          if (StepsUtil.checkStrIsEmpty(res)) {
+            return;
+          }
+          this.progressValue = NumberUtil._parseInt(res, 10);
+        });
+
+        StepsUtil.getStorageValue(CommonConstants.START_POSITION).then((res: string) => {
+          if (StepsUtil.checkStrIsEmpty(res)) {
+            return;
+          }
+          this.startPosition = res;
+        });
+
+        StepsUtil.getStorageValue(CommonConstants.OLD_STEPS).then((res: string) => {
+          if (StepsUtil.checkStrIsEmpty(res)) {
+            return;
+          }
+          this.oldSteps = res;
+        });
+      } else {
+        this.isStart = false;
+      }
+    })
+
+    StepsUtil.getStorageValue(CommonConstants.STEP_GOAL).then((res: string) => {
+      if (StepsUtil.checkStrIsEmpty(res)) {
+        return;
+      }
+      this.stepGoal = res;
+    });
+  }
+
+  requestPermissions(): void {
+    let atManager = abilityAccessCtrl.createAtManager();
+    try {
+      atManager.requestPermissionsFromUser(this.context, CommonConstants.REQUEST_PERMISSIONS).then((data) => {
+        if (data.authResults[0] !== 0 || data.authResults[1] !== 0) {
+          return;
+        }
+        const that = this;
+        try {
+          sensor.on(sensor.SensorId.PEDOMETER, this.sensorCallback, { interval: CommonConstants.SENSOR_INTERVAL });
+
+        } catch (err) {
+          console.error('On fail, errCode: ' + JSON.stringify(err));
+        }
+
+        LocationUtil.geolocationOn(this.getGeolocation);
+      }).catch((err: Error) => {
+        Logger.error(TAG, 'requestPermissionsFromUser err' + JSON.stringify(err));
+      })
+    } catch (err) {
+      Logger.error(TAG, 'requestPermissionsFromUser err' + JSON.stringify(err));
+    }
+  }
+
+  build() {
+    Stack({ alignContent: Alignment.TopStart }) {
+      CompletionStatus({
+        progressValue: $progressValue
+      })
+
+      CurrentSituation({
+        currentSteps: this.currentSteps,
+        startPosition: this.startPosition,
+        currentLocation: this.currentLocation
+      })
+
+      Row() {
+        Button(this.isStart ? $r('app.string.stop') : $r('app.string.start'))
+          .width($r('app.float.start_button_width'))
+          .height($r('app.float.start_button_height'))
+          .borderRadius($r('app.float.start_button_radius'))
+          .backgroundColor($r('app.color.button_background'))
+          .fontSize($r('app.float.start_font_size'))
+          .fontColor(Color.White)
+          .fontWeight(CommonConstants.BIG_FONT_WEIGHT)
+          .onClick(() => {
+            if (this.isStart) {
+              this.isStart = false;
+              this.oldSteps = '';
+              StepsUtil.CleanStepsData();
+              BackgroundUtil.stopContinuousTask(this.context);
+            } else {
+              if (this.stepGoal === '' || this.currentLocation === '') {
+                this.getUIContext().getPromptAction().showToast({ message: CommonConstants.WAIT });
+              } else {
+                this.isStart = true;
+                this.startPosition = this.currentLocation;
+                StepsUtil.putStorageValue(CommonConstants.START_POSITION, this.startPosition);
+                this.currentSteps = CommonConstants.INITIALIZATION_VALUE;
+                this.progressValue = 0;
+                BackgroundUtil.startContinuousTask(this.context);
+              }
+            }
+            StepsUtil.putStorageValue(CommonConstants.IS_START, String(this.isStart));
+          })
+      }
+      .width(CommonConstants.FULL_WIDTH)
+      .height($r('app.float.button_height'))
+      .margin({ top: $r('app.float.button_margin_top') })
+      .justifyContent(FlexAlign.Center)
+    }
+    .width(CommonConstants.FULL_WIDTH)
+    .height(CommonConstants.FULL_HEIGHT)
+    .backgroundColor(Color.White)
+  }
+}ÀÔrCœ¯@kit.AbilityKit°@kit.LocationKitµ@kit.SensorServiceKit´@kit.LocalizationKit¾../common/utils/BackgroundUtil¸../view/CompletionStatusÙ#../common/constants/CommonConstants¸../view/CurrentSituation¹../common/utils/StepsUtil¼../common/utils/LocationUtilº../common/utils/NumberUtil¶../common/utils/LoggerÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙj hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.AbilityKit.d.tsAÃªoh-resolveÂDAÃÙk hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.LocationKit.d.tsÔrE‘¯hostModulesInfo–ÔrF’²hostDependencyName®hostModuleName°@kit.LocationKit¥entryF°@kit.LocationKit¥entryF°@kit.LocationKit¥entryF°@kit.LocationKit¥entryF°@kit.LocationKit¥entryF°@kit.LocationKit¥entryÃªoh-resolveÂDAÃÙp hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.SensorServiceKit.d.tsE“Fµ@kit.SensorServiceKit¥entryFµ@kit.SensorServiceKit¥entryFµ@kit.SensorServiceKit¥entryÃªoh-resolveÂDAÃÙo hvigor_ignore_C:_Program Files_Huawei_DevEco Studio_sdk_default_openharmony_ets_kits_@kit.LocalizationKit.d.tsE“F´@kit.LocalizationKit¥entryF´@kit.LocalizationKit¥entryF´@kit.LocalizationKit¥entryÃªoh-resolveÂDAÂÙkC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\BackgroundUtil.etsAÃªoh-resolveÂDAÂÙeC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\view\CompletionStatus.etsAÃªoh-resolveÂDAÂÙpC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\constants\CommonConstants.etsAÃªoh-resolveÂDAÂÙeC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\view\CurrentSituation.etsAÃªoh-resolveÂDAÂÙfC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\StepsUtil.etsAÃªoh-resolveÂDAÂÙiC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\LocationUtil.etsAÃªoh-resolveÂDAÂÙgC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\NumberUtil.etsAÃªoh-resolveÂDAÂÙcC:\Users\xsy\labProject\myDevEchoStudioProject\Pedometer\entry\src\main\ets\common\utils\Logger.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings«HomePage.js ‘¬HomePage.etsÜ‹‘”    ‘” ˜”   ” ”	 	” ” ”" "”3 3”4 4˜”   ” ”	 	” ” ”# #”5 5”6 6˜”   ” ”	 	” ” ” ”. .”/ /˜”   ” ”	 	” ” ” ”+ +”, ,˜”   ” ”	 	” ” ” ”? ?”Ì@ Ì@˜”   ” ”	 	” ” ”! !”; ;”< <˜”   ” ”	 	” ” ”   ”ÌE ÌE”ÌF ÌF˜”   ” ”	 	” ” ”! !”; ;”< <–”   ” ” ” ”7 7”8 8–”   ” ” ” ”+ +”, ,–”   ” ” ” ”3 3”4 4–”   ” ” ” ”1 1”2 2–”   ” ”	 	” ” ” ›”   ” ” ” )” 3” 4”  7”! 8”, ÌC”- ÌD”. ÌE’” #” #‘” ! ””; $ ”ÌJ $/”ÌK $0”Ì_ $ÌD’”7 %”9 % ’”7 &”9 &’”< '!”> '#’”> (#”Ì@ (%—”5 )”9 )”: )”Ì@ )%”ÌA )&”ÌX )=”ÌZ )?’”7 *”8 *’”8 +”9 +’”< ,!”= ,"’”6 -”; -!•” .-”  .6”" .8”0 .ÌF”2 .Ìc•” /ÌE” /ÌF”# /Ìd”% /Ìf”' /Ìh’” 0” 0–” 1” 1
+” 1” 1”  1”" 1›” 2” 2”! 2”" 2”1 2%”2 2&”6 2*”7 2+”? 23”Ì@ 24”ÌB 26œ” 3
+” 3” 3”% 3”( 3”, 3”- 3”2 3$”3 3%”; 3-”= 3/”> 30” 4
+”! 4”" 4”1 4#”2 4$”ÌA 43”ÌB 44”ÌK 4=”ÌM 4?”ÌQ 4ÌC”ÌR 4ÌD”ÌZ 4ÌL”Ì[ 4ÌM”Ì\ 4ÌN‘” 5	‘” 5Ü ” 6
+” 6” 6”) 6”, 6”- 6”1 6#”2 6$”7 6)”: 6,”ÌD 66”ÌE 67”ÌN 6Ì@”ÌO 6ÌA”ÌS 6ÌE”ÌT 6ÌF”Ì\ 6ÌN”Ì^ 6ÌP”Ì` 6ÌR”Ìa 6ÌS”Ìb 6ÌT”Ìc 6ÌU”Ìk 6Ì]”Ìm 6Ì_”Ìn 6Ì`‘” 7	‘” 8‘” 8œ” 9” 9” 9”% 9”( 9”, 9 ”- 9!”2 9&”3 9'”; 9/”= 91”> 92‘” :Ü ” <” <
+” <” <”- <#”. <$”2 <(”3 <)”; <1”< <2”Ì@ <6”ÌA <7”ÌE <;”ÌF <<”ÌM <ÌC”ÌO <ÌE’” =” =‘” >” ?” ?” ?”) ?”* ? ”9 ?/”: ?0”ÌG ?=”ÌI ??”ÌM ?ÌC”ÌN ?ÌD”ÌZ ?ÌP”Ì[ ?ÌQ”Ì\ ?ÌRÜ  ” Ì@” Ì@
+” Ì@”" Ì@”% Ì@”. Ì@$”/ Ì@%”? Ì@5”Ì@ Ì@6”ÌJ Ì@Ì@”ÌK Ì@ÌA”ÌT Ì@ÌJ”ÌU Ì@ÌK”ÌY Ì@ÌO”ÌZ Ì@ÌP”Ìb Ì@ÌX”Ìd Ì@ÌZ”Ìf Ì@Ì\”Ìg Ì@Ì]”Ìi ÌA”Ìs ÌA”Ìt ÌA”Ì} ÌA”Ì~ ÌA”Ì‚ ÌA!”Ìƒ ÌA"”Ì ÌA.”Ì‘ ÌA0”Ì“ ÌA2”Ì” ÌA3”Ì• ÌA4”Ì– ÌA5Ü ” ÌB” ÌB” ÌB”) ÌB”* ÌB ”9 ÌB/”: ÌB0”ÌL ÌBÌB”ÌN ÌBÌD”ÌT ÌBÌJ”ÌU ÌBÌK”ÌY ÌBÌO”ÌZ ÌBÌP”Ìg ÌBÌ]”Ìh ÌBÌ^”Ìi ÌBÌ_”Ìj ÌBÌ`‘” ÌC”” ÌC” ÌC” ÌC” ÌCÜ ” ÌD” ÌD” ÌD” ÌD” ÌD”  ÌD”" ÌD”1 ÌD'”4 ÌD*”8 ÌD.”9 ÌD/”ÌB ÌD8”ÌC ÌD9”ÌF ÌD<”ÌG ÌD=”ÌH ÌD>”ÌI ÌD?‘” ÌE’” ÌF”	 ÌF•” ÌGÌL” ÌGÌM”' ÌGÌr”) ÌGÌt”+ ÌGÌvÜ ” ÌH” ÌH” ÌH” ÌH” ÌH”" ÌH”* ÌH"”+ ÌH#”3 ÌH+”7 ÌH/”; ÌH3”< ÌH4”ÌE ÌH=”ÌJ ÌHÌB”ÌR ÌHÌJ”ÌS ÌHÌK”Ì\ ÌHÌT”Ì^ ÌHÌV’” ÌI” ÌI‘” ÌJ™” ÌK” ÌK” ÌK	” ÌK” ÌK”$ ÌK”% ÌK”- ÌK%”. ÌK&™” ÌL” ÌL” ÌL	” ÌL” ÌL”% ÌL”& ÌL”/ ÌL'”0 ÌL(”” ÌM” ÌM”% ÌM”( ÌMÌJÜ ” ÌN” ÌN” ÌN” ÌN” ÌN”% ÌN”& ÌN”. ÌN$”0 ÌN&”1 ÌN'”9 ÌN/”: ÌN0”> ÌN4”? ÌN5”Ì@ ÌN6”ÌA ÌN7”ÌB ÌN8”ÌF ÌN<”ÌG ÌN=”ÌH ÌN>”ÌI ÌN?”ÌM ÌNÌC–” ÌO” ÌO” ÌO”  ÌO”! ÌO”) ÌO–” ÌP” ÌP” ÌP”! ÌP”" ÌP”+ ÌP!”” ÌQ” ÌQ” ÌQ” ÌQ’” ÌR” ÌR” ÌS” ÌS” ÌS”7 ÌS/”8 ÌS0”ÌM ÌSÌE”ÌN ÌSÌF”ÌO ÌSÌG”ÌS ÌSÌK”ÌT ÌSÌL”ÌX ÌSÌP”ÌY ÌSÌQ”Ì[ ÌSÌS™” ÌT” ÌT
+” ÌT” ÌT” ÌT” ÌT” ÌT”% ÌT”' ÌTœ” ÌU” ÌU” ÌU”( ÌU”+ ÌU”/ ÌU#”0 ÌU$”1 ÌU%”2 ÌU&”3 ÌU'”< ÌU0”= ÌU1‘” ÌVš” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW” ÌWÜ ” ÌX” ÌX” ÌX” ÌX” ÌX”  ÌX”" ÌX”ÌA ÌX7”ÌD ÌX:”ÌH ÌX>”ÌI ÌX?”ÌR ÌXÌH”ÌS ÌXÌI”ÌV ÌXÌL”ÌW ÌXÌM”ÌX ÌXÌN”ÌY ÌXÌO”” ÌY” ÌY” ÌY” ÌY’” ÌZ”	 ÌZ‘” ÌE’” $	” $’” $	” $’” %” %’” %” %’” &	” &’” &	” &’” '	” '’” '	” '’” (	” (’” (	” (’” )	” )’” )	” )’” *	” *’” *	” *’” +	” +’” +	” +’” ,	” ,’” ,	” ,’” -	” -’” -	” -’” Ì\” Ì\–” Ì]” Ì]” Ì]	” Ì]” Ì]” Ì]–” Ì^” Ì^” Ì^	” Ì^”! Ì^”" Ì^’” Ì_” Ì_’” Ìa” Ìaœ” Ìb” Ìb
+” Ìb” Ìb” Ìb” Ìb” Ìb”" Ìb”# Ìb”, Ìb(”- Ìb)”. Ìb*’” Ìc” Ìc’” Ìe” ÌeÜ ” Ìf” Ìf” Ìf”! Ìf”" Ìf”1 Ìf-”2 Ìf.”: Ìf6”; Ìf7”< Ìf8”Ì@ Ìf<”ÌA Ìf=”ÌB Ìf>”ÌE ÌfÌI”ÌG ÌfÌK”ÌI ÌfÌM˜” Ìg” Ìg
+” Ìg” Ìg”' Ìg!”( Ìg"”, Ìg&”. Ìg(—” Ìh” Ìh” Ìh” Ìh” Ìh”# Ìh”$ ÌhÜ ” Ìi” Ìi” Ìi”) Ìi!”* Ìi"”9 Ìi1”: Ìi2”ÌG Ìi?”ÌH ÌiÌ@”ÌI ÌiÌA”ÌM ÌiÌE”ÌN ÌiÌF”ÌO ÌiÌG”ÌR ÌiÌR”ÌT ÌiÌT”ÌV ÌiÌV™” Ìj
+” Ìj”! Ìj”" Ìj”1 Ìj'”2 Ìj(”5 Ìj+”6 Ìj,”8 Ìj.’” Ìk” Ìk‘” Ìl—” Ìm
+” Ìm” Ìm”% Ìm”( Ìm”+ Ìm!”, Ìm"”” Ìn” Ìn	” Ìn
+” ÌnÜ ” Ìp” Ìp” Ìp”) Ìp!”* Ìp"”9 Ìp1”: Ìp2”ÌL ÌpÌD”ÌM ÌpÌE”ÌN ÌpÌF”ÌR ÌpÌJ”ÌS ÌpÌK”ÌT ÌpÌL”ÌW ÌpÌW”ÌY ÌpÌY”Ì[ ÌpÌ[™” Ìq
+” Ìq”! Ìq”" Ìq”1 Ìq'”2 Ìq(”5 Ìq+”6 Ìq,”8 Ìq.’” Ìr” Ìr‘” Ìs” Ìt
+” Ìt” Ìt”& Ìt”) Ìt”3 Ìt)”4 Ìt*”= Ìt3”> Ìt4”ÌA Ìt7”ÌC Ìt9”ÌE Ìt;”ÌF Ìt<”ÌG Ìt=”” Ìu” Ìu	” Ìu
+” ÌuÜ ” Ìw” Ìw” Ìw”) Ìw!”* Ìw"”9 Ìw1”: Ìw2”ÌH ÌwÌ@”ÌI ÌwÌA”ÌJ ÌwÌB”ÌN ÌwÌF”ÌO ÌwÌG”ÌP ÌwÌH”ÌS ÌwÌS”ÌU ÌwÌU”ÌW ÌwÌW™” Ìx
+” Ìx”! Ìx”" Ìx”1 Ìx'”2 Ìx(”5 Ìx+”6 Ìx,”8 Ìx.’” Ìy” Ìy‘” Ìz—” Ì{
+” Ì{” Ì{”& Ì{”) Ì{”, Ì{"”- Ì{#”” Ì|” Ì|	” Ì|
+” Ì|Ü ” Ì~” Ì~” Ì~”) Ì~!”* Ì~"”9 Ì~1”: Ì~2”ÌC Ì~;”ÌD Ì~<”ÌE Ì~=”ÌI Ì~ÌA”ÌJ Ì~ÌB”ÌK Ì~ÌC”ÌN Ì~ÌN”ÌP Ì~ÌP”ÌR Ì~ÌR™” Ì
+” Ì”! Ì”" Ì”1 Ì'”2 Ì(”5 Ì+”6 Ì,”8 Ì.’” Ì€” Ì€‘” Ì—” Ì‚
+” Ì‚” Ì‚”! Ì‚”$ Ì‚”' Ì‚”( Ì‚”” Ìƒ” Ìƒ	” Ìƒ
+” Ìƒ‘” Ì„‘” Ì„—” Ì…” Ì…” Ì…” Ì…” Ì…”$ Ì…”% Ì…‘” Ì†”” Ì‡”	 Ì‡”
+ Ì‡” Ì‡Ü ” Ì‰” Ì‰” Ì‰”! Ì‰”" Ì‰”1 Ì‰-”2 Ì‰.”; Ì‰7”< Ì‰8”= Ì‰9”ÌA Ì‰=”ÌB Ì‰>”ÌC Ì‰?”ÌF Ì‰ÌJ”ÌH Ì‰ÌL”ÌJ Ì‰ÌN™” ÌŠ” ÌŠ
+” ÌŠ” ÌŠ”) ÌŠ#”* ÌŠ$”- ÌŠ'”. ÌŠ(”0 ÌŠ*’” Ì‹” Ì‹‘” ÌŒ—” Ì” Ì
+” Ì” Ì” Ì” Ì”  Ì”” Ì”	 Ì”
+ Ì” Ì’” Ì” Ì’” Ì‘” Ì‘™” Ì’” Ì’” Ì’” Ì’”) Ì’%”* Ì’&”9 Ì’5”; Ì’7”< Ì’8’” Ì“” Ì“Ü ” Ì”” Ì”” Ì””0 Ì”*”1 Ì”+”5 Ì”/”6 Ì”0”= Ì”7”? Ì”9”ÌN Ì”ÌH”ÌO Ì”ÌI”Ìb Ì”Ì\”Ìc Ì”Ì]”Ìd Ì”Ì^”Ìh Ì”Ìb”Ìi Ì”Ìc”Ìj Ì”Ìd”Ìn Ì”Ìh”Ìp Ì”Ìj”Ìr Ì”ÌlÜ ” Ì•” Ì•” Ì•” Ì•”$ Ì•”% Ì•”& Ì•”' Ì•”, Ì•$”- Ì•%”1 Ì•)”5 Ì•-”6 Ì•.”ÌA Ì•9”ÌB Ì•:”ÌC Ì•;”ÌD Ì•<”ÌI Ì•ÌA”ÌJ Ì•ÌB”ÌL Ì•ÌD’” Ì–
+” Ì–‘” Ì—	–” Ì˜” Ì˜” Ì˜” Ì˜”! Ì˜”" Ì˜’” Ì™” Ì™Ü ” Ìš
+” Ìš” Ìš” Ìš” Ìš”$ Ìš”% Ìš”- Ìš#”. Ìš$”7 Ìš-”9 Ìš/”= Ìš3”> Ìš4”ÌL ÌšÌB”ÌN ÌšÌD”ÌP ÌšÌF”ÌX ÌšÌN”ÌZ ÌšÌP”Ìi ÌšÌ_”Ìj ÌšÌ`”Ìy ÌšÌo”Ì{ ÌšÌq”Ì| ÌšÌr”Ì} ÌšÌs‘” Ìœ	”” Ìœ
+” Ìœ” Ìœ” ÌœŸ” Ì
+” Ì” Ì”! Ì”" Ì”6 Ì,”9 Ì/”= Ì3”> Ì4”ÌG Ì=”ÌH Ì>”ÌK ÌÌA”ÌL ÌÌB”ÌM ÌÌC”ÌN ÌÌD‘” Ì	š” Ì ” Ì ” Ì ”* Ì "”+ Ì #”/ Ì '”0 Ì (”> Ì 6”? Ì 7”Ì@ Ì 8š” Ì¡” Ì¡” Ì¡” Ì¡	” Ì¡” Ì¡” Ì¡” Ì¡” Ì¡” Ì¡Ü ” Ì¢” Ì¢” Ì¢” Ì¢” Ì¢”  Ì¢”" Ì¢”ÌB Ì¢:”ÌE Ì¢=”ÌI Ì¢ÌA”ÌJ Ì¢ÌB”ÌS Ì¢ÌK”ÌT Ì¢ÌL”ÌW Ì¢ÌO”ÌX Ì¢ÌP”ÌY Ì¢ÌQ”ÌZ Ì¢ÌR”” Ì£” Ì£” Ì£” Ì£‘”	 Ì¤”” Ì¤” Ì¤” Ì¤” Ì¤Ü ” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥”> Ì¥8”ÌA Ì¥;”ÌE Ì¥?”ÌF Ì¥Ì@”ÌO Ì¥ÌI”ÌP Ì¥ÌJ”ÌS Ì¥ÌM”ÌT Ì¥ÌN”ÌU Ì¥ÌO”ÌV Ì¥ÌP‘”	 Ì¦’” Ì§” Ì§‘” Ì©š” Ìª” Ìª	” Ìª
+” Ìª”' Ìª”) Ìª”2 Ìª#”3 Ìª$”; Ìª,”= Ìª.˜” Ìª” Ìª	” ÌØ” ÌØ
+” ÌØ”' ÌØ”( ÌØ”2 ÌØ%˜” Ìª” Ìª	” ÌÙ” ÌÙ” ÌÙ”( ÌÙ”) ÌÙ”4 ÌÙ'˜” Ìª” Ìª	” ÌÚ”! ÌÚ”" ÌÚ”' ÌÚ”( ÌÚ”- ÌÚ “”, Ì«”< Ì«”ÌC Ì«“” Ì¬”% Ì¬”; Ì¬%‘” Ì­’” Ì¬”) Ì¬“”, Ì¯”< Ì¯”ÌC Ì¯–” Ì°”$ Ì°”& Ì°”* Ì°”+ Ì°”7 Ì°'–” Ì±”% Ì±”' Ì±”+ Ì±”, Ì±”9 Ì±)–” Ì²”' Ì²”) Ì²”- Ì²”. Ì²”= Ì²-‘” Ì³–” Ì°”( Ì°”* Ì°”. Ì°”/ Ì°”; Ì°'–” Ì±”) Ì±”+ Ì±”/ Ì±”0 Ì±”= Ì±)–” Ì²”+ Ì²”- Ì²”1 Ì²”2 Ì²”ÌA Ì²-–” Ì°”$ Ì°”& Ì°”* Ì°”+ Ì°”7 Ì°'–” Ì±”% Ì±”' Ì±”+ Ì±”, Ì±”9 Ì±)–” Ì²”' Ì²”) Ì²”- Ì²”. Ì²”= Ì²-’” Ìµ” Ìµ	˜” Ìµ” Ìµ	” ÌÓ” ÌÓ” ÌÓ”% ÌÓ”& ÌÓ”0 ÌÓ'”” Ìµ” Ìµ	” ÌÔ” ÌÔ™” Ìµ” Ìµ	” ÌÕ” ÌÕ” ÌÕ” ÌÕ” ÌÕ”ÌŒ ÌÕ6”Ì ÌÕ8˜” Ìµ” Ìµ	” ÌÖ” ÌÖ” ÌÖ”( ÌÖ”) ÌÖ ”/ ÌÖ&›” Ì¶” Ì¶”# Ì¶”' Ì¶”( Ì¶”/ Ì¶”0 Ì¶”1 Ì¶”Ì¡ Ì¶4”Ì¢ Ì¶5”Í Ì¶ÌL”” Ì¶” Ì¶” Ì·” Ì·”” Ì¶” Ì¶” Ì¸” Ì¸”” Ì¶” Ì¶” Ì¹” Ì¹”” Ì¶” Ì¶” Ìº”" Ìº”” Ì¶” Ì¶” Ì»” Ì»˜” Ì¶” Ì¶” Ì¼” Ì¼” Ì¼”" Ì¼”# Ì¼”( Ì¼ ˜” Ì¶” Ì¶” Ì½” Ì½” Ì½”- Ì½%”. Ì½&”= Ì½5—” Ì¶” Ì¶” Ì¾” Ì¾” Ì¾” Ì¾”  Ì¾–” Ì¿” Ì¿” Ì¿” Ì¿”  Ì¿”" Ì¿—” ÌÀ” ÌÀ” ÌÀ”  ÌÀ”# ÌÀ”( ÌÀ"”) ÌÀ#—” ÌÁ” ÌÁ” ÌÁ”! ÌÁ”$ ÌÁ”& ÌÁ ”' ÌÁ!–” ÌÂ” ÌÂ” ÌÂ”, ÌÂ&”. ÌÂ(”/ ÌÂ)š” ÌÃ”" ÌÃ”# ÌÃ”5 ÌÃ/”6 ÌÃ0”: ÌÃ4”; ÌÃ5”ÌB ÌÃ<”ÌC ÌÃ=”ÌD ÌÃ>‘” ÌÄ‘” ÌÄ” ÌÅ” ÌÅ” ÌÅ” ÌÅ”% ÌÅ”* ÌÅ$”, ÌÅ&”0 ÌÅ*”4 ÌÅ.”5 ÌÅ/”ÌD ÌÅ>”ÌI ÌÅÌC”ÌK ÌÅÌE”ÌM ÌÅÌGÜ ” ÌÆ” ÌÆ” ÌÆ”) ÌÆ!”+ ÌÆ#”, ÌÆ$”; ÌÆ3”= ÌÆ5”> ÌÆ6”ÌG ÌÆ?”ÌH ÌÆÌ@”ÌJ ÌÆÌB”ÌQ ÌÆÌI”ÌS ÌÆÌK”Ìb ÌÆÌZ”Ìc ÌÆÌ[”Ìg ÌÆÌ_”Ìi ÌÆÌa”Ìj ÌÆÌb”Ìk ÌÆÌc‘” ÌÇ‘” ÌÇ—” ÌÈ” ÌÈ” ÌÈ”$ ÌÈ”' ÌÈ”+ ÌÈ#”, ÌÈ$™” ÌÉ” ÌÉ” ÌÉ”* ÌÉ"”- ÌÉ%”1 ÌÉ)”2 ÌÉ*”ÌA ÌÉ9”ÌB ÌÉ:” ÌÊ”! ÌÊ”" ÌÊ”1 ÌÊ)”2 ÌÊ*”ÌA ÌÊ9”ÌB ÌÊ:”ÌP ÌÊÌH”ÌR ÌÊÌJ”ÌV ÌÊÌN”ÌW ÌÊÌO”Ìd ÌÊÌ\”Ìe ÌÊÌ]”Ìf ÌÊÌ^™” ÌË” ÌË” ÌË”) ÌË!”, ÌË$”; ÌË3”< ÌË4”ÌP ÌËÌH”ÌQ ÌËÌI—” ÌÌ” ÌÌ” ÌÌ”* ÌÌ"”- ÌÌ%”. ÌÌ&”/ ÌÌ'š” ÌÍ”& ÌÍ”' ÌÍ”: ÌÍ2”; ÌÍ3”? ÌÍ7”Ì@ ÌÍ8”ÌG ÌÍ?”ÌH ÌÍÌ@”ÌI ÌÍÌA‘” ÌÎ‘” ÌÏÜ ” ÌĞ” ÌĞ” ÌĞ”) ÌĞ%”* ÌĞ&”9 ÌĞ5”: ÌĞ6”ÌB ÌĞ>”ÌD ÌĞÌ@”ÌJ ÌĞÌF”ÌK ÌĞÌG”ÌO ÌĞÌK”ÌP ÌĞÌL”ÌW ÌĞÌS”ÌX ÌĞÌT”ÌY ÌĞÌU”ÌZ ÌĞÌV’” ÌÑ
+” ÌÑ’” Ì¶” Ì¶’” Ìµ” Ìµ	’” Ìª” Ìª	‘” ÌÛÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ”‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCacheœÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍîÍ"‘ÔrL•¤type¥start£end¨imported¥local¯ImportSpecifierÍ÷ÍÔrM”¤type¥start£end¤nameªIdentifierÍ÷Í±abilityAccessCtrlMªIdentifierÍ÷Í±abilityAccessCtrlÔrN•¤type¥start£end¥value£raw§LiteralÍÍ!¯@kit.AbilityKit±'@kit.AbilityKit'K±ImportDeclarationÍ$ÍZ‘L¯ImportSpecifierÍ-Í?MªIdentifierÍ-Í?²geoLocationManagerMªIdentifierÍ-Í?²geoLocationManagerN§LiteralÍGÍY°@kit.LocationKit²'@kit.LocationKit'K±ImportDeclarationÍ\Í‹‘L¯ImportSpecifierÍeÍkMªIdentifierÍeÍk¦sensorMªIdentifierÍeÍk¦sensorN§LiteralÍsÍŠµ@kit.SensorServiceKit·'@kit.SensorServiceKit'K±ImportDeclarationÍÍ¹‘L¯ImportSpecifierÍ–ÍšMªIdentifierÍ–Íš¤i18nMªIdentifierÍ–Íš¤i18nN§LiteralÍ¢Í¸´@kit.LocalizationKit¶'@kit.LocalizationKit'K±ImportDeclarationÍ»Íû‘L¯ImportSpecifierÍÄÍÒMªIdentifierÍÄÍÒ®BackgroundUtilMªIdentifierÍÄÍÒ®BackgroundUtilN§LiteralÍÚÍú¾../common/utils/BackgroundUtilÙ '../common/utils/BackgroundUtil'K±ImportDeclarationÍıÍ9‘L¯ImportSpecifierÍÍMªIdentifierÍÍ°CompletionStatusMªIdentifierÍÍ°CompletionStatusN§LiteralÍÍ8¸../view/CompletionStatusº'../view/CompletionStatus'K±ImportDeclarationÍ;Í‘L¯ImportSpecifierÍDÍSMªIdentifierÍDÍS¯CommonConstantsMªIdentifierÍDÍS¯CommonConstantsN§LiteralÍ[Í€Ù#../common/constants/CommonConstantsÙ%'../common/constants/CommonConstants'K±ImportDeclarationÍƒÍ¿‘L¯ImportSpecifierÍŒÍœMªIdentifierÍŒÍœ°CurrentSituationMªIdentifierÍŒÍœ°CurrentSituationN§LiteralÍ¤Í¾¸../view/CurrentSituationº'../view/CurrentSituation'K±ImportDeclarationÍÁÍù‘ÔrO”¤type¥start£end¥local¶ImportDefaultSpecifierÍÈÍÔMªIdentifierÍÈÍÔ¬LocationUtilN§LiteralÍÚÍø¼../common/utils/LocationUtil¾'../common/utils/LocationUtil'K±ImportDeclarationÍûÍ'‘O¶ImportDefaultSpecifierÍÍMªIdentifierÍÍ¦LoggerN§LiteralÍÍ&¶../common/utils/Logger¸'../common/utils/Logger'K±ImportDeclarationÍ)Í]‘O¶ImportDefaultSpecifierÍ0Í:MªIdentifierÍ0Í:ªNumberUtilN§LiteralÍ@Í\º../common/utils/NumberUtil¼'../common/utils/NumberUtil'K±ImportDeclarationÍ_Í‘‘O¶ImportDefaultSpecifierÍfÍoMªIdentifierÍfÍo©StepsUtilN§LiteralÍuÍ¹../common/utils/StepsUtil»'../common/utils/StepsUtil'
