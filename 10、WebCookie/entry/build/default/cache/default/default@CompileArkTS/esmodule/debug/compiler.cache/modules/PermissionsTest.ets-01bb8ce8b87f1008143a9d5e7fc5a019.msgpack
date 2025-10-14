@@ -1,0 +1,670 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ?¿if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import http from '@ohos.net.http';
+import call from '@ohos.telephony.call';
+import wifi from '@ohos.wifiManager';
+import sms from '@ohos.telephony.sms';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import bundle from "@ohos.bundle";
+const TAG = 'PermissionsTest';
+class PermissionsTest extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.context = getContext(this);
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.context !== undefined) {
+            this.context = params.context;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+    }
+    aboutToBeDeleted() {
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('API Permissions Test');
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.padding(10);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            List.create({ space: 10 });
+            List.width('100%');
+            List.layoutWeight(1);
+            List.padding(10);
+        }, List);
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('HTTP Request (Callback)', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testHttpRequest();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('HTTP è¯·æ±‚ï¼ˆæµï¼‰', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testHttpRequestInStream();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('Bluetooth SPP Write', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testSppWrite();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('æ‹¨å·å‘¼å«', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testDialCall();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('è·å–è®¾å¤‡åº”ç”¨åˆ—è¡¨', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testGetAllApplication();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('Send Message', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testSendMessage();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('Enable Cellular Data', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.testEnableCellularData();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('Enable/Disable Wifi', { type: ButtonType.Capsule, stateEffect: true });
+                    Button.width('100%');
+                    Button.onClick(() => {
+                        this.toggleWifi();
+                    });
+                }, Button);
+                Button.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        List.pop();
+        Column.pop();
+    }
+    testHttpRequest() {
+        let httpRequest = http.createHttp();
+        httpRequest.request("https://www.example.com", (err, data) => {
+            if (!err) {
+                console.info(TAG, 'Request success: ' + JSON.stringify(data));
+            }
+            else {
+                console.error(TAG, 'Request failed: ' + JSON.stringify(err));
+            }
+        });
+    }
+    testHttpRequestInStream() {
+        let httpRequest = http.createHttp();
+        httpRequest.requestInStream("https://www.baidu.com")
+            .then((data) => {
+            console.info(TAG, 'RequestInStream success: ' + data);
+        })
+            .catch((err) => {
+            console.error(TAG, 'RequestInStream failed: ' + JSON.stringify(err));
+        });
+    }
+    async testSppWrite() {
+        await this.requestPermissions(['ohos.permission.ACCESS_BLUETOOTH']);
+        console.info(TAG, 'SPP Write button clicked. Implementation requires a connected device.');
+    }
+    async testDialCall() {
+        await this.requestPermissions(['ohos.permission.PLACE_CALL']);
+        call.makeCall('10086', (err) => {
+            if (err) {
+                console.error(TAG, 'Dial call failed: ' + JSON.stringify(err));
+                return;
+            }
+            console.info(TAG, 'Dial call success');
+        });
+    }
+    async testGetAllApplication() {
+        await this.requestPermissions(['ohos.permission.GET_BUNDLE_INFO_PRIVILEGED']);
+        let bundleFlags = 8;
+        let userId = 100;
+        bundle.getAllApplicationInfo(bundleFlags, userId)
+            .then((data) => {
+            console.info('Operation successful. Data: ' + JSON.stringify(data));
+        }).catch((error) => {
+            console.error('Operation failed. Cause: ' + JSON.stringify(error));
+        });
+    }
+    async testSendMessage() {
+        await this.requestPermissions(['ohos.permission.SEND_MESSAGES']);
+        if (this.context === undefined) {
+            console.error(TAG, "context is undefined");
+            return;
+        }
+        sms.sendMessage({
+            slotId: 0,
+            destinationHost: '10086',
+            content: 'Test message',
+            sendCallback: () => {
+                console.info(TAG, 'Send message success');
+            },
+            deliveryCallback: () => {
+                console.info(TAG, 'Message delivered');
+            }
+        });
+    }
+    async testEnableCellularData() {
+        await this.requestPermissions(['ohos.permission.SET_TELEPHONY_STATE']);
+        try {
+            // await data.setDataRoamingEnabled(0, true);
+            console.info(TAG, 'Enable data roaming success');
+        }
+        catch (err) {
+            const error = err;
+            console.error(TAG, `Enable data roaming failed: ${JSON.stringify(error)}`);
+        }
+    }
+    async toggleWifi() {
+        await this.requestPermissions(['ohos.permission.SET_WIFI_INFO', 'ohos.permission.MANAGE_WIFI_CONNECTION']);
+        try {
+            let enabled = wifi.isWifiActive();
+            if (enabled) {
+                wifi.disconnect();
+                console.info(TAG, 'Wifi disabled');
+            }
+            else {
+                await wifi.enableWifi();
+                console.info(TAG, 'Wifi enabled');
+            }
+        }
+        catch (error) {
+            const err = error;
+            console.error(TAG, `Wifi toggle failed: ${err.code}, ${err.message}`);
+        }
+    }
+    async requestPermissions(permissions) {
+        if (this.context === undefined) {
+            console.error(TAG, 'context is undefined');
+            return;
+        }
+        let atManager = abilityAccessCtrl.createAtManager();
+        try {
+            await atManager.requestPermissionsFromUser(this.context, permissions);
+        }
+        catch (err) {
+            const error = err;
+            console.error(TAG, `Failed to request permissions: ${JSON.stringify(error)}`);
+        }
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "PermissionsTest";
+    }
+}
+registerNamedRoute(() => new PermissionsTest(undefined, {}), "", { bundleName: "com.example.webcookie", moduleName: "entry", pagePath: "pages/PermissionsTest", pageFullPath: "entry/src/main/ets/pages/PermissionsTest", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=PermissionsTest.js.mapÂ–Ùf hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.net.http.d.tsÙl hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.call.d.tsÙi hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.wifiManager.d.tsÙk hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.sms.d.tsÙo hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.abilityAccessCtrl.d.tsÙd hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.bundle.d.tsÙUC:\Users\yao\Desktop\final_api\WebCookie\entry\src\main\ets\pages\PermissionsTest.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ.C:\Users\yao\Desktop\final_api\WebCookie\entryÙ(C:\Users\yao\Desktop\final_api\WebCookie¥entry¥1.0.0Ô  Ù.C:\Users\yao\Desktop\final_api\WebCookie\entryÃÃÚimport router from '@ohos.router';
+import http from '@ohos.net.http';
+import socket from '@ohos.net.socket';
+import bluetooth from '@ohos.bluetoothManager';
+import call from '@ohos.telephony.call';
+import wifi from '@ohos.wifiManager';
+import sms from '@ohos.telephony.sms';
+import data from '@ohos.telephony.data';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import type { Permissions } from '@ohos.abilityAccessCtrl';
+import common from '@ohos.app.ability.common';
+import type { BusinessError } from '@ohos.base';
+import { bundle } from '@kit.AbilityKit';
+
+const TAG = 'PermissionsTest';
+
+@Entry
+@Component
+struct PermissionsTest {
+  private context: common.Context | undefined = getContext(this) as common.Context;
+
+  build() {
+    Column() {
+      Text('API Permissions Test')
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .padding(10)
+
+      List({ space: 10 }) {
+        ListItem() {
+          Button('HTTP Request (Callback)', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testHttpRequest();
+            })
+        }
+
+        ListItem() {
+          Button('HTTP è¯·æ±‚ï¼ˆæµï¼‰', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testHttpRequestInStream();
+            })
+        }
+
+        ListItem() {
+          Button('Bluetooth SPP Write', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testSppWrite();
+            })
+        }
+
+        ListItem() {
+          Button('æ‹¨å·å‘¼å«', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testDialCall();
+            })
+        }
+        ListItem() {
+          Button('è·å–è®¾å¤‡åº”ç”¨åˆ—è¡¨', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testGetAllApplication();
+            })
+        }
+        ListItem() {
+          Button('Send Message', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testSendMessage();
+            })
+        }
+
+        ListItem() {
+          Button('Enable Cellular Data', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.testEnableCellularData();
+            })
+        }
+
+        ListItem() {
+          Button('Enable/Disable Wifi', { type: ButtonType.Capsule, stateEffect: true })
+            .width('100%')
+            .onClick(() => {
+              this.toggleWifi();
+            })
+        }
+      }
+      .width('100%')
+      .layoutWeight(1)
+      .padding(10)
+    }
+    .width('100%')
+    .height('100%')
+  }
+
+  testHttpRequest() {
+    let httpRequest = http.createHttp();
+    httpRequest.request("https://www.example.com", (err: BusinessError | null, data: http.HttpResponse) => {
+      if (!err) {
+        console.info(TAG, 'Request success: ' + JSON.stringify(data));
+      } else {
+        console.error(TAG, 'Request failed: ' + JSON.stringify(err));
+      }
+    });
+  }
+
+  testHttpRequestInStream() {
+    let httpRequest = http.createHttp();
+    httpRequest.requestInStream("https://www.baidu.com")
+      .then((data: http.ResponseCode) => {
+        console.info(TAG, 'RequestInStream success: ' + data);
+      })
+      .catch((err: BusinessError) => {
+        console.error(TAG, 'RequestInStream failed: ' + JSON.stringify(err));
+      });
+  }
+
+  async testSppWrite() {
+    await this.requestPermissions(['ohos.permission.ACCESS_BLUETOOTH']);
+    console.info(TAG, 'SPP Write button clicked. Implementation requires a connected device.');
+  }
+
+  async testDialCall() {
+    await this.requestPermissions(['ohos.permission.PLACE_CALL']);
+    call.makeCall('10086', (err: BusinessError | null) => {
+      if (err) {
+        console.error(TAG, 'Dial call failed: ' + JSON.stringify(err));
+        return;
+      }
+      console.info(TAG, 'Dial call success');
+    });
+  }
+  async testGetAllApplication() {
+    await this.requestPermissions(['ohos.permission.GET_BUNDLE_INFO_PRIVILEGED']);
+    let bundleFlags: number = 8;
+    let userId: number = 100;
+    bundle.getAllApplicationInfo(bundleFlags, userId)
+      .then((data) => {
+        console.info('Operation successful. Data: ' + JSON.stringify(data));
+      }).catch((error: BusinessError) => {
+      console.error('Operation failed. Cause: ' + JSON.stringify(error));
+    })
+  }
+  async testSendMessage() {
+    await this.requestPermissions(['ohos.permission.SEND_MESSAGES']);
+    if (this.context === undefined) {
+      console.error(TAG, "context is undefined");
+      return;
+    }
+    sms.sendMessage({
+      slotId: 0,
+      destinationHost: '10086',
+      content: 'Test message',
+      sendCallback: () => {
+        console.info(TAG, 'Send message success');
+      },
+      deliveryCallback: () => {
+        console.info(TAG, 'Message delivered');
+      }
+    });
+  }
+
+  async testEnableCellularData() {
+    await this.requestPermissions(['ohos.permission.SET_TELEPHONY_STATE']);
+    try {
+      // await data.setDataRoamingEnabled(0, true);
+      console.info(TAG, 'Enable data roaming success');
+    } catch (err) {
+      const error = err as BusinessError;
+      console.error(TAG, `Enable data roaming failed: ${JSON.stringify(error)}`);
+    }
+  }
+
+  async toggleWifi() {
+    await this.requestPermissions(['ohos.permission.SET_WIFI_INFO', 'ohos.permission.MANAGE_WIFI_CONNECTION']);
+    try {
+      let enabled = wifi.isWifiActive();
+      if (enabled) {
+        wifi.disconnect();
+        console.info(TAG, 'Wifi disabled');
+      } else {
+        await wifi.enableWifi();
+        console.info(TAG, 'Wifi enabled');
+      }
+    } catch (error) {
+      const err = error as BusinessError;
+      console.error(TAG, `Wifi toggle failed: ${err.code}, ${err.message}`);
+    }
+  }
+
+  async requestPermissions(permissions: Array<Permissions>) {
+    if (this.context === undefined) {
+      console.error(TAG, 'context is undefined');
+      return;
+    }
+    let atManager = abilityAccessCtrl.createAtManager();
+    try {
+      await atManager.requestPermissionsFromUser(this.context, permissions);
+    } catch (err) {
+      const error = err as BusinessError;
+      console.error(TAG, `Failed to request permissions: ${JSON.stringify(error)}`);
+    }
+  }
+} ÀÔrC–®@ohos.net.http´@ohos.telephony.call±@ohos.wifiManager³@ohos.telephony.sms·@ohos.abilityAccessCtrl¬@ohos.bundleÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙf hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.net.http.d.tsÔrE‘¯hostModulesInfo‘ÔrF’²hostDependencyName®hostModuleName®@ohos.net.http¥entryÃªoh-resolveÂDAÃÙl hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.call.d.tsE‘F´@ohos.telephony.call¥entryÃªoh-resolveÂDAÃÙi hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.wifiManager.d.tsE‘F±@ohos.wifiManager¥entryÃªoh-resolveÂDAÃÙk hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.sms.d.tsE‘F³@ohos.telephony.sms¥entryÃªoh-resolveÂDAÃÙo hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.abilityAccessCtrl.d.tsE‘F·@ohos.abilityAccessCtrl¥entryÃªoh-resolveÂDAÃÙd hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.bundle.d.tsE‘F¬@ohos.bundle¥entryÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings²PermissionsTest.js ‘³PermissionsTest.etsÜz–”   ” ” ” ”! !”" "–”   ” ” ” ”' '”( (–”   ” ” ” ”$ $”% %–”   ” ”
+ 
+” ”% %”& &–”   ” ” ” ”7 7”8 8–”   ” 	” ” ”! (”" )–”   ” ”	 	” ” ” ’” ” ‘”  •” 0”! :”" ;”& ?”' ÌR‘” ‘” ’” ” 
+–” ” 
+” Ì_” Ì_
+” Ì_” Ì_–” ” 
+” Ì`” Ì`” Ì`”  Ì`”” ” 
+” ”. !–” ” 
+” 	” ” ” ˜” ” 
+” 	” ” ”& ”' ”+ #–” ” 
+” 	” ” ” ’” ” 
+˜” ” 
+” ” ” ”! ”# ”% –” ” 
+” Ì[” Ì[” Ì[” Ì[–” ” 
+” Ì\” Ì\” Ì\” Ì\–” ” 
+” Ì]” Ì]” Ì]” Ì]’” ” Ü ” 
+” ”+ ”ÌD *”ÌF ,”ÌH .”ÌL 2”ÌN 4”ÌX >”ÌY ?”Ì` ÌF”Ìb ÌH”Ìm ÌS”Ìo ÌU”Ìs ÌY”Ìu Ì[–” 
+” ” ”  ”! ”' —” 
+” ”  ”"  ”#  ”&  ”(  –” !” !” !”, !"”. !$”/ !%’” "” "’” 
+” ’” ” ’” ” ’” %” %Ü ” &
+” &”+ &”7 &”9 &”; &!”? &%”ÌA &'”ÌK &1”ÌL &2”ÌS &9”ÌU &;”Ì` &ÌF”Ìb &ÌH”Ìf &ÌL”Ìh &ÌN–” &
+” &” '”  '”! '”' '—” &
+” &” (”" (”# (”& (”( (–” )” )” )”4 )*”6 ),”7 )-’” *” *’” &
+” &’” %” %’” %” %’” -” -Ü ” .
+” .”+ .”Ì@ .&”ÌB .(”ÌD .*”ÌH ..”ÌJ .0”ÌT .:”ÌU .;”Ì\ .ÌB”Ì^ .ÌD”Ìi .ÌO”Ìk .ÌQ”Ìo .ÌU”Ìq .ÌW–” .
+” .” /”  /”! /”' /—” .
+” .” 0”" 0”# 0”& 0”( 0–” 1” 1” 1”) 1”+ 1!”, 1"’” 2” 2’” .
+” .’” -” -’” -” -’” 5” 5Ü ” 6
+” 6”+ 6”1 6”3 6”5 6”9 6”; 6!”ÌE 6+”ÌF 6,”ÌM 63”ÌO 65”ÌZ 6Ì@”Ì\ 6ÌB”Ì` 6ÌF”Ìb 6ÌH–” 6
+” 6” 7”  7”! 7”' 7—” 6
+” 6” 8”" 8”# 8”& 8”( 8–” 9” 9” 9”) 9”+ 9!”, 9"’” :” :’” 6
+” 6’” 5” 5’” 5” 5’” <” <Ü ” =
+” =”+ =”5 =”7 =”9 =”= =#”? =%”ÌI =/”ÌJ =0”ÌQ =7”ÌS =9”Ì^ =ÌD”Ì` =ÌF”Ìd =ÌJ”Ìf =ÌL–” =
+” =” >”  >”! >”' >—” =
+” =” ?”" ?”# ?”& ?”( ?–” Ì@” Ì@” Ì@”2 Ì@(”4 Ì@*”5 Ì@+’” ÌA” ÌA’” =
+” =’” <” <’” <” <’” ÌC” ÌCÜ ” ÌD
+” ÌD”+ ÌD”9 ÌD”; ÌD!”= ÌD#”ÌA ÌD'”ÌC ÌD)”ÌM ÌD3”ÌN ÌD4”ÌU ÌD;”ÌW ÌD=”Ìb ÌDÌH”Ìd ÌDÌJ”Ìh ÌDÌN”Ìj ÌDÌP–” ÌD
+” ÌD” ÌE”  ÌE”! ÌE”' ÌE—” ÌD
+” ÌD” ÌF”" ÌF”# ÌF”& ÌF”( ÌF–” ÌG” ÌG” ÌG”, ÌG"”. ÌG$”/ ÌG%’” ÌH” ÌH’” ÌD
+” ÌD’” ÌC” ÌC’” ÌC” ÌC’” ÌK” ÌKÜ ” ÌL
+” ÌL”+ ÌL”ÌA ÌL'”ÌC ÌL)”ÌE ÌL+”ÌI ÌL/”ÌK ÌL1”ÌU ÌL;”ÌV ÌL<”Ì] ÌLÌC”Ì_ ÌLÌE”Ìj ÌLÌP”Ìl ÌLÌR”Ìp ÌLÌV”Ìr ÌLÌX–” ÌL
+” ÌL” ÌM”  ÌM”! ÌM”' ÌM—” ÌL
+” ÌL” ÌN”" ÌN”# ÌN”& ÌN”( ÌN–” ÌO” ÌO” ÌO”3 ÌO)”5 ÌO+”6 ÌO,’” ÌP” ÌP’” ÌL
+” ÌL’” ÌK” ÌK’” ÌK” ÌK’” ÌS” ÌSÜ ” ÌT
+” ÌT”+ ÌT”Ì@ ÌT&”ÌB ÌT(”ÌD ÌT*”ÌH ÌT.”ÌJ ÌT0”ÌT ÌT:”ÌU ÌT;”Ì\ ÌTÌB”Ì^ ÌTÌD”Ìi ÌTÌO”Ìk ÌTÌQ”Ìo ÌTÌU”Ìq ÌTÌW–” ÌT
+” ÌT” ÌU”  ÌU”! ÌU”' ÌU—” ÌT
+” ÌT” ÌV”" ÌV”# ÌV”& ÌV”( ÌV–” ÌW” ÌW” ÌW”' ÌW”) ÌW”* ÌW ’” ÌX” ÌX’” ÌT
+” ÌT’” ÌS” ÌS’” ÌS” ÌS’” ” 
+’” ” 
+‘” Ìa’” Ìc” Ìc™” Ìd” Ìd” Ìd” Ìd” Ìd” Ìd”) Ìd%”+ Ìd'”, Ìd(” Ìe” Ìe” Ìe” Ìe” Ìe”5 Ìe1”7 Ìe3”8 Ìe4”; ÌeÌM”= ÌeÌO”ÌA ÌeÌf”ÌC ÌeÌh”ÌE ÌeÌj•” Ìf” Ìf
+” Ìf” Ìf” ÌfÜ ” Ìg” Ìg” Ìg” Ìg” Ìg”  Ìg”" Ìg”5 Ìg-”8 Ìg0”< Ìg4”= Ìg5”ÌF Ìg>”ÌG Ìg?”ÌK ÌgÌC”ÌL ÌgÌD”ÌM ÌgÌE”ÌN ÌgÌF‘” Ìh‘” ÌhÜ ” Ìi” Ìi” Ìi” Ìi” Ìi”! Ìi”# Ìi”5 Ìi-”8 Ìi0”< Ìi4”= Ìi5”ÌF Ìi>”ÌG Ìi?”ÌJ ÌiÌB”ÌK ÌiÌC”ÌL ÌiÌD”ÌM ÌiÌE‘” Ìj”” Ìk”	 Ìk”
+ Ìk” Ìk’” Ìl” Ìl’” Ìn” Ìn™” Ìo” Ìo” Ìo” Ìo” Ìo” Ìo”) Ìo%”+ Ìo'”, Ìo(—” Ìp” Ìp” Ìp”# Ìp”$ Ìp ”; Ìp7”< Ìp8—” Ìq” Ìq” Ìq” Ìq” Ìq$” Ìq&” Ìq(œ” Ìr” Ìr” Ìr” Ìr” Ìr” Ìr” Ìr”9 Ìr5”< Ìr8”Ì@ Ìr<”ÌA Ìr=”ÌB Ìr>“” Ìs”	 Ìs”
+ Ìs—” Ìt” Ìt” Ìt” Ìt” Ìt ” Ìt"” Ìt$Ü ” Ìu” Ìu” Ìu” Ìu” Ìu” Ìu” Ìu”9 Ìu5”< Ìu8”Ì@ Ìu<”ÌA Ìu=”ÌJ ÌuÌF”ÌK ÌuÌG”ÌN ÌuÌJ”ÌO ÌuÌK”ÌP ÌuÌL”ÌQ ÌuÌM”” Ìv”	 Ìv”
+ Ìv” Ìv	’” Ìw” Ìw”” Ìy”	 Ìy”
+ Ìy” Ìy›” Ìz” Ìz
+” Ìz” Ìz”% Ìz!”& Ìz"”' Ìz#”ÌI ÌzÌE”ÌJ ÌzÌF”ÌK ÌzÌG”ÌL ÌzÌHš” Ì{” Ì{” Ì{” Ì{” Ì{” Ì{” Ì{”Ìa Ì{Ì]”Ìb Ì{Ì^”Ìc Ì{Ì_’” Ì|” Ì|”” Ì~”	 Ì~”
+ Ì~” Ì~›” Ì” Ì
+” Ì” Ì”% Ì!”& Ì"”' Ì#”ÌC Ì?”ÌD ÌÌ@”ÌE ÌÌA”ÌF ÌÌB›” Ì€” Ì€” Ì€	” Ì€” Ì€” Ì€” Ì€”  Ì€”# Ì€5”% Ì€7”' Ì€9”” Ì” Ì
+” Ì” ÌÜ ” Ì‚” Ì‚” Ì‚” Ì‚” Ì‚”! Ì‚”# Ì‚”7 Ì‚/”: Ì‚2”> Ì‚6”? Ì‚7”ÌH Ì‚Ì@”ÌI Ì‚ÌA”ÌL Ì‚ÌD”ÌM Ì‚ÌE”ÌN Ì‚ÌF”ÌO Ì‚ÌG’” Ìƒ” Ìƒ‘” Ì„š” Ì…” Ì…” Ì…” Ì…” Ì…” Ì…” Ì…”1 Ì…+”2 Ì…,”3 Ì…-”” Ì†”	 Ì†”
+ Ì†” Ì†’” Ì‡” Ì‡”” Ìˆ”	 Ìˆ”
+ Ìˆ” Ìˆ›” Ì‰” Ì‰
+” Ì‰” Ì‰”% Ì‰!”& Ì‰"”' Ì‰#”ÌS Ì‰ÌO”ÌT Ì‰ÌP”ÌU Ì‰ÌQ”ÌV Ì‰ÌR–” ÌŠ” ÌŠ” ÌŠ” ÌŠ” ÌŠ” ÌŠ –” Ì‹” Ì‹” Ì‹” Ì‹” Ì‹” Ì‹™” ÌŒ” ÌŒ
+” ÌŒ”$ ÌŒ ”% ÌŒ!”0 ÌŒ,”2 ÌŒ.”8 ÌŒ4”9 ÌŒ5—” Ì” Ì” Ì” Ì” Ì” Ì” ÌŸ” Ì” Ì” Ì” Ì” Ì”7 Ì3”: Ì6”> Ì:”? Ì;”ÌH ÌÌD”ÌI ÌÌE”ÌM ÌÌI”ÌN ÌÌJ”ÌO ÌÌK”ÌP ÌÌLš” Ì”	 Ì”
+ Ì” Ì	” Ì” Ì” Ì” Ì$” Ì&” Ì(Ÿ” Ì” Ì” Ì” Ì” Ì”5 Ì/”8 Ì2”< Ì6”= Ì7”ÌF ÌÌ@”ÌG ÌÌA”ÌL ÌÌF”ÌM ÌÌG”ÌN ÌÌH”ÌO ÌÌI”” Ì‘”	 Ì‘”
+ Ì‘” Ì‘’” Ì’” Ì’”” Ì“”	 Ì“”
+ Ì“” Ì“›” Ì”” Ì”
+” Ì”” Ì””% Ì”!”& Ì”"”' Ì”#”ÌF Ì”ÌB”ÌG Ì”ÌC”ÌH Ì”ÌD”ÌI Ì”ÌE˜” Ì•” Ì•” Ì•” Ì•” Ì•” Ì•”& Ì•"”( Ì•$š” Ì–” Ì–” Ì–” Ì–” Ì–” Ì–” Ì–”5 Ì–/”6 Ì–0”7 Ì–1’” Ì—” Ì—‘”	 Ì˜•” Ì™” Ì™” Ì™” Ì™” Ì™”” Ìš” Ìš” Ìš” Ìš”” Ì›” Ì›” Ì›”$ Ì›”” Ìœ” Ìœ” Ìœ”# Ìœ•” Ì” Ì” Ì” Ì” Ìš” Ì” Ì” Ì” Ì” Ì”  Ì”" Ì”8 Ì0”9 Ì1”: Ì2’” ÌŸ” ÌŸ•” Ì ” Ì ” Ì ”! Ì ”# Ì š” Ì¡” Ì¡” Ì¡” Ì¡” Ì¡”  Ì¡”" Ì¡”5 Ì¡-”6 Ì¡.”7 Ì¡/’” Ì¢” Ì¢“”	 Ì£”
+ Ì£” Ì£’” Ì¤” Ì¤”” Ì¦”	 Ì¦”
+ Ì¦”  Ì¦›” Ì§” Ì§
+” Ì§” Ì§”% Ì§!”& Ì§"”' Ì§#”ÌL Ì§ÌH”ÌM Ì§ÌI”ÌN Ì§ÌJ”ÌO Ì§ÌK’” Ì¨” Ì¨’” Ì©”9 Ì©3š” Ìª” Ìª” Ìª” Ìª” Ìª” Ìª” Ìª”; Ìª5”< Ìª6”= Ìª7‘”	 Ì«”” Ì«” Ì«” Ì«” Ì«–” Ì¬” Ì¬” Ì¬” Ì¬” Ì¬(” Ì¬)Ü ” Ì­” Ì­” Ì­” Ì­” Ì­” Ì­” Ì­”> Ì­8”ÌB Ì­<”ÌC Ì­=”ÌL Ì­ÌF”ÌM Ì­ÌG”ÌR Ì­ÌL”ÌS Ì­ÌM”ÌU Ì­ÌO”ÌV Ì­ÌP”ÌW Ì­ÌQ‘”	 Ì®’” Ì¯” Ì¯”” Ì±”	 Ì±”
+ Ì±” Ì±” Ì²” Ì²
+” Ì²” Ì²”% Ì²!”& Ì²"”' Ì²#”ÌF Ì²ÌB”ÌH Ì²ÌD”Ìp Ì²Ìl”Ìq Ì²Ìm”Ìr Ì²Ìn”Ìs Ì²Ìo’” Ì³” Ì³™” Ì´” Ì´
+” Ì´” Ì´” Ì´” Ì´”+ Ì´%”- Ì´'”. Ì´(”” Ìµ” Ìµ
+” Ìµ” Ìµ–” Ì¶” Ì¶” Ì¶” Ì¶”! Ì¶”" Ì¶š” Ì·” Ì·” Ì·” Ì·” Ì·”  Ì·”" Ì·”1 Ì·)”2 Ì·*”3 Ì·+‘” Ì¸‘” Ì¸—” Ì¹” Ì¹” Ì¹” Ì¹”% Ì¹”' Ì¹”( Ì¹ š” Ìº” Ìº” Ìº” Ìº” Ìº”  Ìº”" Ìº”0 Ìº(”1 Ìº)”2 Ìº*‘” Ì»‘”	 Ì¼”” Ì¼” Ì¼” Ì¼” Ì¼–” Ì½” Ì½” Ì½” Ì½” Ì½(” Ì½)Ü ” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾” Ì¾”6 Ì¾0”9 Ì¾3”: Ì¾4”> Ì¾8”ÌC Ì¾=”ÌF Ì¾Ì@”ÌG Ì¾ÌA”ÌN Ì¾ÌH”ÌP Ì¾ÌJ”ÌQ Ì¾ÌK”ÌR Ì¾ÌL‘”	 Ì¿’” ÌÀ” ÌÀ–” ÌÂ”	 ÌÂ”
+ ÌÂ” ÌÂ” ÌÂ”( ÌÂ:˜” ÌÃ” ÌÃ” ÌÃ” ÌÃ” ÌÃ” ÌÃ”& ÌÃ"”( ÌÃ$š” ÌÄ” ÌÄ” ÌÄ” ÌÄ” ÌÄ” ÌÄ” ÌÄ”5 ÌÄ/”6 ÌÄ0”7 ÌÄ1’” ÌÅ” ÌÅ‘”	 ÌÆ™” ÌÇ” ÌÇ” ÌÇ” ÌÇ”) ÌÇ%”* ÌÇ&”9 ÌÇ5”; ÌÇ7”< ÌÇ8’” ÌÈ” ÌÈ” ÌÉ” ÌÉ” ÌÉ” ÌÉ”6 ÌÉ0”7 ÌÉ1”; ÌÉ5”< ÌÉ6”ÌC ÌÉ=”ÌE ÌÉ?”ÌP ÌÉÌJ”ÌQ ÌÉÌK”ÌR ÌÉÌL‘”	 ÌÊ”” ÌÊ” ÌÊ” ÌÊ” ÌÊ–” ÌË” ÌË” ÌË” ÌË” ÌË(” ÌË)Ü ” ÌÌ” ÌÌ” ÌÌ” ÌÌ” ÌÌ” ÌÌ” ÌÌ”ÌA ÌÌ;”ÌE ÌÌ?”ÌF ÌÌÌ@”ÌO ÌÌÌI”ÌP ÌÌÌJ”ÌU ÌÌÌO”ÌV ÌÌÌP”ÌX ÌÌÌR”ÌY ÌÌÌS”ÌZ ÌÌÌT‘”	 ÌÍ’” ÌÎ” ÌÎÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜƒ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache–ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¢‘ÔrL”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡Ì‹ÔrM”¤type¥start£end¤nameªIdentifierÌ‡Ì‹¤httpÔrN•¤type¥start£end¥value£raw§LiteralÌ‘Ì¡®@ohos.net.http°'@ohos.net.http'K±ImportDeclarationÌ¤ÌÌ‘L¶ImportDefaultSpecifierÌ«Ì¯MªIdentifierÌ«Ì¯¤callN§LiteralÌµÌË´@ohos.telephony.call¶'@ohos.telephony.call'K±ImportDeclarationÌÎÌó‘L¶ImportDefaultSpecifierÌÕÌÙMªIdentifierÌÕÌÙ¤wifiN§LiteralÌßÌò±@ohos.wifiManager³'@ohos.wifiManager'K±ImportDeclarationÌõÍ‘L¶ImportDefaultSpecifierÌüÌÿMªIdentifierÌüÌÿ£smsN§LiteralÍÍ³@ohos.telephony.smsµ'@ohos.telephony.sms'K±ImportDeclarationÍÍU‘L¶ImportDefaultSpecifierÍ$Í5MªIdentifierÍ$Í5±abilityAccessCtrlN§LiteralÍ;ÍT·@ohos.abilityAccessCtrl¹'@ohos.abilityAccessCtrl'K±ImportDeclarationÍWÍy‘L¶ImportDefaultSpecifierÍ^ÍdMªIdentifierÍ^Íd¦bundleN§LiteralÍjÍx¬@ohos.bundle®"@ohos.bundle"

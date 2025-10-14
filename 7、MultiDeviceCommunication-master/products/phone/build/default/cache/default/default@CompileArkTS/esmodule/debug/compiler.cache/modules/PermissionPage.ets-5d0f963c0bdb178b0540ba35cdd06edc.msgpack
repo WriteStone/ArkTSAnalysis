@@ -1,0 +1,1268 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚx!if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import promptAction from '@ohos.promptAction';
+import calendarManager from "@ohos.calendarManager";
+import contact from '@ohos.contact';
+export class PermissionPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.context = getContext(this);
+        this.CONTACT_URI = 'datashare:///com.ohos.contactsdataability/contacts/contact';
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.context !== undefined) {
+            this.context = params.context;
+        }
+        if (params.CONTACT_URI !== undefined) {
+            this.CONTACT_URI = params.CONTACT_URI;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+    }
+    aboutToBeDeleted() {
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.padding(16);
+            Column.backgroundColor('#F1F3F5');
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('Permission API Demo');
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ bottom: 20 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Calendar Permissions Section
+            Text.create('Calendar Permissions');
+            // Calendar Permissions Section
+            Text.fontSize(20);
+            // Calendar Permissions Section
+            Text.fontWeight(FontWeight.Medium);
+            // Calendar Permissions Section
+            Text.margin({ top: 20, bottom: 10 });
+            // Calendar Permissions Section
+            Text.width('100%');
+        }, Text);
+        // Calendar Permissions Section
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Calendar: Delete Events Button
+            Button.createWithLabel('Delete Events (Calendar)');
+            // Calendar: Delete Events Button
+            Button.width('90%');
+            // Calendar: Delete Events Button
+            Button.margin(5);
+            // Calendar: Delete Events Button
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤æ—¥å†äº‹ä»¶åŠŸèƒ½
+                try {
+                    // è·å–æ—¥å†ç®¡ç†å™¨
+                    const calendarMgr = calendarManager.getCalendarManager(this.context);
+                    // è·å–é»˜è®¤æ—¥å†
+                    calendarMgr.getCalendar().then((calendar) => {
+                        // è·å–æ‰€æœ‰äº‹ä»¶
+                        calendar.getEvents().then((events) => {
+                            // æå–æ‰€æœ‰äº‹ä»¶IDï¼Œè¿‡æ»¤æ‰undefinedå€¼
+                            const validEvents = events.filter(event => event.id !== undefined);
+                            const eventIds = [];
+                            validEvents.forEach(event => {
+                                if (event.id !== undefined) {
+                                    eventIds.push(event.id);
+                                }
+                            });
+                            if (eventIds.length > 0) {
+                                // åˆ é™¤è¿™äº›äº‹ä»¶
+                                calendar.deleteEvents(eventIds).then(() => {
+                                    promptAction.showToast({
+                                        message: `å·²æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªäº‹ä»¶`,
+                                        duration: 2000
+                                    });
+                                    console.info(`æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªæ—¥å†äº‹ä»¶`);
+                                }).catch((err) => {
+                                    promptAction.showToast({
+                                        message: `åˆ é™¤äº‹ä»¶å¤±è´¥: ${err.message}`,
+                                        duration: 2000
+                                    });
+                                    console.error(`åˆ é™¤äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                                });
+                            }
+                            else {
+                                promptAction.showToast({
+                                    message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶',
+                                    duration: 2000
+                                });
+                                console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶');
+                            }
+                        }).catch((err) => {
+                            promptAction.showToast({
+                                message: `è·å–äº‹ä»¶å¤±è´¥: ${err.message}`,
+                                duration: 2000
+                            });
+                            console.error(`è·å–äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                        });
+                    }).catch((err) => {
+                        promptAction.showToast({
+                            message: `è·å–æ—¥å†å¤±è´¥: ${err.message}`,
+                            duration: 2000
+                        });
+                        console.error(`è·å–æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+                    });
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`åˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Calendar: Delete Events Button
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Calendar: Delete Single Event Button
+            Button.createWithLabel('Delete Single Event (Calendar)');
+            // Calendar: Delete Single Event Button
+            Button.width('90%');
+            // Calendar: Delete Single Event Button
+            Button.margin(5);
+            // Calendar: Delete Single Event Button
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤å•ä¸ªæ—¥å†äº‹ä»¶åŠŸèƒ½
+                try {
+                    // è·å–æ—¥å†ç®¡ç†å™¨
+                    const calendarMgr = calendarManager.getCalendarManager(this.context);
+                    // è·å–é»˜è®¤æ—¥å†
+                    calendarMgr.getCalendar().then((calendar) => {
+                        // è·å–æ‰€æœ‰äº‹ä»¶
+                        calendar.getEvents().then((events) => {
+                            // è¿‡æ»¤æ‰æ²¡æœ‰IDçš„äº‹ä»¶
+                            const validEvents = events.filter(event => event.id !== undefined);
+                            if (validEvents.length > 0) {
+                                // åªåˆ é™¤ç¬¬ä¸€ä¸ªäº‹ä»¶
+                                const eventId = validEvents[0].id;
+                                if (eventId !== undefined) {
+                                    calendar.deleteEvent(eventId).then(() => {
+                                        promptAction.showToast({
+                                            message: `å·²æˆåŠŸåˆ é™¤äº‹ä»¶ (ID: ${eventId})`,
+                                            duration: 2000
+                                        });
+                                        console.info(`æˆåŠŸåˆ é™¤å•ä¸ªæ—¥å†äº‹ä»¶ (ID: ${eventId})`);
+                                    }).catch((err) => {
+                                        promptAction.showToast({
+                                            message: `åˆ é™¤äº‹ä»¶å¤±è´¥: ${err.message}`,
+                                            duration: 2000
+                                        });
+                                        console.error(`åˆ é™¤äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                                    });
+                                }
+                            }
+                            else {
+                                promptAction.showToast({
+                                    message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶',
+                                    duration: 2000
+                                });
+                                console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶');
+                            }
+                        }).catch((err) => {
+                            promptAction.showToast({
+                                message: `è·å–äº‹ä»¶å¤±è´¥: ${err.message}`,
+                                duration: 2000
+                            });
+                            console.error(`è·å–äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                        });
+                    }).catch((err) => {
+                        promptAction.showToast({
+                            message: `è·å–æ—¥å†å¤±è´¥: ${err.message}`,
+                            duration: 2000
+                        });
+                        console.error(`è·å–æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+                    });
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`åˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Calendar: Delete Single Event Button
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Calendar: Delete Whole Calendar Data
+            Button.createWithLabel('Delete Whole Calendar Data');
+            // Calendar: Delete Whole Calendar Data
+            Button.width('90%');
+            // Calendar: Delete Whole Calendar Data
+            Button.margin(5);
+            // Calendar: Delete Whole Calendar Data
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤æ•´ä¸ªæ—¥å†åŠŸèƒ½
+                try {
+                    // è·å–æ—¥å†ç®¡ç†å™¨
+                    const calendarMgr = calendarManager.getCalendarManager(this.context);
+                    // è·å–æ‰€æœ‰æ—¥å†
+                    calendarMgr.getAllCalendars().then((calendars) => {
+                        if (calendars.length > 0) {
+                            const deletePromises = calendars.map((cal) => {
+                                return calendarMgr.deleteCalendar(cal).catch((err) => {
+                                    console.error(`åˆ é™¤æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+                                    return false; // è¿”å›å¤±è´¥æ ‡è®°
+                                });
+                            });
+                            // ç­‰å¾…æ‰€æœ‰åˆ é™¤æ“ä½œå®Œæˆ
+                            Promise.all(deletePromises).then((results) => {
+                                const successCount = results.filter(result => result !== false).length;
+                                if (successCount > 0) {
+                                    promptAction.showToast({
+                                        message: `å·²æˆåŠŸåˆ é™¤${successCount}ä¸ªæ—¥å†`,
+                                        duration: 2000
+                                    });
+                                    console.info(`æˆåŠŸåˆ é™¤${successCount}ä¸ªæ—¥å†`);
+                                }
+                                else {
+                                    promptAction.showToast({
+                                        message: 'åˆ é™¤æ—¥å†å¤±è´¥',
+                                        duration: 2000
+                                    });
+                                    console.error('æ‰€æœ‰æ—¥å†åˆ é™¤æ“ä½œå‡å¤±è´¥');
+                                }
+                            });
+                        }
+                        else {
+                            promptAction.showToast({
+                                message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†',
+                                duration: 2000
+                            });
+                            console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†');
+                        }
+                    }).catch((err) => {
+                        promptAction.showToast({
+                            message: `è·å–æ—¥å†åˆ—è¡¨å¤±è´¥: ${err.message}`,
+                            duration: 2000
+                        });
+                        console.error(`è·å–æ—¥å†åˆ—è¡¨å¤±è´¥: ${JSON.stringify(err)}`);
+                    });
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`åˆ é™¤æ—¥å†æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Calendar: Delete Whole Calendar Data
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Calendar: Delete Regular Calendar Data
+            Button.createWithLabel('Delete Regular Calendar Data');
+            // Calendar: Delete Regular Calendar Data
+            Button.width('90%');
+            // Calendar: Delete Regular Calendar Data
+            Button.margin(5);
+            // Calendar: Delete Regular Calendar Data
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤å¸¸è§„æ—¥å†æ•°æ®åŠŸèƒ½
+                try {
+                    // è·å–æ—¥å†ç®¡ç†å™¨
+                    const calendarMgr = calendarManager.getCalendarManager(this.context);
+                    // è·å–é»˜è®¤æ—¥å†
+                    calendarMgr.getCalendar().then((calendar) => {
+                        // è·å–æ‰€æœ‰äº‹ä»¶ï¼ˆç”±äºæ²¡æœ‰filterByTypeæ–¹æ³•ï¼Œæˆ‘ä»¬è·å–æ‰€æœ‰äº‹ä»¶åå†ç­›é€‰ï¼‰
+                        calendar.getEvents().then((events) => {
+                            // ç­›é€‰æ™®é€šç±»å‹çš„äº‹ä»¶
+                            const normalEvents = events.filter(event => event.type === calendarManager.EventType.NORMAL &&
+                                event.id !== undefined);
+                            const eventIds = [];
+                            normalEvents.forEach(event => {
+                                if (event.id !== undefined) {
+                                    eventIds.push(event.id);
+                                }
+                            });
+                            if (eventIds.length > 0) {
+                                // åˆ é™¤è¿™äº›äº‹ä»¶
+                                calendar.deleteEvents(eventIds).then(() => {
+                                    promptAction.showToast({
+                                        message: `å·²æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªæ™®é€šäº‹ä»¶`,
+                                        duration: 2000
+                                    });
+                                    console.info(`æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªæ™®é€šæ—¥å†äº‹ä»¶`);
+                                }).catch((err) => {
+                                    promptAction.showToast({
+                                        message: `åˆ é™¤äº‹ä»¶å¤±è´¥: ${err.message}`,
+                                        duration: 2000
+                                    });
+                                    console.error(`åˆ é™¤äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                                });
+                            }
+                            else {
+                                promptAction.showToast({
+                                    message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶',
+                                    duration: 2000
+                                });
+                                console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶');
+                            }
+                        }).catch((err) => {
+                            promptAction.showToast({
+                                message: `è·å–äº‹ä»¶å¤±è´¥: ${err.message}`,
+                                duration: 2000
+                            });
+                            console.error(`è·å–äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                        });
+                    }).catch((err) => {
+                        promptAction.showToast({
+                            message: `è·å–æ—¥å†å¤±è´¥: ${err.message}`,
+                            duration: 2000
+                        });
+                        console.error(`è·å–æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+                    });
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`åˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Calendar: Delete Regular Calendar Data
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts Permissions Section
+            Text.create('Contacts Permissions');
+            // Contacts Permissions Section
+            Text.fontSize(20);
+            // Contacts Permissions Section
+            Text.fontWeight(FontWeight.Medium);
+            // Contacts Permissions Section
+            Text.margin({ top: 20, bottom: 10 });
+            // Contacts Permissions Section
+            Text.width('100%');
+        }, Text);
+        // Contacts Permissions Section
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts: Insert Contact Data
+            Button.createWithLabel('Insert Contact Data');
+            // Contacts: Insert Contact Data
+            Button.width('90%');
+            // Contacts: Insert Contact Data
+            Button.margin(5);
+            // Contacts: Insert Contact Data
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°æ’å…¥è”ç³»äººæ•°æ®åŠŸèƒ½
+                try {
+                    let uri = ("datashare:///com.ohos.contactsdataability");
+                    let key1 = "name";
+                    let value11 = "roe11";
+                    let key2 = "age";
+                    let value21 = 21;
+                    let key3 = "salary";
+                    let value31 = 20.5;
+                    let valuesBucket1 = {
+                        key1: value11,
+                        key2: value21,
+                        key3: value31,
+                    };
+                    let vbs = new Array(valuesBucket1);
+                    try {
+                        //Api20æ”¯æŒ
+                        // if (dataShareHelper != undefined) {
+                        //   (dataShareHelper as dataShare.DataShareHelper).batchInsert(uri, vbs, (err:Error, data:dataShare) => {
+                        //     if (err !== undefined) {
+                        //       console.error(`batchInsert error: code: ${err}, message: ${err.message} `);
+                        //       return;
+                        //     }
+                        //     console.info("batchInsert succeed, data : " + data);
+                        //   });
+                        // }
+                    }
+                    catch (err) {
+                        let code = err.code;
+                        let message = err.message;
+                        console.error(`batchInsert error: code: ${code}, message: ${message} `);
+                    }
+                    ;
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Contacts: Insert Contact Data
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts: Batch Insert Contacts
+            Button.createWithLabel('æ‰¹é‡æ’å…¥æ•°æ®');
+            // Contacts: Batch Insert Contacts
+            Button.width('90%');
+            // Contacts: Batch Insert Contacts
+            Button.margin(5);
+            // Contacts: Batch Insert Contacts
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°æ‰¹é‡æ’å…¥è”ç³»äººåŠŸèƒ½
+                try {
+                    // åˆ›å»ºå¤šä¸ªè”ç³»äººå¯¹è±¡
+                    const contacts = [
+                        {
+                            name: {
+                                fullName: 'æå››',
+                                familyName: 'æ',
+                                givenName: 'å››'
+                            },
+                            phoneNumbers: [{
+                                    phoneNumber: '13900139000',
+                                    labelName: 'ç§»åŠ¨ç”µè¯'
+                                }],
+                            emails: [{
+                                    email: 'lisi@example.com',
+                                    labelName: 'ä¸ªäºº'
+                                }]
+                        },
+                        {
+                            name: {
+                                fullName: 'ç‹äº”',
+                                familyName: 'ç‹',
+                                givenName: 'äº”'
+                            },
+                            phoneNumbers: [{
+                                    phoneNumber: '13700137000',
+                                    labelName: 'ç§»åŠ¨ç”µè¯'
+                                }],
+                            emails: [{
+                                    email: 'wangwu@example.com',
+                                    labelName: 'å·¥ä½œ'
+                                }]
+                        }
+                    ];
+                    // æ‰¹é‡æ·»åŠ è”ç³»äººï¼ˆç”±äºæ²¡æœ‰ç›´æ¥çš„æ‰¹é‡æ·»åŠ æ–¹æ³•ï¼Œä½¿ç”¨Promise.allå®ç°ï¼‰
+                    const addPromises = contacts.map(c => {
+                        return contact.addContact(this.context, c).catch((err) => {
+                            console.error(`æ·»åŠ è”ç³»äººå¤±è´¥: ${JSON.stringify(err)}`);
+                            return -1; // è¿”å›å¤±è´¥æ ‡è®°
+                        });
+                    });
+                    // ç­‰å¾…æ‰€æœ‰æ·»åŠ æ“ä½œå®Œæˆ
+                    Promise.all(addPromises).then((contactIds) => {
+                        const successCount = contactIds.filter(id => id !== -1).length;
+                        if (successCount > 0) {
+                            promptAction.showToast({
+                                message: `å·²æˆåŠŸæ·»åŠ ${successCount}ä¸ªè”ç³»äºº`,
+                                duration: 2000
+                            });
+                            console.info(`æˆåŠŸæ·»åŠ ${successCount}ä¸ªè”ç³»äºº`);
+                        }
+                        else {
+                            promptAction.showToast({
+                                message: 'æ·»åŠ è”ç³»äººå¤±è´¥',
+                                duration: 2000
+                            });
+                            console.error('æ‰€æœ‰è”ç³»äººæ·»åŠ æ“ä½œå‡å¤±è´¥');
+                        }
+                    });
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`æ‰¹é‡æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Contacts: Batch Insert Contacts
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts: Add Contact
+            Button.createWithLabel('Add Contact');
+            // Contacts: Add Contact
+            Button.width('90%');
+            // Contacts: Add Contact
+            Button.margin(5);
+            // Contacts: Add Contact
+            Button.onClick(() => {
+                // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°æ·»åŠ è”ç³»äººåŠŸèƒ½ï¼ˆå¸¦æ›´å¤šè¯¦ç»†ä¿¡æ¯ï¼‰
+                try {
+                    // åˆ›å»ºä¸€ä¸ªæ–°çš„è”ç³»äººå¯¹è±¡ï¼ˆæ›´å¤šä¿¡æ¯ï¼‰
+                    const detailedContact = {
+                        name: {
+                            fullName: 'èµµå…­',
+                            familyName: 'èµµ',
+                            givenName: 'å…­',
+                            namePrefix: 'å…ˆç”Ÿ'
+                        },
+                        phoneNumbers: [
+                            {
+                                phoneNumber: '13600136000',
+                                labelName: 'ç§»åŠ¨ç”µè¯'
+                            },
+                            {
+                                phoneNumber: '010-88889999',
+                                labelName: 'å·¥ä½œ'
+                            }
+                        ],
+                        emails: [
+                            {
+                                email: 'zhaoliu@example.com',
+                                labelName: 'å·¥ä½œ'
+                            },
+                            {
+                                email: 'zhaoliu_personal@example.com',
+                                labelName: 'ä¸ªäºº'
+                            }
+                        ],
+                        websites: [
+                            {
+                                website: 'https://www.example.com/zhaoliu'
+                            }
+                        ]
+                    };
+                    // æ·»åŠ è”ç³»äºº
+                    contact.addContact(this.context, detailedContact).then((contactId) => {
+                        promptAction.showToast({
+                            message: `å·²æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: ${contactId}`,
+                            duration: 2000
+                        });
+                        console.info(`æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: ${contactId}`);
+                    }).catch((err) => {
+                        promptAction.showToast({
+                            message: `æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: ${err.message}`,
+                            duration: 2000
+                        });
+                        console.error(`æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: ${JSON.stringify(err)}`);
+                    });
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`æ·»åŠ è¯¦ç»†è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Contacts: Add Contact
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts: Update Contact
+            Button.createWithLabel('Update Contact');
+            // Contacts: Update Contact
+            Button.width('90%');
+            // Contacts: Update Contact
+            Button.margin(5);
+            // Contacts: Update Contact
+            Button.onClick(() => {
+                // ç”±äºcontact.getContactå’ŒupdateContact APIåœ¨å½“å‰ç¯å¢ƒä¸å¯ç”¨æˆ–å·²å˜æ›´ï¼Œä½¿ç”¨Toastæ¶ˆæ¯ä»£æ›¿
+                try {
+                    promptAction.showToast({
+                        message: 'æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨contact.getContactå’ŒupdateContact APIï¼Œä½†å½“å‰ç¯å¢ƒå¯èƒ½ä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œè¯¥åŠŸèƒ½å¯ä»¥æŸ¥æ‰¾å¹¶æ›´æ–°è”ç³»äººæ•°æ®ã€‚',
+                        duration: 3000
+                    });
+                    console.info('è”ç³»äººæ›´æ–°åŠŸèƒ½æ¼”ç¤ºï¼šé¦–å…ˆä¼šæŸ¥æ‰¾é‚®ç®±ä¸ºtest@example.comçš„è”ç³»äººï¼Œç„¶åæ›´æ–°å…¶å§“åå’Œç”µè¯ä¿¡æ¯');
+                }
+                catch (error) {
+                    promptAction.showToast({
+                        message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+                        duration: 2000
+                    });
+                    console.error(`æ›´æ–°è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+                }
+            });
+        }, Button);
+        // Contacts: Update Contact
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts: Update Contact via DataShare
+            Button.createWithLabel('Update Contact (DataShare)');
+            // Contacts: Update Contact via DataShare
+            Button.width('90%');
+            // Contacts: Update Contact via DataShare
+            Button.margin(5);
+            // Contacts: Update Contact via DataShare
+            Button.onClick(() => {
+                // ç”±äºDataShare APIä¸å¯ç”¨ï¼Œä½¿ç”¨Toastæ¶ˆæ¯ä»£æ›¿
+                promptAction.showToast({
+                    message: 'æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨DataShare APIï¼Œä½†å½“å‰ç¯å¢ƒä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œå¯ä»¥é€šè¿‡DataShareæ›´æ–°è”ç³»äººæ•°æ®ã€‚',
+                    duration: 3000
+                });
+                console.info('DataShare APIç›®å‰ä¸å¯ç”¨ï¼Œæ— æ³•æ¼”ç¤ºDataShareæ›´æ–°è”ç³»äººåŠŸèƒ½');
+            });
+        }, Button);
+        // Contacts: Update Contact via DataShare
+        Button.pop();
+        Column.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+//# sourceMappingURL=PermissionPage.js.mapÂ“Ùj hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙm hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.calendarManager.d.tsÙe hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.contact.d.tsÙrC:\Users\yao\Desktop\final_api\MultiDeviceCommunication-master\features\home\src\main\ets\pages\PermissionPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¤homeÃÂÙLC:\Users\yao\Desktop\final_api\MultiDeviceCommunication-master\features\homeÙ>C:\Users\yao\Desktop\final_api\MultiDeviceCommunication-master¤home¥1.0.0ÔrC’§pkgNameªpkgVersion¤home¥1.0.0‘ÔrD’²hostDependencyName®hostModuleName°./PermissionPage¤homeÙLC:\Users\yao\Desktop\final_api\MultiDeviceCommunication-master\features\homeÃÃÚU"/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import common from '@ohos.app.ability.common';
+import promptAction from '@ohos.promptAction';
+import { BusinessError } from '@ohos.base';
+import { calendarManager } from '@kit.CalendarKit';
+import contact from '@ohos.contact';
+import { ValuesBucket } from '@kit.ArkData';
+
+//Api20æ”¯æŒ
+// import dataShare from '@ohos.data.dataShare'
+@Component
+export struct PermissionPage {
+  private context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+  private CONTACT_URI: string = 'datashare:///com.ohos.contactsdataability/contacts/contact';
+
+  build() {
+    Column() {
+      Text('Permission API Demo')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 20 })
+      
+      // Calendar Permissions Section
+      Text('Calendar Permissions')
+        .fontSize(20)
+        .fontWeight(FontWeight.Medium)
+        .margin({ top: 20, bottom: 10 })
+        .width('100%')
+      
+      // Calendar: Delete Events Button
+      Button('Delete Events (Calendar)')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤æ—¥å†äº‹ä»¶åŠŸèƒ½
+          try {
+            // è·å–æ—¥å†ç®¡ç†å™¨
+            const calendarMgr = calendarManager.getCalendarManager(this.context);
+            
+            // è·å–é»˜è®¤æ—¥å†
+            calendarMgr.getCalendar().then((calendar) => {
+              // è·å–æ‰€æœ‰äº‹ä»¶
+              calendar.getEvents().then((events) => {
+                // æå–æ‰€æœ‰äº‹ä»¶IDï¼Œè¿‡æ»¤æ‰undefinedå€¼
+                const validEvents = events.filter(event => event.id !== undefined);
+                const eventIds: number[] = [];
+                validEvents.forEach(event => {
+                  if (event.id !== undefined) {
+                    eventIds.push(event.id);
+                  }
+                });
+                
+                if (eventIds.length > 0) {
+                  // åˆ é™¤è¿™äº›äº‹ä»¶
+                  calendar.deleteEvents(eventIds).then(() => {
+                    promptAction.showToast({
+                      message: `å·²æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªäº‹ä»¶`,
+                      duration: 2000
+                    });
+                    console.info(`æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªæ—¥å†äº‹ä»¶`);
+                  }).catch((err: BusinessError) => {
+                    promptAction.showToast({
+                      message: `åˆ é™¤äº‹ä»¶å¤±è´¥: ${err.message}`,
+                      duration: 2000
+                    });
+                    console.error(`åˆ é™¤äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                  });
+                } else {
+                  promptAction.showToast({
+                    message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶',
+                    duration: 2000
+                  });
+                  console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶');
+                }
+              }).catch((err: BusinessError) => {
+                promptAction.showToast({
+                  message: `è·å–äº‹ä»¶å¤±è´¥: ${err.message}`,
+                  duration: 2000
+                });
+                console.error(`è·å–äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+              });
+            }).catch((err: BusinessError) => {
+              promptAction.showToast({
+                message: `è·å–æ—¥å†å¤±è´¥: ${err.message}`,
+                duration: 2000
+              });
+              console.error(`è·å–æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+            });
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`åˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Calendar: Delete Single Event Button
+      Button('Delete Single Event (Calendar)')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤å•ä¸ªæ—¥å†äº‹ä»¶åŠŸèƒ½
+          try {
+            // è·å–æ—¥å†ç®¡ç†å™¨
+            const calendarMgr = calendarManager.getCalendarManager(this.context);
+            
+            // è·å–é»˜è®¤æ—¥å†
+            calendarMgr.getCalendar().then((calendar) => {
+              // è·å–æ‰€æœ‰äº‹ä»¶
+              calendar.getEvents().then((events) => {
+                // è¿‡æ»¤æ‰æ²¡æœ‰IDçš„äº‹ä»¶
+                const validEvents = events.filter(event => event.id !== undefined);
+                
+                if (validEvents.length > 0) {
+                  // åªåˆ é™¤ç¬¬ä¸€ä¸ªäº‹ä»¶
+                  const eventId = validEvents[0].id;
+                  if (eventId !== undefined) {
+                    calendar.deleteEvent(eventId).then(() => {
+                      promptAction.showToast({
+                        message: `å·²æˆåŠŸåˆ é™¤äº‹ä»¶ (ID: ${eventId})`,
+                        duration: 2000
+                      });
+                      console.info(`æˆåŠŸåˆ é™¤å•ä¸ªæ—¥å†äº‹ä»¶ (ID: ${eventId})`);
+                    }).catch((err: BusinessError) => {
+                      promptAction.showToast({
+                        message: `åˆ é™¤äº‹ä»¶å¤±è´¥: ${err.message}`,
+                        duration: 2000
+                      });
+                      console.error(`åˆ é™¤äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                    });
+                  }
+                } else {
+                  promptAction.showToast({
+                    message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶',
+                    duration: 2000
+                  });
+                  console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶');
+                }
+              }).catch((err: BusinessError) => {
+                promptAction.showToast({
+                  message: `è·å–äº‹ä»¶å¤±è´¥: ${err.message}`,
+                  duration: 2000
+                });
+                console.error(`è·å–äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+              });
+            }).catch((err: BusinessError) => {
+              promptAction.showToast({
+                message: `è·å–æ—¥å†å¤±è´¥: ${err.message}`,
+                duration: 2000
+              });
+              console.error(`è·å–æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+            });
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`åˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Calendar: Delete Whole Calendar Data
+      Button('Delete Whole Calendar Data')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤æ•´ä¸ªæ—¥å†åŠŸèƒ½
+          try {
+            // è·å–æ—¥å†ç®¡ç†å™¨
+            const calendarMgr = calendarManager.getCalendarManager(this.context);
+            
+            // è·å–æ‰€æœ‰æ—¥å†
+            calendarMgr.getAllCalendars().then((calendars) => {
+              if (calendars.length > 0) {
+                const deletePromises = calendars.map((cal) => {
+                  return calendarMgr.deleteCalendar(cal).catch((err: BusinessError) => {
+                    console.error(`åˆ é™¤æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+                    return false; // è¿”å›å¤±è´¥æ ‡è®°
+                  });
+                });
+                
+                // ç­‰å¾…æ‰€æœ‰åˆ é™¤æ“ä½œå®Œæˆ
+                Promise.all(deletePromises).then((results) => {
+                  const successCount = results.filter(result => result !== false).length;
+                  if (successCount > 0) {
+                    promptAction.showToast({
+                      message: `å·²æˆåŠŸåˆ é™¤${successCount}ä¸ªæ—¥å†`,
+                      duration: 2000
+                    });
+                    console.info(`æˆåŠŸåˆ é™¤${successCount}ä¸ªæ—¥å†`);
+                  } else {
+                    promptAction.showToast({
+                      message: 'åˆ é™¤æ—¥å†å¤±è´¥',
+                      duration: 2000
+                    });
+                    console.error('æ‰€æœ‰æ—¥å†åˆ é™¤æ“ä½œå‡å¤±è´¥');
+                  }
+                });
+              } else {
+                promptAction.showToast({
+                  message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†',
+                  duration: 2000
+                });
+                console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†');
+              }
+            }).catch((err: BusinessError) => {
+              promptAction.showToast({
+                message: `è·å–æ—¥å†åˆ—è¡¨å¤±è´¥: ${err.message}`,
+                duration: 2000
+              });
+              console.error(`è·å–æ—¥å†åˆ—è¡¨å¤±è´¥: ${JSON.stringify(err)}`);
+            });
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`åˆ é™¤æ—¥å†æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Calendar: Delete Regular Calendar Data
+      Button('Delete Regular Calendar Data')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°åˆ é™¤å¸¸è§„æ—¥å†æ•°æ®åŠŸèƒ½
+          try {
+            // è·å–æ—¥å†ç®¡ç†å™¨
+            const calendarMgr = calendarManager.getCalendarManager(this.context);
+            
+            // è·å–é»˜è®¤æ—¥å†
+            calendarMgr.getCalendar().then((calendar) => {
+              // è·å–æ‰€æœ‰äº‹ä»¶ï¼ˆç”±äºæ²¡æœ‰filterByTypeæ–¹æ³•ï¼Œæˆ‘ä»¬è·å–æ‰€æœ‰äº‹ä»¶åå†ç­›é€‰ï¼‰
+              calendar.getEvents().then((events) => {
+                // ç­›é€‰æ™®é€šç±»å‹çš„äº‹ä»¶
+                const normalEvents = events.filter(event => 
+                  event.type === calendarManager.EventType.NORMAL && 
+                  event.id !== undefined
+                );
+                
+                const eventIds: number[] = [];
+                normalEvents.forEach(event => {
+                  if (event.id !== undefined) {
+                    eventIds.push(event.id);
+                  }
+                });
+                
+                if (eventIds.length > 0) {
+                  // åˆ é™¤è¿™äº›äº‹ä»¶
+                  calendar.deleteEvents(eventIds).then(() => {
+                    promptAction.showToast({
+                      message: `å·²æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªæ™®é€šäº‹ä»¶`,
+                      duration: 2000
+                    });
+                    console.info(`æˆåŠŸåˆ é™¤${eventIds.length}ä¸ªæ™®é€šæ—¥å†äº‹ä»¶`);
+                  }).catch((err: BusinessError) => {
+                    promptAction.showToast({
+                      message: `åˆ é™¤äº‹ä»¶å¤±è´¥: ${err.message}`,
+                      duration: 2000
+                    });
+                    console.error(`åˆ é™¤äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+                  });
+                } else {
+                  promptAction.showToast({
+                    message: 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶',
+                    duration: 2000
+                  });
+                  console.info('æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶');
+                }
+              }).catch((err: BusinessError) => {
+                promptAction.showToast({
+                  message: `è·å–äº‹ä»¶å¤±è´¥: ${err.message}`,
+                  duration: 2000
+                });
+                console.error(`è·å–äº‹ä»¶å¤±è´¥: ${JSON.stringify(err)}`);
+              });
+            }).catch((err: BusinessError) => {
+              promptAction.showToast({
+                message: `è·å–æ—¥å†å¤±è´¥: ${err.message}`,
+                duration: 2000
+              });
+              console.error(`è·å–æ—¥å†å¤±è´¥: ${JSON.stringify(err)}`);
+            });
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`åˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Contacts Permissions Section
+      Text('Contacts Permissions')
+        .fontSize(20)
+        .fontWeight(FontWeight.Medium)
+        .margin({ top: 20, bottom: 10 })
+        .width('100%')
+      
+      // Contacts: Insert Contact Data
+      Button('Insert Contact Data')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°æ’å…¥è”ç³»äººæ•°æ®åŠŸèƒ½
+          try {
+            let uri = ("datashare:///com.ohos.contactsdataability");
+            let key1: string = "name";
+            let value11: string = "roe11"
+            let key2: string = "age";
+            let value21: number = 21;
+            let key3: string = "salary";
+            let value31: number = 20.5;
+            let valuesBucket1: ValuesBucket = {
+              key1: value11,
+              key2: value21,
+              key3: value31,
+            }
+            let vbs = new Array(valuesBucket1);
+            try {
+
+              //Api20æ”¯æŒ
+              // if (dataShareHelper != undefined) {
+              //   (dataShareHelper as dataShare.DataShareHelper).batchInsert(uri, vbs, (err:Error, data:dataShare) => {
+              //     if (err !== undefined) {
+              //       console.error(`batchInsert error: code: ${err}, message: ${err.message} `);
+              //       return;
+              //     }
+              //     console.info("batchInsert succeed, data : " + data);
+              //   });
+              // }
+            } catch (err) {
+              let code = (err as BusinessError).code;
+              let message = (err as BusinessError).message;
+              console.error(`batchInsert error: code: ${code}, message: ${message} `);
+            };
+
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Contacts: Batch Insert Contacts
+      Button('æ‰¹é‡æ’å…¥æ•°æ®')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°æ‰¹é‡æ’å…¥è”ç³»äººåŠŸèƒ½
+          try {
+            // åˆ›å»ºå¤šä¸ªè”ç³»äººå¯¹è±¡
+            const contacts: contact.Contact[] = [
+              {
+                name: {
+                  fullName: 'æå››',
+                  familyName: 'æ',
+                  givenName: 'å››'
+                },
+                phoneNumbers: [{
+                  phoneNumber: '13900139000',
+                  labelName: 'ç§»åŠ¨ç”µè¯'
+                }],
+                emails: [{
+                  email: 'lisi@example.com',
+                  labelName: 'ä¸ªäºº'
+                }]
+              },
+              {
+                name: {
+                  fullName: 'ç‹äº”',
+                  familyName: 'ç‹',
+                  givenName: 'äº”'
+                },
+                phoneNumbers: [{
+                  phoneNumber: '13700137000',
+                  labelName: 'ç§»åŠ¨ç”µè¯'
+                }],
+                emails: [{
+                  email: 'wangwu@example.com',
+                  labelName: 'å·¥ä½œ'
+                }]
+              }
+            ];
+            
+            // æ‰¹é‡æ·»åŠ è”ç³»äººï¼ˆç”±äºæ²¡æœ‰ç›´æ¥çš„æ‰¹é‡æ·»åŠ æ–¹æ³•ï¼Œä½¿ç”¨Promise.allå®ç°ï¼‰
+            const addPromises = contacts.map(c => {
+              return contact.addContact(this.context, c).catch((err: BusinessError) => {
+                console.error(`æ·»åŠ è”ç³»äººå¤±è´¥: ${JSON.stringify(err)}`);
+                return -1; // è¿”å›å¤±è´¥æ ‡è®°
+              });
+            });
+            
+            // ç­‰å¾…æ‰€æœ‰æ·»åŠ æ“ä½œå®Œæˆ
+            Promise.all(addPromises).then((contactIds) => {
+              const successCount = contactIds.filter(id => id !== -1).length;
+              if (successCount > 0) {
+                promptAction.showToast({
+                  message: `å·²æˆåŠŸæ·»åŠ ${successCount}ä¸ªè”ç³»äºº`,
+                  duration: 2000
+                });
+                console.info(`æˆåŠŸæ·»åŠ ${successCount}ä¸ªè”ç³»äºº`);
+              } else {
+                promptAction.showToast({
+                  message: 'æ·»åŠ è”ç³»äººå¤±è´¥',
+                  duration: 2000
+                });
+                console.error('æ‰€æœ‰è”ç³»äººæ·»åŠ æ“ä½œå‡å¤±è´¥');
+              }
+            });
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`æ‰¹é‡æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Contacts: Add Contact
+      Button('Add Contact')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ä½¿ç”¨ ArkTS 5.0.0 è¯­æ³•å®ç°æ·»åŠ è”ç³»äººåŠŸèƒ½ï¼ˆå¸¦æ›´å¤šè¯¦ç»†ä¿¡æ¯ï¼‰
+          try {
+            // åˆ›å»ºä¸€ä¸ªæ–°çš„è”ç³»äººå¯¹è±¡ï¼ˆæ›´å¤šä¿¡æ¯ï¼‰
+            const detailedContact: contact.Contact = {
+              name: {
+                fullName: 'èµµå…­',
+                familyName: 'èµµ',
+                givenName: 'å…­',
+                namePrefix: 'å…ˆç”Ÿ'
+              },
+              phoneNumbers: [
+                {
+                  phoneNumber: '13600136000',
+                  labelName: 'ç§»åŠ¨ç”µè¯'
+                },
+                {
+                  phoneNumber: '010-88889999',
+                  labelName: 'å·¥ä½œ'
+                }
+              ],
+              emails: [
+                {
+                  email: 'zhaoliu@example.com',
+                  labelName: 'å·¥ä½œ'
+                },
+                {
+                  email: 'zhaoliu_personal@example.com',
+                  labelName: 'ä¸ªäºº'
+                }
+              ],
+              websites: [
+                {
+                  website: 'https://www.example.com/zhaoliu'
+                }
+              ]
+            };
+            
+            // æ·»åŠ è”ç³»äºº
+            contact.addContact(this.context, detailedContact).then((contactId) => {
+              promptAction.showToast({
+                message: `å·²æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: ${contactId}`,
+                duration: 2000
+              });
+              console.info(`æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: ${contactId}`);
+            }).catch((err: BusinessError) => {
+              promptAction.showToast({
+                message: `æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: ${err.message}`,
+                duration: 2000
+              });
+              console.error(`æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: ${JSON.stringify(err)}`);
+            });
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`æ·»åŠ è¯¦ç»†è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Contacts: Update Contact
+      Button('Update Contact')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ç”±äºcontact.getContactå’ŒupdateContact APIåœ¨å½“å‰ç¯å¢ƒä¸å¯ç”¨æˆ–å·²å˜æ›´ï¼Œä½¿ç”¨Toastæ¶ˆæ¯ä»£æ›¿
+          try {
+            promptAction.showToast({
+              message: 'æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨contact.getContactå’ŒupdateContact APIï¼Œä½†å½“å‰ç¯å¢ƒå¯èƒ½ä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œè¯¥åŠŸèƒ½å¯ä»¥æŸ¥æ‰¾å¹¶æ›´æ–°è”ç³»äººæ•°æ®ã€‚',
+              duration: 3000
+            });
+            console.info('è”ç³»äººæ›´æ–°åŠŸèƒ½æ¼”ç¤ºï¼šé¦–å…ˆä¼šæŸ¥æ‰¾é‚®ç®±ä¸ºtest@example.comçš„è”ç³»äººï¼Œç„¶åæ›´æ–°å…¶å§“åå’Œç”µè¯ä¿¡æ¯');
+          } catch (error) {
+            promptAction.showToast({
+              message: `æ“ä½œå¼‚å¸¸: ${error.message}`,
+              duration: 2000
+            });
+            console.error(`æ›´æ–°è”ç³»äººæ“ä½œå¼‚å¸¸: ${JSON.stringify(error)}`);
+          }
+        })
+      
+      // Contacts: Update Contact via DataShare
+      Button('Update Contact (DataShare)')
+        .width('90%')
+        .margin(5)
+        .onClick(() => {
+          // ç”±äºDataShare APIä¸å¯ç”¨ï¼Œä½¿ç”¨Toastæ¶ˆæ¯ä»£æ›¿
+          promptAction.showToast({
+            message: 'æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨DataShare APIï¼Œä½†å½“å‰ç¯å¢ƒä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œå¯ä»¥é€šè¿‡DataShareæ›´æ–°è”ç³»äººæ•°æ®ã€‚',
+            duration: 3000
+          });
+          console.info('DataShare APIç›®å‰ä¸å¯ç”¨ï¼Œæ— æ³•æ¼”ç¤ºDataShareæ›´æ–°è”ç³»äººåŠŸèƒ½');
+        })
+    }
+    .width('100%')
+    .height('100%')
+    .padding(16)
+    .backgroundColor('#F1F3F5')
+  }
+} ÀÔrE“²@ohos.promptActionµ@ohos.calendarManager­@ohos.contactÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙj hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÔrG‘¯hostModulesInfo‘D²@ohos.promptAction¤homeÃªoh-resolveÂFAÃÙm hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.calendarManager.d.tsG‘Dµ@ohos.calendarManager¤homeÃªoh-resolveÂFAÃÙe hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.contact.d.tsG‘D­@ohos.contact¤homeÃªoh-resolveÂ“ÔrH–§version¤fileªsourceRoot§sources¥names¨mappings±PermissionPage.js ‘²PermissionPage.etsÜj–”   ” ” ” ”- -”. .–”   ” 	” ”  ”3 2”4 3–”   ” ” ” ”# #”$ $””   ” ” ” ‘”  •” -”! 7”" 8”& <”' ÌX’”  ”ÌW Ì\‘” ,‘” ’” ” 
+–” ” 
+” Í” Í
+” Í” Í–” ” 
+” Í” Í” Í”  Í–” ” 
+” Í” Í” Í” Í–” ” 
+” Í”" Í”# Í”, Í”” ” 
+” ”-  –” ” 
+”  	”  ”  ”  ˜” ” 
+” !	” !” !”& !”' !”+ !#š” ” 
+” "	” "” "” "”  "”" "”$ "”& "’” ” 
+’” $”+ $%”” %” %
+” %”. %!’” $”+ $%–” %” %
+” &	” &” &” &’” $”+ $%˜” %” %
+” '	” '” '”& '”' '”- '%’” $”+ $%” %” %
+” (	” (” (” (” (” (”! (”# (”) (!”+ (#”- (%”/ ('’” $”+ $%–” %” %
+” )	” )” )” )’” $”' $%’” %” %
+’” +”- +'”” ,” ,”# ,”= ,'’” +”- +'–” ,” ,” -	” -” -” -’” +”- +'–” ,” ,” .	” .” .” .’” +”- +'—” ,” ,” /	” /” /” /”  /’” 0
+”. 0(’” 1
+” 1’” 2” 2” 3” 3”% 3”( 3 ”7 3/”8 30”ÌJ 3ÌB”ÌK 3ÌC”ÌO 3ÌG”ÌP 3ÌH”ÌW 3ÌO”ÌX 3ÌP”ÌY 3ÌQ’” 5” 5œ” 6” 6”  6”+ 6#”- 6%”. 6&”2 6*”3 6+”4 6,”< 64”> 66”Ì@ 68’” 7”! 7œ” 8”  8”! 8”* 8 ”, 8"”- 8#”1 8'”2 8(”3 8)”9 8/”; 81”= 83’” 9”5 9)Ü ” :”" :”- :!”0 :$”6 :*”7 :+”= :1”> :2”ÌC :7”ÌD :8”ÌF ::”ÌG :;”ÌL :Ì@”ÌM :ÌA”ÌO :ÌC”ÌT :ÌH”Ì] :ÌQ”Ì^ :ÌR”Ì_ :ÌS–” ;”" ;”* ;”- ;+”/ ;-”0 ;.˜” <”' <”( <”/ <#”0 <$”5 <)”6 <*”8 <,˜”  =”$ =”) =”* =”, =”1 =#”: =,”< =.š”$ >”, >”- >”1 >!”2 >"”7 >'”8 >(”: >*”; >+”< >,‘”! ?”” Ì@” Ì@” Ì@” Ì@˜” ÌB”  ÌB”( ÌB”) ÌB”/ ÌB#”2 ÌB&”3 ÌB'”5 ÌB)’”  ÌC”) ÌCœ”  ÌD”( ÌD”) ÌD”5 ÌD'”6 ÌD(”> ÌD0”? ÌD1”Ì@ ÌD2”ÌD ÌD6”ÌE ÌD7”ÌH ÌD:”ÌJ ÌD<•”$ ÌE”0 ÌE ”1 ÌE!”: ÌE*”; ÌE+˜”( ÌF”/ ÌF”1 ÌF”9 ÌF'”ÌA ÌF/”ÌB ÌF0”ÌH ÌF6”ÌM ÌF;””( ÌG”0 ÌG”2 ÌG ”6 ÌG$“”% ÌH”& ÌH”' ÌHœ”$ ÌI”+ ÌI”, ÌI”0 ÌI ”1 ÌI!”8 ÌI(”Ì@ ÌI0”ÌA ÌI1”ÌG ÌI7”ÌN ÌI>”ÌO ÌI?”ÌP ÌIÌ@š”  ÌJ”! ÌJ”" ÌJ”# ÌJ”( ÌJ”) ÌJ”* ÌJ”- ÌJ.”/ ÌJ0”1 ÌJ2•”$ ÌK”0 ÌK ”1 ÌK!”: ÌK*”; ÌK+˜”( ÌL”/ ÌL”1 ÌL”< ÌL*”? ÌL-”Ì@ ÌL.”ÌG ÌL5”ÌI ÌL7””( ÌM”0 ÌM”2 ÌM ”6 ÌM$“”% ÌN”& ÌN”' ÌNŸ”$ ÌO”+ ÌO”, ÌO”1 ÌO!”2 ÌO"”= ÌO-”ÌA ÌO1”ÌB ÌO2”ÌK ÌO;”ÌL ÌO<”ÌO ÌO?”ÌP ÌOÌ@”ÌR ÌOÌB”ÌS ÌOÌC”ÌT ÌOÌD””  ÌP”! ÌP”" ÌP”# ÌP‘” ÌQ‘”! ÌQ•”  ÌR”, ÌR”- ÌR”6 ÌR(”7 ÌR)””$ ÌS”+ ÌS”- ÌS”9 ÌS)””$ ÌT”, ÌT”. ÌT”2 ÌT"“”! ÌU”" ÌU”# ÌU˜”  ÌV”' ÌV”( ÌV”, ÌV”- ÌV”9 ÌV+”: ÌV,”; ÌV-‘” ÌWš” ÌX” ÌX” ÌX” ÌX”  ÌX”! ÌX”" ÌX”% ÌX*”' ÌX,”) ÌX.•” ÌY”( ÌY”) ÌY”2 ÌY&”3 ÌY'˜”  ÌZ”' ÌZ”) ÌZ”4 ÌZ&”7 ÌZ)”8 ÌZ*”? ÌZ1”ÌA ÌZ3””  Ì[”( Ì[”* Ì[”. Ì[ “” Ì\” Ì\” Ì\Ÿ” Ì]”# Ì]”$ Ì]”) Ì]”* Ì]”5 Ì])”9 Ì]-”: Ì].”ÌC Ì]7”ÌD Ì]8”ÌG Ì];”ÌH Ì]<”ÌJ Ì]>”ÌK Ì]?”ÌL Ì]Ì@”” Ì^” Ì^” Ì^” Ì^š” Ì_” Ì_” Ì_” Ì_” Ì_” Ì_” Ì_”! Ì_(”# Ì_*”% Ì_,•” Ì`”$ Ì`”% Ì`”. Ì`$”/ Ì`%˜” Ìa”# Ìa”% Ìa”0 Ìa$”3 Ìa'”4 Ìa(”; Ìa/”= Ìa1”” Ìb”$ Ìb”& Ìb”* Ìb“” Ìc” Ìc” ÌcŸ” Ìd” Ìd”  Ìd”% Ìd”& Ìd”1 Ìd'”5 Ìd+”6 Ìd,”? Ìd5”Ì@ Ìd6”ÌC Ìd9”ÌD Ìd:”ÌF Ìd<”ÌG Ìd=”ÌH Ìd>”” Ìe” Ìe” Ìe” Ìe‘” Ìf”” Ìf” Ìf” Ìf” Ìf•” Ìg”  Ìg”! Ìg”* Ìg"”+ Ìg#˜” Ìh” Ìh”! Ìh”* Ìh ”/ Ìh%”0 Ìh&”7 Ìh-”9 Ìh/”” Ìi”  Ìi”" Ìi”& Ìi“” Ìj” Ìj” ÌjŸ” Ìk” Ìk” Ìk”! Ìk”" Ìk”/ Ìk'”3 Ìk+”4 Ìk,”= Ìk5”> Ìk6”ÌC Ìk;”ÌD Ìk<”ÌF Ìk>”ÌG Ìk?”ÌH ÌkÌ@‘” Ìl’” Ìm” Ìm	’” +”) +'’” ,” ,’” Ìo”3 Ìo-”” Ìp” Ìp”# Ìp”ÌC Ìp-’” Ìo”3 Ìo-–” Ìp” Ìp” Ìq	” Ìq” Ìq” Ìq’” Ìo”3 Ìo-–” Ìp” Ìp” Ìr	” Ìr” Ìr” Ìr’” Ìo”3 Ìo-—” Ìp” Ìp” Ìs	” Ìs” Ìs” Ìs”  Ìs’” Ìt
+”0 Ìt*’” Ìu
+” Ìu’” Ìv” Ìv” Ìw” Ìw”% Ìw”( Ìw ”7 Ìw/”8 Ìw0”ÌJ ÌwÌB”ÌK ÌwÌC”ÌO ÌwÌG”ÌP ÌwÌH”ÌW ÌwÌO”ÌX ÌwÌP”ÌY ÌwÌQ’” Ìy” Ìyœ” Ìz” Ìz”  Ìz”+ Ìz#”- Ìz%”. Ìz&”2 Ìz*”3 Ìz+”4 Ìz,”< Ìz4”> Ìz6”Ì@ Ìz8’” Ì{”! Ì{œ” Ì|”  Ì|”! Ì|”* Ì| ”, Ì|"”- Ì|#”1 Ì|'”2 Ì|(”3 Ì|)”9 Ì|/”; Ì|1”= Ì|3’” Ì}”) Ì}Ü ” Ì~”" Ì~”- Ì~!”0 Ì~$”6 Ì~*”7 Ì~+”= Ì~1”> Ì~2”ÌC Ì~7”ÌD Ì~8”ÌF Ì~:”ÌG Ì~;”ÌL Ì~Ì@”ÌM Ì~ÌA”ÌO Ì~ÌC”ÌT Ì~ÌH”Ì] Ì~ÌQ”Ì^ Ì~ÌR”Ì_ Ì~ÌS˜” Ì€”  Ì€”+ Ì€”, Ì€ ”2 Ì€&”5 Ì€)”6 Ì€*”8 Ì€,’”  Ì”+ Ì›”  Ì‚”& Ì‚”- Ì‚”0 Ì‚"”; Ì‚-”< Ì‚.”= Ì‚/”> Ì‚0”? Ì‚1”ÌA Ì‚3”ÌB Ì‚4–”  Ìƒ”$ Ìƒ”+ Ìƒ”0 Ìƒ"”9 Ìƒ+”; Ìƒ-œ”$ Ì„”, Ì„”- Ì„”8 Ì„(”9 Ì„)”Ì@ Ì„0”ÌA Ì„1”ÌB Ì„2”ÌF Ì„6”ÌG Ì„7”ÌJ Ì„:”ÌL Ì„<•”( Ì…”4 Ì…"”5 Ì…#”> Ì…,”? Ì…-–”, Ì†”3 Ì†”5 Ì†!”ÌE Ì†1”ÌL Ì†8”ÌO Ì†;””, Ì‡”4 Ì‡ ”6 Ì‡"”: Ì‡&“”) Ìˆ”* Ìˆ”+ Ìˆš”( Ì‰”/ Ì‰”0 Ì‰”4 Ì‰"”5 Ì‰#”ÌH Ì‰6”ÌO Ì‰=”ÌR Ì‰Ì@”ÌS Ì‰ÌA”ÌT Ì‰ÌBš”$ ÌŠ”% ÌŠ”& ÌŠ”' ÌŠ”, ÌŠ”- ÌŠ”. ÌŠ”1 ÌŠ0”3 ÌŠ2”5 ÌŠ4•”( Ì‹”4 Ì‹"”5 Ì‹#”> Ì‹,”? Ì‹-˜”, ÌŒ”3 ÌŒ”5 ÌŒ!”Ì@ ÌŒ,”ÌC ÌŒ/”ÌD ÌŒ0”ÌK ÌŒ7”ÌM ÌŒ9””, Ì”4 Ì ”6 Ì"”: Ì&“”) Ì”* Ì”+ ÌŸ”( Ì”/ Ì”0 Ì”5 Ì#”6 Ì$”ÌA Ì/”ÌE Ì3”ÌF Ì4”ÌO Ì=”ÌP Ì>”ÌS ÌÌA”ÌT ÌÌB”ÌV ÌÌD”ÌW ÌÌE”ÌX ÌÌF””$ Ì”% Ì”& Ì”' Ì‘”! Ì‘‘” Ì’‘”! Ì’•”  Ì“”, Ì“”- Ì“”6 Ì“(”7 Ì“)””$ Ì””+ Ì””- Ì””9 Ì”)””$ Ì•”, Ì•”. Ì•”2 Ì•"“”! Ì–”" Ì–”# Ì–˜”  Ì—”' Ì—”( Ì—”, Ì—”- Ì—”9 Ì—+”: Ì—,”; Ì—-‘” Ì˜š” Ì™” Ì™” Ì™” Ì™”  Ì™”! Ì™”" Ì™”% Ì™*”' Ì™,”) Ì™.•” Ìš”( Ìš”) Ìš”2 Ìš&”3 Ìš'˜”  Ì›”' Ì›”) Ì›”4 Ì›&”7 Ì›)”8 Ì›*”? Ì›1”ÌA Ì›3””  Ìœ”( Ìœ”* Ìœ”. Ìœ “” Ì” Ì” ÌŸ” Ì”# Ì”$ Ì”) Ì”* Ì”5 Ì)”9 Ì-”: Ì.”ÌC Ì7”ÌD Ì8”ÌG Ì;”ÌH Ì<”ÌJ Ì>”ÌK Ì?”ÌL ÌÌ@”” ÌŸ” ÌŸ” ÌŸ” ÌŸš” Ì ” Ì ” Ì ” Ì ” Ì ” Ì ” Ì ”! Ì (”# Ì *”% Ì ,•” Ì¡”$ Ì¡”% Ì¡”. Ì¡$”/ Ì¡%˜” Ì¢”# Ì¢”% Ì¢”0 Ì¢$”3 Ì¢'”4 Ì¢(”; Ì¢/”= Ì¢1”” Ì£”$ Ì£”& Ì£”* Ì£“” Ì¤” Ì¤” Ì¤Ÿ” Ì¥” Ì¥”  Ì¥”% Ì¥”& Ì¥”1 Ì¥'”5 Ì¥+”6 Ì¥,”? Ì¥5”Ì@ Ì¥6”ÌC Ì¥9”ÌD Ì¥:”ÌF Ì¥<”ÌG Ì¥=”ÌH Ì¥>”” Ì¦” Ì¦” Ì¦” Ì¦‘” Ì§”” Ì§” Ì§” Ì§” Ì§•” Ì¨”  Ì¨”! Ì¨”* Ì¨"”+ Ì¨#˜” Ì©” Ì©”! Ì©”* Ì© ”/ Ì©%”0 Ì©&”7 Ì©-”9 Ì©/”” Ìª”  Ìª”" Ìª”& Ìª“” Ì«” Ì«” Ì«Ÿ” Ì¬” Ì¬” Ì¬”! Ì¬”" Ì¬”/ Ì¬'”3 Ì¬+”4 Ì¬,”= Ì¬5”> Ì¬6”ÌC Ì¬;”ÌD Ì¬<”ÌF Ì¬>”ÌG Ì¬?”ÌH Ì¬Ì@‘” Ì­’” Ì®” Ì®	’” Ìo”/ Ìo-’” Ìp” Ìp’” Ì°”3 Ì°-”” Ì±” Ì±”# Ì±”? Ì±)’” Ì°”3 Ì°-–” Ì±” Ì±” Ì²	” Ì²” Ì²” Ì²’” Ì°”3 Ì°-–” Ì±” Ì±” Ì³	” Ì³” Ì³” Ì³’” Ì°”3 Ì°-—” Ì±” Ì±” Ì´	” Ì´” Ì´” Ì´”  Ì´’” Ìµ
+”. Ìµ(’” Ì¶
+” Ì¶’” Ì·” Ì·” Ì¸” Ì¸”% Ì¸”( Ì¸ ”7 Ì¸/”8 Ì¸0”ÌJ Ì¸ÌB”ÌK Ì¸ÌC”ÌO Ì¸ÌG”ÌP Ì¸ÌH”ÌW Ì¸ÌO”ÌX Ì¸ÌP”ÌY Ì¸ÌQ’” Ìº” Ìºœ” Ì»” Ì»”  Ì»”/ Ì»'”1 Ì»)”2 Ì»*”6 Ì».”7 Ì»/”8 Ì»0”ÌA Ì»9”ÌC Ì»;”ÌE Ì»=˜” Ì¼” Ì¼”% Ì¼”& Ì¼”, Ì¼"”/ Ì¼%”0 Ì¼&”2 Ì¼(œ” Ì½”" Ì½”0 Ì½$”3 Ì½'”< Ì½0”= Ì½1”Ì@ Ì½4”ÌA Ì½5”ÌB Ì½6”ÌE Ì½9”ÌG Ì½;”ÌI Ì½=Ÿ”  Ì¾”' Ì¾”2 Ì¾$”3 Ì¾%”ÌA Ì¾3”ÌB Ì¾4”ÌE Ì¾7”ÌF Ì¾8”ÌG Ì¾9”ÌL Ì¾>”ÌM Ì¾?”ÌN Ì¾Ì@”ÌQ Ì¾ÌR”ÌS Ì¾ÌT”ÌU Ì¾ÌVŸ”$ Ì¿”+ Ì¿”, Ì¿”1 Ì¿!”2 Ì¿"”= Ì¿-”ÌA Ì¿1”ÌB Ì¿2”ÌK Ì¿;”ÌL Ì¿<”ÌO Ì¿?”ÌP Ì¿Ì@”ÌR Ì¿ÌB”ÌS Ì¿ÌC”ÌT Ì¿ÌD–”$ ÌÀ”+ ÌÀ”0 ÌÀ ”1 ÌÀ!”2 ÌÀ"”; ÌÀ+””  ÌÁ”! ÌÁ”" ÌÁ”# ÌÁ”” ÌÂ” ÌÂ” ÌÂ” ÌÂ’” ÌÄ”) ÌÄ” ÌÅ”# ÌÅ”$ ÌÅ”' ÌÅ”( ÌÅ”6 ÌÅ*”7 ÌÅ+”8 ÌÅ,”< ÌÅ0”= ÌÅ1”> ÌÅ2”ÌE ÌÅ9”ÌG ÌÅ;”ÌI ÌÅ=Ü ”  ÌÆ”& ÌÆ”2 ÌÆ$”5 ÌÆ'”< ÌÆ.”= ÌÆ/”ÌC ÌÆ5”ÌD ÌÆ6”ÌJ ÌÆ<”ÌK ÌÆ=”ÌM ÌÆ?”ÌN ÌÆÌ@”ÌT ÌÆÌF”ÌY ÌÆÌK”Ì^ ÌÆÌP”Ì_ ÌÆÌQ”Ì` ÌÆÌR”Ìf ÌÆÌX”Ìg ÌÆÌY–”  ÌÇ”$ ÌÇ”0 ÌÇ"”3 ÌÇ%”4 ÌÇ&”6 ÌÇ(•”$ ÌÈ”0 ÌÈ ”1 ÌÈ!”: ÌÈ*”; ÌÈ+–”( ÌÉ”/ ÌÉ”1 ÌÉ”9 ÌÉ'”ÌE ÌÉ3”ÌJ ÌÉ8””( ÌÊ”0 ÌÊ”2 ÌÊ ”6 ÌÊ$“”% ÌË”& ÌË”' ÌËš”$ ÌÌ”+ ÌÌ”, ÌÌ”0 ÌÌ ”1 ÌÌ!”8 ÌÌ(”ÌD ÌÌ4”ÌI ÌÌ9”ÌJ ÌÌ:”ÌK ÌÌ;‘”! ÌÍ‘”% ÌÍ•”$ ÌÎ”0 ÌÎ ”1 ÌÎ!”: ÌÎ*”; ÌÎ+””( ÌÏ”/ ÌÏ”1 ÌÏ”9 ÌÏ'””( ÌĞ”0 ÌĞ”2 ÌĞ ”6 ÌĞ$“”% ÌÑ”& ÌÑ”' ÌÑ˜”$ ÌÒ”+ ÌÒ”, ÌÒ”1 ÌÒ!”2 ÌÒ"”? ÌÒ/”Ì@ ÌÒ0”ÌA ÌÒ1‘”! ÌÓ”” ÌÔ” ÌÔ” ÌÔ” ÌÔ‘” ÌÕ‘” ÌÕ•” ÌÖ”( ÌÖ”) ÌÖ”2 ÌÖ&”3 ÌÖ'””  Ì×”' Ì×”) Ì×”5 Ì×'””  ÌØ”( ÌØ”* ÌØ”. ÌØ “” ÌÙ” ÌÙ” ÌÙ˜” ÌÚ”# ÌÚ”$ ÌÚ”( ÌÚ”) ÌÚ”5 ÌÚ)”6 ÌÚ*”7 ÌÚ+‘” ÌÛš” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ”! ÌÜ(”# ÌÜ*”% ÌÜ,•” Ìİ”$ Ìİ”% Ìİ”. Ìİ$”/ Ìİ%˜” ÌŞ”# ÌŞ”% ÌŞ”2 ÌŞ&”5 ÌŞ)”6 ÌŞ*”= ÌŞ1”? ÌŞ3”” Ìß”$ Ìß”& Ìß”* Ìß“” Ìà” Ìà” ÌàŸ” Ìá” Ìá”  Ìá”% Ìá”& Ìá”3 Ìá)”7 Ìá-”8 Ìá.”ÌA Ìá7”ÌB Ìá8”ÌE Ìá;”ÌF Ìá<”ÌH Ìá>”ÌI Ìá?”ÌJ ÌáÌ@”” Ìâ” Ìâ” Ìâ” Ìâ‘” Ìã”” Ìã” Ìã” Ìã” Ìã•” Ìä”  Ìä”! Ìä”* Ìä"”+ Ìä#˜” Ìå” Ìå”! Ìå”* Ìå ”/ Ìå%”0 Ìå&”7 Ìå-”9 Ìå/”” Ìæ”  Ìæ”" Ìæ”& Ìæ“” Ìç” Ìç” ÌçŸ” Ìè” Ìè” Ìè”! Ìè”" Ìè”/ Ìè'”3 Ìè+”4 Ìè,”= Ìè5”> Ìè6”ÌC Ìè;”ÌD Ìè<”ÌF Ìè>”ÌG Ìè?”ÌH ÌèÌ@‘” Ìé’” Ìê” Ìê	’” Ì°”/ Ì°-’” Ì±” Ì±’” Ìì”5 Ìì/”” Ìí” Ìí”# Ìí”ÌA Ìí+’” Ìì”5 Ìì/–” Ìí” Ìí” Ìî	” Ìî” Ìî” Ìî’” Ìì”5 Ìì/–” Ìí” Ìí” Ìï	” Ìï” Ìï” Ìï’” Ìì”5 Ìì/—” Ìí” Ìí” Ìğ	” Ìğ” Ìğ” Ìğ”  Ìğ’” Ìñ
+”0 Ìñ*’” Ìò
+” Ìò’” Ìó” Ìó” Ìô” Ìô”% Ìô”( Ìô ”7 Ìô/”8 Ìô0”ÌJ ÌôÌB”ÌK ÌôÌC”ÌO ÌôÌG”ÌP ÌôÌH”ÌW ÌôÌO”ÌX ÌôÌP”ÌY ÌôÌQ’” Ìö” Ìöœ” Ì÷” Ì÷”  Ì÷”+ Ì÷#”- Ì÷%”. Ì÷&”2 Ì÷*”3 Ì÷+”4 Ì÷,”< Ì÷4”> Ì÷6”Ì@ Ì÷8’” Ìø”ÌB Ìø8œ” Ìù”  Ìù”! Ìù”* Ìù ”, Ìù"”- Ìù#”1 Ìù'”2 Ìù(”3 Ìù)”9 Ìù/”; Ìù1”= Ìù3’” Ìú”( ÌúÜ ” Ìû”" Ìû”. Ìû"”1 Ìû%”7 Ìû+”8 Ìû,”> Ìû2”? Ìû3”ÌD Ìû8”ÌE Ìû9”ÌG Ìû;”ÌH Ìü”ÌM Ìü”ÌN Ìü”ÌR Ìü”ÌW Ìü!”Ìf Ìü0”Ìg Ìü1”Ìp Ìü:”Ìq Ìü;”Ìw ÌüÌA˜”  Ìı”% Ìı”& Ìı”( Ìı”- Ìı”6 Ìı(”7 Ìş”8 Ìş–” Í ”" Í ”* Í ”- Í +”/ Í -”0 Í .˜” Í”( Í”) Í”0 Í$”1 Í%”6 Í*”7 Í+”9 Í-˜”  Í”$ Í”) Í”* Í”, Í”1 Í#”: Í,”< Í.š”$ Í”, Í”- Í”1 Í!”2 Í"”7 Í'”8 Í(”: Í*”; Í+”< Í,‘”! Í”” Í” Í” Í” Í˜” Í”  Í”( Í”) Í”/ Í#”2 Í&”3 Í'”5 Í)’”  Í”) Íœ”  Í	”( Í	”) Í	”5 Í	'”6 Í	(”> Í	0”? Í	1”Ì@ Í	2”ÌD Í	6”ÌE Í	7”ÌH Í	:”ÌJ Í	<•”$ Í
+”0 Í
+ ”1 Í
+!”: Í
+*”; Í
++˜”( Í”/ Í”1 Í”9 Í'”ÌA Í/”ÌB Í0”ÌH Í6”ÌO Í=””( Í”0 Í”2 Í ”6 Í$“”% Í”& Í”' Íœ”$ Í”+ Í”, Í”0 Í ”1 Í!”8 Í(”Ì@ Í0”ÌA Í1”ÌG Í7”ÌP ÍÌ@”ÌQ ÍÌA”ÌR ÍÌBš”  Í”! Í”" Í”# Í”( Í”) Í”* Í”- Í.”/ Í0”1 Í2•”$ Í”0 Í ”1 Í!”: Í*”; Í+˜”( Í”/ Í”1 Í”< Í*”? Í-”Ì@ Í.”ÌG Í5”ÌI Í7””( Í”0 Í”2 Í ”6 Í$“”% Í”& Í”' ÍŸ”$ Í”+ Í”, Í”1 Í!”2 Í"”= Í-”ÌA Í1”ÌB Í2”ÌK Í;”ÌL Í<”ÌO Í?”ÌP ÍÌ@”ÌR ÍÌB”ÌS ÍÌC”ÌT ÍÌD””  Í”! Í”" Í”# Í‘” Í‘”! Í•”  Í”, Í”- Í”6 Í(”7 Í)””$ Í”+ Í”- Í”; Í+””$ Í”, Í”. Í”2 Í"“”! Í”" Í”# Í˜”  Í”' Í”( Í”, Í”- Í”; Í-”< Í.”= Í/‘” Íš” Í” Í” Í” Í”  Í”! Í”" Í”% Í*”' Í,”) Í.•” Í”( Í”) Í”2 Í&”3 Í'˜”  Í”' Í”) Í”4 Í&”7 Í)”8 Í*”? Í1”ÌA Í3””  Í ”( Í ”* Í ”. Í  “” Í!” Í!” Í!Ÿ” Í"”# Í"”$ Í"”) Í"”* Í"”5 Í")”9 Í"-”: Í".”ÌC Í"7”ÌD Í"8”ÌG Í";”ÌH Í"<”ÌJ Í">”ÌK Í"?”ÌL Í"Ì@”” Í#” Í#” Í#” Í#š” Í$” Í$” Í$” Í$” Í$” Í$” Í$”! Í$(”# Í$*”% Í$,•” Í%”$ Í%”% Í%”. Í%$”/ Í%%˜” Í&”# Í&”% Í&”0 Í&$”3 Í&'”4 Í&(”; Í&/”= Í&1”” Í'”$ Í'”& Í'”* Í'“” Í(” Í(” Í(Ÿ” Í)” Í)”  Í)”% Í)”& Í)”1 Í)'”5 Í)+”6 Í),”? Í)5”Ì@ Í)6”ÌC Í)9”ÌD Í):”ÌF Í)<”ÌG Í)=”ÌH Í)>”” Í*” Í*” Í*” Í*‘” Í+”” Í+” Í+” Í+” Í+•” Í,”  Í,”! Í,”* Í,"”+ Í,#˜” Í-” Í-”! Í-”* Í- ”/ Í-%”0 Í-&”7 Í--”9 Í-/”” Í.”  Í.”" Í.”& Í.“” Í/” Í/” Í/Ÿ” Í0” Í0” Í0”! Í0”" Í0”/ Í0'”3 Í0+”4 Í0,”= Í05”> Í06”ÌC Í0;”ÌD Í0<”ÌF Í0>”ÌG Í0?”ÌH Í0Ì@‘” Í1’” Í2” Í2	’” Ìì”1 Ìì/’” Ìí” Ìí’” Í4”+ Í4%”” Í5” Í5
+” Í5”. Í5!’” Í4”+ Í4%–” Í5” Í5
+” Í6	” Í6” Í6” Í6’” Í4”+ Í4%˜” Í5” Í5
+” Í7	” Í7” Í7”& Í7”' Í7”- Í7%’” Í4”+ Í4%” Í5” Í5
+” Í8	” Í8” Í8” Í8” Í8” Í8”! Í8”# Í8”) Í8!”+ Í8#”- Í8%”/ Í8'’” Í4”+ Í4%–” Í5” Í5
+” Í9	” Í9” Í9” Í9’” Í4”' Í4%’” Í5” Í5
+’” Í;”, Í;&”” Í<” Í<”# Í<”8 Í<"’” Í;”, Í;&–” Í<” Í<” Í=	” Í=” Í=” Í=’” Í;”, Í;&–” Í<” Í<” Í>	” Í>” Í>” Í>’” Í;”, Í;&—” Í<” Í<” Í?	” Í?” Í?” Í?”  Í?’” Í@
+”/ Í@)’” ÍA
+” ÍA˜” ÍB” ÍB” ÍB” ÍB” ÍB”ÌJ ÍBÌB”ÌK ÍBÌC”ÌL ÍBÌD–” ÍC” ÍC” ÍC” ÍC”% ÍC%”& ÍC&–” ÍD” ÍD” ÍD”" ÍD"”) ÍD)”* ÍD)–” ÍE” ÍE” ÍE” ÍE”$ ÍE$”% ÍE%–” ÍF” ÍF” ÍF”" ÍF"”$ ÍF$”% ÍF%–” ÍG” ÍG” ÍG” ÍG”' ÍG'”( ÍG(–” ÍH” ÍH” ÍH”" ÍH"”& ÍH&”' ÍH'”” ÍI” ÍI”% ÍI”( ÍI.”” ÍJ” ÍJ” ÍJ”% ÍJ”” ÍK” ÍK” ÍK”% ÍK”” ÍL” ÍL” ÍL”% ÍL’” ÍM” ÍMš” ÍN” ÍN” ÍN” ÍN”" ÍN”' ÍN”( ÍN ”5 ÍN-”6 ÍN.”7 ÍN/’” ÍO” ÍO’” ÍQ”! ÍQ’” ÍR”> ÍR4’” ÍS”Ì‚ ÍSÌx’” ÍT”7 ÍT-’” ÍU”Ìl ÍUÌb’” ÍV”( ÍV’” ÍW”  ÍW’” ÍX”ÌS ÍXÌI’” ÍY”  ÍY’” ÍZ” ÍZ‘” Í[”” Í[” Í[” Í[”  Í[˜” Í\” Í\”  Í\”# Í\”& Í\/”' Í\0”+ Í\4”, Í\5˜” Í]” Í]”# Í]”& Í]”) Í]2”* Í]3”1 Í]:”2 Í];œ” Í^” Í^”  Í^”% Í^”& Í^”ÌB Í^8”ÌF Í^<”ÌT Í^ÌJ”Ì[ Í^ÌQ”Ì^ Í^ÌT”Ì_ Í^ÌU”Ì` Í^ÌV‘” Í_’” Í_” Í_‘” Ía”” Ía” Ía” Ía” Ía•” Íb”  Íb”! Íb”* Íb"”+ Íb#˜” Íc” Íc”! Íc”* Íc ”/ Íc%”0 Íc&”7 Íc-”9 Íc/”” Íd”  Íd”" Íd”& Íd“” Íe” Íe” ÍeŸ” Íf” Íf” Íf”! Íf”" Íf”0 Íf(”4 Íf,”5 Íf-”> Íf6”? Íf7”ÌD Íf<”ÌE Íf=”ÌG Íf?”ÌH ÍfÌ@”ÌI ÍfÌA‘” Íg’” Íh” Íh	’” Í;”( Í;&’” Í<” Í<’” Íj”. Íj(”” Ík” Ík”# Ík”+ Ík’” Íj”. Íj(–” Ík” Ík” Íl	” Íl” Íl” Íl’” Íj”. Íj(–” Ík” Ík” Ím	” Ím” Ím” Ím’” Íj”. Íj(—” Ík” Ík” Ín	” Ín” Ín” Ín”  Ín’” Ío
+”/ Ío)’” Íp
+” Íp’” Íq”  Íq”” Ír” Ír”" Ír”% Ír0‘” Ís“” Ít”  Ít”" Ít””  Íu”( Íu”* Íu”. Íu ””  Ív”* Ív”, Ív”/ Ív!””  Íw”) Íw”+ Íw”. Íw ‘” Íx”” Íy”( Íy”* Íy”+ Íy””$ Íz”/ Íz”1 Íz”> Íz,””$ Í{”- Í{”/ Í{”5 Í{#’”! Í|”" Í|”” Í}”" Í}”$ Í}”% Í}””$ Í~”) Í~”+ Í~”= Í~+””$ Í”- Í”/ Í”3 Í!’”! Í€”" Í€‘” Í‘” Í‚“” Íƒ”  Íƒ”" Íƒ””  Í„”( Í„”* Í„”. Í„ ””  Í…”* Í…”, Í…”/ Í…!””  Í†”) Í†”+ Í†”. Í† ‘” Í‡”” Íˆ”( Íˆ”* Íˆ”+ Íˆ””$ Í‰”/ Í‰”1 Í‰”> Í‰,””$ ÍŠ”- ÍŠ”/ ÍŠ”5 ÍŠ#’”! Í‹”" Í‹”” ÍŒ”" ÍŒ”$ ÍŒ”% ÍŒ””$ Í”) Í”+ Í”? Í-””$ Í”- Í”/ Í”3 Í!’”! Í”" Í‘” Í’” Í‘” Í‘’” Í“”= Í“5›” Í”” Í””% Í””( Í” ”0 Í”(”1 Í”)”4 Í”,”5 Í”-”6 Í”.”7 Í”/”9 Í”1Ü ” Í•” Í•”& Í•”' Í•”1 Í•'”2 Í•(”6 Í•,”7 Í•-”> Í•4”Ì@ Í•6”ÌA Í•7”ÌB Í•8”ÌC Í•9”ÌH Í•>”ÌI Í•?”ÌJ Í•Ì@”ÌM Í•ÌR”ÌO Í•ÌT”ÌQ Í•ÌVŸ” Í–”# Í–”$ Í–”) Í–”* Í–”6 Í–*”: Í–.”; Í–/”ÌD Í–8”ÌE Í–9”ÌH Í–<”ÌI Í–=”ÌK Í–?”ÌL Í–Ì@”ÌM Í–ÌA—” Í—”# Í—”$ Í—”% Í—”& Í—”' Í—”0 Í—$”” Í˜” Í˜” Í˜” Í˜”” Í™” Í™” Í™” Í™’” Í›”! Í›” Íœ” Íœ” Íœ” Íœ”  Íœ”+ Íœ#”, Íœ$”- Íœ%”1 Íœ)”2 Íœ*”3 Íœ+”= Íœ5”? Íœ7”ÌA Íœ9Ü ” Í” Í”* Í ”- Í#”7 Í-”8 Í.”> Í4”? Í5”ÌA Í7”ÌB Í8”ÌD Í:”ÌE Í;”ÌG Í=”ÌL ÍÌB”ÌM ÍÌC”ÌN ÍÌD”ÌO ÍÌE”ÌP ÍÌF”ÌV ÍÌL”ÌW ÍÌM–” Í” Í”( Í”+ Í!”, Í"”. Í$•” ÍŸ”( ÍŸ”) ÍŸ”2 ÍŸ&”3 ÍŸ'–”  Í ”' Í ”) Í ”1 Í #”= Í /”ÌC Í 5””  Í¡”( Í¡”* Í¡”. Í¡ “” Í¢” Í¢” Í¢š” Í£”# Í£”$ Í£”( Í£”) Í£”0 Í£$”< Í£0”ÌB Í£6”ÌC Í£7”ÌD Í£8‘” Í¤‘” Í¤•” Í¥”( Í¥”) Í¥”2 Í¥&”3 Í¥'””  Í¦”' Í¦”) Í¦”2 Í¦$””  Í§”( Í§”* Í§”. Í§ “” Í¨” Í¨” Í¨˜” Í©”# Í©”$ Í©”) Í©”* Í©”8 Í©,”9 Í©-”: Í©.‘” Íª”” Í«” Í«” Í«” Í«‘” Í¬”” Í¬” Í¬” Í¬” Í¬•” Í­”  Í­”! Í­”* Í­"”+ Í­#˜” Í®” Í®”! Í®”* Í® ”/ Í®%”0 Í®&”7 Í®-”9 Í®/”” Í¯”  Í¯”" Í¯”& Í¯“” Í°” Í°” Í°Ÿ” Í±” Í±” Í±”! Í±”" Í±”2 Í±*”6 Í±.”7 Í±/”Ì@ Í±8”ÌA Í±9”ÌF Í±>”ÌG Í±?”ÌI Í±ÌA”ÌJ Í±ÌB”ÌK Í±ÌC‘” Í²’” Í³” Í³	’” Íj”* Íj(’” Ík” Ík’” Íµ”$ Íµ”” Í¶” Í¶”# Í¶”0 Í¶’” Íµ”$ Íµ–” Í¶” Í¶” Í·	” Í·” Í·” Í·’” Íµ”$ Íµ–” Í¶” Í¶” Í¸	” Í¸” Í¸” Í¸’” Íµ”$ Íµ—” Í¶” Í¶” Í¹	” Í¹” Í¹” Í¹”  Í¹’” Íº
+”6 Íº0’” Í»
+” Í»’” Í¼”( Í¼ ”” Í½” Í½”) Í½!”, Í½5“” Í¾” Í¾” Í¾”” Í¿”$ Í¿”& Í¿”* Í¿”” ÍÀ”& ÍÀ”( ÍÀ”+ ÍÀ”” ÍÁ”% ÍÁ”' ÍÁ”* ÍÁ”” ÍÂ”& ÍÂ”( ÍÂ”, ÍÂ ‘” ÍÃ“” ÍÄ”$ ÍÄ”& ÍÄ‘” ÍÅ””  ÍÆ”+ ÍÆ”- ÍÆ”: ÍÆ,””  ÍÇ”) ÍÇ”+ ÍÇ”1 ÍÇ#‘” ÍÈ‘” ÍÉ””  ÍÊ”+ ÍÊ”- ÍÊ”; ÍÊ-””  ÍË”) ÍË”+ ÍË”/ ÍË!‘” ÍÌ‘” ÍÍ“” ÍÎ” ÍÎ”  ÍÎ‘” ÍÏ””  ÍĞ”% ÍĞ”' ÍĞ”< ÍĞ.””  ÍÑ”) ÍÑ”+ ÍÑ”/ ÍÑ!‘” ÍÒ‘” ÍÓ””  ÍÔ”% ÍÔ”' ÍÔ”ÌE ÍÔ7””  ÍÕ”) ÍÕ”+ ÍÕ”/ ÍÕ!‘” ÍÖ‘” Í×“” ÍØ”  ÍØ”" ÍØ‘” ÍÙ””  ÍÚ”' ÍÚ”) ÍÚ”ÌJ ÍÚ<‘” ÍÛ‘” ÍÜ’” Íİ” Íİ’” Íß” ÍßÜ ” Íà” Íà” Íà”& Íà”' Íà”+ Íà#”, Íà$”3 Íà+”5 Íà-”ÌD Íà<”ÌE Íà=”ÌF Íà>”ÌJ ÍàÌB”ÌK ÍàÌC”ÌL ÍàÌD”ÌU ÍàÌM”ÌW ÍàÌO”ÌY ÍàÌQ•” Íá”$ Íá”% Íá”. Íá$”/ Íá%–” Íâ”# Íâ”% Íâ”7 Íâ+”Ì@ Íâ4”ÌB Íâ6”” Íã”$ Íã”& Íã”* Íã“” Íä” Íä” Íäš” Íå” Íå”  Íå”$ Íå”% Íå”6 Íå,”? Íå5”ÌA Íå7”ÌB Íå8”ÌC Íå9š” Íæ” Íæ” Íæ” Íæ” Íæ” Íæ” Íæ”! Íæ(”# Íæ*”% Íæ,•” Íç”$ Íç”% Íç”. Íç$”/ Íç%˜” Íè”# Íè”% Íè”3 Íè'”6 Íè*”7 Íè+”> Íè2”Ì@ Íè4”” Íé”$ Íé”& Íé”* Íé“” Íê” Íê” ÍêŸ” Íë” Íë”  Íë”% Íë”& Íë”4 Íë*”8 Íë.”9 Íë/”ÌB Íë8”ÌC Íë9”ÌF Íë<”ÌG Íë=”ÌI Íë?”ÌJ ÍëÌ@”ÌK ÍëÌA”” Íì” Íì” Íì” Íì‘” Íí”” Íí” Íí” Íí” Íí•” Íî”  Íî”! Íî”* Íî"”+ Íî#˜” Íï” Íï”! Íï”* Íï ”/ Íï%”0 Íï&”7 Íï-”9 Íï/”” Íğ”  Íğ”" Íğ”& Íğ“” Íñ” Íñ” ÍñŸ” Íò” Íò” Íò”! Íò”" Íò”2 Íò*”6 Íò.”7 Íò/”Ì@ Íò8”ÌA Íò9”ÌF Íò>”ÌG Íò?”ÌI ÍòÌA”ÌJ ÍòÌB”ÌK ÍòÌC‘” Íó’” Íô” Íô	’” Íµ”  Íµ’” Í¶” Í¶’” Íö”' Íö!”” Í÷” Í÷”# Í÷”3 Í÷’” Íö”' Íö!–” Í÷” Í÷” Íø	” Íø” Íø” Íø’” Íö”' Íö!–” Í÷” Í÷” Íù	” Íù” Íù” Íù’” Íö”' Íö!—” Í÷” Í÷” Íú	” Íú” Íú” Íú”  Íú’” Íû
+”ÌQ ÍûÌK’” Íü
+” Íü•” Íı”  Íı”! Íı”* Íı"”+ Íı#”” Íş” Íş”! Íş”Ìq ÍşÌg”” Íÿ”  Íÿ”" Íÿ”& Íÿ“” Í ” Í ” Í ˜” Í” Í” Í”  Í”! Í”ÌV ÍÌN”ÌW ÍÌO”ÌX ÍÌP‘” Í”” Í” Í” Í” Í•” Í”  Í”! Í”* Í"”+ Í#˜” Í” Í”! Í”* Í ”/ Í%”0 Í&”7 Í-”9 Í/”” Í”  Í”" Í”& Í“” Í” Í” ÍŸ” Í” Í” Í”! Í”" Í”0 Í(”4 Í,”5 Í-”> Í6”? Í7”ÌD Í<”ÌE Í=”ÌG Í?”ÌH ÍÌ@”ÌI ÍÌA‘” Í’” Í	” Í		’” Íö”# Íö!’” Í÷” Í÷’” Í”5 Í/”” Í” Í”# Í”? Í)’” Í”5 Í/–” Í” Í” Í	” Í” Í” Í’” Í”5 Í/–” Í” Í” Í	” Í” Í” Í’” Í”5 Í/—” Í” Í” Í	” Í” Í” Í”  Í’” Í
+”1 Í+•” Í
+” Í” Í”& Í ”' Í!”” Í” Í” Í”ÌY ÍÌQ”” Í” Í” Í”" Í“” Í” Í” Í˜” Í
+” Í” Í” Í” Í”ÌF ÍÌ@”ÌG ÍÌA”ÌH ÍÌB’” Í” Í	’” Í”1 Í/’” Í” Í’” ” 
+‘” ÍÔrI–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜo‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ÔrJ’§missing¦pluginÃ¦genAbcÂÔ  ÔrK”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache‘ÔrL–¤type¥start£end«declarationªspecifiers¦source¶ExportNamedDeclarationÍÍoÛÔrM–¤type¥start£end¢idªsuperClass¤body°ClassDeclarationÍÍoÛÔrN”¤type¥start£end¤nameªIdentifierÍÍ'®PermissionPageNªIdentifierÍ0Í6¦ViewPUÔrO”¤type¥start£end¤body©ClassBodyÍ7ÍoÛ—ÔrP˜¤type¥start£end¦static¨computed£key¤kind¥value°MethodDefinitionÍ>Í+ÂÂNªIdentifierÍ>ÍI«constructor«constructorÔrQ™¤type¥start£end¢idªexpression©generator¥async¦params¤body²FunctionExpressionÍIÍ+ÀÂÂÂ–NªIdentifierÍJÍP¦parentNªIdentifierÍRÍX¦paramsNªIdentifierÍZÍh®__localStorageÔrR•¤type¥start£end¤left¥right±AssignmentPatternÍjÍuNªIdentifierÍjÍp¦elmtIdÔrS–¤type¥start£end¨operator¦prefix¨argument¯UnaryExpressionÍsÍu¡-ÃÔrT•¤type¥start£end¥value£raw§LiteralÍtÍu¡1R±AssignmentPatternÍwÍNªIdentifierÍwÍƒ¬paramsLambdaNªIdentifierÍ†Í©undefinedNªIdentifierÍ‘Íš©extraInfoO®BlockStatementÍœÍ+–ÔrU”¤type¥start£endªexpression³ExpressionStatementÍ§ÍØÔrV–¤type¥start£end¦callee©arguments¨optional®CallExpressionÍ§Í×ÔrW“¤type¥start£end¥SuperÍ§Í¬”NªIdentifierÍ­Í³¦parentNªIdentifierÍµÍÃ®__localStorageNªIdentifierÍÅÍË¦elmtIdNªIdentifierÍÍÍÖ©extraInfoÂÔrX–¤type¥start£end¤testªconsequent©alternate«IfStatementÍâÍIÔrY–¤type¥start£end¤left¨operator¥right°BinaryExpressionÍæÍS¯UnaryExpressionÍæÍù¦typeofÃNªIdentifierÍíÍù¬paramsLambda£===T§LiteralÍşÍ¨functionª"function"O®BlockStatementÍ
+ÍI‘U³ExpressionStatementÍÍ>ÔrZ–¤type¥start£end¨operator¤left¥right´AssignmentExpressionÍÍ=¡=Ôr[—¤type¥start£end¦object¨property¨computed¨optional°MemberExpressionÍÍ.W®ThisExpressionÍÍNªIdentifierÍÍ.°paramsGenerator_ÂÂNªIdentifierÍ1Í=¬paramsLambdaÀU³ExpressionStatementÍSÍsZ´AssignmentExpressionÍSÍr¡=[°MemberExpressionÍSÍ_W®ThisExpressionÍSÍWNªIdentifierÍXÍ_§contextÂÂV®CallExpressionÍbÍrNªIdentifierÍbÍlªgetContext‘W®ThisExpressionÍmÍqÂU³ExpressionStatementÍ}ÍÍZ´AssignmentExpressionÍ}ÍÌ¡=[°MemberExpressionÍ}ÍW®ThisExpressionÍ}ÍNªIdentifierÍ‚Í«CONTACT_URIÂÂT§LiteralÍÍÌÙ:datashare:///com.ohos.contactsdataability/contacts/contactÙ<'datashare:///com.ohos.contactsdataability/contacts/contact'U³ExpressionStatementÍ×ÍşV®CallExpressionÍ×Íı[°MemberExpressionÍ×ÍõW®ThisExpressionÍ×ÍÛNªIdentifierÍÜÍõ¹setInitiallyProvidedValueÂÂ‘NªIdentifierÍöÍü¦paramsÂU³ExpressionStatementÍÍ$V®CallExpressionÍÍ#[°MemberExpressionÍÍ!W®ThisExpressionÍÍNªIdentifierÍÍ!´finalizeConstructionÂÂÂP°MethodDefinitionÍ1Í/ÂÂNªIdentifierÍ1ÍJ¹setInitiallyProvidedValue¦methodQ²FunctionExpressionÍJÍ/ÀÂÂÂ‘NªIdentifierÍKÍQ¦paramsO®BlockStatementÍSÍ/’X«IfStatementÍ^Í¸Y°BinaryExpressionÍbÍ~[°MemberExpressionÍbÍpNªIdentifierÍbÍh¦paramsNªIdentifierÍiÍp§contextÂÂ£!==NªIdentifierÍuÍ~©undefinedO®BlockStatementÍ€Í¸‘U³ExpressionStatementÍÍ­Z´AssignmentExpressionÍÍ¬¡=[°MemberExpressionÍÍ›W®ThisExpressionÍÍ“NªIdentifierÍ”Í›§contextÂÂ[°MemberExpressionÍÍ¬NªIdentifierÍÍ¤¦paramsNªIdentifierÍ¥Í¬§contextÂÂÀX«IfStatementÍÂÍ(Y°BinaryExpressionÍÆÍæ[°MemberExpressionÍÆÍØNªIdentifierÍÆÍÌ¦paramsNªIdentifierÍÍÍØ«CONTACT_URIÂÂ£!==NªIdentifierÍİÍæ©undefinedO®BlockStatementÍèÍ(‘U³ExpressionStatementÍ÷ÍZ´AssignmentExpressionÍ÷Í¡=[°MemberExpressionÍ÷ÍW®ThisExpressionÍ÷ÍûNªIdentifierÍüÍ«CONTACT_URIÂÂ[°MemberExpressionÍ
+ÍNªIdentifierÍ
+Í¦paramsNªIdentifierÍÍ«CONTACT_URIÂÂÀP°MethodDefinitionÍ5ÍUÂÂNªIdentifierÍ5ÍD¯updateStateVars¦methodQ²FunctionExpressionÍDÍUÀÂÂÂ‘NªIdentifierÍEÍK¦paramsO®BlockStatementÍMÍUP°MethodDefinitionÍ[ÍÂÂNªIdentifierÍ[Í|Ù!purgeVariableDependenciesOnElmtId¦methodQ²FunctionExpressionÍ|ÍÀÂÂÂ‘NªIdentifierÍ}Í…¨rmElmtIdO®BlockStatementÍ‡ÍP°MethodDefinitionÍ•ÍÂÂNªIdentifierÍ•Í¥°aboutToBeDeleted¦methodQ²FunctionExpressionÍ¥ÍÀÂÂÂO®BlockStatementÍ¨Í’U³ExpressionStatementÍ³ÍßV®CallExpressionÍ³ÍŞ[°MemberExpressionÍ³ÍÑV®CallExpressionÍ³ÍÊ[°MemberExpressionÍ³ÍÈNªIdentifierÍ³ÍÄ±SubscriberManagerNªIdentifierÍÅÍÈ£GetÂÂÂNªIdentifierÍËÍÑ¦deleteÂÂ‘V®CallExpressionÍÒÍİ[°MemberExpressionÍÒÍÛW®ThisExpressionÍÒÍÖNªIdentifierÍ×ÍÛ¤id__ÂÂÂÂU³ExpressionStatementÍéÍ	V®CallExpressionÍéÍ[°MemberExpressionÍéÍW®ThisExpressionÍéÍíNªIdentifierÍîÍ¸aboutToBeDeletedInternalÂÂÂP°MethodDefinitionÍÍošÂÂNªIdentifierÍÍ#­initialRender¦methodQ²FunctionExpressionÍ#ÍošÀÂÂÂO®BlockStatementÍ&ÍošÜ U³ExpressionStatementÍ1Í9V®CallExpressionÍ1Í8[°MemberExpressionÍ1ÍOW®ThisExpressionÍ1Í5NªIdentifierÍ6ÍO¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍPÍ/ÀÂÂÂ’NªIdentifierÍQÍW¦elmtIdNªIdentifierÍYÍh¯isInitialRenderO®BlockStatementÍmÍ/•U³ExpressionStatementÍ|ÍŒV®CallExpressionÍ|Í‹[°MemberExpressionÍ|Í‰NªIdentifierÍ|Í‚¦ColumnNªIdentifierÍƒÍ‰¦createÂÂÂU³ExpressionStatementÍšÍ¯V®CallExpressionÍšÍ®[°MemberExpressionÍšÍ¦NªIdentifierÍšÍ ¦ColumnNªIdentifierÍ¡Í¦¥widthÂÂ‘T§LiteralÍ§Í­¤100%¦'100%'ÂU³ExpressionStatementÍ½ÍÓV®CallExpressionÍ½ÍÒ[°MemberExpressionÍ½ÍÊNªIdentifierÍ½ÍÃ¦ColumnNªIdentifierÍÄÍÊ¦heightÂÂ‘T§LiteralÍËÍÑ¤100%¦'100%'ÂU³ExpressionStatementÍáÍôV®CallExpressionÍáÍó[°MemberExpressionÍáÍïNªIdentifierÍáÍç¦ColumnNªIdentifierÍèÍï§paddingÂÂ‘T§LiteralÍğÍò¢16ÂU³ExpressionStatementÍÍ$V®CallExpressionÍÍ#[°MemberExpressionÍÍNªIdentifierÍÍ¦ColumnNªIdentifierÍ	Í¯backgroundColorÂÂ‘T§LiteralÍÍ"§#F1F3F5©'#F1F3F5'ÂNªIdentifierÍ1Í7¦ColumnÂU³ExpressionStatementÍCÍ=V®CallExpressionÍCÍ<[°MemberExpressionÍCÍaW®ThisExpressionÍCÍGNªIdentifierÍHÍa¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍbÍ5ÀÂÂÂ’NªIdentifierÍcÍi¦elmtIdNªIdentifierÍkÍz¯isInitialRenderO®BlockStatementÍÍ5”U³ExpressionStatementÍÍ±V®CallExpressionÍÍ°[°MemberExpressionÍÍ™NªIdentifierÍÍ’¤TextNªIdentifierÍ“Í™¦createÂÂ‘T§LiteralÍšÍ¯³Permission API Demoµ'Permission API Demo'ÂU³ExpressionStatementÍ¿ÍÑV®CallExpressionÍ¿ÍĞ[°MemberExpressionÍ¿ÍÌNªIdentifierÍ¿ÍÃ¤TextNªIdentifierÍÄÍÌ¨fontSizeÂÂ‘T§LiteralÍÍÍÏ¢24ÂU³ExpressionStatementÍßÍ V®CallExpressionÍßÍÿ[°MemberExpressionÍßÍîNªIdentifierÍßÍã¤TextNªIdentifierÍäÍîªfontWeightÂÂ‘[°MemberExpressionÍïÍşNªIdentifierÍïÍùªFontWeightNªIdentifierÍúÍş¤BoldÂÂÂU³ExpressionStatementÍÍ*V®CallExpressionÍÍ)[°MemberExpressionÍÍNªIdentifierÍÍ¤TextNªIdentifierÍÍ¦marginÂÂ‘Ôr\”¤type¥start£endªproperties°ObjectExpressionÍÍ(‘Ôr]™¤type¥start£end¦method©shorthand¨computed£key¥value¤kind¨PropertyÍÍ&ÂÂÂNªIdentifierÍÍ"¦bottomT§LiteralÍ$Í&¢20¤initÂNªIdentifierÍ7Í;¤TextÂU³ExpressionStatementÍGÍRV®CallExpressionÍGÍQ[°MemberExpressionÍGÍONªIdentifierÍGÍK¤TextNªIdentifierÍLÍO£popÂÂÂU³ExpressionStatementÍ\Í	dV®CallExpressionÍ\Í	c[°MemberExpressionÍ\ÍzW®ThisExpressionÍ\Í`NªIdentifierÍaÍz¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍ{Í	\ÀÂÂÂ’NªIdentifierÍ|Í‚¦elmtIdNªIdentifierÍ„Í“¯isInitialRenderO®BlockStatementÍ˜Í	\•U³ExpressionStatementÍÔÍøV®CallExpressionÍÔÍ÷[°MemberExpressionÍÔÍßNªIdentifierÍÔÍØ¤TextNªIdentifierÍÙÍß¦createÂÂ‘T§LiteralÍàÍö´Calendar Permissions¶'Calendar Permissions'ÂU³ExpressionStatementÍ3ÍEV®CallExpressionÍ3ÍD[°MemberExpressionÍ3Í@NªIdentifierÍ3Í7¤TextNªIdentifierÍ8Í@¨fontSizeÂÂ‘T§LiteralÍAÍC¢20ÂU³ExpressionStatementÍ€Í£V®CallExpressionÍ€Í¢[°MemberExpressionÍ€ÍNªIdentifierÍ€Í„¤TextNªIdentifierÍ…ÍªfontWeightÂÂ‘[°MemberExpressionÍÍ¡NªIdentifierÍÍšªFontWeightNªIdentifierÍ›Í¡¦MediumÂÂÂU³ExpressionStatementÍŞÍ	V®CallExpressionÍŞÍ	[°MemberExpressionÍŞÍéNªIdentifierÍŞÍâ¤TextNªIdentifierÍãÍé¦marginÂÂ‘\°ObjectExpressionÍêÍ	’]¨PropertyÍìÍóÂÂÂNªIdentifierÍìÍï£topT§LiteralÍñÍó¢20¤init]¨PropertyÍõÍÿÂÂÂNªIdentifierÍõÍû¦bottomT§LiteralÍıÍÿ
+¢10¤initÂU³ExpressionStatementÍ	>Í	QV®CallExpressionÍ	>Í	P[°MemberExpressionÍ	>Í	HNªIdentifierÍ	>Í	B¤TextNªIdentifierÍ	CÍ	H¥widthÂÂ‘T§LiteralÍ	IÍ	O¤100%¦'100%'ÂNªIdentifierÍ	^Í	b¤TextÂU³ExpressionStatementÍ	—Í	¢V®CallExpressionÍ	—Í	¡[°MemberExpressionÍ	—Í	ŸNªIdentifierÍ	—Í	›¤TextNªIdentifierÍ	œÍ	Ÿ£popÂÂÂU³ExpressionStatementÍ	¬Í¢V®CallExpressionÍ	¬Í¡[°MemberExpressionÍ	¬Í	ÊW®ThisExpressionÍ	¬Í	°NªIdentifierÍ	±Í	Ê¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍ	ËÍ˜ÀÂÂÂ’NªIdentifierÍ	ÌÍ	Ò¦elmtIdNªIdentifierÍ	ÔÍ	ã¯isInitialRenderO®BlockStatementÍ	èÍ˜”U³ExpressionStatementÍ
+&Í
+YV®CallExpressionÍ
+&Í
+X[°MemberExpressionÍ
+&Í
+<NªIdentifierÍ
+&Í
+,¦ButtonNªIdentifierÍ
+-Í
+<¯createWithLabelÂÂ‘T§LiteralÍ
+=Í
+W¸Delete Events (Calendar)º'Delete Events (Calendar)'ÂU³ExpressionStatementÍ
+–Í
+ªV®CallExpressionÍ
+–Í
+©[°MemberExpressionÍ
+–Í
+¢NªIdentifierÍ
+–Í
+œ¦ButtonNªIdentifierÍ
+Í
+¢¥widthÂÂ‘T§LiteralÍ
+£Í
+¨£90%¥'90%'ÂU³ExpressionStatementÍ
+çÍ
+øV®CallExpressionÍ
+çÍ
+÷[°MemberExpressionÍ
+çÍ
+ôNªIdentifierÍ
+çÍ
+í¦ButtonNªIdentifierÍ
+îÍ
+ô¦marginÂÂ‘T§LiteralÍ
+õÍ
+ö¡5ÂU³ExpressionStatementÍ5ÍV®CallExpressionÍ5ÍŒ[°MemberExpressionÍ5ÍCNªIdentifierÍ5Í;¦ButtonNªIdentifierÍ<ÍC§onClickÂÂ‘Q·ArrowFunctionExpressionÍDÍ‹ÀÂÂÂO®BlockStatementÍJÍ‹‘Ôr^–¤type¥start£end¥block§handler©finalizer¬TryStatementÍÍ|O®BlockStatementÍ‘ÍS’Ôr_•¤type¥start£end¬declarations¤kind³VariableDeclarationÍÈÍ‘Ôr`•¤type¥start£end¢id¤init²VariableDeclaratorÍÎÍNªIdentifierÍÎÍÙ«calendarMgrV®CallExpressionÍÜÍ[°MemberExpressionÍÜÍşNªIdentifierÍÜÍë¯calendarManagerNªIdentifierÍìÍş²getCalendarManagerÂÂ‘[°MemberExpressionÍÿÍW®ThisExpressionÍÿÍNªIdentifierÍÍ§contextÂÂÂ¥constU³ExpressionStatementÍBÍ@V®CallExpressionÍBÍ?[°MemberExpressionÍBÍV®CallExpressionÍBÍ[°MemberExpressionÍBÍ`V®CallExpressionÍBÍ[[°MemberExpressionÍBÍYNªIdentifierÍBÍM«calendarMgrNªIdentifierÍNÍY«getCalendarÂÂÂNªIdentifierÍ\Í`¤thenÂÂ‘Q·ArrowFunctionExpressionÍaÍÀÂÂÂ‘NªIdentifierÍbÍj¨calendarO®BlockStatementÍoÍ‘U³ExpressionStatementÍ­ÍùV®CallExpressionÍ­Íø[°MemberExpressionÍ­Í¸V®CallExpressionÍ­Í²[°MemberExpressionÍ­ÍÆV®CallExpressionÍ­ÍÁ[°MemberExpressionÍ­Í¿NªIdentifierÍ­Íµ¨calendarNªIdentifierÍ¶Í¿©getEventsÂÂÂNªIdentifierÍÂÍÆ¤thenÂÂ‘Q·ArrowFunctionExpressionÍÇÍ±ÀÂÂÂ‘NªIdentifierÍÈÍÎ¦eventsO®BlockStatementÍÓÍ±”_³VariableDeclarationÍ)Íl‘`²VariableDeclaratorÍ/ÍkNªIdentifierÍ/Í:«validEventsV®CallExpressionÍ=Ík[°MemberExpressionÍ=ÍJNªIdentifierÍ=ÍC¦eventsNªIdentifierÍDÍJ¦filterÂÂ‘Q·ArrowFunctionExpressionÍKÍjÀÃÂÂ‘NªIdentifierÍKÍP¥eventY°BinaryExpressionÍTÍj[°MemberExpressionÍTÍ\NªIdentifierÍTÍY¥eventNªIdentifierÍZÍ\¢idÂÂ£!==NªIdentifierÍaÍj©undefinedÂ¥const_³VariableDeclarationÍŠÍ‘`²VariableDeclaratorÍÍNªIdentifierÍÍ˜¨eventIdsÔra”¤type¥start£end¨elements¯ArrayExpressionÍ›Í¥constU³ExpressionStatementÍ¼Í›V®CallExpressionÍ¼Íš[°MemberExpressionÍ¼ÍÏNªIdentifierÍ¼ÍÇ«validEventsNªIdentifierÍÈÍÏ§forEachÂÂ‘Q·ArrowFunctionExpressionÍĞÍ™ÀÂÂÂ‘NªIdentifierÍĞÍÕ¥eventO®BlockStatementÍÙÍ™‘X«IfStatementÍüÍzY°BinaryExpressionÍ Í[°MemberExpressionÍ ÍNªIdentifierÍ Í¥eventNªIdentifierÍÍ¢idÂÂ£!==NªIdentifierÍÍ©undefinedO®BlockStatementÍÍz‘U³ExpressionStatementÍ?ÍWV®CallExpressionÍ?ÍV[°MemberExpressionÍ?ÍLNªIdentifierÍ?ÍG¨eventIdsNªIdentifierÍHÍL¤pushÂÂ‘[°MemberExpressionÍMÍUNªIdentifierÍMÍR¥eventNªIdentifierÍSÍU¢idÂÂÂÀÂX«IfStatementÍ¹Í–Y°BinaryExpressionÍ½ÍĞ[°MemberExpressionÍ½ÍÌNªIdentifierÍ½ÍÅ¨eventIdsNªIdentifierÍÆÍÌ¦lengthÂÂ¡>T§LiteralÍÏÍĞ ¡0O®BlockStatementÍÒÍG‘U³ExpressionStatementÍ Í(V®CallExpressionÍ Í'[°MemberExpressionÍ Í·V®CallExpressionÍ Í±[°MemberExpressionÍ ÍDV®CallExpressionÍ Í?[°MemberExpressionÍ Í5NªIdentifierÍ Í(¨calendarNªIdentifierÍ)Í5¬deleteEventsÂÂ‘NªIdentifierÍ6Í>¨eventIdsÂNªIdentifierÍ@ÍD¤thenÂÂ‘Q·ArrowFunctionExpressionÍEÍ°ÀÂÂÂO®BlockStatementÍKÍ°’U³ExpressionStatementÍrÍ;V®CallExpressionÍrÍ:[°MemberExpressionÍrÍˆNªIdentifierÍrÍ~¬promptActionNªIdentifierÍÍˆ©showToastÂÂ‘\°ObjectExpressionÍ‰Í9’]¨PropertyÍ´ÍÙÂÂÂNªIdentifierÍ´Í»§messageÔrb•¤type¥start£end«expressions¦quasis¯TemplateLiteralÍ½ÍÙ‘[°MemberExpressionÍÅÍÔNªIdentifierÍÅÍÍ¨eventIdsNªIdentifierÍÎÍÔ¦lengthÂÂ’Ôrc•¤type¥start£end¥value¤tail¯TemplateElementÍ¾ÍÃÔrd’£raw¦cooked¯å·²æˆåŠŸåˆ é™¤¯å·²æˆåŠŸåˆ é™¤Âc¯TemplateElementÍÕÍØd©ä¸ªäº‹ä»¶©ä¸ªäº‹ä»¶Ã¤init]¨PropertyÍÍÂÂÂNªIdentifierÍÍ¨durationT§LiteralÍÍÍĞ¤2000¤initÂU³ExpressionStatementÍaÍV®CallExpressionÍaÍŒ[°MemberExpressionÍaÍmNªIdentifierÍaÍh§consoleNªIdentifierÍiÍm¤infoÂÂ‘b¯TemplateLiteralÍnÍ‹‘[°MemberExpressionÍuÍ„NªIdentifierÍuÍ}¨eventIdsNªIdentifierÍ~Í„¦lengthÂÂ’c¯TemplateElementÍoÍsd¬æˆåŠŸåˆ é™¤¬æˆåŠŸåˆ é™¤Âc¯TemplateElementÍ…ÍŠd¯ä¸ªæ—¥å†äº‹ä»¶¯ä¸ªæ—¥å†äº‹ä»¶ÃÂÂNªIdentifierÍ²Í·¥catchÂÂ‘Q·ArrowFunctionExpressionÍ¸Í&ÀÂÂÂ‘NªIdentifierÍ¹Í¼£errO®BlockStatementÍÁÍ&’U³ExpressionStatementÍèÍ­V®CallExpressionÍèÍ¬[°MemberExpressionÍèÍşNªIdentifierÍèÍô¬promptActionNªIdentifierÍõÍş©showToastÂÂ‘\°ObjectExpressionÍÿÍ«’]¨PropertyÍ*ÍKÂÂÂNªIdentifierÍ*Í1§messageb¯TemplateLiteralÍ3ÍK‘[°MemberExpressionÍ>ÍINªIdentifierÍ>ÍA£errNªIdentifierÍBÍI§messageÂÂ’c¯TemplateElementÍ4Í<d´åˆ é™¤äº‹ä»¶å¤±è´¥: ´åˆ é™¤äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍJÍJd  Ã¤init]¨PropertyÍvÍ„ÂÂÂNªIdentifierÍvÍ~¨durationT§LiteralÍ€Í„ÍĞ¤2000¤initÂU³ExpressionStatementÍÓÍV®CallExpressionÍÓÍ[°MemberExpressionÍÓÍàNªIdentifierÍÓÍÚ§consoleNªIdentifierÍÛÍà¥errorÂÂ‘b¯TemplateLiteralÍáÍ‘V®CallExpressionÍìÍÿ[°MemberExpressionÍìÍúNªIdentifierÍìÍğ¤JSONNªIdentifierÍñÍú©stringifyÂÂ‘NªIdentifierÍûÍş£errÂ’c¯TemplateElementÍâÍêd´åˆ é™¤äº‹ä»¶å¤±è´¥: ´åˆ é™¤äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ Í d  ÃÂÂO®BlockStatementÍjÍ–’U³ExpressionStatementÍÍ:V®CallExpressionÍÍ9[°MemberExpressionÍÍ£NªIdentifierÍÍ™¬promptActionNªIdentifierÍšÍ£©showToastÂÂ‘\°ObjectExpressionÍ¤Í8’]¨PropertyÍËÍàÂÂÂNªIdentifierÍËÍÒ§messageT§LiteralÍÔÍà¾æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶Ù 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶'¤init]¨PropertyÍÍÂÂÂNªIdentifierÍÍ¨durationT§LiteralÍÍÍĞ¤2000¤initÂU³ExpressionStatementÍ\ÍwV®CallExpressionÍ\Ív[°MemberExpressionÍ\ÍhNªIdentifierÍ\Íc§consoleNªIdentifierÍdÍh¤infoÂÂ‘T§LiteralÍiÍu¾æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶Ù 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶'ÂÂNªIdentifierÍ³Í¸¥catchÂÂ‘Q·ArrowFunctionExpressionÍ¹Í÷ÀÂÂÂ‘NªIdentifierÍºÍ½£errO®BlockStatementÍÂÍ÷’U³ExpressionStatementÍáÍV®CallExpressionÍáÍ[°MemberExpressionÍáÍ÷NªIdentifierÍáÍí¬promptActionNªIdentifierÍîÍ÷©showToastÂÂ‘\°ObjectExpressionÍøÍŒ’]¨PropertyÍÍ<ÂÂÂNªIdentifierÍÍ"§messageb¯TemplateLiteralÍ$Í<‘[°MemberExpressionÍ/Í:NªIdentifierÍ/Í2£errNªIdentifierÍ3Í:§messageÂÂ’c¯TemplateElementÍ%Í-d´è·å–äº‹ä»¶å¤±è´¥: ´è·å–äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ;Í;d  Ã¤init]¨PropertyÍ_ÍmÂÂÂNªIdentifierÍ_Íg¨durationT§LiteralÍiÍmÍĞ¤2000¤initÂU³ExpressionStatementÍ¬ÍÜV®CallExpressionÍ¬ÍÛ[°MemberExpressionÍ¬Í¹NªIdentifierÍ¬Í³§consoleNªIdentifierÍ´Í¹¥errorÂÂ‘b¯TemplateLiteralÍºÍÚ‘V®CallExpressionÍÅÍØ[°MemberExpressionÍÅÍÓNªIdentifierÍÅÍÉ¤JSONNªIdentifierÍÊÍÓ©stringifyÂÂ‘NªIdentifierÍÔÍ×£errÂ’c¯TemplateElementÍ»ÍÃd´è·å–äº‹ä»¶å¤±è´¥: ´è·å–äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍÙÍÙd  ÃÂÂÂNªIdentifierÍÍ¥catchÂÂ‘Q·ArrowFunctionExpressionÍÍ>ÀÂÂÂ‘NªIdentifierÍÍ£errO®BlockStatementÍ!Í>’U³ExpressionStatementÍ<ÍİV®CallExpressionÍ<ÍÜ[°MemberExpressionÍ<ÍRNªIdentifierÍ<ÍH¬promptActionNªIdentifierÍIÍR©showToastÂÂ‘\°ObjectExpressionÍSÍÛ’]¨PropertyÍrÍ“ÂÂÂNªIdentifierÍrÍy§messageb¯TemplateLiteralÍ{Í“‘[°MemberExpressionÍ†Í‘NªIdentifierÍ†Í‰£errNªIdentifierÍŠÍ‘§messageÂÂ’c¯TemplateElementÍ|Í„d´è·å–æ—¥å†å¤±è´¥: ´è·å–æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ’Í’d  Ã¤init]¨PropertyÍ²ÍÀÂÂÂNªIdentifierÍ²Íº¨durationT§LiteralÍ¼ÍÀÍĞ¤2000¤initÂU³ExpressionStatementÍ÷Í'V®CallExpressionÍ÷Í&[°MemberExpressionÍ÷ÍNªIdentifierÍ÷Íş§consoleNªIdentifierÍÿÍ¥errorÂÂ‘b¯TemplateLiteralÍÍ%‘V®CallExpressionÍÍ#[°MemberExpressionÍÍNªIdentifierÍÍ¤JSONNªIdentifierÍÍ©stringifyÂÂ‘NªIdentifierÍÍ"£errÂ’c¯TemplateElementÍÍd´è·å–æ—¥å†å¤±è´¥: ´è·å–æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ$Í$d  ÃÂÂÔre•¤type¥start£end¥param¤body«CatchClauseÍeÍ|NªIdentifierÍlÍq¥errorO®BlockStatementÍsÍ|’U³ExpressionStatementÍŠÍV®CallExpressionÍŠÍ[°MemberExpressionÍŠÍ NªIdentifierÍŠÍ–¬promptActionNªIdentifierÍ—Í ©showToastÂÂ‘\°ObjectExpressionÍ¡Í’]¨PropertyÍ¼ÍİÂÂÂNªIdentifierÍ¼ÍÃ§messageb¯TemplateLiteralÍÅÍİ‘[°MemberExpressionÍÎÍÛNªIdentifierÍÎÍÓ¥errorNªIdentifierÍÔÍÛ§messageÂÂ’c¯TemplateElementÍÆÍÌd®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍÜÍÜd  Ã¤init]¨PropertyÍøÍÂÂÂNªIdentifierÍøÍ ¨durationT§LiteralÍÍÍĞ¤2000¤initÂU³ExpressionStatementÍ5ÍiV®CallExpressionÍ5Íh[°MemberExpressionÍ5ÍBNªIdentifierÍ5Í<§consoleNªIdentifierÍ=ÍB¥errorÂÂ‘b¯TemplateLiteralÍCÍg‘V®CallExpressionÍPÍe[°MemberExpressionÍPÍ^NªIdentifierÍPÍT¤JSONNªIdentifierÍUÍ^©stringifyÂÂ‘NªIdentifierÍ_Íd¥errorÂ’c¯TemplateElementÍDÍNdºåˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ºåˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍfÍfd  ÃÂÀÂNªIdentifierÍšÍ ¦ButtonÂU³ExpressionStatementÍ×ÍäV®CallExpressionÍ×Íã[°MemberExpressionÍ×ÍáNªIdentifierÍ×Íİ¦ButtonNªIdentifierÍŞÍá£popÂÂÂU³ExpressionStatementÍîÍ%£V®CallExpressionÍîÍ%¢[°MemberExpressionÍîÍW®ThisExpressionÍîÍòNªIdentifierÍóÍ¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍÍ%™ÀÂÂÂ’NªIdentifierÍÍ¦elmtIdNªIdentifierÍÍ%¯isInitialRenderO®BlockStatementÍ*Í%™”U³ExpressionStatementÍnÍ§V®CallExpressionÍnÍ¦[°MemberExpressionÍnÍ„NªIdentifierÍnÍt¦ButtonNªIdentifierÍuÍ„¯createWithLabelÂÂ‘T§LiteralÍ…Í¥¾Delete Single Event (Calendar)Ù 'Delete Single Event (Calendar)'ÂU³ExpressionStatementÍêÍşV®CallExpressionÍêÍı[°MemberExpressionÍêÍöNªIdentifierÍêÍğ¦ButtonNªIdentifierÍñÍö¥widthÂÂ‘T§LiteralÍ÷Íü£90%¥'90%'ÂU³ExpressionStatementÍAÍRV®CallExpressionÍAÍQ[°MemberExpressionÍAÍNNªIdentifierÍAÍG¦ButtonNªIdentifierÍHÍN¦marginÂÂ‘T§LiteralÍOÍP¡5ÂU³ExpressionStatementÍ•Í%V®CallExpressionÍ•Í%[°MemberExpressionÍ•Í£NªIdentifierÍ•Í›¦ButtonNªIdentifierÍœÍ£§onClickÂÂ‘Q·ArrowFunctionExpressionÍ¤Í%ŒÀÂÂÂO®BlockStatementÍªÍ%Œ‘^¬TryStatementÍïÍ%}O®BlockStatementÍóÍ$T’_³VariableDeclarationÍ*Ío‘`²VariableDeclaratorÍ0ÍnNªIdentifierÍ0Í;«calendarMgrV®CallExpressionÍ>Ín[°MemberExpressionÍ>Í`NªIdentifierÍ>ÍM¯calendarManagerNªIdentifierÍNÍ`²getCalendarManagerÂÂ‘[°MemberExpressionÍaÍmW®ThisExpressionÍaÍeNªIdentifierÍfÍm§contextÂÂÂ¥constU³ExpressionStatementÍ¤Í$AV®CallExpressionÍ¤Í$@[°MemberExpressionÍ¤Í#V®CallExpressionÍ¤Í#[°MemberExpressionÍ¤ÍÂV®CallExpressionÍ¤Í½[°MemberExpressionÍ¤Í»NªIdentifierÍ¤Í¯«calendarMgrNªIdentifierÍ°Í»«getCalendarÂÂÂNªIdentifierÍ¾ÍÂ¤thenÂÂ‘Q·ArrowFunctionExpressionÍÃÍ#ÀÂÂÂ‘NªIdentifierÍÄÍÌ¨calendarO®BlockStatementÍÑÍ#‘U³ExpressionStatementÍÍ"úV®CallExpressionÍÍ"ù[°MemberExpressionÍÍ!¹V®CallExpressionÍÍ!³[°MemberExpressionÍÍ(V®CallExpressionÍÍ#[°MemberExpressionÍÍ!NªIdentifierÍÍ¨calendarNªIdentifierÍÍ!©getEventsÂÂÂNªIdentifierÍ$Í(¤thenÂÂ‘Q·ArrowFunctionExpressionÍ)Í!²ÀÂÂÂ‘NªIdentifierÍ*Í0¦eventsO®BlockStatementÍ5Í!²’_³VariableDeclarationÍÍÂ‘`²VariableDeclaratorÍ…ÍÁNªIdentifierÍ…Í«validEventsV®CallExpressionÍ“ÍÁ[°MemberExpressionÍ“Í NªIdentifierÍ“Í™¦eventsNªIdentifierÍšÍ ¦filterÂÂ‘Q·ArrowFunctionExpressionÍ¡ÍÀÀÃÂÂ‘NªIdentifierÍ¡Í¦¥eventY°BinaryExpressionÍªÍÀ[°MemberExpressionÍªÍ²NªIdentifierÍªÍ¯¥eventNªIdentifierÍ°Í²¢idÂÂ£!==NªIdentifierÍ·ÍÀ©undefinedÂ¥constX«IfStatementÍàÍ!—Y°BinaryExpressionÍäÍú[°MemberExpressionÍäÍöNªIdentifierÍäÍï«validEventsNªIdentifierÍğÍö¦lengthÂÂ¡>T§LiteralÍùÍú ¡0O®BlockStatementÍüÍ H’_³VariableDeclarationÍLÍn‘`²VariableDeclaratorÍRÍmNªIdentifierÍRÍY§eventId[°MemberExpressionÍ\Ím[°MemberExpressionÍ\ÍjNªIdentifierÍ\Íg«validEventsT§LiteralÍhÍi ¡0ÃÂNªIdentifierÍkÍm¢idÂÂ¥constX«IfStatementÍÍ )Y°BinaryExpressionÍ”Í©NªIdentifierÍ”Í›§eventId£!==NªIdentifierÍ Í©©undefinedO®BlockStatementÍ«Í )‘U³ExpressionStatementÍÒÍ V®CallExpressionÍÒÍ [°MemberExpressionÍÒÍ}V®CallExpressionÍÒÍw[°MemberExpressionÍÒÍôV®CallExpressionÍÒÍï[°MemberExpressionÍÒÍæNªIdentifierÍÒÍÚ¨calendarNªIdentifierÍÛÍæ«deleteEventÂÂ‘NªIdentifierÍçÍî§eventIdÂNªIdentifierÍğÍô¤thenÂÂ‘Q·ArrowFunctionExpressionÍõÍvÀÂÂÂO®BlockStatementÍûÍv’U³ExpressionStatementÍ&ÍùV®CallExpressionÍ&Íø[°MemberExpressionÍ&Í<NªIdentifierÍ&Í2¬promptActionNªIdentifierÍ3Í<©showToastÂÂ‘\°ObjectExpressionÍ=Í÷’]¨PropertyÍlÍÂÂÂNªIdentifierÍlÍs§messageb¯TemplateLiteralÍuÍ‘NªIdentifierÍ…ÍŒ§eventId’c¯TemplateElementÍvÍƒd»å·²æˆåŠŸåˆ é™¤äº‹ä»¶ (ID: »å·²æˆåŠŸåˆ é™¤äº‹ä»¶ (ID: Âc¯TemplateElementÍÍd¡)¡)Ã¤init]¨PropertyÍ¾ÍÌÂÂÂNªIdentifierÍ¾ÍÆ¨durationT§LiteralÍÈÍÌÍĞ¤2000¤initÂU³ExpressionStatementÍ#ÍOV®CallExpressionÍ#ÍN[°MemberExpressionÍ#Í/NªIdentifierÍ#Í*§consoleNªIdentifierÍ+Í/¤infoÂÂ‘b¯TemplateLiteralÍ0ÍM‘NªIdentifierÍCÍJ§eventId’c¯TemplateElementÍ1ÍAdÙ$æˆåŠŸåˆ é™¤å•ä¸ªæ—¥å†äº‹ä»¶ (ID: Ù$æˆåŠŸåˆ é™¤å•ä¸ªæ—¥å†äº‹ä»¶ (ID: Âc¯TemplateElementÍKÍLd¡)¡)ÃÂÂNªIdentifierÍxÍ}¥catchÂÂ‘Q·ArrowFunctionExpressionÍ~Í ÀÂÂÂ‘NªIdentifierÍÍ‚£errO®BlockStatementÍ‡Í ’U³ExpressionStatementÍ²ÍƒV®CallExpressionÍ²Í‚[°MemberExpressionÍ²ÍÈNªIdentifierÍ²Í¾¬promptActionNªIdentifierÍ¿ÍÈ©showToastÂÂ‘\°ObjectExpressionÍÉÍ’]¨PropertyÍøÍÂÂÂNªIdentifierÍøÍÿ§messageb¯TemplateLiteralÍÍ‘[°MemberExpressionÍÍNªIdentifierÍÍ£errNªIdentifierÍÍ§messageÂÂ’c¯TemplateElementÍÍ
+d´åˆ é™¤äº‹ä»¶å¤±è´¥: ´åˆ é™¤äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍÍd  Ã¤init]¨PropertyÍHÍVÂÂÂNªIdentifierÍHÍP¨durationT§LiteralÍRÍVÍĞ¤2000¤initÂU³ExpressionStatementÍ­ÍİV®CallExpressionÍ­ÍÜ[°MemberExpressionÍ­ÍºNªIdentifierÍ­Í´§consoleNªIdentifierÍµÍº¥errorÂÂ‘b¯TemplateLiteralÍ»ÍÛ‘V®CallExpressionÍÆÍÙ[°MemberExpressionÍÆÍÔNªIdentifierÍÆÍÊ¤JSONNªIdentifierÍËÍÔ©stringifyÂÂ‘NªIdentifierÍÕÍØ£errÂ’c¯TemplateElementÍ¼ÍÄd´åˆ é™¤äº‹ä»¶å¤±è´¥: ´åˆ é™¤äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍÚÍÚd  ÃÂÂÀO®BlockStatementÍ kÍ!—’U³ExpressionStatementÍ Í!;V®CallExpressionÍ Í!:[°MemberExpressionÍ Í ¤NªIdentifierÍ Í š¬promptActionNªIdentifierÍ ›Í ¤©showToastÂÂ‘\°ObjectExpressionÍ ¥Í!9’]¨PropertyÍ ÌÍ áÂÂÂNªIdentifierÍ ÌÍ Ó§messageT§LiteralÍ ÕÍ á¾æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶Ù 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶'¤init]¨PropertyÍ!Í!ÂÂÂNªIdentifierÍ!Í!¨durationT§LiteralÍ!Í!ÍĞ¤2000¤initÂU³ExpressionStatementÍ!]Í!xV®CallExpressionÍ!]Í!w[°MemberExpressionÍ!]Í!iNªIdentifierÍ!]Í!d§consoleNªIdentifierÍ!eÍ!i¤infoÂÂ‘T§LiteralÍ!jÍ!v¾æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶Ù 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„äº‹ä»¶'ÂÂNªIdentifierÍ!´Í!¹¥catchÂÂ‘Q·ArrowFunctionExpressionÍ!ºÍ"øÀÂÂÂ‘NªIdentifierÍ!»Í!¾£errO®BlockStatementÍ!ÃÍ"ø’U³ExpressionStatementÍ!âÍ"V®CallExpressionÍ!âÍ"[°MemberExpressionÍ!âÍ!øNªIdentifierÍ!âÍ!î¬promptActionNªIdentifierÍ!ïÍ!ø©showToastÂÂ‘\°ObjectExpressionÍ!ùÍ"’]¨PropertyÍ"Í"=ÂÂÂNªIdentifierÍ"Í"#§messageb¯TemplateLiteralÍ"%Í"=‘[°MemberExpressionÍ"0Í";NªIdentifierÍ"0Í"3£errNªIdentifierÍ"4Í";§messageÂÂ’c¯TemplateElementÍ"&Í".d´è·å–äº‹ä»¶å¤±è´¥: ´è·å–äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ"<Í"<d  Ã¤init]¨PropertyÍ"`Í"nÂÂÂNªIdentifierÍ"`Í"h¨durationT§LiteralÍ"jÍ"nÍĞ¤2000¤initÂU³ExpressionStatementÍ"­Í"İV®CallExpressionÍ"­Í"Ü[°MemberExpressionÍ"­Í"ºNªIdentifierÍ"­Í"´§consoleNªIdentifierÍ"µÍ"º¥errorÂÂ‘b¯TemplateLiteralÍ"»Í"Û‘V®CallExpressionÍ"ÆÍ"Ù[°MemberExpressionÍ"ÆÍ"ÔNªIdentifierÍ"ÆÍ"Ê¤JSONNªIdentifierÍ"ËÍ"Ô©stringifyÂÂ‘NªIdentifierÍ"ÕÍ"Ø£errÂ’c¯TemplateElementÍ"¼Í"Äd´è·å–äº‹ä»¶å¤±è´¥: ´è·å–äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ"ÚÍ"Úd  ÃÂÂÂNªIdentifierÍ#Í#¥catchÂÂ‘Q·ArrowFunctionExpressionÍ#Í$?ÀÂÂÂ‘NªIdentifierÍ#Í#£errO®BlockStatementÍ#"Í$?’U³ExpressionStatementÍ#=Í#ŞV®CallExpressionÍ#=Í#İ[°MemberExpressionÍ#=Í#SNªIdentifierÍ#=Í#I¬promptActionNªIdentifierÍ#JÍ#S©showToastÂÂ‘\°ObjectExpressionÍ#TÍ#Ü’]¨PropertyÍ#sÍ#”ÂÂÂNªIdentifierÍ#sÍ#z§messageb¯TemplateLiteralÍ#|Í#”‘[°MemberExpressionÍ#‡Í#’NªIdentifierÍ#‡Í#Š£errNªIdentifierÍ#‹Í#’§messageÂÂ’c¯TemplateElementÍ#}Í#…d´è·å–æ—¥å†å¤±è´¥: ´è·å–æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ#“Í#“d  Ã¤init]¨PropertyÍ#³Í#ÁÂÂÂNªIdentifierÍ#³Í#»¨durationT§LiteralÍ#½Í#ÁÍĞ¤2000¤initÂU³ExpressionStatementÍ#øÍ$(V®CallExpressionÍ#øÍ$'[°MemberExpressionÍ#øÍ$NªIdentifierÍ#øÍ#ÿ§consoleNªIdentifierÍ$ Í$¥errorÂÂ‘b¯TemplateLiteralÍ$Í$&‘V®CallExpressionÍ$Í$$[°MemberExpressionÍ$Í$NªIdentifierÍ$Í$¤JSONNªIdentifierÍ$Í$©stringifyÂÂ‘NªIdentifierÍ$ Í$#£errÂ’c¯TemplateElementÍ$Í$d´è·å–æ—¥å†å¤±è´¥: ´è·å–æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ$%Í$%d  ÃÂÂe«CatchClauseÍ$fÍ%}NªIdentifierÍ$mÍ$r¥errorO®BlockStatementÍ$tÍ%}’U³ExpressionStatementÍ$‹Í% V®CallExpressionÍ$‹Í%[°MemberExpressionÍ$‹Í$¡NªIdentifierÍ$‹Í$—¬promptActionNªIdentifierÍ$˜Í$¡©showToastÂÂ‘\°ObjectExpressionÍ$¢Í%’]¨PropertyÍ$½Í$ŞÂÂÂNªIdentifierÍ$½Í$Ä§messageb¯TemplateLiteralÍ$ÆÍ$Ş‘[°MemberExpressionÍ$ÏÍ$ÜNªIdentifierÍ$ÏÍ$Ô¥errorNªIdentifierÍ$ÕÍ$Ü§messageÂÂ’c¯TemplateElementÍ$ÇÍ$Íd®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍ$İÍ$İd  Ã¤init]¨PropertyÍ$ùÍ%ÂÂÂNªIdentifierÍ$ùÍ%¨durationT§LiteralÍ%Í%ÍĞ¤2000¤initÂU³ExpressionStatementÍ%6Í%jV®CallExpressionÍ%6Í%i[°MemberExpressionÍ%6Í%CNªIdentifierÍ%6Í%=§consoleNªIdentifierÍ%>Í%C¥errorÂÂ‘b¯TemplateLiteralÍ%DÍ%h‘V®CallExpressionÍ%QÍ%f[°MemberExpressionÍ%QÍ%_NªIdentifierÍ%QÍ%U¤JSONNªIdentifierÍ%VÍ%_©stringifyÂÂ‘NªIdentifierÍ%`Í%e¥errorÂ’c¯TemplateElementÍ%EÍ%Odºåˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ºåˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍ%gÍ%gd  ÃÂÀÂNªIdentifierÍ%›Í%¡¦ButtonÂU³ExpressionStatementÍ%ŞÍ%ëV®CallExpressionÍ%ŞÍ%ê[°MemberExpressionÍ%ŞÍ%èNªIdentifierÍ%ŞÍ%ä¦ButtonNªIdentifierÍ%åÍ%è£popÂÂÂU³ExpressionStatementÍ%õÍ2‡V®CallExpressionÍ%õÍ2†[°MemberExpressionÍ%õÍ&W®ThisExpressionÍ%õÍ%ùNªIdentifierÍ%úÍ&¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍ&Í2}ÀÂÂÂ’NªIdentifierÍ&Í&¦elmtIdNªIdentifierÍ&Í&,¯isInitialRenderO®BlockStatementÍ&1Í2}”U³ExpressionStatementÍ&uÍ&ªV®CallExpressionÍ&uÍ&©[°MemberExpressionÍ&uÍ&‹NªIdentifierÍ&uÍ&{¦ButtonNªIdentifierÍ&|Í&‹¯createWithLabelÂÂ‘T§LiteralÍ&ŒÍ&¨ºDelete Whole Calendar Data¼'Delete Whole Calendar Data'ÂU³ExpressionStatementÍ&íÍ'V®CallExpressionÍ&íÍ' [°MemberExpressionÍ&íÍ&ùNªIdentifierÍ&íÍ&ó¦ButtonNªIdentifierÍ&ôÍ&ù¥widthÂÂ‘T§LiteralÍ&úÍ&ÿ£90%¥'90%'ÂU³ExpressionStatementÍ'DÍ'UV®CallExpressionÍ'DÍ'T[°MemberExpressionÍ'DÍ'QNªIdentifierÍ'DÍ'J¦ButtonNªIdentifierÍ'KÍ'Q¦marginÂÂ‘T§LiteralÍ'RÍ'S¡5ÂU³ExpressionStatementÍ'˜Í2rV®CallExpressionÍ'˜Í2q[°MemberExpressionÍ'˜Í'¦NªIdentifierÍ'˜Í'¦ButtonNªIdentifierÍ'ŸÍ'¦§onClickÂÂ‘Q·ArrowFunctionExpressionÍ'§Í2pÀÂÂÂO®BlockStatementÍ'­Í2p‘^¬TryStatementÍ'ğÍ2aO®BlockStatementÍ'ôÍ18’_³VariableDeclarationÍ(+Í(p‘`²VariableDeclaratorÍ(1Í(oNªIdentifierÍ(1Í(<«calendarMgrV®CallExpressionÍ(?Í(o[°MemberExpressionÍ(?Í(aNªIdentifierÍ(?Í(N¯calendarManagerNªIdentifierÍ(OÍ(a²getCalendarManagerÂÂ‘[°MemberExpressionÍ(bÍ(nW®ThisExpressionÍ(bÍ(fNªIdentifierÍ(gÍ(n§contextÂÂÂ¥constU³ExpressionStatementÍ(¥Í1%V®CallExpressionÍ(¥Í1$[°MemberExpressionÍ(¥Í/øV®CallExpressionÍ(¥Í/ò[°MemberExpressionÍ(¥Í(ÇV®CallExpressionÍ(¥Í(Â[°MemberExpressionÍ(¥Í(ÀNªIdentifierÍ(¥Í(°«calendarMgrNªIdentifierÍ(±Í(À¯getAllCalendarsÂÂÂNªIdentifierÍ(ÃÍ(Ç¤thenÂÂ‘Q·ArrowFunctionExpressionÍ(ÈÍ/ñÀÂÂÂ‘NªIdentifierÍ(ÉÍ(Ò©calendarsO®BlockStatementÍ(×Í/ñ‘X«IfStatementÍ(òÍ/ÚY°BinaryExpressionÍ(öÍ)
+[°MemberExpressionÍ(öÍ)NªIdentifierÍ(öÍ(ÿ©calendarsNªIdentifierÍ) Í)¦lengthÂÂ¡>T§LiteralÍ)	Í)
+ ¡0O®BlockStatementÍ)Í.§’_³VariableDeclarationÍ)+Í*Œ‘`²VariableDeclaratorÍ)1Í*‹NªIdentifierÍ)1Í)?®deletePromisesV®CallExpressionÍ)BÍ*‹[°MemberExpressionÍ)BÍ)ONªIdentifierÍ)BÍ)K©calendarsNªIdentifierÍ)LÍ)O£mapÂÂ‘Q·ArrowFunctionExpressionÍ)PÍ*ŠÀÂÂÂ‘NªIdentifierÍ)QÍ)T£calO®BlockStatementÍ)YÍ*Š‘Ôrf”¤type¥start£end¨argument¯ReturnStatementÍ)|Í*kV®CallExpressionÍ)ƒÍ*j[°MemberExpressionÍ)ƒÍ)¨V®CallExpressionÍ)ƒÍ)¢[°MemberExpressionÍ)ƒÍ)NªIdentifierÍ)ƒÍ)«calendarMgrNªIdentifierÍ)Í)®deleteCalendarÂÂ‘NªIdentifierÍ)Í)¡£calÂNªIdentifierÍ)£Í)¨¥catchÂÂ‘Q·ArrowFunctionExpressionÍ)©Í*iÀÂÂÂ‘NªIdentifierÍ)ªÍ)­£errO®BlockStatementÍ)²Í*i’U³ExpressionStatementÍ)ÙÍ*	V®CallExpressionÍ)ÙÍ*[°MemberExpressionÍ)ÙÍ)æNªIdentifierÍ)ÙÍ)à§consoleNªIdentifierÍ)áÍ)æ¥errorÂÂ‘b¯TemplateLiteralÍ)çÍ*‘V®CallExpressionÍ)òÍ*[°MemberExpressionÍ)òÍ* NªIdentifierÍ)òÍ)ö¤JSONNªIdentifierÍ)÷Í* ©stringifyÂÂ‘NªIdentifierÍ*Í*£errÂ’c¯TemplateElementÍ)èÍ)ğd´åˆ é™¤æ—¥å†å¤±è´¥: ´åˆ é™¤æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ*Í*d  ÃÂf¯ReturnStatementÍ*/Í*<T§LiteralÍ*6Í*;Â¥falseÂÂ¥constU³ExpressionStatementÍ*ÕÍ.ŒV®CallExpressionÍ*ÕÍ.‹[°MemberExpressionÍ*ÕÍ*õV®CallExpressionÍ*ÕÍ*ğ[°MemberExpressionÍ*ÕÍ*àNªIdentifierÍ*ÕÍ*Ü§PromiseNªIdentifierÍ*İÍ*à£allÂÂ‘NªIdentifierÍ*áÍ*ï®deletePromisesÂNªIdentifierÍ*ñÍ*õ¤thenÂÂ‘Q·ArrowFunctionExpressionÍ*öÍ.ŠÀÂÂÂ‘NªIdentifierÍ*÷Í*ş§resultsO®BlockStatementÍ+Í.Š’_³VariableDeclarationÍ+&Í+m‘`²VariableDeclaratorÍ+,Í+lNªIdentifierÍ+,Í+8¬successCount[°MemberExpressionÍ+;Í+lV®CallExpressionÍ+;Í+e[°MemberExpressionÍ+;Í+INªIdentifierÍ+;Í+B§resultsNªIdentifierÍ+CÍ+I¦filterÂÂ‘Q·ArrowFunctionExpressionÍ+JÍ+dÀÃÂÂ‘NªIdentifierÍ+JÍ+P¦resultY°BinaryExpressionÍ+TÍ+dNªIdentifierÍ+TÍ+Z¦result£!==T§LiteralÍ+_Í+dÂ¥falseÂNªIdentifierÍ+fÍ+l¦lengthÂÂ¥constX«IfStatementÍ+Í.kY°BinaryExpressionÍ+“Í+£NªIdentifierÍ+“Í+Ÿ¬successCount¡>T§LiteralÍ+¢Í+£ ¡0O®BlockStatementÍ+¥Í-’U³ExpressionStatementÍ+ÌÍ,’V®CallExpressionÍ+ÌÍ,‘[°MemberExpressionÍ+ÌÍ+âNªIdentifierÍ+ÌÍ+Ø¬promptActionNªIdentifierÍ+ÙÍ+â©showToastÂÂ‘\°ObjectExpressionÍ+ãÍ,’]¨PropertyÍ,Í,0ÂÂÂNªIdentifierÍ,Í,§messageb¯TemplateLiteralÍ,Í,0‘NªIdentifierÍ,Í,+¬successCount’c¯TemplateElementÍ,Í,d¯å·²æˆåŠŸåˆ é™¤¯å·²æˆåŠŸåˆ é™¤Âc¯TemplateElementÍ,,Í,/d©ä¸ªæ—¥å†©ä¸ªæ—¥å†Ã¤init]¨PropertyÍ,[Í,iÂÂÂNªIdentifierÍ,[Í,c¨durationT§LiteralÍ,eÍ,iÍĞ¤2000¤initÂU³ExpressionStatementÍ,¸Í,ßV®CallExpressionÍ,¸Í,Ş[°MemberExpressionÍ,¸Í,ÄNªIdentifierÍ,¸Í,¿§consoleNªIdentifierÍ,ÀÍ,Ä¤infoÂÂ‘b¯TemplateLiteralÍ,ÅÍ,İ‘NªIdentifierÍ,ÌÍ,Ø¬successCount’c¯TemplateElementÍ,ÆÍ,Êd¬æˆåŠŸåˆ é™¤¬æˆåŠŸåˆ é™¤Âc¯TemplateElementÍ,ÙÍ,Üd©ä¸ªæ—¥å†©ä¸ªæ—¥å†ÃÂO®BlockStatementÍ-)Í.k’U³ExpressionStatementÍ-PÍ.V®CallExpressionÍ-PÍ.[°MemberExpressionÍ-PÍ-fNªIdentifierÍ-PÍ-\¬promptActionNªIdentifierÍ-]Í-f©showToastÂÂ‘\°ObjectExpressionÍ-gÍ.’]¨PropertyÍ-’Í-£ÂÂÂNªIdentifierÍ-’Í-™§messageT§LiteralÍ-›Í-£²åˆ é™¤æ—¥å†å¤±è´¥´'åˆ é™¤æ—¥å†å¤±è´¥'¤init]¨PropertyÍ-ÎÍ-ÜÂÂÂNªIdentifierÍ-ÎÍ-Ö¨durationT§LiteralÍ-ØÍ-ÜÍĞ¤2000¤initÂU³ExpressionStatementÍ.+Í.HV®CallExpressionÍ.+Í.G[°MemberExpressionÍ.+Í.8NªIdentifierÍ.+Í.2§consoleNªIdentifierÍ.3Í.8¥errorÂÂ‘T§LiteralÍ.9Í.FÙ!æ‰€æœ‰æ—¥å†åˆ é™¤æ“ä½œå‡å¤±è´¥Ù#'æ‰€æœ‰æ—¥å†åˆ é™¤æ“ä½œå‡å¤±è´¥'ÂÂO®BlockStatementÍ.ÆÍ/Ú’U³ExpressionStatementÍ.åÍ/†V®CallExpressionÍ.åÍ/…[°MemberExpressionÍ.åÍ.ûNªIdentifierÍ.åÍ.ñ¬promptActionNªIdentifierÍ.òÍ.û©showToastÂÂ‘\°ObjectExpressionÍ.üÍ/„’]¨PropertyÍ/Í/4ÂÂÂNªIdentifierÍ/Í/&§messageT§LiteralÍ/(Í/4¾æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†Ù 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†'¤init]¨PropertyÍ/WÍ/eÂÂÂNªIdentifierÍ/WÍ/_¨durationT§LiteralÍ/aÍ/eÍĞ¤2000¤initÂU³ExpressionStatementÍ/¤Í/¿V®CallExpressionÍ/¤Í/¾[°MemberExpressionÍ/¤Í/°NªIdentifierÍ/¤Í/«§consoleNªIdentifierÍ/¬Í/°¤infoÂÂ‘T§LiteralÍ/±Í/½¾æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†Ù 'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ—¥å†'ÂÂNªIdentifierÍ/óÍ/ø¥catchÂÂ‘Q·ArrowFunctionExpressionÍ/ùÍ1#ÀÂÂÂ‘NªIdentifierÍ/úÍ/ı£errO®BlockStatementÍ0Í1#’U³ExpressionStatementÍ0Í0ÀV®CallExpressionÍ0Í0¿[°MemberExpressionÍ0Í03NªIdentifierÍ0Í0)¬promptActionNªIdentifierÍ0*Í03©showToastÂÂ‘\°ObjectExpressionÍ04Í0¾’]¨PropertyÍ0SÍ0vÂÂÂNªIdentifierÍ0SÍ0Z§messageb¯TemplateLiteralÍ0\Í0v‘[°MemberExpressionÍ0iÍ0tNªIdentifierÍ0iÍ0l£errNªIdentifierÍ0mÍ0t§messageÂÂ’c¯TemplateElementÍ0]Í0gdºè·å–æ—¥å†åˆ—è¡¨å¤±è´¥: ºè·å–æ—¥å†åˆ—è¡¨å¤±è´¥: Âc¯TemplateElementÍ0uÍ0ud  Ã¤init]¨PropertyÍ0•Í0£ÂÂÂNªIdentifierÍ0•Í0¨durationT§LiteralÍ0ŸÍ0£ÍĞ¤2000¤initÂU³ExpressionStatementÍ0ÚÍ1V®CallExpressionÍ0ÚÍ1[°MemberExpressionÍ0ÚÍ0çNªIdentifierÍ0ÚÍ0á§consoleNªIdentifierÍ0âÍ0ç¥errorÂÂ‘b¯TemplateLiteralÍ0èÍ1
+‘V®CallExpressionÍ0õÍ1[°MemberExpressionÍ0õÍ1NªIdentifierÍ0õÍ0ù¤JSONNªIdentifierÍ0úÍ1©stringifyÂÂ‘NªIdentifierÍ1Í1£errÂ’c¯TemplateElementÍ0éÍ0ódºè·å–æ—¥å†åˆ—è¡¨å¤±è´¥: ºè·å–æ—¥å†åˆ—è¡¨å¤±è´¥: Âc¯TemplateElementÍ1	Í1	d  ÃÂÂe«CatchClauseÍ1JÍ2aNªIdentifierÍ1QÍ1V¥errorO®BlockStatementÍ1XÍ2a’U³ExpressionStatementÍ1oÍ2V®CallExpressionÍ1oÍ2[°MemberExpressionÍ1oÍ1…NªIdentifierÍ1oÍ1{¬promptActionNªIdentifierÍ1|Í1…©showToastÂÂ‘\°ObjectExpressionÍ1†Í2’]¨PropertyÍ1¡Í1ÂÂÂÂNªIdentifierÍ1¡Í1¨§messageb¯TemplateLiteralÍ1ªÍ1Â‘[°MemberExpressionÍ1³Í1ÀNªIdentifierÍ1³Í1¸¥errorNªIdentifierÍ1¹Í1À§messageÂÂ’c¯TemplateElementÍ1«Í1±d®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍ1ÁÍ1Ád  Ã¤init]¨PropertyÍ1İÍ1ëÂÂÂNªIdentifierÍ1İÍ1å¨durationT§LiteralÍ1çÍ1ëÍĞ¤2000¤initÂU³ExpressionStatementÍ2Í2NV®CallExpressionÍ2Í2M[°MemberExpressionÍ2Í2'NªIdentifierÍ2Í2!§consoleNªIdentifierÍ2"Í2'¥errorÂÂ‘b¯TemplateLiteralÍ2(Í2L‘V®CallExpressionÍ25Í2J[°MemberExpressionÍ25Í2CNªIdentifierÍ25Í29¤JSONNªIdentifierÍ2:Í2C©stringifyÂÂ‘NªIdentifierÍ2DÍ2I¥errorÂ’c¯TemplateElementÍ2)Í23dºåˆ é™¤æ—¥å†æ“ä½œå¼‚å¸¸: ºåˆ é™¤æ—¥å†æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍ2KÍ2Kd  ÃÂÀÂNªIdentifierÍ2Í2…¦ButtonÂU³ExpressionStatementÍ2ÂÍ2ÏV®CallExpressionÍ2ÂÍ2Î[°MemberExpressionÍ2ÂÍ2ÌNªIdentifierÍ2ÂÍ2È¦ButtonNªIdentifierÍ2ÉÍ2Ì£popÂÂÂU³ExpressionStatementÍ2ÙÍAgV®CallExpressionÍ2ÙÍAf[°MemberExpressionÍ2ÙÍ2÷W®ThisExpressionÍ2ÙÍ2İNªIdentifierÍ2ŞÍ2÷¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍ2øÍA]ÀÂÂÂ’NªIdentifierÍ2ùÍ2ÿ¦elmtIdNªIdentifierÍ3Í3¯isInitialRenderO®BlockStatementÍ3ÍA]”U³ExpressionStatementÍ3[Í3’V®CallExpressionÍ3[Í3‘[°MemberExpressionÍ3[Í3qNªIdentifierÍ3[Í3a¦ButtonNªIdentifierÍ3bÍ3q¯createWithLabelÂÂ‘T§LiteralÍ3rÍ3¼Delete Regular Calendar Data¾'Delete Regular Calendar Data'ÂU³ExpressionStatementÍ3×Í3ëV®CallExpressionÍ3×Í3ê[°MemberExpressionÍ3×Í3ãNªIdentifierÍ3×Í3İ¦ButtonNªIdentifierÍ3ŞÍ3ã¥widthÂÂ‘T§LiteralÍ3äÍ3é£90%¥'90%'ÂU³ExpressionStatementÍ40Í4AV®CallExpressionÍ40Í4@[°MemberExpressionÍ40Í4=NªIdentifierÍ40Í46¦ButtonNªIdentifierÍ47Í4=¦marginÂÂ‘T§LiteralÍ4>Í4?¡5ÂU³ExpressionStatementÍ4†ÍARV®CallExpressionÍ4†ÍAQ[°MemberExpressionÍ4†Í4”NªIdentifierÍ4†Í4Œ¦ButtonNªIdentifierÍ4Í4”§onClickÂÂ‘Q·ArrowFunctionExpressionÍ4•ÍAPÀÂÂÂO®BlockStatementÍ4›ÍAP‘^¬TryStatementÍ4àÍAAO®BlockStatementÍ4äÍ@’_³VariableDeclarationÍ5Í5`‘`²VariableDeclaratorÍ5!Í5_NªIdentifierÍ5!Í5,«calendarMgrV®CallExpressionÍ5/Í5_[°MemberExpressionÍ5/Í5QNªIdentifierÍ5/Í5>¯calendarManagerNªIdentifierÍ5?Í5Q²getCalendarManagerÂÂ‘[°MemberExpressionÍ5RÍ5^W®ThisExpressionÍ5RÍ5VNªIdentifierÍ5WÍ5^§contextÂÂÂ¥constU³ExpressionStatementÍ5•Í@V®CallExpressionÍ5•Í@[°MemberExpressionÍ5•Í>ÜV®CallExpressionÍ5•Í>Ö[°MemberExpressionÍ5•Í5³V®CallExpressionÍ5•Í5®[°MemberExpressionÍ5•Í5¬NªIdentifierÍ5•Í5 «calendarMgrNªIdentifierÍ5¡Í5¬«getCalendarÂÂÂNªIdentifierÍ5¯Í5³¤thenÂÂ‘Q·ArrowFunctionExpressionÍ5´Í>ÕÀÂÂÂ‘NªIdentifierÍ5µÍ5½¨calendarO®BlockStatementÍ5ÂÍ>Õ‘U³ExpressionStatementÍ6!Í>¾V®CallExpressionÍ6!Í>½[°MemberExpressionÍ6!Í=}V®CallExpressionÍ6!Í=w[°MemberExpressionÍ6!Í6:V®CallExpressionÍ6!Í65[°MemberExpressionÍ6!Í63NªIdentifierÍ6!Í6)¨calendarNªIdentifierÍ6*Í63©getEventsÂÂÂNªIdentifierÍ66Í6:¤thenÂÂ‘Q·ArrowFunctionExpressionÍ6;Í=vÀÂÂÂ‘NªIdentifierÍ6<Í6B¦eventsO®BlockStatementÍ6GÍ=v”_³VariableDeclarationÍ6Í7(‘`²VariableDeclaratorÍ6–Í7'NªIdentifierÍ6–Í6¢¬normalEventsV®CallExpressionÍ6¥Í7'[°MemberExpressionÍ6¥Í6²NªIdentifierÍ6¥Í6«¦eventsNªIdentifierÍ6¬Í6²¦filterÂÂ‘Q·ArrowFunctionExpressionÍ6³Í7&ÀÃÂÂ‘NªIdentifierÍ6³Í6¸¥eventY±LogicalExpressionÍ6¼Í7&Y°BinaryExpressionÍ6¼Í6ë[°MemberExpressionÍ6¼Í6ÆNªIdentifierÍ6¼Í6Á¥eventNªIdentifierÍ6ÂÍ6Æ¤typeÂÂ£===[°MemberExpressionÍ6ËÍ6ë[°MemberExpressionÍ6ËÍ6äNªIdentifierÍ6ËÍ6Ú¯calendarManagerNªIdentifierÍ6ÛÍ6ä©EventTypeÂÂNªIdentifierÍ6åÍ6ë¦NORMALÂÂ¢&&Y°BinaryExpressionÍ7Í7&[°MemberExpressionÍ7Í7NªIdentifierÍ7Í7¥eventNªIdentifierÍ7Í7¢idÂÂ£!==NªIdentifierÍ7Í7&©undefinedÂ¥const_³VariableDeclarationÍ7FÍ7Z‘`²VariableDeclaratorÍ7LÍ7YNªIdentifierÍ7LÍ7T¨eventIdsa¯ArrayExpressionÍ7WÍ7Y¥constU³ExpressionStatementÍ7xÍ8XV®CallExpressionÍ7xÍ8W[°MemberExpressionÍ7xÍ7ŒNªIdentifierÍ7xÍ7„¬normalEventsNªIdentifierÍ7…Í7Œ§forEachÂÂ‘Q·ArrowFunctionExpressionÍ7Í8VÀÂÂÂ‘NªIdentifierÍ7Í7’¥eventO®BlockStatementÍ7–Í8V‘X«IfStatementÍ7¹Í87Y°BinaryExpressionÍ7½Í7Ó[°MemberExpressionÍ7½Í7ÅNªIdentifierÍ7½Í7Â¥eventNªIdentifierÍ7ÃÍ7Å¢idÂÂ£!==NªIdentifierÍ7ÊÍ7Ó©undefinedO®BlockStatementÍ7ÕÍ87‘U³ExpressionStatementÍ7üÍ8V®CallExpressionÍ7üÍ8[°MemberExpressionÍ7üÍ8	NªIdentifierÍ7üÍ8¨eventIdsNªIdentifierÍ8Í8	¤pushÂÂ‘[°MemberExpressionÍ8
+Í8NªIdentifierÍ8
+Í8¥eventNªIdentifierÍ8Í8¢idÂÂÂÀÂX«IfStatementÍ8vÍ=[Y°BinaryExpressionÍ8zÍ8[°MemberExpressionÍ8zÍ8‰NªIdentifierÍ8zÍ8‚¨eventIdsNªIdentifierÍ8ƒÍ8‰¦lengthÂÂ¡>T§LiteralÍ8ŒÍ8 ¡0O®BlockStatementÍ8Í<‘U³ExpressionStatementÍ8İÍ;éV®CallExpressionÍ8İÍ;è[°MemberExpressionÍ8İÍ:xV®CallExpressionÍ8İÍ:r[°MemberExpressionÍ8İÍ9V®CallExpressionÍ8İÍ8ü[°MemberExpressionÍ8İÍ8òNªIdentifierÍ8İÍ8å¨calendarNªIdentifierÍ8æÍ8ò¬deleteEventsÂÂ‘NªIdentifierÍ8óÍ8û¨eventIdsÂNªIdentifierÍ8ıÍ9¤thenÂÂ‘Q·ArrowFunctionExpressionÍ9Í:qÀÂÂÂO®BlockStatementÍ9Í:q’U³ExpressionStatementÍ9/Í9úV®CallExpressionÍ9/Í9ù[°MemberExpressionÍ9/Í9ENªIdentifierÍ9/Í9;¬promptActionNªIdentifierÍ9<Í9E©showToastÂÂ‘\°ObjectExpressionÍ9FÍ9ø’]¨PropertyÍ9qÍ9˜ÂÂÂNªIdentifierÍ9qÍ9x§messageb¯TemplateLiteralÍ9zÍ9˜‘[°MemberExpressionÍ9‚Í9‘NªIdentifierÍ9‚Í9Š¨eventIdsNªIdentifierÍ9‹Í9‘¦lengthÂÂ’c¯TemplateElementÍ9{Í9€d¯å·²æˆåŠŸåˆ é™¤¯å·²æˆåŠŸåˆ é™¤Âc¯TemplateElementÍ9’Í9—d¯ä¸ªæ™®é€šäº‹ä»¶¯ä¸ªæ™®é€šäº‹ä»¶Ã¤init]¨PropertyÍ9ÃÍ9ÑÂÂÂNªIdentifierÍ9ÃÍ9Ë¨durationT§LiteralÍ9ÍÍ9ÑÍĞ¤2000¤initÂU³ExpressionStatementÍ: Í:NV®CallExpressionÍ: Í:M[°MemberExpressionÍ: Í:,NªIdentifierÍ: Í:'§consoleNªIdentifierÍ:(Í:,¤infoÂÂ‘b¯TemplateLiteralÍ:-Í:L‘[°MemberExpressionÍ:4Í:CNªIdentifierÍ:4Í:<¨eventIdsNªIdentifierÍ:=Í:C¦lengthÂÂ’c¯TemplateElementÍ:.Í:2d¬æˆåŠŸåˆ é™¤¬æˆåŠŸåˆ é™¤Âc¯TemplateElementÍ:DÍ:Kdµä¸ªæ™®é€šæ—¥å†äº‹ä»¶µä¸ªæ™®é€šæ—¥å†äº‹ä»¶ÃÂÂNªIdentifierÍ:sÍ:x¥catchÂÂ‘Q·ArrowFunctionExpressionÍ:yÍ;çÀÂÂÂ‘NªIdentifierÍ:zÍ:}£errO®BlockStatementÍ:‚Í;ç’U³ExpressionStatementÍ:©Í;nV®CallExpressionÍ:©Í;m[°MemberExpressionÍ:©Í:¿NªIdentifierÍ:©Í:µ¬promptActionNªIdentifierÍ:¶Í:¿©showToastÂÂ‘\°ObjectExpressionÍ:ÀÍ;l’]¨PropertyÍ:ëÍ;ÂÂÂNªIdentifierÍ:ëÍ:ò§messageb¯TemplateLiteralÍ:ôÍ;‘[°MemberExpressionÍ:ÿÍ;
+NªIdentifierÍ:ÿÍ;£errNªIdentifierÍ;Í;
+§messageÂÂ’c¯TemplateElementÍ:õÍ:ıd´åˆ é™¤äº‹ä»¶å¤±è´¥: ´åˆ é™¤äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ;Í;d  Ã¤init]¨PropertyÍ;7Í;EÂÂÂNªIdentifierÍ;7Í;?¨durationT§LiteralÍ;AÍ;EÍĞ¤2000¤initÂU³ExpressionStatementÍ;”Í;ÄV®CallExpressionÍ;”Í;Ã[°MemberExpressionÍ;”Í;¡NªIdentifierÍ;”Í;›§consoleNªIdentifierÍ;œÍ;¡¥errorÂÂ‘b¯TemplateLiteralÍ;¢Í;Â‘V®CallExpressionÍ;­Í;À[°MemberExpressionÍ;­Í;»NªIdentifierÍ;­Í;±¤JSONNªIdentifierÍ;²Í;»©stringifyÂÂ‘NªIdentifierÍ;¼Í;¿£errÂ’c¯TemplateElementÍ;£Í;«d´åˆ é™¤äº‹ä»¶å¤±è´¥: ´åˆ é™¤äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ;ÁÍ;Ád  ÃÂÂO®BlockStatementÍ<+Í=[’U³ExpressionStatementÍ<NÍ<ıV®CallExpressionÍ<NÍ<ü[°MemberExpressionÍ<NÍ<dNªIdentifierÍ<NÍ<Z¬promptActionNªIdentifierÍ<[Í<d©showToastÂÂ‘\°ObjectExpressionÍ<eÍ<û’]¨PropertyÍ<ŒÍ<£ÂÂÂNªIdentifierÍ<ŒÍ<“§messageT§LiteralÍ<•Í<£Ù$æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶Ù&'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶'¤init]¨PropertyÍ<ÊÍ<ØÂÂÂNªIdentifierÍ<ÊÍ<Ò¨durationT§LiteralÍ<ÔÍ<ØÍĞ¤2000¤initÂU³ExpressionStatementÍ=Í=<V®CallExpressionÍ=Í=;[°MemberExpressionÍ=Í=+NªIdentifierÍ=Í=&§consoleNªIdentifierÍ='Í=+¤infoÂÂ‘T§LiteralÍ=,Í=:Ù$æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶Ù&'æ²¡æœ‰æ‰¾åˆ°å¯åˆ é™¤çš„æ™®é€šäº‹ä»¶'ÂÂNªIdentifierÍ=xÍ=}¥catchÂÂ‘Q·ArrowFunctionExpressionÍ=~Í>¼ÀÂÂÂ‘NªIdentifierÍ=Í=‚£errO®BlockStatementÍ=‡Í>¼’U³ExpressionStatementÍ=¦Í>SV®CallExpressionÍ=¦Í>R[°MemberExpressionÍ=¦Í=¼NªIdentifierÍ=¦Í=²¬promptActionNªIdentifierÍ=³Í=¼©showToastÂÂ‘\°ObjectExpressionÍ=½Í>Q’]¨PropertyÍ=àÍ>ÂÂÂNªIdentifierÍ=àÍ=ç§messageb¯TemplateLiteralÍ=éÍ>‘[°MemberExpressionÍ=ôÍ=ÿNªIdentifierÍ=ôÍ=÷£errNªIdentifierÍ=øÍ=ÿ§messageÂÂ’c¯TemplateElementÍ=êÍ=òd´è·å–äº‹ä»¶å¤±è´¥: ´è·å–äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ> Í> d  Ã¤init]¨PropertyÍ>$Í>2ÂÂÂNªIdentifierÍ>$Í>,¨durationT§LiteralÍ>.Í>2ÍĞ¤2000¤initÂU³ExpressionStatementÍ>qÍ>¡V®CallExpressionÍ>qÍ> [°MemberExpressionÍ>qÍ>~NªIdentifierÍ>qÍ>x§consoleNªIdentifierÍ>yÍ>~¥errorÂÂ‘b¯TemplateLiteralÍ>Í>Ÿ‘V®CallExpressionÍ>ŠÍ>[°MemberExpressionÍ>ŠÍ>˜NªIdentifierÍ>ŠÍ>¤JSONNªIdentifierÍ>Í>˜©stringifyÂÂ‘NªIdentifierÍ>™Í>œ£errÂ’c¯TemplateElementÍ>€Í>ˆd´è·å–äº‹ä»¶å¤±è´¥: ´è·å–äº‹ä»¶å¤±è´¥: Âc¯TemplateElementÍ>Í>d  ÃÂÂÂNªIdentifierÍ>×Í>Ü¥catchÂÂ‘Q·ArrowFunctionExpressionÍ>İÍ@ÀÂÂÂ‘NªIdentifierÍ>ŞÍ>á£errO®BlockStatementÍ>æÍ@’U³ExpressionStatementÍ?Í?¢V®CallExpressionÍ?Í?¡[°MemberExpressionÍ?Í?NªIdentifierÍ?Í?¬promptActionNªIdentifierÍ?Í?©showToastÂÂ‘\°ObjectExpressionÍ?Í? ’]¨PropertyÍ?7Í?XÂÂÂNªIdentifierÍ?7Í?>§messageb¯TemplateLiteralÍ?@Í?X‘[°MemberExpressionÍ?KÍ?VNªIdentifierÍ?KÍ?N£errNªIdentifierÍ?OÍ?V§messageÂÂ’c¯TemplateElementÍ?AÍ?Id´è·å–æ—¥å†å¤±è´¥: ´è·å–æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ?WÍ?Wd  Ã¤init]¨PropertyÍ?wÍ?…ÂÂÂNªIdentifierÍ?wÍ?¨durationT§LiteralÍ?Í?…ÍĞ¤2000¤initÂU³ExpressionStatementÍ?¼Í?ìV®CallExpressionÍ?¼Í?ë[°MemberExpressionÍ?¼Í?ÉNªIdentifierÍ?¼Í?Ã§consoleNªIdentifierÍ?ÄÍ?É¥errorÂÂ‘b¯TemplateLiteralÍ?ÊÍ?ê‘V®CallExpressionÍ?ÕÍ?è[°MemberExpressionÍ?ÕÍ?ãNªIdentifierÍ?ÕÍ?Ù¤JSONNªIdentifierÍ?ÚÍ?ã©stringifyÂÂ‘NªIdentifierÍ?äÍ?ç£errÂ’c¯TemplateElementÍ?ËÍ?Ód´è·å–æ—¥å†å¤±è´¥: ´è·å–æ—¥å†å¤±è´¥: Âc¯TemplateElementÍ?éÍ?éd  ÃÂÂe«CatchClauseÍ@*ÍAANªIdentifierÍ@1Í@6¥errorO®BlockStatementÍ@8ÍAA’U³ExpressionStatementÍ@OÍ@äV®CallExpressionÍ@OÍ@ã[°MemberExpressionÍ@OÍ@eNªIdentifierÍ@OÍ@[¬promptActionNªIdentifierÍ@\Í@e©showToastÂÂ‘\°ObjectExpressionÍ@fÍ@â’]¨PropertyÍ@Í@¢ÂÂÂNªIdentifierÍ@Í@ˆ§messageb¯TemplateLiteralÍ@ŠÍ@¢‘[°MemberExpressionÍ@“Í@ NªIdentifierÍ@“Í@˜¥errorNªIdentifierÍ@™Í@ §messageÂÂ’c¯TemplateElementÍ@‹Í@‘d®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍ@¡Í@¡d  Ã¤init]¨PropertyÍ@½Í@ËÂÂÂNªIdentifierÍ@½Í@Å¨durationT§LiteralÍ@ÇÍ@ËÍĞ¤2000¤initÂU³ExpressionStatementÍ@úÍA.V®CallExpressionÍ@úÍA-[°MemberExpressionÍ@úÍANªIdentifierÍ@úÍA§consoleNªIdentifierÍAÍA¥errorÂÂ‘b¯TemplateLiteralÍAÍA,‘V®CallExpressionÍAÍA*[°MemberExpressionÍAÍA#NªIdentifierÍAÍA¤JSONNªIdentifierÍAÍA#©stringifyÂÂ‘NªIdentifierÍA$ÍA)¥errorÂ’c¯TemplateElementÍA	ÍAdºåˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: ºåˆ é™¤äº‹ä»¶æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍA+ÍA+d  ÃÂÀÂNªIdentifierÍA_ÍAe¦ButtonÂU³ExpressionStatementÍA¤ÍA±V®CallExpressionÍA¤ÍA°[°MemberExpressionÍA¤ÍA®NªIdentifierÍA¤ÍAª¦ButtonNªIdentifierÍA«ÍA®£popÂÂÂU³ExpressionStatementÍA»ÍCÃV®CallExpressionÍA»ÍCÂ[°MemberExpressionÍA»ÍAÙW®ThisExpressionÍA»ÍA¿NªIdentifierÍAÀÍAÙ¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍAÚÍC»ÀÂÂÂ’NªIdentifierÍAÛÍAá¦elmtIdNªIdentifierÍAãÍAò¯isInitialRenderO®BlockStatementÍA÷ÍC»•U³ExpressionStatementÍB3ÍBWV®CallExpressionÍB3ÍBV[°MemberExpressionÍB3ÍB>NªIdentifierÍB3ÍB7¤TextNªIdentifierÍB8ÍB>¦createÂÂ‘T§LiteralÍB?ÍBU´Contacts Permissions¶'Contacts Permissions'ÂU³ExpressionStatementÍB’ÍB¤V®CallExpressionÍB’ÍB£[°MemberExpressionÍB’ÍBŸNªIdentifierÍB’ÍB–¤TextNªIdentifierÍB—ÍBŸ¨fontSizeÂÂ‘T§LiteralÍB ÍB¢¢20ÂU³ExpressionStatementÍBßÍCV®CallExpressionÍBßÍC[°MemberExpressionÍBßÍBîNªIdentifierÍBßÍBã¤TextNªIdentifierÍBäÍBîªfontWeightÂÂ‘[°MemberExpressionÍBïÍC NªIdentifierÍBïÍBùªFontWeightNªIdentifierÍBúÍC ¦MediumÂÂÂU³ExpressionStatementÍC=ÍCbV®CallExpressionÍC=ÍCa[°MemberExpressionÍC=ÍCHNªIdentifierÍC=ÍCA¤TextNªIdentifierÍCBÍCH¦marginÂÂ‘\°ObjectExpressionÍCIÍC`’]¨PropertyÍCKÍCRÂÂÂNªIdentifierÍCKÍCN£topT§LiteralÍCPÍCR¢20¤init]¨PropertyÍCTÍC^ÂÂÂNªIdentifierÍCTÍCZ¦bottomT§LiteralÍC\ÍC^
+¢10¤initÂU³ExpressionStatementÍCÍC°V®CallExpressionÍCÍC¯[°MemberExpressionÍCÍC§NªIdentifierÍCÍC¡¤TextNªIdentifierÍC¢ÍC§¥widthÂÂ‘T§LiteralÍC¨ÍC®¤100%¦'100%'ÂNªIdentifierÍC½ÍCÁ¤TextÂU³ExpressionStatementÍCöÍDV®CallExpressionÍCöÍD [°MemberExpressionÍCöÍCşNªIdentifierÍCöÍCú¤TextNªIdentifierÍCûÍCş£popÂÂÂU³ExpressionStatementÍDÍM9V®CallExpressionÍDÍM8[°MemberExpressionÍDÍD)W®ThisExpressionÍDÍDNªIdentifierÍDÍD)¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍD*ÍM/ÀÂÂÂ’NªIdentifierÍD+ÍD1¦elmtIdNªIdentifierÍD3ÍDB¯isInitialRenderO®BlockStatementÍDGÍM/”U³ExpressionStatementÍD„ÍD²V®CallExpressionÍD„ÍD±[°MemberExpressionÍD„ÍDšNªIdentifierÍD„ÍDŠ¦ButtonNªIdentifierÍD‹ÍDš¯createWithLabelÂÂ‘T§LiteralÍD›ÍD°³Insert Contact Dataµ'Insert Contact Data'ÂU³ExpressionStatementÍDîÍEV®CallExpressionÍDîÍE[°MemberExpressionÍDîÍDúNªIdentifierÍDîÍDô¦ButtonNªIdentifierÍDõÍDú¥widthÂÂ‘T§LiteralÍDûÍE £90%¥'90%'ÂU³ExpressionStatementÍE>ÍEOV®CallExpressionÍE>ÍEN[°MemberExpressionÍE>ÍEKNªIdentifierÍE>ÍED¦ButtonNªIdentifierÍEEÍEK¦marginÂÂ‘T§LiteralÍELÍEM¡5ÂU³ExpressionStatementÍE‹ÍM$V®CallExpressionÍE‹ÍM#[°MemberExpressionÍE‹ÍE™NªIdentifierÍE‹ÍE‘¦ButtonNªIdentifierÍE’ÍE™§onClickÂÂ‘Q·ArrowFunctionExpressionÍEšÍM"ÀÂÂÂO®BlockStatementÍE ÍM"‘^¬TryStatementÍEäÍMO®BlockStatementÍEèÍKé›_³VariableDeclarationÍEÿÍF7‘`²VariableDeclaratorÍFÍF6NªIdentifierÍFÍF£uriT§LiteralÍF
+ÍF5Ù)datashare:///com.ohos.contactsdataabilityÙ+"datashare:///com.ohos.contactsdataability"£let_³VariableDeclarationÍFMÍF_‘`²VariableDeclaratorÍFQÍF^NªIdentifierÍFQÍFU¤key1T§LiteralÍFXÍF^¤name¦"name"£let_³VariableDeclarationÍFuÍF‹‘`²VariableDeclaratorÍFyÍFŠNªIdentifierÍFyÍF€§value11T§LiteralÍFƒÍFŠ¥roe11§"roe11"£let_³VariableDeclarationÍF¡ÍF²‘`²VariableDeclaratorÍF¥ÍF±NªIdentifierÍF¥ÍF©¤key2T§LiteralÍF¬ÍF±£age¥"age"£let_³VariableDeclarationÍFÈÍFÙ‘`²VariableDeclaratorÍFÌÍFØNªIdentifierÍFÌÍFÓ§value21T§LiteralÍFÖÍFØ¢21£let_³VariableDeclarationÍFïÍG‘`²VariableDeclaratorÍFóÍGNªIdentifierÍFóÍF÷¤key3T§LiteralÍFúÍG¦salary¨"salary"£let_³VariableDeclarationÍGÍG,‘`²VariableDeclaratorÍGÍG+NªIdentifierÍGÍG$§value31T§LiteralÍG'ÍG+Ë@4€     ¤20.5£let_³VariableDeclarationÍGBÍGç‘`²VariableDeclaratorÍGFÍGæNªIdentifierÍGFÍGS­valuesBucket1\°ObjectExpressionÍGVÍGæ“]¨PropertyÍGqÍG~ÂÂÂNªIdentifierÍGqÍGu¤key1NªIdentifierÍGwÍG~§value11¤init]¨PropertyÍG™ÍG¦ÂÂÂNªIdentifierÍG™ÍG¤key2NªIdentifierÍGŸÍG¦§value21¤init]¨PropertyÍGÁÍGÎÂÂÂNªIdentifierÍGÁÍGÅ¤key3NªIdentifierÍGÇÍGÎ§value31¤init£let_³VariableDeclarationÍGıÍH ‘`²VariableDeclaratorÍHÍHNªIdentifierÍHÍH£vbsÔrg•¤type¥start£end¦callee©arguments­NewExpressionÍHÍHNªIdentifierÍHÍH¥Array‘NªIdentifierÍHÍH­valuesBucket1£let^¬TryStatementÍH6ÍK¿O®BlockStatementÍH:ÍJÁe«CatchClauseÍJ×ÍK¿NªIdentifierÍJŞÍJá£errO®BlockStatementÍJãÍK¿“_³VariableDeclarationÍJşÍK‘`²VariableDeclaratorÍKÍKNªIdentifierÍKÍK¤code[°MemberExpressionÍK	ÍKNªIdentifierÍK	ÍK£errNªIdentifierÍKÍK¤codeÂÂ£let_³VariableDeclarationÍK,ÍKF‘`²VariableDeclaratorÍK0ÍKENªIdentifierÍK0ÍK7§message[°MemberExpressionÍK:ÍKENªIdentifierÍK:ÍK=£errNªIdentifierÍK>ÍKE§messageÂÂ£letU³ExpressionStatementÍK`ÍK¨V®CallExpressionÍK`ÍK§[°MemberExpressionÍK`ÍKmNªIdentifierÍK`ÍKg§consoleNªIdentifierÍKhÍKm¥errorÂÂ‘b¯TemplateLiteralÍKnÍK¦’NªIdentifierÍKŠÍK¤codeNªIdentifierÍKœÍK£§message“c¯TemplateElementÍKoÍKˆd¹batchInsert error: code: ¹batchInsert error: code: Âc¯TemplateElementÍKÍKšd«, message: «, message: Âc¯TemplateElementÍK¤ÍK¥d¡ ¡ ÃÂÀW®EmptyStatementÍKÕÍKÖe«CatchClauseÍKûÍMNªIdentifierÍLÍL¥errorO®BlockStatementÍL	ÍM’U³ExpressionStatementÍL ÍLµV®CallExpressionÍL ÍL´[°MemberExpressionÍL ÍL6NªIdentifierÍL ÍL,¬promptActionNªIdentifierÍL-ÍL6©showToastÂÂ‘\°ObjectExpressionÍL7ÍL³’]¨PropertyÍLRÍLsÂÂÂNªIdentifierÍLRÍLY§messageb¯TemplateLiteralÍL[ÍLs‘[°MemberExpressionÍLdÍLqNªIdentifierÍLdÍLi¥errorNªIdentifierÍLjÍLq§messageÂÂ’c¯TemplateElementÍL\ÍLbd®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍLrÍLrd  Ã¤init]¨PropertyÍLÍLœÂÂÂNªIdentifierÍLÍL–¨durationT§LiteralÍL˜ÍLœÍĞ¤2000¤initÂU³ExpressionStatementÍLËÍM V®CallExpressionÍLËÍLÿ[°MemberExpressionÍLËÍLØNªIdentifierÍLËÍLÒ§consoleNªIdentifierÍLÓÍLØ¥errorÂÂ‘b¯TemplateLiteralÍLÙÍLş‘V®CallExpressionÍLçÍLü[°MemberExpressionÍLçÍLõNªIdentifierÍLçÍLë¤JSONNªIdentifierÍLìÍLõ©stringifyÂÂ‘NªIdentifierÍLöÍLû¥errorÂ’c¯TemplateElementÍLÚÍLåd½æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: ½æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍLıÍLıd  ÃÂÀÂNªIdentifierÍM1ÍM7¦ButtonÂU³ExpressionStatementÍMmÍMzV®CallExpressionÍMmÍMy[°MemberExpressionÍMmÍMwNªIdentifierÍMmÍMs¦ButtonNªIdentifierÍMtÍMw£popÂÂÂU³ExpressionStatementÍM„Í[OV®CallExpressionÍM„Í[N[°MemberExpressionÍM„ÍM¢W®ThisExpressionÍM„ÍMˆNªIdentifierÍM‰ÍM¢¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍM£Í[EÀÂÂÂ’NªIdentifierÍM¤ÍMª¦elmtIdNªIdentifierÍM¬ÍM»¯isInitialRenderO®BlockStatementÍMÀÍ[E”U³ExpressionStatementÍMÿÍN V®CallExpressionÍMÿÍN[°MemberExpressionÍMÿÍNNªIdentifierÍMÿÍN¦ButtonNªIdentifierÍNÍN¯createWithLabelÂÂ‘T§LiteralÍNÍN²æ‰¹é‡æ’å…¥æ•°æ®´'æ‰¹é‡æ’å…¥æ•°æ®'ÂU³ExpressionStatementÍN^ÍNrV®CallExpressionÍN^ÍNq[°MemberExpressionÍN^ÍNjNªIdentifierÍN^ÍNd¦ButtonNªIdentifierÍNeÍNj¥widthÂÂ‘T§LiteralÍNkÍNp£90%¥'90%'ÂU³ExpressionStatementÍN°ÍNÁV®CallExpressionÍN°ÍNÀ[°MemberExpressionÍN°ÍN½NªIdentifierÍN°ÍN¶¦ButtonNªIdentifierÍN·ÍN½¦marginÂÂ‘T§LiteralÍN¾ÍN¿¡5ÂU³ExpressionStatementÍNÿÍ[:V®CallExpressionÍNÿÍ[9[°MemberExpressionÍNÿÍONªIdentifierÍNÿÍO¦ButtonNªIdentifierÍOÍO§onClickÂÂ‘Q·ArrowFunctionExpressionÍOÍ[8ÀÂÂÂO®BlockStatementÍOÍ[8‘^¬TryStatementÍOXÍ[)O®BlockStatementÍO\ÍYı“_³VariableDeclarationÍO•ÍTö‘`²VariableDeclaratorÍO›ÍTõNªIdentifierÍO›ÍO£¨contactsa¯ArrayExpressionÍO¦ÍTõ’\°ObjectExpressionÍOÁÍRA“]¨PropertyÍOàÍP™ÂÂÂNªIdentifierÍOàÍOä¤name\°ObjectExpressionÍOæÍP™“]¨PropertyÍP	ÍPÂÂÂNªIdentifierÍP	ÍP¨fullNameT§LiteralÍPÍP¦æå››¨'æå››'¤init]¨PropertyÍP:ÍPIÂÂÂNªIdentifierÍP:ÍPDªfamilyNameT§LiteralÍPFÍPI£æ¥'æ'¤init]¨PropertyÍPlÍPzÂÂÂNªIdentifierÍPlÍPu©givenNameT§LiteralÍPwÍPz£å››¥'å››'¤init¤init]¨PropertyÍP¸ÍQdÂÂÂNªIdentifierÍP¸ÍPÄ¬phoneNumbersa¯ArrayExpressionÍPÆÍQd‘\°ObjectExpressionÍPÇÍQc’]¨PropertyÍPîÍQÂÂÂNªIdentifierÍPîÍPù«phoneNumberT§LiteralÍPûÍQ«13900139000­'13900139000'¤init]¨PropertyÍQ/ÍQ@ÂÂÂNªIdentifierÍQ/ÍQ8©labelNameT§LiteralÍQ:ÍQ@¬ç§»åŠ¨ç”µè¯®'ç§»åŠ¨ç”µè¯'¤init¤init]¨PropertyÍQƒÍR&ÂÂÂNªIdentifierÍQƒÍQ‰¦emailsa¯ArrayExpressionÍQ‹ÍR&‘\°ObjectExpressionÍQŒÍR%’]¨PropertyÍQ³ÍQÌÂÂÂNªIdentifierÍQ³ÍQ¸¥emailT§LiteralÍQºÍQÌ°lisi@example.com²'lisi@example.com'¤init]¨PropertyÍQóÍRÂÂÂNªIdentifierÍQóÍQü©labelNameT§LiteralÍQşÍR¦ä¸ªäºº¨'ä¸ªäºº'¤init¤init\°ObjectExpressionÍR\ÍTŞ“]¨PropertyÍR{ÍS4ÂÂÂNªIdentifierÍR{ÍR¤name\°ObjectExpressionÍRÍS4“]¨PropertyÍR¤ÍR²ÂÂÂNªIdentifierÍR¤ÍR¬¨fullNameT§LiteralÍR®ÍR²¦ç‹äº”¨'ç‹äº”'¤init]¨PropertyÍRÕÍRäÂÂÂNªIdentifierÍRÕÍRßªfamilyNameT§LiteralÍRáÍRä£ç‹¥'ç‹'¤init]¨PropertyÍSÍSÂÂÂNªIdentifierÍSÍS©givenNameT§LiteralÍSÍS£äº”¥'äº”'¤init¤init]¨PropertyÍSSÍSÿÂÂÂNªIdentifierÍSSÍS_¬phoneNumbersa¯ArrayExpressionÍSaÍSÿ‘\°ObjectExpressionÍSbÍSş’]¨PropertyÍS‰ÍS£ÂÂÂNªIdentifierÍS‰ÍS”«phoneNumberT§LiteralÍS–ÍS£«13700137000­'13700137000'¤init]¨PropertyÍSÊÍSÛÂÂÂNªIdentifierÍSÊÍSÓ©labelNameT§LiteralÍSÕÍSÛ¬ç§»åŠ¨ç”µè¯®'ç§»åŠ¨ç”µè¯'¤init¤init]¨PropertyÍTÍTÃÂÂÂNªIdentifierÍTÍT$¦emailsa¯ArrayExpressionÍT&ÍTÃ‘\°ObjectExpressionÍT'ÍTÂ’]¨PropertyÍTNÍTiÂÂÂNªIdentifierÍTNÍTS¥emailT§LiteralÍTUÍTi²wangwu@example.com´'wangwu@example.com'¤init]¨PropertyÍTÍTŸÂÂÂNªIdentifierÍTÍT™©labelNameT§LiteralÍT›ÍTŸ¦å·¥ä½œ¨'å·¥ä½œ'¤init¤init¥const_³VariableDeclarationÍUKÍV~‘`²VariableDeclaratorÍUQÍV}NªIdentifierÍUQÍU\«addPromisesV®CallExpressionÍU_ÍV}[°MemberExpressionÍU_ÍUkNªIdentifierÍU_ÍUg¨contactsNªIdentifierÍUhÍUk£mapÂÂ‘Q·ArrowFunctionExpressionÍUlÍV|ÀÂÂÂ‘NªIdentifierÍUlÍUm¡cO®BlockStatementÍUqÍV|‘f¯ReturnStatementÍUŒÍVeV®CallExpressionÍU“ÍVd[°MemberExpressionÍU“ÍU¼V®CallExpressionÍU“ÍU¶[°MemberExpressionÍU“ÍU¥NªIdentifierÍU“ÍUš§contactNªIdentifierÍU›ÍU¥ªaddContactÂÂ’[°MemberExpressionÍU¦ÍU²W®ThisExpressionÍU¦ÍUªNªIdentifierÍU«ÍU²§contextÂÂNªIdentifierÍU´ÍUµ¡cÂNªIdentifierÍU·ÍU¼¥catchÂÂ‘Q·ArrowFunctionExpressionÍU½ÍVcÀÂÂÂ‘NªIdentifierÍU¾ÍUÁ£errO®BlockStatementÍUÆÍVc’U³ExpressionStatementÍUåÍVV®CallExpressionÍUåÍV[°MemberExpressionÍUåÍUòNªIdentifierÍUåÍUì§consoleNªIdentifierÍUíÍUò¥errorÂÂ‘b¯TemplateLiteralÍUóÍV‘V®CallExpressionÍUÿÍV[°MemberExpressionÍUÿÍVNªIdentifierÍUÿÍV¤JSONNªIdentifierÍVÍV©stringifyÂÂ‘NªIdentifierÍVÍV£errÂ’c¯TemplateElementÍUôÍUıd·æ·»åŠ è”ç³»äººå¤±è´¥: ·æ·»åŠ è”ç³»äººå¤±è´¥: Âc¯TemplateElementÍVÍVd  ÃÂf¯ReturnStatementÍV4ÍV>S¯UnaryExpressionÍV;ÍV=¡-ÃT§LiteralÍV<ÍV=¡1ÂÂ¥constU³ExpressionStatementÍV·ÍYêV®CallExpressionÍV·ÍYé[°MemberExpressionÍV·ÍVÔV®CallExpressionÍV·ÍVÏ[°MemberExpressionÍV·ÍVÂNªIdentifierÍV·ÍV¾§PromiseNªIdentifierÍV¿ÍVÂ£allÂÂ‘NªIdentifierÍVÃÍVÎ«addPromisesÂNªIdentifierÍVĞÍVÔ¤thenÂÂ‘Q·ArrowFunctionExpressionÍVÕÍYèÀÂÂÂ‘NªIdentifierÍVÖÍVàªcontactIdsO®BlockStatementÍVåÍYè’_³VariableDeclarationÍW ÍW?‘`²VariableDeclaratorÍWÍW>NªIdentifierÍWÍW¬successCount[°MemberExpressionÍWÍW>V®CallExpressionÍWÍW7[°MemberExpressionÍWÍW&NªIdentifierÍWÍWªcontactIdsNªIdentifierÍW ÍW&¦filterÂÂ‘Q·ArrowFunctionExpressionÍW'ÍW6ÀÃÂÂ‘NªIdentifierÍW'ÍW)¢idY°BinaryExpressionÍW-ÍW6NªIdentifierÍW-ÍW/¢id£!==S¯UnaryExpressionÍW4ÍW6¡-ÃT§LiteralÍW5ÍW6¡1ÂNªIdentifierÍW8ÍW>¦lengthÂÂ¥constX«IfStatementÍWYÍYÑY°BinaryExpressionÍW]ÍWmNªIdentifierÍW]ÍWi¬successCount¡>T§LiteralÍWlÍWm ¡0O®BlockStatementÍWoÍX’U³ExpressionStatementÍWÍX=V®CallExpressionÍWÍX<[°MemberExpressionÍWÍW¤NªIdentifierÍWÍWš¬promptActionNªIdentifierÍW›ÍW¤©showToastÂÂ‘\°ObjectExpressionÍW¥ÍX;’]¨PropertyÍWÈÍWëÂÂÂNªIdentifierÍWÈÍWÏ§messageb¯TemplateLiteralÍWÑÍWë‘NªIdentifierÍWÙÍWå¬successCount’c¯TemplateElementÍWÒÍW×d¯å·²æˆåŠŸæ·»åŠ ¯å·²æˆåŠŸæ·»åŠ Âc¯TemplateElementÍWæÍWêd¬ä¸ªè”ç³»äºº¬ä¸ªè”ç³»äººÃ¤init]¨PropertyÍXÍXÂÂÂNªIdentifierÍXÍX¨durationT§LiteralÍXÍXÍĞ¤2000¤initÂU³ExpressionStatementÍX[ÍXƒV®CallExpressionÍX[ÍX‚[°MemberExpressionÍX[ÍXgNªIdentifierÍX[ÍXb§consoleNªIdentifierÍXcÍXg¤infoÂÂ‘b¯TemplateLiteralÍXhÍX‘NªIdentifierÍXoÍX{¬successCount’c¯TemplateElementÍXiÍXmd¬æˆåŠŸæ·»åŠ ¬æˆåŠŸæ·»åŠ Âc¯TemplateElementÍX|ÍX€d¬ä¸ªè”ç³»äºº¬ä¸ªè”ç³»äººÃÂO®BlockStatementÍX½ÍYÑ’U³ExpressionStatementÍXÜÍYzV®CallExpressionÍXÜÍYy[°MemberExpressionÍXÜÍXòNªIdentifierÍXÜÍXè¬promptActionNªIdentifierÍXéÍXò©showToastÂÂ‘\°ObjectExpressionÍXóÍYx’]¨PropertyÍYÍY(ÂÂÂNªIdentifierÍYÍY§messageT§LiteralÍYÍY(µæ·»åŠ è”ç³»äººå¤±è´¥·'æ·»åŠ è”ç³»äººå¤±è´¥'¤init]¨PropertyÍYKÍYYÂÂÂNªIdentifierÍYKÍYS¨durationT§LiteralÍYUÍYYÍĞ¤2000¤initÂU³ExpressionStatementÍY˜ÍY¶V®CallExpressionÍY˜ÍYµ[°MemberExpressionÍY˜ÍY¥NªIdentifierÍY˜ÍYŸ§consoleNªIdentifierÍY ÍY¥¥errorÂÂ‘T§LiteralÍY¦ÍY´Ù$æ‰€æœ‰è”ç³»äººæ·»åŠ æ“ä½œå‡å¤±è´¥Ù&'æ‰€æœ‰è”ç³»äººæ·»åŠ æ“ä½œå‡å¤±è´¥'ÂÂe«CatchClauseÍZÍ[)NªIdentifierÍZÍZ¥errorO®BlockStatementÍZÍ[)’U³ExpressionStatementÍZ4ÍZÉV®CallExpressionÍZ4ÍZÈ[°MemberExpressionÍZ4ÍZJNªIdentifierÍZ4ÍZ@¬promptActionNªIdentifierÍZAÍZJ©showToastÂÂ‘\°ObjectExpressionÍZKÍZÇ’]¨PropertyÍZfÍZ‡ÂÂÂNªIdentifierÍZfÍZm§messageb¯TemplateLiteralÍZoÍZ‡‘[°MemberExpressionÍZxÍZ…NªIdentifierÍZxÍZ}¥errorNªIdentifierÍZ~ÍZ…§messageÂÂ’c¯TemplateElementÍZpÍZvd®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍZ†ÍZ†d  Ã¤init]¨PropertyÍZ¢ÍZ°ÂÂÂNªIdentifierÍZ¢ÍZª¨durationT§LiteralÍZ¬ÍZ°ÍĞ¤2000¤initÂU³ExpressionStatementÍZßÍ[V®CallExpressionÍZßÍ[[°MemberExpressionÍZßÍZìNªIdentifierÍZßÍZæ§consoleNªIdentifierÍZçÍZì¥errorÂÂ‘b¯TemplateLiteralÍZíÍ[‘V®CallExpressionÍZıÍ[[°MemberExpressionÍZıÍ[NªIdentifierÍZıÍ[¤JSONNªIdentifierÍ[Í[©stringifyÂÂ‘NªIdentifierÍ[Í[¥errorÂ’c¯TemplateElementÍZîÍZûdÙ#æ‰¹é‡æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: Ù#æ‰¹é‡æ·»åŠ è”ç³»äººæ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍ[Í[d  ÃÂÀÂNªIdentifierÍ[GÍ[M¦ButtonÂU³ExpressionStatementÍ[…Í[’V®CallExpressionÍ[…Í[‘[°MemberExpressionÍ[…Í[NªIdentifierÍ[…Í[‹¦ButtonNªIdentifierÍ[ŒÍ[£popÂÂÂU³ExpressionStatementÍ[œÍfÿV®CallExpressionÍ[œÍfş[°MemberExpressionÍ[œÍ[ºW®ThisExpressionÍ[œÍ[ NªIdentifierÍ[¡Í[º¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍ[»ÍfõÀÂÂÂ’NªIdentifierÍ[¼Í[Â¦elmtIdNªIdentifierÍ[ÄÍ[Ó¯isInitialRenderO®BlockStatementÍ[ØÍfõ”U³ExpressionStatementÍ\Í\3V®CallExpressionÍ\Í\2[°MemberExpressionÍ\Í\#NªIdentifierÍ\Í\¦ButtonNªIdentifierÍ\Í\#¯createWithLabelÂÂ‘T§LiteralÍ\$Í\1«Add Contact­'Add Contact'ÂU³ExpressionStatementÍ\gÍ\{V®CallExpressionÍ\gÍ\z[°MemberExpressionÍ\gÍ\sNªIdentifierÍ\gÍ\m¦ButtonNªIdentifierÍ\nÍ\s¥widthÂÂ‘T§LiteralÍ\tÍ\y£90%¥'90%'ÂU³ExpressionStatementÍ\¯Í\ÀV®CallExpressionÍ\¯Í\¿[°MemberExpressionÍ\¯Í\¼NªIdentifierÍ\¯Í\µ¦ButtonNªIdentifierÍ\¶Í\¼¦marginÂÂ‘T§LiteralÍ\½Í\¾¡5ÂU³ExpressionStatementÍ\ôÍfêV®CallExpressionÍ\ôÍfé[°MemberExpressionÍ\ôÍ]NªIdentifierÍ\ôÍ\ú¦ButtonNªIdentifierÍ\ûÍ]§onClickÂÂ‘Q·ArrowFunctionExpressionÍ]ÍfèÀÂÂÂO®BlockStatementÍ]	Ífè‘^¬TryStatementÍ]TÍfÙO®BlockStatementÍ]XÍe­’_³VariableDeclarationÍ]™ÍbÍ‘`²VariableDeclaratorÍ]ŸÍbÌNªIdentifierÍ]ŸÍ]®¯detailedContact\°ObjectExpressionÍ]±ÍbÌ”]¨PropertyÍ]ÌÍ^¤ÂÂÂNªIdentifierÍ]ÌÍ]Ğ¤name\°ObjectExpressionÍ]ÒÍ^¤”]¨PropertyÍ]ñÍ]ÿÂÂÂNªIdentifierÍ]ñÍ]ù¨fullNameT§LiteralÍ]ûÍ]ÿ¦èµµå…­¨'èµµå…­'¤init]¨PropertyÍ^Í^-ÂÂÂNªIdentifierÍ^Í^(ªfamilyNameT§LiteralÍ^*Í^-£èµµ¥'èµµ'¤init]¨PropertyÍ^LÍ^ZÂÂÂNªIdentifierÍ^LÍ^U©givenNameT§LiteralÍ^WÍ^Z£å…­¥'å…­'¤init]¨PropertyÍ^yÍ^‰ÂÂÂNªIdentifierÍ^yÍ^ƒªnamePrefixT§LiteralÍ^…Í^‰¦å…ˆç”Ÿ¨'å…ˆç”Ÿ'¤init¤init]¨PropertyÍ^¿Í`EÂÂÂNªIdentifierÍ^¿Í^Ë¬phoneNumbersa¯ArrayExpressionÍ^ÍÍ`E’\°ObjectExpressionÍ^ìÍ_|’]¨PropertyÍ_Í_)ÂÂÂNªIdentifierÍ_Í_«phoneNumberT§LiteralÍ_Í_)«13600136000­'13600136000'¤init]¨PropertyÍ_LÍ_]ÂÂÂNªIdentifierÍ_LÍ_U©labelNameT§LiteralÍ_WÍ_]¬ç§»åŠ¨ç”µè¯®'ç§»åŠ¨ç”µè¯'¤init\°ObjectExpressionÍ_›Í`*’]¨PropertyÍ_¾Í_ÙÂÂÂNªIdentifierÍ_¾Í_É«phoneNumberT§LiteralÍ_ËÍ_Ù¬010-88889999®'010-88889999'¤init]¨PropertyÍ_üÍ`ÂÂÂNªIdentifierÍ_üÍ`©labelNameT§LiteralÍ`Í`¦å·¥ä½œ¨'å·¥ä½œ'¤init¤init]¨PropertyÍ``ÍaêÂÂÂNªIdentifierÍ``Í`f¦emailsa¯ArrayExpressionÍ`hÍaê’\°ObjectExpressionÍ`‡Ía’]¨PropertyÍ`ªÍ`ÆÂÂÂNªIdentifierÍ`ªÍ`¯¥emailT§LiteralÍ`±Í`Æ³zhaoliu@example.comµ'zhaoliu@example.com'¤init]¨PropertyÍ`éÍ`øÂÂÂNªIdentifierÍ`éÍ`ò©labelNameT§LiteralÍ`ôÍ`ø¦å·¥ä½œ¨'å·¥ä½œ'¤init\°ObjectExpressionÍa6ÍaÏ’]¨PropertyÍaYÍa~ÂÂÂNªIdentifierÍaYÍa^¥emailT§LiteralÍa`Ía~¼zhaoliu_personal@example.com¾'zhaoliu_personal@example.com'¤init]¨PropertyÍa¡Ía°ÂÂÂNªIdentifierÍa¡Íaª©labelNameT§LiteralÍa¬Ía°¦ä¸ªäºº¨'ä¸ªäºº'¤init¤init]¨PropertyÍbÍbµÂÂÂNªIdentifierÍbÍb¨websitesa¯ArrayExpressionÍbÍbµ‘\°ObjectExpressionÍb.Íbš‘]¨PropertyÍbQÍb{ÂÂÂNªIdentifierÍbQÍbX§websiteT§LiteralÍbZÍb{¿https://www.example.com/zhaoliuÙ!'https://www.example.com/zhaoliu'¤init¤init¥constU³ExpressionStatementÍcÍešV®CallExpressionÍcÍe™[°MemberExpressionÍcÍdkV®CallExpressionÍcÍde[°MemberExpressionÍcÍc7V®CallExpressionÍcÍc2[°MemberExpressionÍcÍcNªIdentifierÍcÍc§contactNªIdentifierÍc	ÍcªaddContactÂÂ’[°MemberExpressionÍcÍc W®ThisExpressionÍcÍcNªIdentifierÍcÍc §contextÂÂNªIdentifierÍc"Íc1¯detailedContactÂNªIdentifierÍc3Íc7¤thenÂÂ‘Q·ArrowFunctionExpressionÍc8ÍddÀÂÂÂ‘NªIdentifierÍc9ÍcB©contactIdO®BlockStatementÍcGÍdd’U³ExpressionStatementÍcbÍdV®CallExpressionÍcbÍd[°MemberExpressionÍcbÍcxNªIdentifierÍcbÍcn¬promptActionNªIdentifierÍcoÍcx©showToastÂÂ‘\°ObjectExpressionÍcyÍd’]¨PropertyÍc˜Íc¾ÂÂÂNªIdentifierÍc˜ÍcŸ§messageb¯TemplateLiteralÍc¡Íc¾‘NªIdentifierÍc³Íc¼©contactId’c¯TemplateElementÍc¢Íc±dÙ%å·²æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: Ù%å·²æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: Âc¯TemplateElementÍc½Íc½d  Ã¤init]¨PropertyÍcİÍcëÂÂÂNªIdentifierÍcİÍcå¨durationT§LiteralÍcçÍcëÍĞ¤2000¤initÂU³ExpressionStatementÍd"ÍdMV®CallExpressionÍd"ÍdL[°MemberExpressionÍd"Íd.NªIdentifierÍd"Íd)§consoleNªIdentifierÍd*Íd.¤infoÂÂ‘b¯TemplateLiteralÍd/ÍdK‘NªIdentifierÍd@ÍdI©contactId’c¯TemplateElementÍd0Íd>dÙ"æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: Ù"æˆåŠŸæ·»åŠ è¯¦ç»†è”ç³»äººï¼ŒID: Âc¯TemplateElementÍdJÍdJd  ÃÂÂNªIdentifierÍdfÍdk¥catchÂÂ‘Q·ArrowFunctionExpressionÍdlÍe˜ÀÂÂÂ‘NªIdentifierÍdmÍdp£errO®BlockStatementÍduÍe˜’U³ExpressionStatementÍdÍe4V®CallExpressionÍdÍe3[°MemberExpressionÍdÍd¦NªIdentifierÍdÍdœ¬promptActionNªIdentifierÍdÍd¦©showToastÂÂ‘\°ObjectExpressionÍd§Íe2’]¨PropertyÍdÆÍdêÂÂÂNªIdentifierÍdÆÍdÍ§messageb¯TemplateLiteralÍdÏÍdê‘[°MemberExpressionÍdİÍdèNªIdentifierÍdİÍdà£errNªIdentifierÍdáÍdè§messageÂÂ’c¯TemplateElementÍdĞÍdÛd½æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: ½æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: Âc¯TemplateElementÍdéÍdéd  Ã¤init]¨PropertyÍe	ÍeÂÂÂNªIdentifierÍe	Íe¨durationT§LiteralÍeÍeÍĞ¤2000¤initÂU³ExpressionStatementÍeNÍeV®CallExpressionÍeNÍe€[°MemberExpressionÍeNÍe[NªIdentifierÍeNÍeU§consoleNªIdentifierÍeVÍe[¥errorÂÂ‘b¯TemplateLiteralÍe\Íe‘V®CallExpressionÍejÍe}[°MemberExpressionÍejÍexNªIdentifierÍejÍen¤JSONNªIdentifierÍeoÍex©stringifyÂÂ‘NªIdentifierÍeyÍe|£errÂ’c¯TemplateElementÍe]Íehd½æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: ½æ·»åŠ è¯¦ç»†è”ç³»äººå¤±è´¥: Âc¯TemplateElementÍe~Íe~d  ÃÂÂe«CatchClauseÍe¿ÍfÙNªIdentifierÍeÆÍeË¥errorO®BlockStatementÍeÍÍfÙ’U³ExpressionStatementÍeäÍfyV®CallExpressionÍeäÍfx[°MemberExpressionÍeäÍeúNªIdentifierÍeäÍeğ¬promptActionNªIdentifierÍeñÍeú©showToastÂÂ‘\°ObjectExpressionÍeûÍfw’]¨PropertyÍfÍf7ÂÂÂNªIdentifierÍfÍf§messageb¯TemplateLiteralÍfÍf7‘[°MemberExpressionÍf(Íf5NªIdentifierÍf(Íf-¥errorNªIdentifierÍf.Íf5§messageÂÂ’c¯TemplateElementÍf Íf&d®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍf6Íf6d  Ã¤init]¨PropertyÍfRÍf`ÂÂÂNªIdentifierÍfRÍfZ¨durationT§LiteralÍf\Íf`ÍĞ¤2000¤initÂU³ExpressionStatementÍfÍfÆV®CallExpressionÍfÍfÅ[°MemberExpressionÍfÍfœNªIdentifierÍfÍf–§consoleNªIdentifierÍf—Ífœ¥errorÂÂ‘b¯TemplateLiteralÍfÍfÄ‘V®CallExpressionÍf­ÍfÂ[°MemberExpressionÍf­Íf»NªIdentifierÍf­Íf±¤JSONNªIdentifierÍf²Íf»©stringifyÂÂ‘NªIdentifierÍf¼ÍfÁ¥errorÂ’c¯TemplateElementÍfÍf«dÙ#æ·»åŠ è¯¦ç»†è”ç³»äººæ“ä½œå¼‚å¸¸: Ù#æ·»åŠ è¯¦ç»†è”ç³»äººæ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍfÃÍfÃd  ÃÂÀÂNªIdentifierÍf÷Ífı¦ButtonÂU³ExpressionStatementÍg+Íg8V®CallExpressionÍg+Íg7[°MemberExpressionÍg+Íg5NªIdentifierÍg+Íg1¦ButtonNªIdentifierÍg2Íg5£popÂÂÂU³ExpressionStatementÍgBÍkÉV®CallExpressionÍgBÍkÈ[°MemberExpressionÍgBÍg`W®ThisExpressionÍgBÍgFNªIdentifierÍgGÍg`¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍgaÍk¿ÀÂÂÂ’NªIdentifierÍgbÍgh¦elmtIdNªIdentifierÍgjÍgy¯isInitialRenderO®BlockStatementÍg~Ík¿”U³ExpressionStatementÍg¶ÍgßV®CallExpressionÍg¶ÍgŞ[°MemberExpressionÍg¶ÍgÌNªIdentifierÍg¶Íg¼¦ButtonNªIdentifierÍg½ÍgÌ¯createWithLabelÂÂ‘T§LiteralÍgÍÍgİ®Update Contact°'Update Contact'ÂU³ExpressionStatementÍhÍh*V®CallExpressionÍhÍh)[°MemberExpressionÍhÍh"NªIdentifierÍhÍh¦ButtonNªIdentifierÍhÍh"¥widthÂÂ‘T§LiteralÍh#Íh(£90%¥'90%'ÂU³ExpressionStatementÍhaÍhrV®CallExpressionÍhaÍhq[°MemberExpressionÍhaÍhnNªIdentifierÍhaÍhg¦ButtonNªIdentifierÍhhÍhn¦marginÂÂ‘T§LiteralÍhoÍhp¡5ÂU³ExpressionStatementÍh©Ík´V®CallExpressionÍh©Ík³[°MemberExpressionÍh©Íh·NªIdentifierÍh©Íh¯¦ButtonNªIdentifierÍh°Íh·§onClickÂÂ‘Q·ArrowFunctionExpressionÍh¸Ík²ÀÂÂÂO®BlockStatementÍh¾Ík²‘^¬TryStatementÍi$Ík£O®BlockStatementÍi(Íjy’U³ExpressionStatementÍi?ÍjV®CallExpressionÍi?Íj[°MemberExpressionÍi?ÍiUNªIdentifierÍi?ÍiK¬promptActionNªIdentifierÍiLÍiU©showToastÂÂ‘\°ObjectExpressionÍiVÍj
+’]¨PropertyÍiqÍiÊÂÂÂNªIdentifierÍiqÍix§messageT§LiteralÍizÍiÊÙ¤æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨contact.getContactå’ŒupdateContact APIï¼Œä½†å½“å‰ç¯å¢ƒå¯èƒ½ä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œè¯¥åŠŸèƒ½å¯ä»¥æŸ¥æ‰¾å¹¶æ›´æ–°è”ç³»äººæ•°æ®ã€‚Ù¦'æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨contact.getContactå’ŒupdateContact APIï¼Œä½†å½“å‰ç¯å¢ƒå¯èƒ½ä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œè¯¥åŠŸèƒ½å¯ä»¥æŸ¥æ‰¾å¹¶æ›´æ–°è”ç³»äººæ•°æ®ã€‚'¤init]¨PropertyÍiåÍióÂÂÂNªIdentifierÍiåÍií¨durationT§LiteralÍiïÍióÍ¸¤3000¤initÂU³ExpressionStatementÍj"ÍjfV®CallExpressionÍj"Íje[°MemberExpressionÍj"Íj.NªIdentifierÍj"Íj)§consoleNªIdentifierÍj*Íj.¤infoÂÂ‘T§LiteralÍj/ÍjdÙyè”ç³»äººæ›´æ–°åŠŸèƒ½æ¼”ç¤ºï¼šé¦–å…ˆä¼šæŸ¥æ‰¾é‚®ç®±ä¸ºtest@example.comçš„è”ç³»äººï¼Œç„¶åæ›´æ–°å…¶å§“åå’Œç”µè¯ä¿¡æ¯Ù{'è”ç³»äººæ›´æ–°åŠŸèƒ½æ¼”ç¤ºï¼šé¦–å…ˆä¼šæŸ¥æ‰¾é‚®ç®±ä¸ºtest@example.comçš„è”ç³»äººï¼Œç„¶åæ›´æ–°å…¶å§“åå’Œç”µè¯ä¿¡æ¯'Âe«CatchClauseÍj‹Ík£NªIdentifierÍj’Íj—¥errorO®BlockStatementÍj™Ík£’U³ExpressionStatementÍj°ÍkEV®CallExpressionÍj°ÍkD[°MemberExpressionÍj°ÍjÆNªIdentifierÍj°Íj¼¬promptActionNªIdentifierÍj½ÍjÆ©showToastÂÂ‘\°ObjectExpressionÍjÇÍkC’]¨PropertyÍjâÍkÂÂÂNªIdentifierÍjâÍjé§messageb¯TemplateLiteralÍjëÍk‘[°MemberExpressionÍjôÍkNªIdentifierÍjôÍjù¥errorNªIdentifierÍjúÍk§messageÂÂ’c¯TemplateElementÍjìÍjòd®æ“ä½œå¼‚å¸¸: ®æ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍkÍkd  Ã¤init]¨PropertyÍkÍk,ÂÂÂNªIdentifierÍkÍk&¨durationT§LiteralÍk(Ík,ÍĞ¤2000¤initÂU³ExpressionStatementÍk[ÍkV®CallExpressionÍk[Ík[°MemberExpressionÍk[ÍkhNªIdentifierÍk[Íkb§consoleNªIdentifierÍkcÍkh¥errorÂÂ‘b¯TemplateLiteralÍkiÍk‘V®CallExpressionÍkwÍkŒ[°MemberExpressionÍkwÍk…NªIdentifierÍkwÍk{¤JSONNªIdentifierÍk|Ík…©stringifyÂÂ‘NªIdentifierÍk†Ík‹¥errorÂ’c¯TemplateElementÍkjÍkud½æ›´æ–°è”ç³»äººæ“ä½œå¼‚å¸¸: ½æ›´æ–°è”ç³»äººæ“ä½œå¼‚å¸¸: Âc¯TemplateElementÍkÍkd  ÃÂÀÂNªIdentifierÍkÁÍkÇ¦ButtonÂU³ExpressionStatementÍkøÍlV®CallExpressionÍkøÍl[°MemberExpressionÍkøÍlNªIdentifierÍkøÍkş¦ButtonNªIdentifierÍkÿÍl£popÂÂÂU³ExpressionStatementÍlÍo2V®CallExpressionÍlÍo1[°MemberExpressionÍlÍl-W®ThisExpressionÍlÍlNªIdentifierÍlÍl-¹observeComponentCreation2ÂÂ’Q·ArrowFunctionExpressionÍl.Ío(ÀÂÂÂ’NªIdentifierÍl/Íl5¦elmtIdNªIdentifierÍl7ÍlF¯isInitialRenderO®BlockStatementÍlKÍo(”U³ExpressionStatementÍl‘ÍlÆV®CallExpressionÍl‘ÍlÅ[°MemberExpressionÍl‘Íl§NªIdentifierÍl‘Íl—¦ButtonNªIdentifierÍl˜Íl§¯createWithLabelÂÂ‘T§LiteralÍl¨ÍlÄºUpdate Contact (DataShare)¼'Update Contact (DataShare)'ÂU³ExpressionStatementÍmÍmV®CallExpressionÍmÍm[°MemberExpressionÍmÍmNªIdentifierÍmÍm¦ButtonNªIdentifierÍmÍm¥widthÂÂ‘T§LiteralÍmÍm£90%¥'90%'ÂU³ExpressionStatementÍmdÍmuV®CallExpressionÍmdÍmt[°MemberExpressionÍmdÍmqNªIdentifierÍmdÍmj¦ButtonNªIdentifierÍmkÍmq¦marginÂÂ‘T§LiteralÍmrÍms¡5ÂU³ExpressionStatementÍmºÍoV®CallExpressionÍmºÍo[°MemberExpressionÍmºÍmÈNªIdentifierÍmºÍmÀ¦ButtonNªIdentifierÍmÁÍmÈ§onClickÂÂ‘Q·ArrowFunctionExpressionÍmÉÍoÀÂÂÂO®BlockStatementÍmÏÍo’U³ExpressionStatementÍnÍnÂV®CallExpressionÍnÍnÁ[°MemberExpressionÍnÍn+NªIdentifierÍnÍn!¬promptActionNªIdentifierÍn"Ín+©showToastÂÂ‘\°ObjectExpressionÍn,ÍnÀ’]¨PropertyÍnCÍnˆÂÂÂNªIdentifierÍnCÍnJ§messageT§LiteralÍnLÍnˆÙ‚æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨DataShare APIï¼Œä½†å½“å‰ç¯å¢ƒä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œå¯ä»¥é€šè¿‡DataShareæ›´æ–°è”ç³»äººæ•°æ®ã€‚Ù„'æ­¤åŠŸèƒ½éœ€è¦ä½¿ç”¨DataShare APIï¼Œä½†å½“å‰ç¯å¢ƒä¸æ”¯æŒã€‚åœ¨å®é™…è®¾å¤‡ä¸Šï¼Œå¯ä»¥é€šè¿‡DataShareæ›´æ–°è”ç³»äººæ•°æ®ã€‚'¤init]¨PropertyÍnŸÍn­ÂÂÂNªIdentifierÍnŸÍn§¨durationT§LiteralÍn©Ín­Í¸¤3000¤initÂU³ExpressionStatementÍnÔÍoV®CallExpressionÍnÔÍo[°MemberExpressionÍnÔÍnàNªIdentifierÍnÔÍnÛ§consoleNªIdentifierÍnÜÍnà¤infoÂÂ‘T§LiteralÍnáÍo
+ÙIDataShare APIç›®å‰ä¸å¯ç”¨ï¼Œæ— æ³•æ¼”ç¤ºDataShareæ›´æ–°è”ç³»äººåŠŸèƒ½ÙK'DataShare APIç›®å‰ä¸å¯ç”¨ï¼Œæ— æ³•æ¼”ç¤ºDataShareæ›´æ–°è”ç³»äººåŠŸèƒ½'ÂÂNªIdentifierÍo*Ío0¦ButtonÂU³ExpressionStatementÍooÍo|V®CallExpressionÍooÍo{[°MemberExpressionÍooÍoyNªIdentifierÍooÍou¦ButtonNªIdentifierÍovÍoy£popÂÂÂU³ExpressionStatementÍo†Ío“V®CallExpressionÍo†Ío’[°MemberExpressionÍo†ÍoNªIdentifierÍo†ÍoŒ¦ColumnNªIdentifierÍoÍo£popÂÂÂP°MethodDefinitionÍo ÍoØÂÂNªIdentifierÍo Ío¨¨rerender¦methodQ²FunctionExpressionÍo¨ÍoØÀÂÂÂO®BlockStatementÍo«ÍoØ‘U³ExpressionStatementÍo¶ÍoÑV®CallExpressionÍo¶ÍoĞ[°MemberExpressionÍo¶ÍoÎW®ThisExpressionÍo¶ÍoºNªIdentifierÍo»ÍoÎ³updateDirtyElementsÂÂÂÀ“Ôrh•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì®‘Ôri”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡Ì“NªIdentifierÌ‡Ì“¬promptActionT§LiteralÌ™Ì­²@ohos.promptAction´'@ohos.promptAction'h±ImportDeclarationÌ°Ìä‘i¶ImportDefaultSpecifierÌ·ÌÆNªIdentifierÌ·ÌÆ¯calendarManagerT§LiteralÌÌÌãµ@ohos.calendarManager·"@ohos.calendarManager"h±ImportDeclarationÌæÍ
+‘i¶ImportDefaultSpecifierÌíÌôNªIdentifierÌíÌô§contactT§LiteralÌúÍ	­@ohos.contact¯'@ohos.contact'

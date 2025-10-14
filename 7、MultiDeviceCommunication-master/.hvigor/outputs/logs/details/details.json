@@ -1,0 +1,43 @@
+{
+  "HVIGOR_OHOS_PLUGIN": {
+    "MODULES": [
+      {
+        "MODULE_NAME": "f7a42fe7211f98ac7a60a285ac3a9e87",
+        "API_TYPE": "stageMode"
+      },
+      {
+        "MODULE_NAME": "106a6c241b8797f52e1e77317b96a201",
+        "API_TYPE": "stageMode"
+      },
+      {
+        "MODULE_NAME": "071144c83e77b730ff2e28ca1d27fe24",
+        "API_TYPE": "stageMode"
+      },
+      {
+        "MODULE_NAME": "593616de15330c0fb2d55e55410bf994",
+        "API_TYPE": "stageMode"
+      }
+    ],
+    "BUILD_MODE": "debug"
+  },
+  "HVIGOR": {
+    "IS_INCREMENTAL": true,
+    "IS_DAEMON": false,
+    "IS_PARALLEL": true,
+    "IS_HVIGORFILE_TYPE_CHECK": false,
+    "TASK_TIME": {},
+    "CONFIG_PROPERTIES": {
+      "enableSignTask": true,
+      "skipNativeIncremental": false,
+      "hvigor_keepDependency": true
+    },
+    "BUILD_ID": "202509292112511850",
+    "ERROR_MESSAGE": [
+      {
+        "CODE": "00000000",
+        "TIMESTAMP": "1759151573266"
+      }
+    ],
+    "TOTAL_TIME": 2091178700
+  }
+}

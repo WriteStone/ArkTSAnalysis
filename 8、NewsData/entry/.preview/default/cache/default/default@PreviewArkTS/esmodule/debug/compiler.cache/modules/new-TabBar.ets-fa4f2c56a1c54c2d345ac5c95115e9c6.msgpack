@@ -1,0 +1,247 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚÀif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License,Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import NewsList from '../view/NewsList';
+import { CommonConstant as Const } from '../common/constant/CommonConstant';
+import NewsViewModel from '../viewmodel/NewsViewModel';
+export default class TabBar extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__tabBarArray = new ObservedPropertyObjectPU(NewsViewModel.getDefaultTypeList(), this, "tabBarArray");
+        this.__currentIndex = new ObservedPropertySimplePU(0, this, "currentIndex");
+        this.__currentPage = new ObservedPropertySimplePU(1, this, "currentPage");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.tabBarArray !== undefined) {
+            this.tabBarArray = params.tabBarArray;
+        }
+        if (params.currentIndex !== undefined) {
+            this.currentIndex = params.currentIndex;
+        }
+        if (params.currentPage !== undefined) {
+            this.currentPage = params.currentPage;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__tabBarArray.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentIndex.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentPage.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__tabBarArray.aboutToBeDeleted();
+        this.__currentIndex.aboutToBeDeleted();
+        this.__currentPage.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get tabBarArray() {
+        return this.__tabBarArray.get();
+    }
+    set tabBarArray(newValue) {
+        this.__tabBarArray.set(newValue);
+    }
+    get currentIndex() {
+        return this.__currentIndex.get();
+    }
+    set currentIndex(newValue) {
+        this.__currentIndex.set(newValue);
+    }
+    get currentPage() {
+        return this.__currentPage.get();
+    }
+    set currentPage(newValue) {
+        this.__currentPage.set(newValue);
+    }
+    TabBuilder(index, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("entry/src/main/ets/view/TabBar.ets(31:5)", "entry");
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.tabBarArray[index].name);
+            Text.debugLine("entry/src/main/ets/view/TabBar.ets(32:7)", "entry");
+            Text.height(Const.FULL_HEIGHT);
+            Text.padding({ left: Const.TabBars_HORIZONTAL_PADDING, right: Const.TabBars_HORIZONTAL_PADDING });
+            Text.fontSize(this.currentIndex === index ? Const.TabBars_SELECT_TEXT_FONT_SIZE : Const.TabBars_UN_SELECT_TEXT_FONT_SIZE);
+            Text.fontWeight(this.currentIndex === index ? Const.TabBars_SELECT_TEXT_FONT_WEIGHT : Const.TabBars_UN_SELECT_TEXT_FONT_WEIGHT);
+            Text.fontColor({ "id": 16777244, "type": 10001, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" });
+        }, Text);
+        Text.pop();
+        Column.pop();
+    }
+    aboutToAppear() {
+        // Request the news category.
+        NewsViewModel.getNewsTypeList().then((typeList) => {
+            this.tabBarArray = typeList;
+        }).catch((typeList) => {
+            this.tabBarArray = typeList;
+        });
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Tabs.create();
+            Tabs.debugLine("entry/src/main/ets/view/TabBar.ets(51:5)", "entry");
+            Tabs.barHeight(Const.TabBars_BAR_HEIGHT);
+            Tabs.barMode(BarMode.Scrollable);
+            Tabs.barWidth(Const.TabBars_BAR_WIDTH);
+            Tabs.onChange((index) => {
+                this.currentIndex = index;
+                this.currentPage = 1;
+            });
+            Tabs.vertical(false);
+        }, Tabs);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const tabsItem = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    TabContent.create(() => {
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.debugLine("entry/src/main/ets/view/TabBar.ets(54:11)", "entry");
+                        }, Column);
+                        {
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                if (isInitialRender) {
+                                    let componentCall = new NewsList(this, { currentIndex: this.__currentIndex }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/TabBar.ets", line: 55, col: 13 });
+                                    ViewPU.create(componentCall);
+                                    let paramsLambda = () => {
+                                        return {
+                                            currentIndex: this.currentIndex
+                                        };
+                                    };
+                                    componentCall.paramsGenerator_ = paramsLambda;
+                                }
+                                else {
+                                    this.updateStateVarsOfChildByElmtId(elmtId, {});
+                                }
+                            }, { name: "NewsList" });
+                        }
+                        Column.pop();
+                    });
+                    TabContent.tabBar({ builder: () => {
+                            this.TabBuilder.call(this, tabsItem.id);
+                        } });
+                    TabContent.debugLine("entry/src/main/ets/view/TabBar.ets(53:9)", "entry");
+                }, TabContent);
+                TabContent.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.tabBarArray, forEachItemGenFunction, (item) => JSON.stringify(item), false, false);
+        }, ForEach);
+        ForEach.pop();
+        Tabs.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+//# sourceMappingURL=TabBar.js.mapÂ“Ù\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NewsList.etsÙmC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\common\constant\CommonConstant.etsÙfC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsViewModel.etsÙZC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\TabBar.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ=C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entryÙ7C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleName®../view/TabBar¥entryÙ=C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entryÃÃÚ	y/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License,Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import NewsList from '../view/NewsList';
+import { CommonConstant as Const } from '../common/constant/CommonConstant';
+import NewsTypeModel from '../viewmodel/NewsTypeModel';
+import NewsViewModel from '../viewmodel/NewsViewModel';
+
+/**
+ * The tabBar component.
+ */
+@Component
+export default struct TabBar {
+  @State tabBarArray: NewsTypeModel[] = NewsViewModel.getDefaultTypeList();
+  @State currentIndex: number = 0;
+  @State currentPage: number = 1;
+
+  @Builder TabBuilder(index: number) {
+    Column() {
+      Text(this.tabBarArray[index].name)
+        .height(Const.FULL_HEIGHT)
+        .padding({ left: Const.TabBars_HORIZONTAL_PADDING, right: Const.TabBars_HORIZONTAL_PADDING })
+        .fontSize(this.currentIndex === index ? Const.TabBars_SELECT_TEXT_FONT_SIZE : Const.TabBars_UN_SELECT_TEXT_FONT_SIZE)
+        .fontWeight(this.currentIndex === index ? Const.TabBars_SELECT_TEXT_FONT_WEIGHT : Const.TabBars_UN_SELECT_TEXT_FONT_WEIGHT)
+        .fontColor($r('app.color.fontColor_text3'))
+    }
+  }
+
+  aboutToAppear() {
+    // Request the news category.
+    NewsViewModel.getNewsTypeList().then((typeList: NewsTypeModel[]) => {
+      this.tabBarArray = typeList;
+    }).catch((typeList: NewsTypeModel[]) => {
+      this.tabBarArray = typeList;
+    });
+  }
+
+  build() {
+    Tabs() {
+      ForEach(this.tabBarArray, (tabsItem: NewsTypeModel) => {
+        TabContent() {
+          Column() {
+            NewsList({ currentIndex: $currentIndex })
+          }
+        }
+        .tabBar(this.TabBuilder(tabsItem.id))
+      }, (item: NewsTypeModel) => JSON.stringify(item));
+    }
+    .barHeight(Const.TabBars_BAR_HEIGHT)
+    .barMode(BarMode.Scrollable)
+    .barWidth(Const.TabBars_BAR_WIDTH)
+    .onChange((index: number) => {
+      this.currentIndex = index;
+      this.currentPage = 1;
+    })
+    .vertical(false)
+  }
+}ÀÔrD“Ù!../common/constant/CommonConstant°../view/NewsListº../viewmodel/NewsViewModelÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙmC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\common\constant\CommonConstant.etsAÃªoh-resolveÂEAÂÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NewsList.etsAÃªoh-resolveÂEAÂÙfC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsViewModel.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings©TabBar.js ‘ªTabBar.etsÜ š‘”    ‘” –”   ” ” ” ”' '”( (š”   ” ”	 	” ” ”   ”" "”( (”ÌK ÌK”ÌL ÌL–”   ” ” ” ”6 6”7 7–”   ” ” ” ” ” ‘”  •”: (”ÌG 5”ÌH 6”ÌZ ÌH”Ì\ ÌJ’”;  ”< !’”: ”;  ‘” 7’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ”” ” ” ” #’” ” 
+›” ” 
+” ” ” ”( ”) ”. !”/ "”0 #”4 '˜” ” 
+”  	”  ”  ”  ”  ”)  !Ü ” ” 
+” !	” !” !” !” !”! !”& !”' !”ÌA !9”ÌC !;”ÌH !Ì@”ÌJ !ÌB”ÌO !ÌG”ÌP !ÌH”Ìj !Ìb”Ìl !ÌdÜ ” ” 
+” "	” "” "” "” "”+ "#”0 "(”5 "-”6 ".”7 "/”8 "0”= "5”> "6”Ì[ "ÌS”Ì\ "ÌT”Ì] "ÌU”Ì^ "ÌV”Ìc "Ì[”Ìd "Ì\”Ì„ "Ì|Ü ” ” 
+” #	” #” #”  #”! #”- #%”2 #*”7 #/”8 #0”9 #1”: #2”? #7”Ì@ #8”Ì_ #ÌW”Ì` #ÌX”Ìa #ÌY”Ìb #ÌZ”Ìg #Ì_”Ìh #Ì`”ÌŠ #Ì‚”” ” 
+” $	” $’” ” 
+’” ” 
+‘” &’” (” (’” )”% )!œ” *” *” *”% *!”' *#”( *$”, *(”- *)”. **”6 *ÌC”8 *ÌE”: *ÌG—” +” +
+” +” +” +”' +!”( +"š” ,”	 ,”
+ ,” ,” ,” ,” ,” ,'” ,)” ,+—” -” -
+” -” -” -”' -!”( -"”” .”	 .”
+ .” .’” /” /‘” 1’” 2” 2˜” 2” 2” <” <” <”  <”! <”3 <'˜” 2” 2” =” =” =”  =”! =”+ =˜” 2” 2” >” >” >” >”  >”1 >%™” 2” 2” ?” ?” ?” ?”  ?”" ?”$ ? —” Ì@” Ì@
+” Ì@”! Ì@”$ Ì@”) Ì@”* Ì@ —” ÌA” ÌA
+” ÌA”  ÌA”# ÌA”$ ÌA”% ÌA’” ÌB” ÌB–” 2” 2” ÌC” ÌC” ÌC” ÌC’” 3” 3’” 5
+”" 5—”< 6”ÌD 6”ÌK 6”ÌM 6”ÌY 6#”Ìn 62”Ìp 64’”, 6”8 6#’” 5
+” 5’” 9	”% 9˜” 9”  9”! 9”+ 9”7 9 ”? 9(”Ì@ 9)”ÌB 9+Ü ”/ 3”3 3”4 3”? 3”ÌY :	”ÌZ :
+”Ì^ :”Ì` :”Ìb :!”Ìc :"”Ìg :&”Ìh :'”Ìq :0”Ìr :1”Ìv :5”Ìw :6’” 3” 3’” 2” 2‘” ÌDÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ Ÿ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÍéÍ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÍğÍøÔrL”¤type¥start£end¤nameªIdentifierÍğÍø¨NewsListÔrM•¤type¥start£end¥value£raw§LiteralÍşÍ°../view/NewsList²'../view/NewsList'J±ImportDeclarationÍÍ_‘ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÍÍ3LªIdentifierÍÍ*®CommonConstantLªIdentifierÍ.Í3¥ConstM§LiteralÍ;Í^Ù!../common/constant/CommonConstantÙ#'../common/constant/CommonConstant'J±ImportDeclarationÍaÍ˜‘K¶ImportDefaultSpecifierÍhÍuLªIdentifierÍhÍu­NewsViewModelM§LiteralÍ{Í—º../viewmodel/NewsViewModel¼'../viewmodel/NewsViewModel'

@@ -1,0 +1,438 @@
+{
+  "ohos-module-phone": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\src\\main",
+        "RESOURCES_PATH": [
+          "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\cache\\default\\default@CompileJS\\jsbundle",
+          "WORKER_LOADER": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default",
+        "arkOptions": {},
+        "name": "debug"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {
+        "arkOptions": {}
+      },
+      "buildOptionSet": [
+        {
+          "name": "release",
+          "arkOptions": {
+            "obfuscation": {
+              "ruleOptions": {
+                "enable": true,
+                "files": [
+                  "./obfuscation-rules.txt"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "default"
+        },
+        {
+          "name": "debug"
+        }
+      ],
+      "targets": [
+        {
+          "name": "default",
+          "runtimeOS": "HarmonyOS",
+          "config": {
+            "deviceType": [
+              "phone",
+              "tablet",
+              "2in1"
+            ]
+          },
+          "source": {
+            "pages": [
+              "pages/Index"
+            ]
+          }
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-home": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\src\\main",
+        "RESOURCES_PATH": [
+          "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\cache\\default\\default@HarCompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\cache\\default\\default@HarCompileJS\\jsbundle",
+          "WORKER_LOADER": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default",
+        "arkOptions": {},
+        "name": "debug"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {
+        "arkOptions": {}
+      },
+      "buildOptionSet": [
+        {
+          "name": "release",
+          "arkOptions": {
+            "obfuscation": {
+              "ruleOptions": {
+                "enable": true,
+                "files": [
+                  "./obfuscation-rules.txt"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "default"
+        },
+        {
+          "name": "debug"
+        }
+      ],
+      "targets": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-socialCircle": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\src\\main",
+        "RESOURCES_PATH": [
+          "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\cache\\default\\default@HarCompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\cache\\default\\default@HarCompileJS\\jsbundle",
+          "WORKER_LOADER": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default",
+        "arkOptions": {},
+        "name": "debug"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {
+        "arkOptions": {}
+      },
+      "buildOptionSet": [
+        {
+          "name": "release",
+          "arkOptions": {
+            "obfuscation": {
+              "ruleOptions": {
+                "enable": true,
+                "files": [
+                  "./obfuscation-rules.txt"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "default"
+        },
+        {
+          "name": "debug"
+        }
+      ],
+      "targets": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-module-base": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\src\\main",
+        "RESOURCES_PATH": [
+          "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\src\\main\\resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\outputs\\default",
+          "INTERMEDIA_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates",
+          "JS_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\loader_out\\default",
+          "JS_LITE_ASSETS_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\loader_out_lite\\default",
+          "RES_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\res\\default",
+          "RES_PROFILE_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\res\\default\\resources\\base\\profile",
+          "ETS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\cache\\default\\default@HarCompileArkTS\\esmodule",
+          "JS_SUPER_VISUAL_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\cache\\default\\default@HarCompileJS\\jsbundle",
+          "WORKER_LOADER": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\loader\\default\\loader.json",
+          "MANIFEST_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\manifest\\default",
+          "OUTPUT_METADATA_JSON": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\hap_metadata\\default\\output_metadata.json",
+          "SOURCE_MAP_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base\\build\\default\\intermediates\\source_map\\default"
+        },
+        "BUILD_OPTION": {
+          "debuggable": true
+        }
+      }
+    },
+    "BUILD_OPTION": {
+      "default-default": {
+        "debuggable": true,
+        "copyFrom": "default",
+        "arkOptions": {},
+        "name": "debug"
+      }
+    },
+    "BUILD_PROFILE_OPT": {
+      "apiType": "stageMode",
+      "buildOption": {
+        "arkOptions": {}
+      },
+      "buildOptionSet": [
+        {
+          "name": "release",
+          "arkOptions": {
+            "obfuscation": {
+              "ruleOptions": {
+                "enable": true,
+                "files": [
+                  "./obfuscation-rules.txt"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "default"
+        },
+        {
+          "name": "debug"
+        }
+      ],
+      "targets": [
+        {
+          "name": "default"
+        }
+      ]
+    },
+    "BUILD_CACHE_DIR": ""
+  },
+  "ohos-project": {
+    "SELECT_PRODUCT_NAME": "default",
+    "MODULE_BUILD_DIR": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\build",
+    "BUNDLE_NAME": "com.example.multdevicecommunication",
+    "BUILD_PATH": {
+      "OUTPUT_PATH": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\build\\outputs\\default"
+    },
+    "MODULES": [
+      {
+        "name": "phone",
+        "srcPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\products\\phone",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default"
+            ]
+          }
+        ],
+        "belongProjectPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master"
+      },
+      {
+        "name": "home",
+        "srcPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\home",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default"
+            ]
+          }
+        ],
+        "belongProjectPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master"
+      },
+      {
+        "name": "socialCircle",
+        "srcPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\features\\socialCircle",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default"
+            ]
+          }
+        ],
+        "belongProjectPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master"
+      },
+      {
+        "name": "base",
+        "srcPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master\\common\\base",
+        "targets": [
+          {
+            "name": "default",
+            "applyToProducts": [
+              "default"
+            ]
+          }
+        ],
+        "belongProjectPath": "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master"
+      }
+    ],
+    "PROFILE_OPT": {
+      "app": {
+        "signingConfigs": [],
+        "products": [
+          {
+            "name": "default",
+            "signingConfig": "default",
+            "compatibleSdkVersion": "5.0.0(12)",
+            "runtimeOS": "HarmonyOS"
+          }
+        ],
+        "buildModeSet": [
+          {
+            "name": "debug"
+          },
+          {
+            "name": "release"
+          }
+        ]
+      },
+      "modules": [
+        {
+          "name": "phone",
+          "srcPath": "./products/phone",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "home",
+          "srcPath": "./features/home",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "socialCircle",
+          "srcPath": "./features/socialCircle",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "base",
+          "srcPath": "./common/base",
+          "targets": [
+            {
+              "name": "default",
+              "applyToProducts": [
+                "default"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "CONFIG_PROPERTIES": {
+      "enableSignTask": true,
+      "skipNativeIncremental": false,
+      "hvigor.keepDependency": true
+    },
+    "OVERALL_PROJECT_PATHS": [
+      "C:\\Users\\yao\\Desktop\\final_api\\MultiDeviceCommunication-master"
+    ],
+    "BUILD_CACHE_DIR": ""
+  },
+  "version": 1
+}

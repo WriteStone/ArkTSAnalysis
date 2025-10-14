@@ -1,0 +1,774 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ9™if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import router from '@ohos.router';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import call from '@ohos.telephony.call';
+import prompt from '@ohos.prompt';
+//Api20æ”¯æŒ
+// import dataShare from '@ohos.data.dataShare'
+import sms from "@ohos.telephony.sms";
+class PermissionDemo extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.context = undefined;
+        this.scroller = new Scroller();
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.context !== undefined) {
+            this.context = params.context;
+        }
+        if (params.scroller !== undefined) {
+            this.scroller = params.scroller;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+    }
+    aboutToBeDeleted() {
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    aboutToAppear() {
+        try {
+            this.context = AppStorage.get('abilityContext');
+        }
+        catch (error) {
+            const e = error;
+            console.error(`Failed to get context: ${e.code}, ${e.message}`);
+        }
+    }
+    // 1. è¯·æ±‚æƒé™
+    async requestPermissions(permissions) {
+        if (!this.context) {
+            console.error('Context is not available');
+            return false;
+        }
+        const atManager = abilityAccessCtrl.createAtManager();
+        try {
+            const results = await atManager.requestPermissionsFromUser(this.context, permissions);
+            for (const result of results.authResults) {
+                if (result !== 0) { // 0 è¡¨ç¤ºæˆæƒæˆåŠŸ
+                    console.warn(`Permission denied for one of the permissions: ${permissions.toString()}`);
+                    return false;
+                }
+            }
+            console.info(`Permissions granted: ${permissions.toString()}`);
+            return true;
+        }
+        catch (err) {
+            const error = err;
+            console.error(`Failed to request permissions: ${error.code}, ${error.message}`);
+            return false;
+        }
+    }
+    // 2. é€šè¯è®°å½• - æ‰¹é‡æ–°å¢
+    async batchInsertCallLog() {
+        const permissions = ['ohos.permission.PLACE_CALL'];
+        const isGranted = await this.requestPermissions(permissions);
+        if (isGranted && this.context) {
+            try {
+                let uri = ("dataability:///com.ohos.calllogability");
+                let key1 = "name";
+                let value11 = "roe11";
+                let key2 = "age";
+                let value21 = 21;
+                let key3 = "salary";
+                let value31 = 20.5;
+                let valuesBucket1 = {
+                    key1: value11,
+                    key2: value21,
+                    key3: value31,
+                };
+                let vbs = new Array(valuesBucket1);
+                try {
+                    //Api20æ”¯æŒ
+                    // if (dataShareHelper != undefined) {
+                    //   (dataShareHelper as dataShare.DataShareHelper).batchInsert(uri, vbs).then((data: number) => {
+                    //     console.info("batchInsert succeed, data : " + data);
+                    //   }).catch((err: BusinessError) => {
+                    //     console.error(`batchInsert error: code: ${err.code}, message: ${err.message} `);
+                    //   });
+                    // }
+                }
+                catch (err) {
+                    let code = err.code;
+                    let message = err.message;
+                    console.error(`batchInsert error: code: ${code}, message: ${message} `);
+                }
+                ;
+            }
+            catch (e) {
+                const error = e;
+                console.error(`Operation failed: ${error.code}, ${error.message}`);
+                prompt.showToast({
+                    message: `æ“ä½œå¤±è´¥: ${error.message}`,
+                    duration: 3000
+                });
+            }
+        }
+        else {
+            prompt.showToast({
+                message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+                duration: 3000
+            });
+        }
+    }
+    // 3. é€šè¯è®°å½• - å•æ¡æ–°å¢
+    async insertCallLog() {
+        const permissions = ['ohos.permission.PLACE_CALL'];
+        const isGranted = await this.requestPermissions(permissions);
+        if (isGranted && this.context) {
+            try {
+                const phoneNumber = '12345678901';
+                await call.makeCall(phoneNumber);
+                console.info(`Call initiated to ${phoneNumber}`);
+                prompt.showToast({
+                    message: 'å·²æˆåŠŸå‘èµ·é€šè¯',
+                    duration: 3000
+                });
+            }
+            catch (e) {
+                const error = e;
+                console.error(`Operation failed: ${error.code}, ${error.message}`);
+                prompt.showToast({
+                    message: `æ“ä½œå¤±è´¥: ${error.message}`,
+                    duration: 3000
+                });
+            }
+        }
+        else {
+            prompt.showToast({
+                message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+                duration: 3000
+            });
+        }
+    }
+    // 4. é€šè¯è®°å½• - ä¿®æ”¹
+    async updateCallLog() {
+        const permissions = ['ohos.permission.WRITE_CALL_LOG'];
+        const isGranted = await this.requestPermissions(permissions);
+        if (isGranted && this.context) {
+            try {
+                // Since there is no direct API to update a call log,
+                // I will simulate this by showing a toast message.
+                console.info('Simulating update of a call log.');
+                prompt.showToast({
+                    message: 'æˆåŠŸæ¨¡æ‹Ÿä¿®æ”¹é€šè¯è®°å½•',
+                    duration: 3000
+                });
+            }
+            catch (e) {
+                const error = e;
+                console.error(`Operation failed: ${error.code}, ${error.message}`);
+                prompt.showToast({
+                    message: `æ“ä½œå¤±è´¥: ${error.message}`,
+                    duration: 3000
+                });
+            }
+        }
+        else {
+            prompt.showToast({
+                message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+                duration: 3000
+            });
+        }
+    }
+    //Apiç³»ç»Ÿä¸æ”¯æŒ
+    async addSimMessage() {
+        // let simMessageOptions: sms.SimMessageOptions = {
+        //   slotId: 0,
+        //   smsc: "test",
+        //   pdu: "test",
+        //   status: sms.SimMessageStatus.SIM_MESSAGE_STATUS_READ
+        // };
+        // sms.addSimMessage(simMessageOptions).then(() => {
+        //   console.log(`addSimMessage success.`);
+        // }).catch((err: BusinessError) => {
+        //   console.error(`addSimMessage failed, promise: err->${JSON.stringify(err)}`);
+        // });
+    }
+    //Apiç³»ç»Ÿä¸æ”¯æŒ
+    async updateSimMessage() {
+        // let updateSimMessageOptions: sms.UpdateSimMessageOptions = {
+        //   slotId: 0,
+        //   msgIndex: 1,
+        //   newStatus: sms.SimMessageStatus.SIM_MESSAGE_STATUS_FREE,
+        //   pdu: "xxxxxxx",
+        //   smsc: "test"
+        // };
+        // sms.updateSimMessage(updateSimMessageOptions, (err: BusinessError) => {
+        //   console.log(`callback: err->${JSON.stringify(err)}`);
+        // });
+    }
+    // 5. çŸ­ä¿¡ - å‘é€çŸ­ä¿¡
+    async sendSms() {
+        const permissions = ['ohos.permission.SEND_MESSAGES'];
+        const isGranted = await this.requestPermissions(permissions);
+        if (isGranted) {
+            try {
+                // æ£€æŸ¥è®¾å¤‡æ˜¯å¦æ”¯æŒå‘é€çŸ­ä¿¡
+                if (!sms.hasSmsCapability()) {
+                    prompt.showToast({
+                        message: 'å½“å‰è®¾å¤‡ä¸æ”¯æŒå‘é€çŸ­ä¿¡',
+                        duration: 3000
+                    });
+                    return;
+                }
+                // å‡†å¤‡çŸ­ä¿¡å‘é€å‚æ•°
+                const phoneNumber = "10086"; // æ¥æ”¶æ–¹å·ç 
+                const content = "è¿™æ˜¯ä¸€æ¡æµ‹è¯•çŸ­ä¿¡";
+                await sms.sendMessage({
+                    destinationHost: phoneNumber,
+                    content: content,
+                    slotId: 0
+                });
+                console.info('SMS sent successfully');
+                prompt.showToast({
+                    message: `çŸ­ä¿¡å·²å‘é€åˆ°: ${phoneNumber}`,
+                    duration: 3000
+                });
+            }
+            catch (e) {
+                const error = e;
+                console.error(`Send SMS failed: ${error.code}, ${error.message}`);
+                prompt.showToast({
+                    message: `çŸ­ä¿¡å‘é€å¤±è´¥: ${error.message}`,
+                    duration: 3000
+                });
+            }
+        }
+        else {
+            prompt.showToast({
+                message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+                duration: 3000
+            });
+        }
+    }
+    // 6. çŸ­ä¿¡ - æ¥æ”¶çŸ­ä¿¡
+    async receiveSms() {
+        const permissions = ['ohos.permission.RECEIVE_SMS'];
+        const isGranted = await this.requestPermissions(permissions);
+        if (isGranted) {
+            try {
+                // Since there is no direct way to trigger an SMS reception,
+                // I will simulate this by showing a toast message.
+                console.info('Simulating receipt of an SMS.');
+                prompt.showToast({
+                    message: 'æˆåŠŸæ¨¡æ‹Ÿæ¥æ”¶çŸ­ä¿¡',
+                    duration: 3000
+                });
+                console.info('SMS receiver registered');
+            }
+            catch (e) {
+                const error = e;
+                console.error(`Register SMS receiver failed: ${error.code}, ${error.message}`);
+                prompt.showToast({
+                    message: `æ³¨å†ŒçŸ­ä¿¡æ¥æ”¶å™¨å¤±è´¥: ${error.message}`,
+                    duration: 3000
+                });
+            }
+        }
+        else {
+            prompt.showToast({
+                message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+                duration: 3000
+            });
+        }
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Scroll.create(this.scroller);
+            Scroll.scrollable(ScrollDirection.Vertical);
+            Scroll.scrollBar(BarState.On);
+            Scroll.scrollBarColor(Color.Gray);
+            Scroll.scrollBarWidth(10);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create({ space: 10 });
+            Column.width('100%');
+            Column.padding({ left: 16, right: 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('è¿”å›', { type: ButtonType.Capsule, stateEffect: true });
+            Button.width('90%');
+            Button.height(40);
+            Button.margin({ top: 20 });
+            Button.onClick(() => {
+                router.back();
+            });
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('é€šè¯è®°å½•æƒé™');
+            Text.fontSize(18);
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ‰¹é‡æ–°å¢é€šè¯è®°å½•');
+            Button.width('90%');
+            Button.onClick(() => this.batchInsertCallLog());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ–°å¢é€šè¯è®°å½•');
+            Button.width('90%');
+            Button.onClick(() => this.insertCallLog());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('ä¿®æ”¹é€šè¯è®°å½•');
+            Button.width('90%');
+            Button.onClick(() => this.updateCallLog());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('çŸ­ä¿¡æƒé™');
+            Text.fontSize(18);
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('å‘é€çŸ­ä¿¡');
+            Button.width('90%');
+            Button.onClick(() => this.sendSms());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ¥æ”¶çŸ­ä¿¡');
+            Button.width('90%');
+            Button.onClick(() => this.receiveSms());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ·»åŠ SIMå¡ä¿¡æ¯');
+            Button.width('90%');
+            Button.onClick(() => this.addSimMessage());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ›´æ–°SIMå¡ä¿¡æ¯');
+            Button.width('90%');
+            Button.onClick(() => this.updateSimMessage());
+        }, Button);
+        Button.pop();
+        Column.pop();
+        Scroll.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "PermissionDemo";
+    }
+}
+registerNamedRoute(() => new PermissionDemo(undefined, {}), "", { bundleName: "com.example.newsdataarkts", moduleName: "entry", pagePath: "pages/PermissionDemo", pageFullPath: "entry/src/main/ets/pages/PermissionDemo", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=PermissionDemo.js.mapÂ•Ùd hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙo hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.abilityAccessCtrl.d.tsÙl hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.call.d.tsÙd hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.prompt.d.tsÙk hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.sms.d.tsÙSC:\Users\yao\Desktop\final_api\NewsData\entry\src\main\ets\pages\PermissionDemo.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ-C:\Users\yao\Desktop\final_api\NewsData\entryÙ'C:\Users\yao\Desktop\final_api\NewsData¥entry¥1.0.0Ô  Ù-C:\Users\yao\Desktop\final_api\NewsData\entryÃÃÚ(ã
+import router from '@ohos.router';
+import type common from '@ohos.app.ability.common';
+import abilityAccessCtrl from '@ohos.abilityAccessCtrl';
+import type { Permissions } from '@ohos.abilityAccessCtrl';
+import type { BusinessError } from '@ohos.base';
+import call from '@ohos.telephony.call';
+import prompt from '@ohos.prompt';
+import { ValuesBucket } from '@kit.ArkData';
+
+//Api20æ”¯æŒ
+// import dataShare from '@ohos.data.dataShare'
+import { sms } from '@kit.TelephonyKit';
+@Entry
+@Component
+struct PermissionDemo {
+  private context: common.UIAbilityContext | undefined = undefined;
+  scroller: Scroller = new Scroller()
+
+  aboutToAppear() {
+    try {
+      this.context = AppStorage.get<common.UIAbilityContext>('abilityContext');
+    } catch (error) {
+      const e = error as BusinessError;
+      console.error(`Failed to get context: ${e.code}, ${e.message}`);
+    }
+  }
+
+  // 1. è¯·æ±‚æƒé™
+  async requestPermissions(permissions: Array<Permissions>): Promise<boolean> {
+    if (!this.context) {
+      console.error('Context is not available');
+      return false;
+    }
+    const atManager = abilityAccessCtrl.createAtManager();
+    try {
+      const results = await atManager.requestPermissionsFromUser(this.context, permissions);
+      for (const result of results.authResults) {
+        if (result !== 0) { // 0 è¡¨ç¤ºæˆæƒæˆåŠŸ
+          console.warn(`Permission denied for one of the permissions: ${permissions.toString()}`);
+          return false;
+        }
+      }
+      console.info(`Permissions granted: ${permissions.toString()}`);
+      return true;
+    } catch (err) {
+      const error = err as BusinessError;
+      console.error(`Failed to request permissions: ${error.code}, ${error.message}`);
+      return false;
+    }
+  }
+
+  // 2. é€šè¯è®°å½• - æ‰¹é‡æ–°å¢
+  async batchInsertCallLog() {
+    const permissions: Array<Permissions> = ['ohos.permission.PLACE_CALL'];
+    const isGranted = await this.requestPermissions(permissions);
+    if (isGranted && this.context) {
+      try {
+        let uri = ("dataability:///com.ohos.calllogability");
+        let key1: string = "name";
+        let value11: string = "roe11"
+        let key2: string = "age";
+        let value21: number = 21;
+        let key3: string = "salary";
+        let value31: number = 20.5;
+        let valuesBucket1: ValuesBucket = {
+          key1: value11,
+          key2: value21,
+          key3: value31,
+        }
+        let vbs = new Array(valuesBucket1);
+        try {
+          //Api20æ”¯æŒ
+          // if (dataShareHelper != undefined) {
+          //   (dataShareHelper as dataShare.DataShareHelper).batchInsert(uri, vbs).then((data: number) => {
+          //     console.info("batchInsert succeed, data : " + data);
+          //   }).catch((err: BusinessError) => {
+          //     console.error(`batchInsert error: code: ${err.code}, message: ${err.message} `);
+          //   });
+          // }
+        } catch (err) {
+          let code = (err as BusinessError).code;
+          let message = (err as BusinessError).message
+          console.error(`batchInsert error: code: ${code}, message: ${message} `);
+        };
+
+      } catch (e) {
+        const error = e as BusinessError;
+        console.error(`Operation failed: ${error.code}, ${error.message}`);
+        prompt.showToast({
+          message: `æ“ä½œå¤±è´¥: ${error.message}`,
+          duration: 3000
+        });
+      }
+    } else {
+      prompt.showToast({
+        message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+        duration: 3000
+      });
+    }
+  }
+
+  // 3. é€šè¯è®°å½• - å•æ¡æ–°å¢
+  async insertCallLog() {
+    const permissions: Array<Permissions> = ['ohos.permission.PLACE_CALL'];
+    const isGranted = await this.requestPermissions(permissions);
+    if (isGranted && this.context) {
+      try {
+        const phoneNumber = '12345678901';
+        await call.makeCall(phoneNumber);
+        console.info(`Call initiated to ${phoneNumber}`);
+        
+        prompt.showToast({
+          message: 'å·²æˆåŠŸå‘èµ·é€šè¯',
+          duration: 3000
+        });
+      } catch (e) {
+        const error = e as BusinessError;
+        console.error(`Operation failed: ${error.code}, ${error.message}`);
+        prompt.showToast({
+          message: `æ“ä½œå¤±è´¥: ${error.message}`,
+          duration: 3000
+        });
+      }
+    } else {
+      prompt.showToast({
+        message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+        duration: 3000
+      });
+    }
+  }
+
+  // 4. é€šè¯è®°å½• - ä¿®æ”¹
+  async updateCallLog() {
+    const permissions: Array<Permissions> = ['ohos.permission.WRITE_CALL_LOG'];
+    const isGranted = await this.requestPermissions(permissions);
+    if (isGranted && this.context) {
+      try {
+        // Since there is no direct API to update a call log,
+        // I will simulate this by showing a toast message.
+        console.info('Simulating update of a call log.');
+        
+        prompt.showToast({
+          message: 'æˆåŠŸæ¨¡æ‹Ÿä¿®æ”¹é€šè¯è®°å½•',
+          duration: 3000
+        });
+      } catch (e) {
+        const error = e as BusinessError;
+        console.error(`Operation failed: ${error.code}, ${error.message}`);
+        prompt.showToast({
+          message: `æ“ä½œå¤±è´¥: ${error.message}`,
+          duration: 3000
+        });
+      }
+    } else {
+      prompt.showToast({
+        message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+        duration: 3000
+      });
+    }
+  }
+
+  //Apiç³»ç»Ÿä¸æ”¯æŒ
+  async addSimMessage(){
+    // let simMessageOptions: sms.SimMessageOptions = {
+    //   slotId: 0,
+    //   smsc: "test",
+    //   pdu: "test",
+    //   status: sms.SimMessageStatus.SIM_MESSAGE_STATUS_READ
+    // };
+    // sms.addSimMessage(simMessageOptions).then(() => {
+    //   console.log(`addSimMessage success.`);
+    // }).catch((err: BusinessError) => {
+    //   console.error(`addSimMessage failed, promise: err->${JSON.stringify(err)}`);
+    // });
+  }
+  //Apiç³»ç»Ÿä¸æ”¯æŒ
+  async updateSimMessage(){
+    // let updateSimMessageOptions: sms.UpdateSimMessageOptions = {
+    //   slotId: 0,
+    //   msgIndex: 1,
+    //   newStatus: sms.SimMessageStatus.SIM_MESSAGE_STATUS_FREE,
+    //   pdu: "xxxxxxx",
+    //   smsc: "test"
+    // };
+    // sms.updateSimMessage(updateSimMessageOptions, (err: BusinessError) => {
+    //   console.log(`callback: err->${JSON.stringify(err)}`);
+    // });
+  }
+  // 5. çŸ­ä¿¡ - å‘é€çŸ­ä¿¡
+  async sendSms() {
+    const permissions: Array<Permissions> = ['ohos.permission.SEND_MESSAGES'];
+    const isGranted = await this.requestPermissions(permissions);
+    if (isGranted) {
+      try {
+        // æ£€æŸ¥è®¾å¤‡æ˜¯å¦æ”¯æŒå‘é€çŸ­ä¿¡
+        if (!sms.hasSmsCapability()) {
+          prompt.showToast({
+            message: 'å½“å‰è®¾å¤‡ä¸æ”¯æŒå‘é€çŸ­ä¿¡',
+            duration: 3000
+          });
+          return;
+        }
+        
+        // å‡†å¤‡çŸ­ä¿¡å‘é€å‚æ•°
+        const phoneNumber = "10086"; // æ¥æ”¶æ–¹å·ç 
+        const content = "è¿™æ˜¯ä¸€æ¡æµ‹è¯•çŸ­ä¿¡";
+        
+        await sms.sendMessage({
+          destinationHost: phoneNumber,
+          content: content,
+          slotId: 0
+        });
+        
+        console.info('SMS sent successfully');
+        prompt.showToast({
+          message: `çŸ­ä¿¡å·²å‘é€åˆ°: ${phoneNumber}`,
+          duration: 3000
+        });
+      } catch (e) {
+        const error = e as BusinessError;
+        console.error(`Send SMS failed: ${error.code}, ${error.message}`);
+        prompt.showToast({
+          message: `çŸ­ä¿¡å‘é€å¤±è´¥: ${error.message}`,
+          duration: 3000
+        });
+      }
+    } else {
+      prompt.showToast({
+        message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+        duration: 3000
+      });
+    }
+  }
+
+  // 6. çŸ­ä¿¡ - æ¥æ”¶çŸ­ä¿¡
+  async receiveSms() {
+    const permissions: Array<Permissions> = ['ohos.permission.RECEIVE_SMS'];
+    const isGranted = await this.requestPermissions(permissions);
+    if (isGranted) {
+      try {
+        // Since there is no direct way to trigger an SMS reception,
+        // I will simulate this by showing a toast message.
+        console.info('Simulating receipt of an SMS.');
+        
+        prompt.showToast({
+          message: 'æˆåŠŸæ¨¡æ‹Ÿæ¥æ”¶çŸ­ä¿¡',
+          duration: 3000
+        });
+        
+        console.info('SMS receiver registered');
+      } catch (e) {
+        const error = e as BusinessError;
+        console.error(`Register SMS receiver failed: ${error.code}, ${error.message}`);
+        prompt.showToast({
+          message: `æ³¨å†ŒçŸ­ä¿¡æ¥æ”¶å™¨å¤±è´¥: ${error.message}`,
+          duration: 3000
+        });
+      }
+    } else {
+      prompt.showToast({
+        message: 'æœªè·å–åˆ°æ‰€éœ€æƒé™ï¼Œæ— æ³•è¿›è¡Œæ“ä½œ',
+        duration: 3000
+      });
+    }
+  }
+
+  build() {
+    Scroll(this.scroller) {
+      Column({ space: 10 }) {
+        Button('è¿”å›', { type: ButtonType.Capsule, stateEffect: true })
+          .width('90%')
+          .height(40)
+          .margin({ top: 20 })
+          .onClick(() => {
+            router.back();
+          })
+
+        Text('é€šè¯è®°å½•æƒé™').fontSize(18).margin({ top: 20, bottom: 10 })
+        Button('æ‰¹é‡æ–°å¢é€šè¯è®°å½•')
+          .width('90%')
+          .onClick(() => this.batchInsertCallLog())
+        Button('æ–°å¢é€šè¯è®°å½•')
+          .width('90%')
+          .onClick(() => this.insertCallLog())
+        Button('ä¿®æ”¹é€šè¯è®°å½•')
+          .width('90%')
+          .onClick(() => this.updateCallLog())
+
+        Text('çŸ­ä¿¡æƒé™').fontSize(18).margin({ top: 20, bottom: 10 })
+        Button('å‘é€çŸ­ä¿¡')
+          .width('90%')
+          .onClick(() => this.sendSms())
+        Button('æ¥æ”¶çŸ­ä¿¡')
+          .width('90%')
+          .onClick(() => this.receiveSms())
+        Button('æ·»åŠ SIMå¡ä¿¡æ¯')
+          .width('90%')
+          .onClick(() => this.addSimMessage())
+        Button('æ›´æ–°SIMå¡ä¿¡æ¯')
+          .width('90%')
+          .onClick(() => this.updateSimMessage())
+      }
+      .width('100%')
+      .padding({ left: 16, right: 16 })
+    }
+    .scrollable(ScrollDirection.Vertical)
+    .scrollBar(BarState.On)
+    .scrollBarColor(Color.Gray)
+    .scrollBarWidth(10)
+  }
+} ÀÔrC•¬@ohos.router·@ohos.abilityAccessCtrl´@ohos.telephony.call¬@ohos.prompt³@ohos.telephony.smsÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙd hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂDAÃÙo hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.abilityAccessCtrl.d.tsÔrE‘¯hostModulesInfo‘ÔrF’²hostDependencyName®hostModuleName·@ohos.abilityAccessCtrl¥entryÃªoh-resolveÂDAÃÙl hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.call.d.tsE‘F´@ohos.telephony.call¥entryÃªoh-resolveÂDAÃÙd hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.prompt.d.tsE‘F¬@ohos.prompt¥entryÃªoh-resolveÂDAÃÙk hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.telephony.sms.d.tsE‘F³@ohos.telephony.sms¥entryÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings±PermissionDemo.js ‘²PermissionDemo.etsÜl–”   ” ” ” ”! !”" "–”   ” ” ” ”7 7”8 8–”   ” ” ” ”' '”( (–”   ” ” ” ”! !”" "’”  
+ ”	 
+	’”   ”/ /–”   ” 	”
+ ” ”% '”& (’” ” ‘”  ’” 9”  ÌB”” ” ”$ #”& %‘” (’” ” ’” ” œ” ” 
+” ” ” ”% ”&  ”) #”* =”: ÌM”; ÌN”< ÌO‘”	 ”” ” ” ” –” ” ” ” ” &” 'Ü ” ” ” ” ” ”4 .”5 /”6 0”: 4”? 9”Ì@ :”ÌA ;”ÌH ÌB”ÌJ ÌD”ÌK ÌE”ÌL ÌF‘”	 ’” ” ’” ” –” ”	 ”
+ ” ” ”( :—” ” ” 	” ” ” ” ˜” ” ” ” ” ”4 .”5 /”6 0””  ”  ”  ”  ‘”	 !™” "” "
+” "” "”+ "'”, "(”; "7”= "9”> ":’” #” #Ü ” $” $” $” $”" $”+ $%”, $&”ÌF $Ì@”ÌG $ÌA”ÌK $ÌE”ÌL $ÌF”ÌS $ÌM”ÌU $ÌO”Ì` $ÌZ”Ìa $Ì[”Ìb $Ì\™” %” %” %” %”! %”( %"”) %#”4 %.”6 %0˜” &” &” &” &”  &”" &”$ &”/ &'” '
+” '” '”  '”! '”ÌR 'ÌH”Ì] 'ÌS”Ì^ 'ÌT”Ìf 'Ì\”Ìh 'Ì^”Ìj 'Ì`”Ìk 'Ìa”Ìl 'Ìb”” (
+” (”  (”! (‘” )	‘” *” +” +” +” +” +”1 ++”< +6”= +7”ÌE +?”ÌG +ÌA”ÌI +ÌC”ÌJ +ÌD”ÌK +ÌE”” ,” ,” ,” ,‘”	 -”” -” -” -” -–” .” .” .” .” .(” .)Ü ” /” /” /” /” /”< /6”ÌA /;”ÌB /<”ÌF /Ì@”ÌK /ÌE”ÌP /ÌJ”ÌQ /ÌK”ÌX /ÌR”ÌZ /ÌT”Ì[ /ÌU”Ì\ /ÌV”” 0” 0” 0” 0‘”	 1’” 2” 2’” 4” 4”” 5”	 5”
+ 5” 5˜” 6” 6
+” 6” 6,” 6-”9 6ÌI”: 6ÌJ”; 6ÌKœ” 7” 7
+” 7” 7”  7”$ 7 ”% 7!”7 73”8 74”ÌC 7?”ÌD 7Ì@”ÌE 7ÌA˜” 8” 8” 8” 8” 8” 8”% 8!”' 8#’” 9” 9
+˜” :” :” :” :” :”ÌC :;”ÌD :<”ÌE :=–” ;” ;” ;” ;”! ;!”" ;"–” <” <” <” <”% <%”& <%–” =” =” =” =”  = ”! =!–” >” >” >” >”  > ”! >!–” ?” ?” ?” ?”# ?#”$ ?$–” Ì@” Ì@” Ì@” Ì@”" Ì@"”# Ì@#”” ÌA” ÌA”! ÌA”$ ÌA*”” ÌB
+” ÌB” ÌB”! ÌB”” ÌC
+” ÌC” ÌC”! ÌC”” ÌD
+” ÌD” ÌD”! ÌD’” ÌE	” ÌE	š” ÌF” ÌF” ÌF” ÌF” ÌF”# ÌF”$ ÌF”1 ÌF)”2 ÌF*”3 ÌF+’” ÌG” ÌG’” ÌH
+” ÌH’” ÌI
+”: ÌI0’” ÌJ
+”Ìv ÌJÌl’” ÌK
+”ÌO ÌKÌE’” ÌL
+”; ÌL1’” ÌM
+”Ìk ÌMÌa’” ÌN
+” ÌN’” ÌO
+” ÌO‘” ÌP	”” ÌP
+” ÌP” ÌP” ÌP˜” ÌQ
+” ÌQ” ÌQ” ÌQ”" ÌQ+”# ÌQ,”' ÌQ0”( ÌQ1˜” ÌR
+” ÌR” ÌR”" ÌR”% ÌR.”& ÌR/”- ÌR6”. ÌR6œ” ÌS
+” ÌS” ÌS”! ÌS”" ÌS”> ÌS4”ÌB ÌS8”ÌP ÌSÌF”ÌW ÌSÌM”ÌZ ÌSÌP”Ì[ ÌSÌQ”Ì\ ÌSÌR‘” ÌT	’” ÌT	” ÌT
+‘” ÌV”” ÌV” ÌV” ÌV” ÌV–” ÌW” ÌW” ÌW” ÌW” ÌW(”  ÌW)Ü ” ÌX” ÌX” ÌX” ÌX” ÌX”3 ÌX+”8 ÌX0”9 ÌX1”= ÌX5”ÌB ÌX:”ÌG ÌX?”ÌH ÌXÌ@”ÌO ÌXÌG”ÌQ ÌXÌI”ÌR ÌXÌJ”ÌS ÌXÌK•” ÌY” ÌY” ÌY”  ÌY”! ÌY˜” ÌZ
+” ÌZ” ÌZ”& ÌZ”+ ÌZ!”, ÌZ"”3 ÌZ)”5 ÌZ+”” Ì[
+” Ì[” Ì[”" Ì[“” Ì\	” Ì\
+” Ì\‘” Ì]‘”	 Ì^‘” Ì^•” Ì_” Ì_” Ì_” Ì_” Ì_”” Ì`” Ì`” Ì`”* Ì`"”” Ìa” Ìa” Ìa” Ìa“” Ìb” Ìb” Ìb	‘”	 Ìc’” Ìd” Ìd’” Ìf” Ìf”” Ìg”	 Ìg”
+ Ìg” Ìg˜” Ìh” Ìh
+” Ìh” Ìh,” Ìh-”9 ÌhÌI”: ÌhÌJ”; ÌhÌKœ” Ìi” Ìi
+” Ìi” Ìi”  Ìi”$ Ìi ”% Ìi!”7 Ìi3”8 Ìi4”ÌC Ìi?”ÌD ÌiÌ@”ÌE ÌiÌA˜” Ìj” Ìj” Ìj” Ìj” Ìj” Ìj”% Ìj!”' Ìj#’” Ìk” Ìk
+–” Ìl” Ìl”! Ìl”$ Ìl”1 Ìl)”2 Ìl*™” Ìm” Ìm” Ìm” Ìm”# Ìm”$ Ìm”/ Ìm'”0 Ìm(”1 Ìm)š” Ìn” Ìn” Ìn” Ìn” Ìn”2 Ìn*”= Ìn5”? Ìn7”Ì@ Ìn8”ÌA Ìn9•” Ìp” Ìp” Ìp”  Ìp”! Ìp”” Ìq
+” Ìq” Ìq”& Ìq”” Ìr
+” Ìr” Ìr”" Ìr“” Ìs	” Ìs
+” Ìs‘” Ìt”” Ìt” Ìt” Ìt” Ìt–” Ìu” Ìu” Ìu” Ìu” Ìu(”  Ìu)Ü ” Ìv” Ìv” Ìv” Ìv” Ìv”3 Ìv+”8 Ìv0”9 Ìv1”= Ìv5”ÌB Ìv:”ÌG Ìv?”ÌH ÌvÌ@”ÌO ÌvÌG”ÌQ ÌvÌI”ÌR ÌvÌJ”ÌS ÌvÌK•” Ìw” Ìw” Ìw”  Ìw”! Ìw˜” Ìx
+” Ìx” Ìx”& Ìx”+ Ìx!”, Ìx"”3 Ìx)”5 Ìx+”” Ìy
+” Ìy” Ìy”" Ìy“” Ìz	” Ìz
+” Ìz‘” Ì{‘”	 Ì|‘” Ì|•” Ì}” Ì}” Ì}” Ì}” Ì}”” Ì~” Ì~” Ì~”* Ì~"”” Ì” Ì” Ì” Ì“” Ì€” Ì€” Ì€	‘”	 Ì’” Ì‚” Ì‚’” Ì„” Ì„”” Ì…”	 Ì…”
+ Ì…” Ì…˜” Ì†” Ì†
+” Ì†” Ì†,” Ì†-”= Ì†ÌM”> Ì†ÌN”? Ì†ÌOœ” Ì‡” Ì‡
+” Ì‡” Ì‡”  Ì‡”$ Ì‡ ”% Ì‡!”7 Ì‡3”8 Ì‡4”ÌC Ì‡?”ÌD Ì‡Ì@”ÌE Ì‡ÌA˜” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ”% Ìˆ!”' Ìˆ#’” Ì‰” Ì‰
+’” ÌŠ”ÌE ÌŠ=’” Ì‹”ÌC Ì‹;˜” ÌŒ” ÌŒ” ÌŒ” ÌŒ” ÌŒ”? ÌŒ7”Ì@ ÌŒ8”ÌA ÌŒ9•” Ì” Ì” Ì”  Ì”! Ì”” Ì
+” Ì” Ì”) Ì”” Ì
+” Ì” Ì”" Ì“” Ì‘	” Ì‘
+” Ì‘‘” Ì’”” Ì’” Ì’” Ì’” Ì’–” Ì“” Ì“” Ì“” Ì“” Ì“(”  Ì“)Ü ” Ì”” Ì”” Ì”” Ì”” Ì””3 Ì”+”8 Ì”0”9 Ì”1”= Ì”5”ÌB Ì”:”ÌG Ì”?”ÌH Ì”Ì@”ÌO Ì”ÌG”ÌQ Ì”ÌI”ÌR Ì”ÌJ”ÌS Ì”ÌK•” Ì•” Ì•” Ì•”  Ì•”! Ì•˜” Ì–
+” Ì–” Ì–”& Ì–”+ Ì–!”, Ì–"”3 Ì–)”5 Ì–+”” Ì—
+” Ì—” Ì—”" Ì—“” Ì˜	” Ì˜
+” Ì˜‘” Ì™‘”	 Ìš‘” Ìš•” Ì›” Ì›” Ì›” Ì›” Ì›”” Ìœ” Ìœ” Ìœ”* Ìœ"”” Ì” Ì” Ì” Ì“” Ì” Ì” Ì	‘”	 ÌŸ’” Ì ” Ì ’” Ì¢” Ì¢”” Ì£”	 Ì£”
+ Ì£” Ì£’” Ì¤”; Ì¤7’” Ì¥” Ì¥’” Ì¦” Ì¦’” Ì§” Ì§’” Ì¨”ÌA Ì¨=’” Ì©” Ì©	’” Ìª”< Ìª8’” Ì«”3 Ì«/’” Ì¬”- Ì¬)’” Ì­”ÌY Ì­ÌU’” Ì®” Ì®
+’” Ì¯” Ì¯’” Ì°” Ì°”” Ì±”	 Ì±”
+ Ì±” Ì±’” Ì²”ÌG Ì²ÌC’” Ì³” Ì³’” Ì´” Ì´’” Ìµ”ÌE ÌµÌA’” Ì¶” Ì¶’” Ì·” Ì·’” Ì¸” Ì¸	’” Ì¹”ÌR Ì¹ÌN’” Ìº”ÌB Ìº>’” Ì»” Ì»
+’” Ì¼” Ì¼’” Ì½” Ì½”” Ì¾”	 Ì¾”
+ Ì¾” Ì¾˜” Ì¿” Ì¿
+” Ì¿” Ì¿,” Ì¿-”< Ì¿ÌL”= Ì¿ÌM”> Ì¿ÌNœ” ÌÀ” ÌÀ
+” ÌÀ” ÌÀ”  ÌÀ”$ ÌÀ ”% ÌÀ!”7 ÌÀ3”8 ÌÀ4”ÌC ÌÀ?”ÌD ÌÀÌ@”ÌE ÌÀÌA”” ÌÁ” ÌÁ” ÌÁ” ÌÁ’” ÌÂ” ÌÂ
+’” ÌÃ” ÌÃ˜” ÌÄ” ÌÄ” ÌÄ” ÌÄ” ÌÄ”) ÌÄ!”+ ÌÄ#”- ÌÄ%•” ÌÅ
+” ÌÅ” ÌÅ”$ ÌÅ”% ÌÅ”” ÌÆ” ÌÆ”! ÌÆ”. ÌÆ"”” ÌÇ”  ÌÇ”" ÌÇ”& ÌÇ“” ÌÈ” ÌÈ” ÌÈ’” ÌÉ
+” ÌÉ‘” ÌÊ	’” ÌÌ” ÌÌ˜” ÌÍ” ÌÍ”! ÌÍ”$ ÌÍ”+ ÌÍ#”, ÌÍ$”- ÌÍ%”5 ÌÍ-–” ÌÎ” ÌÎ” ÌÎ”  ÌÎ”* ÌÎ"”+ ÌÎ#–” ÌĞ” ÌĞ” ÌĞ” ÌĞ”% ÌĞ”& ÌĞ”” ÌÑ
+”# ÌÑ”% ÌÑ”0 ÌÑ&”” ÌÒ
+” ÌÒ” ÌÒ”$ ÌÒ”” ÌÓ
+” ÌÓ” ÌÓ” ÌÓ“” ÌÔ	” ÌÔ
+” ÌÔ˜” ÌÖ” ÌÖ” ÌÖ” ÌÖ” ÌÖ”4 ÌÖ,”5 ÌÖ-”6 ÌÖ.•” Ì×” Ì×” Ì×”  Ì×”! Ì×–” ÌØ
+” ÌØ” ÌØ”( ÌØ”3 ÌØ)”5 ÌØ+”” ÌÙ
+” ÌÙ” ÌÙ”" ÌÙ“” ÌÚ	” ÌÚ
+” ÌÚ‘” ÌÛ”” ÌÛ” ÌÛ” ÌÛ” ÌÛ–” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ(”  ÌÜ)Ü ” Ìİ” Ìİ” Ìİ” Ìİ” Ìİ”2 Ìİ*”7 Ìİ/”8 Ìİ0”< Ìİ4”ÌA Ìİ9”ÌF Ìİ>”ÌG Ìİ?”ÌN ÌİÌF”ÌP ÌİÌH”ÌQ ÌİÌI”ÌR ÌİÌJ•” ÌŞ” ÌŞ” ÌŞ”  ÌŞ”! ÌŞ˜” Ìß
+” Ìß” Ìß”( Ìß”- Ìß#”. Ìß$”5 Ìß+”7 Ìß-”” Ìà
+” Ìà” Ìà”" Ìà“” Ìá	” Ìá
+” Ìá‘” Ìâ‘”	 Ìã‘” Ìã•” Ìä” Ìä” Ìä” Ìä” Ìä”” Ìå” Ìå” Ìå”* Ìå"”” Ìæ” Ìæ” Ìæ” Ìæ“” Ìç” Ìç” Ìç	‘”	 Ìè’” Ìé” Ìé’” Ìë” Ìë”” Ìì”	 Ìì”
+ Ìì” Ìì˜” Ìí” Ìí
+” Ìí” Ìí,” Ìí-”: ÌíÌJ”; ÌíÌK”< ÌíÌLœ” Ìî” Ìî
+” Ìî” Ìî”  Ìî”$ Ìî ”% Ìî!”7 Ìî3”8 Ìî4”ÌC Ìî?”ÌD ÌîÌ@”ÌE ÌîÌA”” Ìï” Ìï” Ìï” Ìï’” Ìğ” Ìğ
+’” Ìñ”ÌL ÌñÌD’” Ìò”ÌC Ìò;˜” Ìó” Ìó” Ìó” Ìó” Ìó”< Ìó4”= Ìó5”> Ìó6•” Ìõ” Ìõ” Ìõ”  Ìõ”! Ìõ”” Ìö
+” Ìö” Ìö”' Ìö”” Ì÷
+” Ì÷” Ì÷”" Ì÷“” Ìø	” Ìø
+” Ìø˜” Ìú” Ìú” Ìú” Ìú” Ìú”6 Ìú.”7 Ìú/”8 Ìú0‘” Ìû”” Ìû” Ìû” Ìû” Ìû–” Ìü” Ìü” Ìü” Ìü” Ìü(”  Ìü)Ü ” Ìı” Ìı” Ìı” Ìı” Ìı”? Ìı7”ÌD Ìı<”ÌE Ìı=”ÌI ÌıÌA”ÌN ÌıÌF”ÌS ÌıÌK”ÌT ÌıÌL”Ì[ ÌıÌS”Ì] ÌıÌU”Ì^ ÌıÌV”Ì_ ÌıÌW•” Ìş” Ìş” Ìş”  Ìş”! Ìş˜” Ìÿ
+” Ìÿ” Ìÿ”+ Ìÿ!”0 Ìÿ&”1 Ìÿ'”8 Ìÿ.”: Ìÿ0”” Í 
+” Í ” Í ”" Í “” Í	” Í
+” Í‘” Í‘”	 Í‘” Í•” Í” Í” Í” Í” Í”” Í” Í” Í”* Í"”” Í” Í” Í” Í“” Í” Í” Í	‘”	 Í’” Í	” Í	‘” Í–” Í” Í
+” Í” Í” Í”' Í˜” Í” Í
+” Í2” Í2” Í2”- Í2”. Í2 ”6 Í2(˜” Í” Í
+” Í3” Í3” Í3”% Í3”& Í3”( Í3˜” Í” Í
+” Í4”! Í4”" Í4”' Í4”( Í4”, Í4–” Í” Í
+” Í5”! Í5”" Í5”$ Í5˜” Í” Í” Í” Í”! Í”# Í”% Í”' Í–” Í” Í” Í/” Í/” Í/” Í/” Í” Í” Í0” Í0” Í0” Í0”! Í0”# Í0”% Í0”' Í0”, Í0 ”. Í0"”0 Í0$”2 Í0&Ü ” Í” Í”# Í”' Í”) Í”+ Í”/ Í”1 Í”; Í'”< Í(”ÌC Í/”ÌE Í1”ÌP Í<”ÌR Í>”ÌV ÍÌB”ÌX ÍÌD–” Í” Í” Í” Í” Í” Í–” Í” Í” Í” Í” Í” Íš” Í” Í” Í” Í” Í” Í” Í”! Í”# Í”% Í—” Í” Í” Í” Í” Í” Í”  Í–” Í” Í” Í” Í” Í” Í’” Í
+” Í’” Í” Í”” Í” Í” Í”  Í–” Í” Í” Í” Í” Í ” Í"” Í” Í” Í$” Í*” Í+” Í-” Í0” Í2”! Í4”# Í6”) Í<”+ Í>”- ÍÌ@”/ ÍÌB’” Í” Í”” Í” Í”# Í”- Í–” Í” Í” Í” Í” Í” Íœ” Í” Í” Í” Í” Í” Í”  Í”! Í”% Í”& Í”8 Í0”: Í2’” Í” Í”” Í” Í”# Í”+ Í–” Í” Í” Í” Í” Í” Íœ” Í” Í” Í” Í” Í” Í”  Í”! Í”% Í”& Í”3 Í+”5 Í-’” Í” Í”” Í” Í”# Í”+ Í–” Í” Í” Í” Í” Í” Íœ” Í” Í” Í” Í” Í” Í”  Í”! Í”% Í”& Í”3 Í+”5 Í-’” Í” Í”” Í!” Í!” Í!” Í!–” Í!” Í!” Í!” Í!” Í!” Í! ” Í!” Í!” Í!"” Í!(” Í!)” Í!+” Í!.” Í!0”! Í!2”# Í!4”) Í!:”+ Í!<”- Í!>”/ Í!Ì@’” Í!” Í!”” Í"” Í"”# Í"”) Í"–” Í"” Í"” Í#” Í#” Í#” Í#œ” Í"” Í"” Í$” Í$” Í$” Í$”  Í$”! Í$”% Í$”& Í$”- Í$%”/ Í$'’” Í"” Í"”” Í%” Í%”# Í%”) Í%–” Í%” Í%” Í&” Í&” Í&” Í&œ” Í%” Í%” Í'” Í'” Í'” Í'”  Í'”! Í'”% Í'”& Í'”0 Í'(”2 Í'*’” Í%” Í%”” Í(” Í(”# Í(”- Í(–” Í(” Í(” Í)” Í)” Í)” Í)œ” Í(” Í(” Í*” Í*” Í*” Í*”  Í*”! Í*”% Í*”& Í*”3 Í*+”5 Í*-’” Í(” Í(”” Í+” Í+”# Í+”- Í+–” Í+” Í+” Í,” Í,” Í,” Í,œ” Í+” Í+” Í-” Í-” Í-” Í-”  Í-”! Í-”% Í-”& Í-”6 Í-.”8 Í-0’” Í+” Í+’” Í” Í’” Í” Í
+‘” Í6ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜu‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache•ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¢‘ÔrL”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡ÌÔrM”¤type¥start£end¤nameªIdentifierÌ‡Ì¦routerÔrN•¤type¥start£end¥value£raw§LiteralÌ“Ì¡¬@ohos.router®'@ohos.router'K±ImportDeclarationÌ¤ÌÜ‘L¶ImportDefaultSpecifierÌ«Ì¼MªIdentifierÌ«Ì¼±abilityAccessCtrlN§LiteralÌÂÌÛ·@ohos.abilityAccessCtrl¹'@ohos.abilityAccessCtrl'K±ImportDeclarationÌŞÍ‘L¶ImportDefaultSpecifierÌåÌéMªIdentifierÌåÌé¤callN§LiteralÌïÍ´@ohos.telephony.call¶'@ohos.telephony.call'K±ImportDeclarationÍÍ*‘L¶ImportDefaultSpecifierÍÍMªIdentifierÍÍ¦promptN§LiteralÍÍ)¬@ohos.prompt®'@ohos.prompt'K±ImportDeclarationÍhÍ‘L¶ImportDefaultSpecifierÍoÍrMªIdentifierÍoÍr£smsN§LiteralÍxÍ³@ohos.telephony.smsµ"@ohos.telephony.sms"

@@ -1,0 +1,371 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ!Nif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import authentication from "@hms.core.authentication";
+import hilog from "@ohos.hilog";
+import { showToast } from '../common/ShowToast';
+import { ErrorCode } from '../common/Constants';
+export class PrepareLoginPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.logTag = 'PrepareLoginPage';
+        this.domainId = 0x0000;
+        this.__isLogin = new ObservedPropertySimplePU(false, this, "isLogin");
+        this.__pageInfos = this.initializeConsume('pageInfos', "pageInfos");
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.logTag !== undefined) {
+            this.logTag = params.logTag;
+        }
+        if (params.domainId !== undefined) {
+            this.domainId = params.domainId;
+        }
+        if (params.isLogin !== undefined) {
+            this.isLogin = params.isLogin;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__isLogin.purgeDependencyOnElmtId(rmElmtId);
+        this.__pageInfos.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__isLogin.aboutToBeDeleted();
+        this.__pageInfos.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get isLogin() {
+        return this.__isLogin.get();
+    }
+    set isLogin(newValue) {
+        this.__isLogin.set(newValue);
+    }
+    get pageInfos() {
+        return this.__pageInfos.get();
+    }
+    set pageInfos(newValue) {
+        this.__pageInfos.set(newValue);
+    }
+    aboutToAppear() {
+        hilog.info(this.domainId, this.logTag, `${this.logTag} aboutToAppear`);
+    }
+    // Redirect to another page.
+    jumpLoginPage(quickLoginAnonymousPhone) {
+        if (quickLoginAnonymousPhone) {
+            // Obtain the anonymous mobile number, pass it, and redirect to the one-tap sign-in screen.
+            const params = { 'anonymousPhone': quickLoginAnonymousPhone };
+            this.pageInfos?.pushPathByName('QuickLoginPage', params, true);
+        }
+        else {
+            // If the anonymous mobile number cannot be obtained, an error message is displayed.
+            const hint = this.getUIContext()
+                .getHostContext().resourceManager.getStringSync({ "id": 16777227, "type": 10003, params: [], "bundleName": "com.example.accountkit_quicklogin_sample", "moduleName": "entry" });
+            showToast(this.getUIContext(), hint);
+        }
+    }
+    // Obtain the anonymous mobile number.
+    getQuickLoginAnonymousPhone() {
+        // Create an authorization request.
+        const authRequest = new authentication.HuaweiIDProvider().createAuthorizationWithHuaweiIDRequest();
+        // User information requested by the app.
+        authRequest.scopes = ['quickLoginAnonymousPhone'];
+        // In the one-tap sign-in scenario, forceAuthorization must be set to false.
+        authRequest.forceAuthorization = false;
+        const controller = new authentication.AuthenticationController();
+        try {
+            controller.executeRequest(authRequest).then((response) => {
+                // Obtain the UnionID, OpenID, and anonymous mobile number.
+                const unionID = response.data?.unionID;
+                const openID = response.data?.openID;
+                const quickLoginAnonymousPhone = response.data?.extraInfo?.quickLoginAnonymousPhone;
+                AppStorage.setOrCreate('quickLoginAnonymousPhone', quickLoginAnonymousPhone);
+                this.jumpLoginPage(quickLoginAnonymousPhone);
+                hilog.info(this.domainId, this.logTag, `Succeeded in authorizing. QuickLoginAnonymousPhone is ${quickLoginAnonymousPhone}`);
+            }).catch((error) => {
+                hilog.error(this.domainId, this.logTag, `Failed to authorize. errCode is ${error.code}, errMessage is ${error.message}`);
+                this.dealAllError(error);
+                showToast(this.getUIContext(), error);
+            });
+        }
+        catch (error) {
+            hilog.error(this.domainId, this.logTag, `Failed to authorize. errCode is ${error.code}, errMessage is ${error.message}`);
+        }
+    }
+    dealAllError(error) {
+        // In app sign-in scenarios involving UI interactions, it is recommended to guide users with the following error code prompts:
+        if (error.code === ErrorCode.ERROR_CODE_LOGIN_OUT) {
+            // The user has not signed in with a HUAWEI ID. Use a HUAWEI ID to sign in and try again, or sign in to the app in another way.
+        }
+        else if (error.code === ErrorCode.ERROR_CODE_NETWORK_ERROR) {
+            // Network exception. Check the current network status and try again, or sign in to the app in another way.
+        }
+        else if (error.code === ErrorCode.ERROR_CODE_INTERNAL_ERROR) {
+            // Sign-in failed. Try another sign-in option.
+        }
+        else if (error.code === ErrorCode.ERROR_CODE_USER_CANCEL) {
+            // The user cancels the authorization.
+        }
+        else if (error.code === ErrorCode.ERROR_CODE_SYSTEM_SERVICE) {
+            // System service exception. Try again later or sign in to the app in another way.
+        }
+        else if (error.code === ErrorCode.ERROR_CODE_REQUEST_REFUSE) {
+            // Repeated request. No further action is needed.
+        }
+        else {
+            // Sign-in failed. Try another sign-in option.
+        }
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            NavDestination.create(() => {
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Column.create();
+                    Column.width('100%');
+                    Column.height('100%');
+                    Column.justifyContent(FlexAlign.Center);
+                }, Column);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create({ "id": 16777233, "type": 10003, params: [], "bundleName": "com.example.accountkit_quicklogin_sample", "moduleName": "entry" });
+                    Text.fontSize(30);
+                    Text.fontWeight(FontWeight.Medium);
+                    Text.textAlign(TextAlign.Center);
+                    Text.id('loginText');
+                    Text.onClick(() => {
+                        this.getQuickLoginAnonymousPhone();
+                    });
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel('æƒé™åŠŸèƒ½æµ‹è¯•');
+                    Button.width('60%');
+                    Button.height(50);
+                    Button.margin({ top: 20 });
+                    Button.backgroundColor('#E64A19');
+                    Button.onClick(() => {
+                        this.pageInfos?.pushPathByName('PermissionsPage', null, true);
+                    });
+                }, Button);
+                Button.pop();
+                Column.pop();
+            }, { moduleName: "entry", pagePath: "entry/src/main/ets/pages/PrepareLoginPage" });
+            NavDestination.backgroundColor('#F1F3F5');
+            NavDestination.hideTitleBar(true);
+            NavDestination.onBackPressed(() => {
+                // Directly exit the app using a gesture.
+                hilog.info(this.domainId, this.logTag, 'PrepareLoginPage onBackPressed');
+                try {
+                    this.getUIContext().getHostContext().terminateSelf();
+                }
+                catch (error) {
+                    hilog.error(this.domainId, this.logTag, `Failed to terminateSelf. errCode is ${error.code}, errMessage is ${error.message}`);
+                }
+                return true;
+            });
+        }, NavDestination);
+        NavDestination.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+//# sourceMappingURL=PrepareLoginPage.js.mapÂ”Ùh hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_hms_ets_api_@hms.core.authentication.d.tsÙc hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.hilog.d.tsÙuC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entry\src\main\ets\common\ShowToast.etsÙuC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entry\src\main\ets\common\Constants.etsÙ{C:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entry\src\main\ets\pages\PrepareLoginPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙSC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entryÙMC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleName²./PrepareLoginPage¥entryÙSC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entryÃÃÚ…/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2025. All rights reserved.
+ */
+import { common } from '@kit.AbilityKit';
+import { authentication } from '@kit.AccountKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { showToast } from '../common/ShowToast';
+import { ErrorCode } from '../common/Constants';
+
+@Component
+export struct PrepareLoginPage {
+  logTag: string = 'PrepareLoginPage';
+  domainId: number = 0x0000;
+  @State isLogin: boolean = false;
+  @Consume('pageInfos') pageInfos: NavPathStack;
+
+  aboutToAppear() {
+    hilog.info(this.domainId, this.logTag, `${this.logTag} aboutToAppear`);
+  }
+
+  // Redirect to another page.
+  private jumpLoginPage(quickLoginAnonymousPhone: string) {
+    if (quickLoginAnonymousPhone) {
+      // Obtain the anonymous mobile number, pass it, and redirect to the one-tap sign-in screen.
+      const params: Record<string, Object> = { 'anonymousPhone': quickLoginAnonymousPhone };
+      this.pageInfos?.pushPathByName('QuickLoginPage', params, true);
+    } else {
+      // If the anonymous mobile number cannot be obtained, an error message is displayed.
+      const hint: string = (this.getUIContext()
+        .getHostContext() as common.UIAbilityContext).resourceManager.getStringSync($r('app.string.get_mobile_number_error'));
+      showToast(this.getUIContext(), hint);
+    }
+  }
+
+  // Obtain the anonymous mobile number.
+  getQuickLoginAnonymousPhone() {
+    // Create an authorization request.
+    const authRequest = new authentication.HuaweiIDProvider().createAuthorizationWithHuaweiIDRequest();
+    // User information requested by the app.
+    authRequest.scopes = ['quickLoginAnonymousPhone'];
+    // In the one-tap sign-in scenario, forceAuthorization must be set to false.
+    authRequest.forceAuthorization = false;
+    const controller = new authentication.AuthenticationController();
+    try {
+      controller.executeRequest(authRequest).then((response: authentication.AuthorizationWithHuaweiIDResponse) => {
+        // Obtain the UnionID, OpenID, and anonymous mobile number.
+        const unionID = response.data?.unionID;
+        const openID = response.data?.openID;
+        const quickLoginAnonymousPhone = response.data?.extraInfo?.quickLoginAnonymousPhone as string;
+        AppStorage.setOrCreate('quickLoginAnonymousPhone', quickLoginAnonymousPhone)
+        this.jumpLoginPage(quickLoginAnonymousPhone);
+        hilog.info(this.domainId, this.logTag,
+          `Succeeded in authorizing. QuickLoginAnonymousPhone is ${quickLoginAnonymousPhone}`);
+      }).catch((error: BusinessError) => {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to authorize. errCode is ${error.code}, errMessage is ${error.message}`);
+        this.dealAllError(error);
+        showToast(this.getUIContext(), error);
+      })
+    } catch (error) {
+      hilog.error(this.domainId, this.logTag,
+        `Failed to authorize. errCode is ${error.code}, errMessage is ${error.message}`);
+    }
+  }
+
+  dealAllError(error: BusinessError): void {
+    // In app sign-in scenarios involving UI interactions, it is recommended to guide users with the following error code prompts:
+    if (error.code === ErrorCode.ERROR_CODE_LOGIN_OUT) {
+      // The user has not signed in with a HUAWEI ID. Use a HUAWEI ID to sign in and try again, or sign in to the app in another way.
+    } else if (error.code === ErrorCode.ERROR_CODE_NETWORK_ERROR) {
+      // Network exception. Check the current network status and try again, or sign in to the app in another way.
+    } else if (error.code === ErrorCode.ERROR_CODE_INTERNAL_ERROR) {
+      // Sign-in failed. Try another sign-in option.
+    } else if (error.code === ErrorCode.ERROR_CODE_USER_CANCEL) {
+      // The user cancels the authorization.
+    } else if (error.code === ErrorCode.ERROR_CODE_SYSTEM_SERVICE) {
+      // System service exception. Try again later or sign in to the app in another way.
+    } else if (error.code === ErrorCode.ERROR_CODE_REQUEST_REFUSE) {
+      // Repeated request. No further action is needed.
+    } else {
+      // Sign-in failed. Try another sign-in option.
+    }
+  }
+
+  build() {
+    NavDestination() {
+      Column() {
+        Text($r('app.string.login'))
+          .fontSize(30)
+          .fontWeight(FontWeight.Medium)
+          .textAlign(TextAlign.Center)
+          .id('loginText')
+          .onClick(() => {
+            this.getQuickLoginAnonymousPhone();
+          })
+          
+        Button('æƒé™åŠŸèƒ½æµ‹è¯•')
+          .width('60%')
+          .height(50)
+          .margin({ top: 20 })
+          .backgroundColor('#E64A19')
+          .onClick(() => {
+            this.pageInfos?.pushPathByName('PermissionsPage', null, true);
+          })
+      }
+      .width('100%')
+      .height('100%')
+      .justifyContent(FlexAlign.Center)
+    }
+    .backgroundColor('#F1F3F5')
+    .hideTitleBar(true)
+    .onBackPressed(() => {
+      // Directly exit the app using a gesture.
+      hilog.info(this.domainId, this.logTag, 'PrepareLoginPage onBackPressed');
+      try {
+        (this.getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf();
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to terminateSelf. errCode is ${error.code}, errMessage is ${error.message}`);
+      }
+      return true;
+    })
+  }
+}
+
+ÀÔrD”¸@hms.core.authentication«@ohos.hilog³../common/ShowToast³../common/ConstantsÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙh hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_hms_ets_api_@hms.core.authentication.d.tsÔrF‘¯hostModulesInfo‘C¸@hms.core.authentication¥entryÃªoh-resolveÂEAÃÙc hvigor_ignore_D:_Apps_DevEcoStudio5_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.hilog.d.tsAÃªoh-resolveÂEAÂÙuC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entry\src\main\ets\common\ShowToast.etsAÃªoh-resolveÂEAÂÙuC:\Users\yao\Desktop\final_api\AccountKit-Codelab-QuickLogin-Clientdemo-ArkTS\entry\src\main\ets\common\Constants.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings³PrepareLoginPage.js ‘´PrepareLoginPage.etsÜ ­–”   ” 	” ” ”5 0”6 1–”   ” 	” ” ” 3”  4˜”   ” ”	 	” ” ” ”/ /”0 0˜”   ” ”	 	” ” ” ”/ /”0 0””   ” ” ” ‘” 
+ ’” ”( %’” ” ’”6 ”; !’”2 ”= ‘” 0’” 	” ’” 	” ’” ” !’” ” !’” ” Ü ” ” 	” 
+” ” ” ” ”  ”" ”& "”' #”- )”/ +”2 .”6 2”7 3”= 9”ÌM ÌI”ÌN ÌJ”ÌO ÌK’” ” ’” ”  ”” 
+” ” ”* 8”” ” ”$  ”& "’” ”Ìg Ìaš” ” ” ” -” /”- ?”/ ÌA”ÌG ÌY”ÌI Ì[”ÌJ Ì\” ” 
+” ” ” ”* $”+ %”; 5”= 7”ÌC =”ÌE ?”ÌI ÌC”ÌJ ÌD”ÌK ÌE‘”	 ‘” ’” ”Ì` ÌZ˜” ” ” ” ”  ” !”* -”, /™” 	” ”! 5”" 6”1 ÌE”2 ÌF”? ÌS”Ì¿ Ì}”ÌÀ Ì~›” ” ” ” ” ”' !”) #”+ %”/ )”0 *”1 +‘”	  ’” !” !’” #”* #(’” $” $’” %”+ %'” &” &
+” &” &”  &”. &*”/ &+”? &;”ÌA &=”ÌB &>”Ìh &Ìd”Ìj &Ìf”Ìk &Ìg’” '”1 '-™” (” (” (” (” (” (”8 (4”9 (5”: (6’” )”ÌT )ÌP—” *” *” *”& *"”) *%”. **”/ *+š” +” +
+” +” +” +”- +)”. +*”ÌF +ÌB”ÌH +ÌD”ÌI +ÌE’” ,” ,” -” -” -”% -”& - ”1 -+”2 -,”3 --”7 -1”8 -2”9 -3”ÌA -Ìm”ÌC -Ìo”ÌE -Ìq’” .”ÌK .ÌCš” /” /” /”  /”( / ”) /!”- /%”/ /'”6 /.”7 //š” 0” 0” 0” 0”' 0”( 0 ”, 0$”. 0&”4 0,”5 0-œ” 1” 1”. 1&”1 1)”9 11”: 12”> 16”Ì@ 18”ÌI 1ÌA”ÌK 1ÌC”Ìc 1Ìe”Ìd 1Ìfš” 2” 2” 2”& 2”' 2”ÌA 29”ÌC 2;”Ì[ 2ÌS”Ì\ 2ÌT”Ì] 2ÌT˜” 3” 3” 3”" 3”# 3”; 33”< 34”= 35Ü ” 4” 4” 4” 4” 4” 4”  4”( 4 ”* 4"”. 4&”/ 4'”5 4-”7 5
+”Ìp 5ÌC”Ìˆ 5Ì[”ÌŠ 5Ì]”Ì‹ 5Ì^”ÌŒ 5Ì_š” 6” 6” 6” 6	” 6” 6” 6” 6$” 6&” 6(Ü ” 7” 7” 7” 7” 7”  7”! 7”) 7!”+ 7#”/ 7'”0 7(”6 7.”8 8
+”Ì[ 8-”Ì` 82”Ìa 83”Ìe 87”Ìx 8ÌJ”Ì} 8ÌO”Ì~ 8ÌP”Ì… 8ÌW”Ì‡ 8ÌY”Ìˆ 8ÌZ”Ì‰ 8Ì[˜” 9” 9” 9”! 9”" 9”' 9”( 9 ”) 9!›” :” :” :” :” :”+ :#”- :%”/ :'”4 :,”5 :-”6 :.”” ;” ;” ;” ;‘”	 <”” <” <” <” <Ü ” =” =” =” =” =” =” =”% =”' =!”+ =%”, =&”2 =,”4 >”ÌW >+”Ì\ >0”Ì] >1”Ìa >5”Ìt >ÌH”Ìy >ÌM”Ìz >ÌN”Ì >ÌU”Ìƒ >ÌW”Ì„ >ÌX”Ì… >ÌY‘”	 ?’” Ì@” Ì@”” ÌB” ÌB” ÌB” ÌB#’” ÌC”Ì† ÌCÌ‚š” ÌD” ÌD” ÌD” ÌD” ÌD” ÌD”$ ÌD ”% ÌD!”9 ÌD5”; ÌD7’” ÌE”Ì‹ ÌEÌ…‘”	 ÌFš” ÌF” ÌF” ÌF” ÌF” ÌF”  ÌF”) ÌF'”* ÌF(”ÌB ÌFÌ@”ÌD ÌFÌB’” ÌG”Ìw ÌGÌq‘”	 ÌHš” ÌH” ÌH” ÌH” ÌH” ÌH”  ÌH”) ÌH'”* ÌH(”ÌC ÌHÌA”ÌE ÌHÌC’” ÌI”: ÌI4‘”	 ÌJš” ÌJ” ÌJ” ÌJ” ÌJ” ÌJ”  ÌJ”) ÌJ'”* ÌJ(”Ì@ ÌJ>”ÌB ÌJÌ@’” ÌK”2 ÌK,‘”	 ÌLš” ÌL” ÌL” ÌL” ÌL” ÌL”  ÌL”) ÌL'”* ÌL(”ÌC ÌLÌA”ÌE ÌLÌC’” ÌM”Ì^ ÌMÌX‘”	 ÌNš” ÌN” ÌN” ÌN” ÌN” ÌN”  ÌN”) ÌN'”* ÌN(”ÌC ÌNÌA”ÌE ÌNÌC’” ÌO”= ÌO7‘”	 ÌP‘” ÌP’” ÌQ”: ÌQ4‘”	 ÌR’” ÌS” ÌS‘” ÌU’” ÌW” ÌW–” ÌW” ÌW” Ìj”  Ìj”! Ìj”' Ìj–” ÌW” ÌW” Ìk”! Ìk”" Ìk”( Ìk˜” ÌW” ÌW” Ìl”) Ìl”* Ìl”3 Ìl”4 Ìl ”: Ìl&’” ÌX” ÌX–” ÌX” ÌX” ÌY”! ÌY”" ÌY”$ ÌY˜” ÌX” ÌX” ÌZ”# ÌZ”$ ÌZ”. ÌZ ”/ ÌZ!”5 ÌZ'˜” ÌX” ÌX” Ì[”" Ì[”# Ì[”, Ì[”- Ì[”3 Ì[%–” ÌX” ÌX” Ì\” Ì\” Ì\”' Ì\—” ÌX” ÌX” Ì]”  Ì]”! Ì]”$ Ì]”& Ì]–” Ì^” Ì^” Ì^”8 Ì^,”: Ì^.”; Ì^/’” Ì_
+” Ì_’” ÌX” ÌX”” Ìa” Ìa”+ Ìa”3 Ìa–” Ìa” Ìa” Ìb”  Ìb”! Ìb”& Ìb–” Ìa” Ìa” Ìc”! Ìc”" Ìc”$ Ìcš” Ìa” Ìa” Ìd”! Ìd”" Ìd”$ Ìd”' Ìd”) Ìd”+ Ìd”- Ìd–” Ìa” Ìa” Ìe”* Ìe”+ Ìe”4 Ìe$—” Ìa” Ìa” Ìf”" Ìf”# Ìf”& Ìf”( Ìf” Ìg” Ìg” Ìg”& Ìg”( Ìg”6 Ìg*”7 Ìg+”ÌH Ìg<”ÌJ Ìg>”ÌN ÌgÌB”ÌP ÌgÌD”ÌT ÌgÌH”ÌU ÌgÌI”ÌV ÌgÌJ’” Ìh
+” Ìh’” Ìa” Ìa’” ÌW” ÌW”” Ìn”* Ìn”+ Ìn”4 Ìn”” Ìo”' Ìo”( Ìo”, Ìo•” Ìp”( Ìp”) Ìp”, Ìp”. Ìp’” Ìq”9 Ìq/Ü ” Ìr” Ìr” Ìr” Ìr” Ìr” Ìr”  Ìr”( Ìr”* Ìr ”. Ìr$”/ Ìr%”5 Ìr+”7 Ìr-”ÌW ÌrÌM”ÌX ÌrÌN”ÌY ÌrÌO’” Ìs” Ìs
+œ” Ìt	” Ìt” Ìt”% Ìt”' Ìt”( Ìt”6 Ìt+”8 ÌtÌI”9 ÌtÌJ”ÌF ÌtÌW”ÌH ÌtÌY”ÌI ÌtÌZ‘” Ìu”” Ìu” Ìu” Ìu” ÌuÜ ” Ìv” Ìv” Ìv” Ìv”  Ìv”$ Ìv”% Ìv”- Ìv!”/ Ìv#”3 Ìv'”4 Ìv(”: Ìv.”< Ìw
+”Ìc Ìw1”Ìh Ìw6”Ìi Ìw7”Ìm Ìw;”Ì€ ÌwÌN”Ì… ÌwÌS”Ì† ÌwÌT”Ì ÌwÌ[”Ì ÌwÌ]”Ì ÌwÌ^”Ì‘ ÌwÌ_‘” Ìx”” Ìy” Ìy” Ìy” Ìy’” Ìz” Ìz‘” Ì{ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ ²‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache‘ÔrK–¤type¥start£end«declarationªspecifiers¦source¶ExportNamedDeclarationÍ>Í!ÔrL–¤type¥start£end¢idªsuperClass¤body°ClassDeclarationÍEÍ!ÔrM”¤type¥start£end¤nameªIdentifierÍKÍ[°PrepareLoginPageMªIdentifierÍdÍj¦ViewPUÔrN”¤type¥start£end¤body©ClassBodyÍkÍ!ŸÔrO˜¤type¥start£end¦static¨computed£key¤kind¥value°MethodDefinitionÍrÍÅÂÂMªIdentifierÍrÍ}«constructor«constructorÔrP™¤type¥start£end¢idªexpression©generator¥async¦params¤body²FunctionExpressionÍ}ÍÅÀÂÂÂ–MªIdentifierÍ~Í„¦parentMªIdentifierÍ†ÍŒ¦paramsMªIdentifierÍÍœ®__localStorageÔrQ•¤type¥start£end¤left¥right±AssignmentPatternÍÍ©MªIdentifierÍÍ¤¦elmtIdÔrR–¤type¥start£end¨operator¦prefix¨argument¯UnaryExpressionÍ§Í©¡-ÃÔrS•¤type¥start£end¥value£raw§LiteralÍ¨Í©¡1Q±AssignmentPatternÍ«ÍÃMªIdentifierÍ«Í·¬paramsLambdaMªIdentifierÍºÍÃ©undefinedMªIdentifierÍÅÍÎ©extraInfoN®BlockStatementÍĞÍÅ˜ÔrT”¤type¥start£endªexpression³ExpressionStatementÍÛÍÔrU–¤type¥start£end¦callee©arguments¨optional®CallExpressionÍÛÍÔrV“¤type¥start£end¥SuperÍÛÍà”MªIdentifierÍáÍç¦parentMªIdentifierÍéÍ÷®__localStorageMªIdentifierÍùÍÿ¦elmtIdMªIdentifierÍÍ
+©extraInfoÂÔrW–¤type¥start£end¤testªconsequent©alternate«IfStatementÍÍ}ÔrX–¤type¥start£end¤left¨operator¥right°BinaryExpressionÍÍ<R¯UnaryExpressionÍÍ-¦typeofÃMªIdentifierÍ!Í-¬paramsLambda£===S§LiteralÍ2Í<¨functionª"function"N®BlockStatementÍ>Í}‘T³ExpressionStatementÍMÍrÔrY–¤type¥start£end¨operator¤left¥right´AssignmentExpressionÍMÍq¡=ÔrZ—¤type¥start£end¦object¨property¨computed¨optional°MemberExpressionÍMÍbV®ThisExpressionÍMÍQMªIdentifierÍRÍb°paramsGenerator_ÂÂMªIdentifierÍeÍq¬paramsLambdaÀT³ExpressionStatementÍ‡Í¨Y´AssignmentExpressionÍ‡Í§¡=Z°MemberExpressionÍ‡Í’V®ThisExpressionÍ‡Í‹MªIdentifierÍŒÍ’¦logTagÂÂS§LiteralÍ•Í§°PrepareLoginPage²'PrepareLoginPage'T³ExpressionStatementÍ²ÍÉY´AssignmentExpressionÍ²ÍÈ¡=Z°MemberExpressionÍ²Í¿V®ThisExpressionÍ²Í¶MªIdentifierÍ·Í¿¨domainIdÂÂS§LiteralÍÂÍÈ ¦0x0000T³ExpressionStatementÍÓÍY´AssignmentExpressionÍÓÍ¡=Z°MemberExpressionÍÓÍáV®ThisExpressionÍÓÍ×MªIdentifierÍØÍá©__isLoginÂÂÔr[•¤type¥start£end¦callee©arguments­NewExpressionÍäÍMªIdentifierÍèÍ ¸ObservedPropertySimplePU“S§LiteralÍÍÂ¥falseV®ThisExpressionÍÍS§LiteralÍÍ§isLogin©"isLogin"T³ExpressionStatementÍ#ÍgY´AssignmentExpressionÍ#Íf¡=Z°MemberExpressionÍ#Í3V®ThisExpressionÍ#Í'MªIdentifierÍ(Í3«__pageInfosÂÂU®CallExpressionÍ6ÍfZ°MemberExpressionÍ6ÍLV®ThisExpressionÍ6Í:MªIdentifierÍ;ÍL±initializeConsumeÂÂ’S§LiteralÍMÍX©pageInfos«'pageInfos'S§LiteralÍZÍe©pageInfos«"pageInfos"ÂT³ExpressionStatementÍqÍ˜U®CallExpressionÍqÍ—Z°MemberExpressionÍqÍV®ThisExpressionÍqÍuMªIdentifierÍvÍ¹setInitiallyProvidedValueÂÂ‘MªIdentifierÍÍ–¦paramsÂT³ExpressionStatementÍ¢Í¾U®CallExpressionÍ¢Í½Z°MemberExpressionÍ¢Í»V®ThisExpressionÍ¢Í¦MªIdentifierÍ§Í»´finalizeConstructionÂÂÂO°MethodDefinitionÍËÍ!ÂÂMªIdentifierÍËÍä¹setInitiallyProvidedValue¦methodP²FunctionExpressionÍäÍ!ÀÂÂÂ‘MªIdentifierÍåÍë¦paramsN®BlockStatementÍíÍ!“W«IfStatementÍøÍOX°BinaryExpressionÍüÍZ°MemberExpressionÍüÍ	MªIdentifierÍüÍ¦paramsMªIdentifierÍÍ	¦logTagÂÂ£!==MªIdentifierÍÍ©undefinedN®BlockStatementÍÍO‘T³ExpressionStatementÍ(ÍDY´AssignmentExpressionÍ(ÍC¡=Z°MemberExpressionÍ(Í3V®ThisExpressionÍ(Í,MªIdentifierÍ-Í3¦logTagÂÂZ°MemberExpressionÍ6ÍCMªIdentifierÍ6Í<¦paramsMªIdentifierÍ=ÍC¦logTagÂÂÀW«IfStatementÍYÍ¶X°BinaryExpressionÍ]ÍzZ°MemberExpressionÍ]ÍlMªIdentifierÍ]Íc¦paramsMªIdentifierÍdÍl¨domainIdÂÂ£!==MªIdentifierÍqÍz©undefinedN®BlockStatementÍ|Í¶‘T³ExpressionStatementÍ‹Í«Y´AssignmentExpressionÍ‹Íª¡=Z°MemberExpressionÍ‹Í˜V®ThisExpressionÍ‹ÍMªIdentifierÍÍ˜¨domainIdÂÂZ°MemberExpressionÍ›ÍªMªIdentifierÍ›Í¡¦paramsMªIdentifierÍ¢Íª¨domainIdÂÂÀW«IfStatementÍÀÍX°BinaryExpressionÍÄÍàZ°MemberExpressionÍÄÍÒMªIdentifierÍÄÍÊ¦paramsMªIdentifierÍËÍÒ§isLoginÂÂ£!==MªIdentifierÍ×Íà©undefinedN®BlockStatementÍâÍ‘T³ExpressionStatementÍñÍY´AssignmentExpressionÍñÍ¡=Z°MemberExpressionÍñÍıV®ThisExpressionÍñÍõMªIdentifierÍöÍı§isLoginÂÂZ°MemberExpressionÍ ÍMªIdentifierÍ Í¦paramsMªIdentifierÍÍ§isLoginÂÂÀO°MethodDefinitionÍ'ÍGÂÂMªIdentifierÍ'Í6¯updateStateVars¦methodP²FunctionExpressionÍ6ÍGÀÂÂÂ‘MªIdentifierÍ7Í=¦paramsN®BlockStatementÍ?ÍGO°MethodDefinitionÍMÍùÂÂMªIdentifierÍMÍnÙ!purgeVariableDependenciesOnElmtId¦methodP²FunctionExpressionÍnÍùÀÂÂÂ‘MªIdentifierÍoÍw¨rmElmtIdN®BlockStatementÍyÍù’T³ExpressionStatementÍ„ÍµU®CallExpressionÍ„Í´Z°MemberExpressionÍ„ÍªZ°MemberExpressionÍ„Í’V®ThisExpressionÍ„ÍˆMªIdentifierÍ‰Í’©__isLoginÂÂMªIdentifierÍ“Íª·purgeDependencyOnElmtIdÂÂ‘MªIdentifierÍ«Í³¨rmElmtIdÂT³ExpressionStatementÍ¿ÍòU®CallExpressionÍ¿ÍñZ°MemberExpressionÍ¿ÍçZ°MemberExpressionÍ¿ÍÏV®ThisExpressionÍ¿ÍÃMªIdentifierÍÄÍÏ«__pageInfosÂÂMªIdentifierÍĞÍç·purgeDependencyOnElmtIdÂÂ‘MªIdentifierÍèÍğ¨rmElmtIdÂO°MethodDefinitionÍÿÍÔÂÂMªIdentifierÍÿÍ°aboutToBeDeleted¦methodP²FunctionExpressionÍÍÔÀÂÂÂN®BlockStatementÍÍÔ”T³ExpressionStatementÍÍ?U®CallExpressionÍÍ>Z°MemberExpressionÍÍ<Z°MemberExpressionÍÍ+V®ThisExpressionÍÍ!MªIdentifierÍ"Í+©__isLoginÂÂMªIdentifierÍ,Í<°aboutToBeDeletedÂÂÂT³ExpressionStatementÍIÍmU®CallExpressionÍIÍlZ°MemberExpressionÍIÍjZ°MemberExpressionÍIÍYV®ThisExpressionÍIÍMMªIdentifierÍNÍY«__pageInfosÂÂMªIdentifierÍZÍj°aboutToBeDeletedÂÂÂT³ExpressionStatementÍwÍ£U®CallExpressionÍwÍ¢Z°MemberExpressionÍwÍ•U®CallExpressionÍwÍZ°MemberExpressionÍwÍŒMªIdentifierÍwÍˆ±SubscriberManagerMªIdentifierÍ‰ÍŒ£GetÂÂÂMªIdentifierÍÍ•¦deleteÂÂ‘U®CallExpressionÍ–Í¡Z°MemberExpressionÍ–ÍŸV®ThisExpressionÍ–ÍšMªIdentifierÍ›ÍŸ¤id__ÂÂÂÂT³ExpressionStatementÍ­ÍÍU®CallExpressionÍ­ÍÌZ°MemberExpressionÍ­ÍÊV®ThisExpressionÍ­Í±MªIdentifierÍ²ÍÊ¸aboutToBeDeletedInternalÂÂÂO°MethodDefinitionÍÚÍÂÂMªIdentifierÍŞÍå§isLogin£getP²FunctionExpressionÍåÍÀÂÂÂN®BlockStatementÍèÍ‘Ôr\”¤type¥start£end¨argument¯ReturnStatementÍóÍU®CallExpressionÍúÍZ°MemberExpressionÍúÍZ°MemberExpressionÍúÍV®ThisExpressionÍúÍşMªIdentifierÍÿÍ©__isLoginÂÂMªIdentifierÍ	Í£getÂÂÂO°MethodDefinitionÍÍaÂÂMªIdentifierÍ Í'§isLogin£setP²FunctionExpressionÍ'ÍaÀÂÂÂ‘MªIdentifierÍ(Í0¨newValueN®BlockStatementÍ2Ía‘T³ExpressionStatementÍ=ÍZU®CallExpressionÍ=ÍYZ°MemberExpressionÍ=ÍOZ°MemberExpressionÍ=ÍKV®ThisExpressionÍ=ÍAMªIdentifierÍBÍK©__isLoginÂÂMªIdentifierÍLÍO£setÂÂ‘MªIdentifierÍPÍX¨newValueÂO°MethodDefinitionÍgÍ§ÂÂMªIdentifierÍkÍt©pageInfos£getP²FunctionExpressionÍtÍ§ÀÂÂÂN®BlockStatementÍwÍ§‘\¯ReturnStatementÍ‚Í U®CallExpressionÍ‰ÍŸZ°MemberExpressionÍ‰ÍZ°MemberExpressionÍ‰Í™V®ThisExpressionÍ‰ÍMªIdentifierÍÍ™«__pageInfosÂÂMªIdentifierÍšÍ£getÂÂÂO°MethodDefinitionÍ­ÍöÂÂMªIdentifierÍ±Íº©pageInfos£setP²FunctionExpressionÍºÍöÀÂÂÂ‘MªIdentifierÍ»ÍÃ¨newValueN®BlockStatementÍÅÍö‘T³ExpressionStatementÍĞÍïU®CallExpressionÍĞÍîZ°MemberExpressionÍĞÍäZ°MemberExpressionÍĞÍàV®ThisExpressionÍĞÍÔMªIdentifierÍÕÍà«__pageInfosÂÂMªIdentifierÍáÍä£setÂÂ‘MªIdentifierÍåÍí¨newValueÂO°MethodDefinitionÍüÍeÂÂMªIdentifierÍüÍ	­aboutToAppear¦methodP²FunctionExpressionÍ	ÍeÀÂÂÂN®BlockStatementÍÍe‘T³ExpressionStatementÍÍ^U®CallExpressionÍÍ]Z°MemberExpressionÍÍ!MªIdentifierÍÍ¥hilogMªIdentifierÍÍ!¤infoÂÂ“Z°MemberExpressionÍ"Í/V®ThisExpressionÍ"Í&MªIdentifierÍ'Í/¨domainIdÂÂZ°MemberExpressionÍ1Í<V®ThisExpressionÍ1Í5MªIdentifierÍ6Í<¦logTagÂÂÔr]•¤type¥start£end«expressions¦quasis¯TemplateLiteralÍ>Í\‘Z°MemberExpressionÍAÍLV®ThisExpressionÍAÍEMªIdentifierÍFÍL¦logTagÂÂ’Ôr^•¤type¥start£end¥value¤tail¯TemplateElementÍ?Í?Ôr_’£raw¦cooked  Â^¯TemplateElementÍMÍ[_® aboutToAppear® aboutToAppearÃÂO°MethodDefinitionÍÍ“ÂÂMªIdentifierÍÍš­jumpLoginPage¦methodP²FunctionExpressionÍšÍ“ÀÂÂÂ‘MªIdentifierÍ›Í³¸quickLoginAnonymousPhoneN®BlockStatementÍµÍ“‘W«IfStatementÍÀÍŒMªIdentifierÍÄÍÜ¸quickLoginAnonymousPhoneN®BlockStatementÍŞÍ	ì’Ôr`•¤type¥start£end¬declarations¤kind³VariableDeclarationÍ	VÍ	”‘Ôra•¤type¥start£end¢id¤init²VariableDeclaratorÍ	\Í	“MªIdentifierÍ	\Í	b¦paramsÔrb”¤type¥start£endªproperties°ObjectExpressionÍ	eÍ	“‘Ôrc™¤type¥start£end¦method©shorthand¨computed£key¥value¤kind¨PropertyÍ	gÍ	‘ÂÂÂS§LiteralÍ	gÍ	w®anonymousPhone°'anonymousPhone'MªIdentifierÍ	yÍ	‘¸quickLoginAnonymousPhone¤init¥constT³ExpressionStatementÍ	¢Í	áT¯ChainExpressionÍ	¢Í	àU®CallExpressionÍ	¢Í	àZ°MemberExpressionÍ	¢Í	ÀZ°MemberExpressionÍ	¢Í	°V®ThisExpressionÍ	¢Í	¦MªIdentifierÍ	§Í	°©pageInfosÂÂMªIdentifierÍ	²Í	À®pushPathByNameÂÃ“S§LiteralÍ	ÁÍ	Ñ®QuickLoginPage°'QuickLoginPage'MªIdentifierÍ	ÓÍ	Ù¦paramsS§LiteralÍ	ÛÍ	ßÃ¤trueÂN®BlockStatementÍ	ûÍŒ’`³VariableDeclarationÍ
+lÍN‘a²VariableDeclaratorÍ
+rÍMMªIdentifierÍ
+rÍ
+v¤hintU®CallExpressionÍ
+yÍMZ°MemberExpressionÍ
+yÍ
+ÍZ°MemberExpressionÍ
+yÍ
+¿U®CallExpressionÍ
+yÍ
+¯Z°MemberExpressionÍ
+yÍ
+­U®CallExpressionÍ
+yÍ
+ŒZ°MemberExpressionÍ
+yÍ
+ŠV®ThisExpressionÍ
+yÍ
+}MªIdentifierÍ
+~Í
+Š¬getUIContextÂÂÂMªIdentifierÍ
+ŸÍ
+­®getHostContextÂÂÂMªIdentifierÍ
+°Í
+¿¯resourceManagerÂÂMªIdentifierÍ
+ÀÍ
+Í­getStringSyncÂÂ‘b°ObjectExpressionÍ
+ÎÍL•c¨PropertyÍ
+ĞÍ
+ŞÂÂÂS§LiteralÍ
+ĞÍ
+Ô¢id¤"id"S§LiteralÍ
+ÖÍ
+ŞÎ  ¨16777227¤initc¨PropertyÍ
+àÍ
+íÂÂÂS§LiteralÍ
+àÍ
+æ¤type¦"type"S§LiteralÍ
+èÍ
+íÍ'¥10003¤initc¨PropertyÍ
+ïÍ
+ùÂÂÂMªIdentifierÍ
+ïÍ
+õ¦paramsÔrd”¤type¥start£end¨elements¯ArrayExpressionÍ
+÷Í
+ù¤initc¨PropertyÍ
+ûÍ3ÂÂÂS§LiteralÍ
+ûÍªbundleName¬"bundleName"S§LiteralÍ	Í3Ù(com.example.accountkit_quicklogin_sampleÙ*"com.example.accountkit_quicklogin_sample"¤initc¨PropertyÍ5ÍJÂÂÂS§LiteralÍ5ÍAªmoduleName¬"moduleName"S§LiteralÍCÍJ¥entry§"entry"¤initÂ¥constT³ExpressionStatementÍ\ÍU®CallExpressionÍ\Í€MªIdentifierÍ\Íe©showToast’U®CallExpressionÍfÍyZ°MemberExpressionÍfÍwV®ThisExpressionÍfÍjMªIdentifierÍkÍw¬getUIContextÂÂÂMªIdentifierÍ{Í¤hintÂO°MethodDefinitionÍÅÍEÂÂMªIdentifierÍÅÍà»getQuickLoginAnonymousPhone¦methodP²FunctionExpressionÍàÍEÀÂÂÂN®BlockStatementÍãÍE•`³VariableDeclarationÍÍ~‘a²VariableDeclaratorÍ!Í}MªIdentifierÍ!Í,«authRequestU®CallExpressionÍ/Í}Z°MemberExpressionÍ/Í{[­NewExpressionÍ/ÍTZ°MemberExpressionÍ3ÍRMªIdentifierÍ3ÍA®authenticationMªIdentifierÍBÍR°HuaweiIDProviderÂÂMªIdentifierÍUÍ{Ù&createAuthorizationWithHuaweiIDRequestÂÂÂ¥constT³ExpressionStatementÍ»ÍíY´AssignmentExpressionÍ»Íì¡=Z°MemberExpressionÍ»ÍÍMªIdentifierÍ»ÍÆ«authRequestMªIdentifierÍÇÍÍ¦scopesÂÂd¯ArrayExpressionÍĞÍì‘S§LiteralÍÑÍë¸quickLoginAnonymousPhoneº'quickLoginAnonymousPhone'T³ExpressionStatementÍMÍtY´AssignmentExpressionÍMÍs¡=Z°MemberExpressionÍMÍkMªIdentifierÍMÍX«authRequestMªIdentifierÍYÍk²forceAuthorizationÂÂS§LiteralÍnÍsÂ¥false`³VariableDeclarationÍ~Í¿‘a²VariableDeclaratorÍ„Í¾MªIdentifierÍ„Íªcontroller[­NewExpressionÍ‘Í¾Z°MemberExpressionÍ•Í¼MªIdentifierÍ•Í£®authenticationMªIdentifierÍ¤Í¼¸AuthenticationControllerÂÂ¥constÔre–¤type¥start£end¥block§handler©finalizer¬TryStatementÍÉÍ>N®BlockStatementÍÍÍ“‘T³ExpressionStatementÍÜÍˆU®CallExpressionÍÜÍ‡Z°MemberExpressionÍÜÍ|U®CallExpressionÍÜÍvZ°MemberExpressionÍÜÍU®CallExpressionÍÜÍZ°MemberExpressionÍÜÍõMªIdentifierÍÜÍæªcontrollerMªIdentifierÍçÍõ®executeRequestÂÂ‘MªIdentifierÍöÍ«authRequestÂMªIdentifierÍÍ¤thenÂÂ‘P·ArrowFunctionExpressionÍÍuÀÂÂÂ‘MªIdentifierÍ	Í¨responseN®BlockStatementÍÍu–`³VariableDeclarationÍvÍ‘a²VariableDeclaratorÍ|ÍœMªIdentifierÍ|Íƒ§unionIDT¯ChainExpressionÍ†ÍœZ°MemberExpressionÍ†ÍœZ°MemberExpressionÍ†Í“MªIdentifierÍ†Í¨responseMªIdentifierÍÍ“¤dataÂÂMªIdentifierÍ•Íœ§unionIDÂÃ¥const`³VariableDeclarationÍ¯ÍÔ‘a²VariableDeclaratorÍµÍÓMªIdentifierÍµÍ»¦openIDT¯ChainExpressionÍ¾ÍÓZ°MemberExpressionÍ¾ÍÓZ°MemberExpressionÍ¾ÍËMªIdentifierÍ¾ÍÆ¨responseMªIdentifierÍÇÍË¤dataÂÂMªIdentifierÍÍÍÓ¦openIDÂÃ¥const`³VariableDeclarationÍæÍ:‘a²VariableDeclaratorÍìÍ9MªIdentifierÍìÍ¸quickLoginAnonymousPhoneT¯ChainExpressionÍÍ9Z°MemberExpressionÍÍ9Z°MemberExpressionÍÍZ°MemberExpressionÍÍMªIdentifierÍÍ¨responseMªIdentifierÍÍ¤dataÂÂMªIdentifierÍÍ©extraInfoÂÃMªIdentifierÍ!Í9¸quickLoginAnonymousPhoneÂÃ¥constT³ExpressionStatementÍLÍ™U®CallExpressionÍLÍ˜Z°MemberExpressionÍLÍbMªIdentifierÍLÍVªAppStorageMªIdentifierÍWÍb«setOrCreateÂÂ’S§LiteralÍcÍ}¸quickLoginAnonymousPhoneº'quickLoginAnonymousPhone'MªIdentifierÍÍ—¸quickLoginAnonymousPhoneÂT³ExpressionStatementÍ«ÍØU®CallExpressionÍ«Í×Z°MemberExpressionÍ«Í½V®ThisExpressionÍ«Í¯MªIdentifierÍ°Í½­jumpLoginPageÂÂ‘MªIdentifierÍ¾ÍÖ¸quickLoginAnonymousPhoneÂT³ExpressionStatementÍêÍfU®CallExpressionÍêÍeZ°MemberExpressionÍêÍôMªIdentifierÍêÍï¥hilogMªIdentifierÍğÍô¤infoÂÂ“Z°MemberExpressionÍõÍV®ThisExpressionÍõÍùMªIdentifierÍúÍ¨domainIdÂÂZ°MemberExpressionÍÍV®ThisExpressionÍÍMªIdentifierÍ	Í¦logTagÂÂ]¯TemplateLiteralÍÍd‘MªIdentifierÍJÍb¸quickLoginAnonymousPhone’^¯TemplateElementÍÍH_Ù6Succeeded in authorizing. QuickLoginAnonymousPhone is Ù6Succeeded in authorizing. QuickLoginAnonymousPhone is Â^¯TemplateElementÍcÍc_  ÃÂÂMªIdentifierÍwÍ|¥catchÂÂ‘P·ArrowFunctionExpressionÍ}Í†ÀÂÂÂ‘MªIdentifierÍ~Íƒ¥errorN®BlockStatementÍˆÍ†“T³ExpressionStatementÍ›ÍU®CallExpressionÍ›ÍZ°MemberExpressionÍ›Í¦MªIdentifierÍ›Í ¥hilogMªIdentifierÍ¡Í¦¥errorÂÂ“Z°MemberExpressionÍ§Í´V®ThisExpressionÍ§Í«MªIdentifierÍ¬Í´¨domainIdÂÂZ°MemberExpressionÍ¶ÍÁV®ThisExpressionÍ¶ÍºMªIdentifierÍ»ÍÁ¦logTagÂÂ]¯TemplateLiteralÍÃÍ’Z°MemberExpressionÍæÍğMªIdentifierÍæÍë¥errorMªIdentifierÍìÍğ¤codeÂÂZ°MemberExpressionÍÍMªIdentifierÍÍ¥errorMªIdentifierÍ	Í§messageÂÂ“^¯TemplateElementÍÄÍä_Ù Failed to authorize. errCode is Ù Failed to authorize. errCode is Â^¯TemplateElementÍñÍ_°, errMessage is °, errMessage is Â^¯TemplateElementÍÍ_  ÃÂT³ExpressionStatementÍ&Í?U®CallExpressionÍ&Í>Z°MemberExpressionÍ&Í7V®ThisExpressionÍ&Í*MªIdentifierÍ+Í7¬dealAllErrorÂÂ‘MªIdentifierÍ8Í=¥errorÂT³ExpressionStatementÍQÍwU®CallExpressionÍQÍvMªIdentifierÍQÍZ©showToast’U®CallExpressionÍ[ÍnZ°MemberExpressionÍ[ÍlV®ThisExpressionÍ[Í_MªIdentifierÍ`Íl¬getUIContextÂÂÂMªIdentifierÍpÍu¥errorÂÂÔrf•¤type¥start£end¥param¤body«CatchClauseÍÍ>MªIdentifierÍ¤Í©¥errorN®BlockStatementÍ«Í>‘T³ExpressionStatementÍºÍ3U®CallExpressionÍºÍ2Z°MemberExpressionÍºÍÅMªIdentifierÍºÍ¿¥hilogMªIdentifierÍÀÍÅ¥errorÂÂ“Z°MemberExpressionÍÆÍÓV®ThisExpressionÍÆÍÊMªIdentifierÍËÍÓ¨domainIdÂÂZ°MemberExpressionÍÕÍàV®ThisExpressionÍÕÍÙMªIdentifierÍÚÍà¦logTagÂÂ]¯TemplateLiteralÍâÍ1’Z°MemberExpressionÍÍMªIdentifierÍÍ
+¥errorMªIdentifierÍÍ¤codeÂÂZ°MemberExpressionÍ"Í/MªIdentifierÍ"Í'¥errorMªIdentifierÍ(Í/§messageÂÂ“^¯TemplateElementÍãÍ_Ù Failed to authorize. errCode is Ù Failed to authorize. errCode is Â^¯TemplateElementÍÍ _°, errMessage is °, errMessage is Â^¯TemplateElementÍ0Í0_  ÃÂÀO°MethodDefinitionÍKÍ?ÂÂMªIdentifierÍKÍW¬dealAllError¦methodP²FunctionExpressionÍWÍ?ÀÂÂÂ‘MªIdentifierÍXÍ]¥errorN®BlockStatementÍ_Í?‘W«IfStatementÍòÍ8X°BinaryExpressionÍöÍ#Z°MemberExpressionÍöÍ MªIdentifierÍöÍû¥errorMªIdentifierÍüÍ ¤codeÂÂ£===Z°MemberExpressionÍÍ#MªIdentifierÍÍ©ErrorCodeMªIdentifierÍÍ#´ERROR_CODE_LOGIN_OUTÂÂN®BlockStatementÍ%Í¾W«IfStatementÍÍÍ8X°BinaryExpressionÍÑÍZ°MemberExpressionÍÑÍÛMªIdentifierÍÑÍÖ¥errorMªIdentifierÍ×ÍÛ¤codeÂÂ£===Z°MemberExpressionÍàÍMªIdentifierÍàÍé©ErrorCodeMªIdentifierÍêÍ¸ERROR_CODE_NETWORK_ERRORÂÂN®BlockStatementÍÍ‰W«IfStatementÍ˜Í8X°BinaryExpressionÍœÍÎZ°MemberExpressionÍœÍ¦MªIdentifierÍœÍ¡¥errorMªIdentifierÍ¢Í¦¤codeÂÂ£===Z°MemberExpressionÍ«ÍÎMªIdentifierÍ«Í´©ErrorCodeMªIdentifierÍµÍÎ¹ERROR_CODE_INTERNAL_ERRORÂÂN®BlockStatementÍĞÍW«IfStatementÍ'Í8X°BinaryExpressionÍ+ÍZZ°MemberExpressionÍ+Í5MªIdentifierÍ+Í0¥errorMªIdentifierÍ1Í5¤codeÂÂ£===Z°MemberExpressionÍ:ÍZMªIdentifierÍ:ÍC©ErrorCodeMªIdentifierÍDÍZ¶ERROR_CODE_USER_CANCELÂÂN®BlockStatementÍ\ÍœW«IfStatementÍ«Í8X°BinaryExpressionÍ¯ÍáZ°MemberExpressionÍ¯Í¹MªIdentifierÍ¯Í´¥errorMªIdentifierÍµÍ¹¤codeÂÂ£===Z°MemberExpressionÍ¾ÍáMªIdentifierÍ¾ÍÇ©ErrorCodeMªIdentifierÍÈÍá¹ERROR_CODE_SYSTEM_SERVICEÂÂN®BlockStatementÍãÍOW«IfStatementÍ^Í8X°BinaryExpressionÍbÍ”Z°MemberExpressionÍbÍlMªIdentifierÍbÍg¥errorMªIdentifierÍhÍl¤codeÂÂ£===Z°MemberExpressionÍqÍ”MªIdentifierÍqÍz©ErrorCodeMªIdentifierÍ{Í”¹ERROR_CODE_REQUEST_REFUSEÂÂN®BlockStatementÍ–ÍáN®BlockStatementÍğÍ8O°MethodDefinitionÍEÍ ÓÂÂMªIdentifierÍEÍR­initialRender¦methodP²FunctionExpressionÍRÍ ÓÀÂÂÂN®BlockStatementÍUÍ Ó’T³ExpressionStatementÍ`Í ­U®CallExpressionÍ`Í ¬Z°MemberExpressionÍ`Í~V®ThisExpressionÍ`ÍdMªIdentifierÍeÍ~¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍÍ ›ÀÂÂÂ’MªIdentifierÍ€Í†¦elmtIdMªIdentifierÍˆÍ—¯isInitialRenderN®BlockStatementÍœÍ ›”T³ExpressionStatementÍ«ÍõU®CallExpressionÍ«ÍôZ°MemberExpressionÍ«ÍÀMªIdentifierÍ«Í¹®NavDestinationMªIdentifierÍºÍÀ¦createÂÂ’P·ArrowFunctionExpressionÍÁÍ£ÀÂÂÂN®BlockStatementÍÇÍ£–T³ExpressionStatementÍÚÍïU®CallExpressionÍÚÍîZ°MemberExpressionÍÚÍøV®ThisExpressionÍÚÍŞMªIdentifierÍßÍø¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍùÍåÀÂÂÂ’MªIdentifierÍúÍ ¦elmtIdMªIdentifierÍÍ¯isInitialRenderN®BlockStatementÍÍå”T³ExpressionStatementÍ-Í=U®CallExpressionÍ-Í<Z°MemberExpressionÍ-Í:MªIdentifierÍ-Í3¦ColumnMªIdentifierÍ4Í:¦createÂÂÂT³ExpressionStatementÍSÍhU®CallExpressionÍSÍgZ°MemberExpressionÍSÍ_MªIdentifierÍSÍY¦ColumnMªIdentifierÍZÍ_¥widthÂÂ‘S§LiteralÍ`Íf¤100%¦'100%'ÂT³ExpressionStatementÍ~Í”U®CallExpressionÍ~Í“Z°MemberExpressionÍ~Í‹MªIdentifierÍ~Í„¦ColumnMªIdentifierÍ…Í‹¦heightÂÂ‘S§LiteralÍŒÍ’¤100%¦'100%'ÂT³ExpressionStatementÍªÍÒU®CallExpressionÍªÍÑZ°MemberExpressionÍªÍ¿MªIdentifierÍªÍ°¦ColumnMªIdentifierÍ±Í¿®justifyContentÂÂ‘Z°MemberExpressionÍÀÍĞMªIdentifierÍÀÍÉ©FlexAlignMªIdentifierÍÊÍĞ¦CenterÂÂÂMªIdentifierÍçÍí¦ColumnÂT³ExpressionStatementÍÍ>U®CallExpressionÍÍ=Z°MemberExpressionÍÍV®ThisExpressionÍÍMªIdentifierÍÍ¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍ Í6ÀÂÂÂ’MªIdentifierÍ!Í'¦elmtIdMªIdentifierÍ)Í8¯isInitialRenderN®BlockStatementÍ=Í6–T³ExpressionStatementÍTÍàU®CallExpressionÍTÍßZ°MemberExpressionÍTÍ_MªIdentifierÍTÍX¤TextMªIdentifierÍYÍ_¦createÂÂ‘b°ObjectExpressionÍ`ÍŞ•c¨PropertyÍbÍpÂÂÂS§LiteralÍbÍf¢id¤"id"S§LiteralÍhÍpÎ  ¨16777233¤initc¨PropertyÍrÍÂÂÂS§LiteralÍrÍx¤type¦"type"S§LiteralÍzÍÍ'¥10003¤initc¨PropertyÍÍ‹ÂÂÂMªIdentifierÍÍ‡¦paramsd¯ArrayExpressionÍ‰Í‹¤initc¨PropertyÍÍÅÂÂÂS§LiteralÍÍ™ªbundleName¬"bundleName"S§LiteralÍ›ÍÅÙ(com.example.accountkit_quicklogin_sampleÙ*"com.example.accountkit_quicklogin_sample"¤initc¨PropertyÍÇÍÜÂÂÂS§LiteralÍÇÍÓªmoduleName¬"moduleName"S§LiteralÍÕÍÜ¥entry§"entry"¤initÂT³ExpressionStatementÍöÍU®CallExpressionÍöÍZ°MemberExpressionÍöÍMªIdentifierÍöÍú¤TextMªIdentifierÍûÍ¨fontSizeÂÂ‘S§LiteralÍÍ¢30ÂT³ExpressionStatementÍÍAU®CallExpressionÍÍ@Z°MemberExpressionÍÍ-MªIdentifierÍÍ"¤TextMªIdentifierÍ#Í-ªfontWeightÂÂ‘Z°MemberExpressionÍ.Í?MªIdentifierÍ.Í8ªFontWeightMªIdentifierÍ9Í?¦MediumÂÂÂT³ExpressionStatementÍWÍxU®CallExpressionÍWÍwZ°MemberExpressionÍWÍeMªIdentifierÍWÍ[¤TextMªIdentifierÍ\Íe©textAlignÂÂ‘Z°MemberExpressionÍfÍvMªIdentifierÍfÍo©TextAlignMªIdentifierÍpÍv¦CenterÂÂÂT³ExpressionStatementÍÍ£U®CallExpressionÍÍ¢Z°MemberExpressionÍÍ•MªIdentifierÍÍ’¤TextMªIdentifierÍ“Í•¢idÂÂ‘S§LiteralÍ–Í¡©loginText«'loginText'ÂT³ExpressionStatementÍ¹Í#U®CallExpressionÍ¹Í"Z°MemberExpressionÍ¹ÍÅMªIdentifierÍ¹Í½¤TextMªIdentifierÍ¾ÍÅ§onClickÂÂ‘P·ArrowFunctionExpressionÍÆÍ!ÀÂÂÂN®BlockStatementÍÌÍ!‘T³ExpressionStatementÍçÍ
+U®CallExpressionÍçÍ	Z°MemberExpressionÍçÍV®ThisExpressionÍçÍëMªIdentifierÍìÍ»getQuickLoginAnonymousPhoneÂÂÂÂMªIdentifierÍ8Í<¤TextÂT³ExpressionStatementÍPÍ[U®CallExpressionÍPÍZZ°MemberExpressionÍPÍXMªIdentifierÍPÍT¤TextMªIdentifierÍUÍX£popÂÂÂT³ExpressionStatementÍmÍVU®CallExpressionÍmÍUZ°MemberExpressionÍmÍ‹V®ThisExpressionÍmÍqMªIdentifierÍrÍ‹¹observeComponentCreation2ÂÂ’P·ArrowFunctionExpressionÍŒÍLÀÂÂÂ’MªIdentifierÍÍ“¦elmtIdMªIdentifierÍ•Í¤¯isInitialRenderN®BlockStatementÍ©ÍL–T³ExpressionStatementÍÀÍáU®CallExpressionÍÀÍàZ°MemberExpressionÍÀÍÖMªIdentifierÍÀÍÆ¦ButtonMªIdentifierÍÇÍÖ¯createWithLabelÂÂ‘S§LiteralÍ×Íß²æƒé™åŠŸèƒ½æµ‹è¯•´'æƒé™åŠŸèƒ½æµ‹è¯•'ÂT³ExpressionStatementÍ÷ÍU®CallExpressionÍ÷Í
+Z°MemberExpressionÍ÷ÍMªIdentifierÍ÷Íı¦ButtonMªIdentifierÍşÍ¥widthÂÂ‘S§LiteralÍÍ	£60%¥'60%'ÂT³ExpressionStatementÍ!Í3U®CallExpressionÍ!Í2Z°MemberExpressionÍ!Í.MªIdentifierÍ!Í'¦ButtonMªIdentifierÍ(Í.¦heightÂÂ‘S§LiteralÍ/Í12¢50ÂT³ExpressionStatementÍIÍdU®CallExpressionÍIÍcZ°MemberExpressionÍIÍVMªIdentifierÍIÍO¦ButtonMªIdentifierÍPÍV¦marginÂÂ‘b°ObjectExpressionÍWÍb‘c¨PropertyÍYÍ`ÂÂÂMªIdentifierÍYÍ\£topS§LiteralÍ^Í`¢20¤initÂT³ExpressionStatementÍzÍœU®CallExpressionÍzÍ›Z°MemberExpressionÍzÍMªIdentifierÍzÍ€¦ButtonMªIdentifierÍÍ¯backgroundColorÂÂ‘S§LiteralÍ‘Íš§#E64A19©'#E64A19'ÂT³ExpressionStatementÍ²Í9U®CallExpressionÍ²Í8Z°MemberExpressionÍ²ÍÀMªIdentifierÍ²Í¸¦ButtonMªIdentifierÍ¹ÍÀ§onClickÂÂ‘P·ArrowFunctionExpressionÍÁÍ7ÀÂÂÂN®BlockStatementÍÇÍ7‘T³ExpressionStatementÍâÍ T¯ChainExpressionÍâÍU®CallExpressionÍâÍZ°MemberExpressionÍâÍ Z°MemberExpressionÍâÍğV®ThisExpressionÍâÍæMªIdentifierÍçÍğ©pageInfosÂÂMªIdentifierÍòÍ ®pushPathByNameÂÃ“S§LiteralÍÍ¯PermissionsPage±'PermissionsPage'S§LiteralÍÍÀ¤nullS§LiteralÍÍÃ¤trueÂÂMªIdentifierÍNÍT¦ButtonÂT³ExpressionStatementÍhÍuU®CallExpressionÍhÍtZ°MemberExpressionÍhÍrMªIdentifierÍhÍn¦ButtonMªIdentifierÍoÍr£popÂÂÂT³ExpressionStatementÍ‡Í”U®CallExpressionÍ‡Í“Z°MemberExpressionÍ‡Í‘MªIdentifierÍ‡Í¦ColumnMªIdentifierÍÍ‘£popÂÂÂb°ObjectExpressionÍ¥Íó’c¨PropertyÍ§ÍºÂÂÂMªIdentifierÍ§Í±ªmoduleNameS§LiteralÍ³Íº¥entry§"entry"¤initc¨PropertyÍ¼ÍñÂÂÂMªIdentifierÍ¼ÍÄ¨pagePathS§LiteralÍÆÍñÙ)entry/src/main/ets/pages/PrepareLoginPageÙ+"entry/src/main/ets/pages/PrepareLoginPage"¤initÂT³ExpressionStatementÍÍ-U®CallExpressionÍÍ,Z°MemberExpressionÍÍ!MªIdentifierÍÍ®NavDestinationMªIdentifierÍÍ!¯backgroundColorÂÂ‘S§LiteralÍ"Í+§#F1F3F5©'#F1F3F5'ÂT³ExpressionStatementÍ;Í]U®CallExpressionÍ;Í\Z°MemberExpressionÍ;ÍVMªIdentifierÍ;ÍI®NavDestinationMªIdentifierÍJÍV¬hideTitleBarÂÂ‘S§LiteralÍWÍ[Ã¤trueÂT³ExpressionStatementÍkÍ U®CallExpressionÍkÍ Z°MemberExpressionÍkÍ‡MªIdentifierÍkÍy®NavDestinationMªIdentifierÍzÍ‡­onBackPressedÂÂ‘P·ArrowFunctionExpressionÍˆÍ ÀÂÂÂN®BlockStatementÍÍ “T³ExpressionStatementÍÜÍ%U®CallExpressionÍÜÍ$Z°MemberExpressionÍÜÍæMªIdentifierÍÜÍá¥hilogMªIdentifierÍâÍæ¤infoÂÂ“Z°MemberExpressionÍçÍôV®ThisExpressionÍçÍëMªIdentifierÍìÍô¨domainIdÂÂZ°MemberExpressionÍöÍV®ThisExpressionÍöÍúMªIdentifierÍûÍ¦logTagÂÂS§LiteralÍÍ#¾PrepareLoginPage onBackPressedÙ 'PrepareLoginPage onBackPressed'Âe¬TryStatementÍ7Í aN®BlockStatementÍ;Íš‘T³ExpressionStatementÍRÍ‡U®CallExpressionÍRÍ†Z°MemberExpressionÍRÍ„U®CallExpressionÍRÍvZ°MemberExpressionÍRÍtU®CallExpressionÍRÍeZ°MemberExpressionÍRÍcV®ThisExpressionÍRÍVMªIdentifierÍWÍc¬getUIContextÂÂÂMªIdentifierÍfÍt®getHostContextÂÂÂMªIdentifierÍwÍ„­terminateSelfÂÂÂf«CatchClauseÍ¬Í aMªIdentifierÍ³Í¸¥errorN®BlockStatementÍºÍ a‘T³ExpressionStatementÍÑÍ NU®CallExpressionÍÑÍ MZ°MemberExpressionÍÑÍÜMªIdentifierÍÑÍÖ¥hilogMªIdentifierÍ×ÍÜ¥errorÂÂ“Z°MemberExpressionÍİÍêV®ThisExpressionÍİÍáMªIdentifierÍâÍê¨domainIdÂÂZ°MemberExpressionÍìÍ÷V®ThisExpressionÍìÍğMªIdentifierÍñÍ÷¦logTagÂÂ]¯TemplateLiteralÍùÍ L’Z°MemberExpressionÍ  Í *MªIdentifierÍ  Í %¥errorMªIdentifierÍ &Í *¤codeÂÂZ°MemberExpressionÍ =Í JMªIdentifierÍ =Í B¥errorMªIdentifierÍ CÍ J§messageÂÂ“^¯TemplateElementÍúÍ _Ù$Failed to terminateSelf. errCode is Ù$Failed to terminateSelf. errCode is Â^¯TemplateElementÍ +Í ;_°, errMessage is °, errMessage is Â^¯TemplateElementÍ KÍ K_  ÃÂÀ\¯ReturnStatementÍ sÍ S§LiteralÍ zÍ ~Ã¤trueÂMªIdentifierÍ Í «®NavDestinationÂT³ExpressionStatementÍ ·Í ÌU®CallExpressionÍ ·Í ËZ°MemberExpressionÍ ·Í ÉMªIdentifierÍ ·Í Å®NavDestinationMªIdentifierÍ ÆÍ É£popÂÂÂO°MethodDefinitionÍ ÙÍ!ÂÂMªIdentifierÍ ÙÍ á¨rerender¦methodP²FunctionExpressionÍ áÍ!ÀÂÂÂN®BlockStatementÍ äÍ!‘T³ExpressionStatementÍ ïÍ!
+U®CallExpressionÍ ïÍ!	Z°MemberExpressionÍ ïÍ!V®ThisExpressionÍ ïÍ óMªIdentifierÍ ôÍ!³updateDirtyElementsÂÂÂÀ”Ôrg•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¶‘Ôrh”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡Ì•MªIdentifierÌ‡Ì•®authenticationS§LiteralÌ›Ìµ¸@hms.core.authenticationº"@hms.core.authentication"g±ImportDeclarationÌ¸ÌØ‘h¶ImportDefaultSpecifierÌ¿ÌÄMªIdentifierÌ¿ÌÄ¥hilogS§LiteralÌÊÌ×«@ohos.hilog­"@ohos.hilog"g±ImportDeclarationÌÚÍ
+‘Ôri•¤type¥start£end¨imported¥local¯ImportSpecifierÌãÌìMªIdentifierÌãÌì©showToastMªIdentifierÌãÌì©showToastS§LiteralÌôÍ	³../common/ShowToastµ'../common/ShowToast'g±ImportDeclarationÍÍ<‘i¯ImportSpecifierÍÍMªIdentifierÍÍ©ErrorCodeMªIdentifierÍÍ©ErrorCodeS§LiteralÍ&Í;³../common/Constantsµ'../common/Constants'

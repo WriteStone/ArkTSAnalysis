@@ -1,0 +1,1248 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚa9if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import contact from '@ohos.contact';
+import promptAction from '@ohos.promptAction';
+import picker from '@ohos.file.picker';
+import fs from '@ohos.file.fs';
+class PermissionsDemo extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__resultText = new ObservedPropertySimplePU('API Results will appear here', this, "resultText");
+        this.__selectedFilePath = new ObservedPropertySimplePU('', this, "selectedFilePath");
+        this.__fileName = new ObservedPropertySimplePU('', this, "fileName");
+        this.__fileSize = new ObservedPropertySimplePU('', this, "fileSize");
+        this.__isLoading = new ObservedPropertySimplePU(false, this, "isLoading");
+        this.context = getContext(this);
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.resultText !== undefined) {
+            this.resultText = params.resultText;
+        }
+        if (params.selectedFilePath !== undefined) {
+            this.selectedFilePath = params.selectedFilePath;
+        }
+        if (params.fileName !== undefined) {
+            this.fileName = params.fileName;
+        }
+        if (params.fileSize !== undefined) {
+            this.fileSize = params.fileSize;
+        }
+        if (params.isLoading !== undefined) {
+            this.isLoading = params.isLoading;
+        }
+        if (params.context !== undefined) {
+            this.context = params.context;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__resultText.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedFilePath.purgeDependencyOnElmtId(rmElmtId);
+        this.__fileName.purgeDependencyOnElmtId(rmElmtId);
+        this.__fileSize.purgeDependencyOnElmtId(rmElmtId);
+        this.__isLoading.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__resultText.aboutToBeDeleted();
+        this.__selectedFilePath.aboutToBeDeleted();
+        this.__fileName.aboutToBeDeleted();
+        this.__fileSize.aboutToBeDeleted();
+        this.__isLoading.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get resultText() {
+        return this.__resultText.get();
+    }
+    set resultText(newValue) {
+        this.__resultText.set(newValue);
+    }
+    get selectedFilePath() {
+        return this.__selectedFilePath.get();
+    }
+    set selectedFilePath(newValue) {
+        this.__selectedFilePath.set(newValue);
+    }
+    get fileName() {
+        return this.__fileName.get();
+    }
+    set fileName(newValue) {
+        this.__fileName.set(newValue);
+    }
+    get fileSize() {
+        return this.__fileSize.get();
+    }
+    set fileSize(newValue) {
+        this.__fileSize.set(newValue);
+    }
+    get isLoading() {
+        return this.__isLoading.get();
+    }
+    set isLoading(newValue) {
+        this.__isLoading.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.padding(20);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('Permission API Demo');
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ bottom: 20 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.resultText);
+            Text.fontSize(16);
+            Text.backgroundColor('#f0f0f0');
+            Text.padding(10);
+            Text.width('90%');
+            Text.height(120);
+            Text.margin({ bottom: 20 });
+            Text.textAlign(TextAlign.Start);
+            Text.borderRadius(8);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Scroll.create();
+            Scroll.width('100%');
+            Scroll.height('70%');
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æ–‡ä»¶é€‰æ‹©éƒ¨åˆ†
+            Text.create('File Operations');
+            // æ–‡ä»¶é€‰æ‹©éƒ¨åˆ†
+            Text.fontSize(20);
+            // æ–‡ä»¶é€‰æ‹©éƒ¨åˆ†
+            Text.fontWeight(FontWeight.Bold);
+            // æ–‡ä»¶é€‰æ‹©éƒ¨åˆ†
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        // æ–‡ä»¶é€‰æ‹©éƒ¨åˆ†
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Select File');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.selectFile());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // æ˜¾ç¤ºé€‰æ‹©çš„æ–‡ä»¶ä¿¡æ¯
+            if (this.selectedFilePath) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`Selected File: ${this.fileName}`);
+                        Text.fontSize(16);
+                        Text.margin({ top: 10, bottom: 5 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`File Size: ${this.fileSize}`);
+                        Text.fontSize(16);
+                        Text.margin({ bottom: 20 });
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            // Contacts APIs
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Contacts APIs
+            Text.create('Contacts Permissions');
+            // Contacts APIs
+            Text.fontSize(20);
+            // Contacts APIs
+            Text.fontWeight(FontWeight.Bold);
+            // Contacts APIs
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        // Contacts APIs
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Contacts (DataShare)');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getContactsViaDataShare());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Contacts (queryContact)');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.queryContact());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get All Contacts');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.queryAllContacts());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Contacts By Phone');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.queryContactsByPhoneNumber());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Contacts By Email');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.queryContactsByEmail());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Groups');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.queryGroups());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Call Log APIs
+            Text.create('Call Log Permissions');
+            // Call Log APIs
+            Text.fontSize(20);
+            // Call Log APIs
+            Text.fontWeight(FontWeight.Bold);
+            // Call Log APIs
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        // Call Log APIs
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Call Logs');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getCallLogs());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // SMS APIs
+            Text.create('SMS Permissions');
+            // SMS APIs
+            Text.fontSize(20);
+            // SMS APIs
+            Text.fontWeight(FontWeight.Bold);
+            // SMS APIs
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        // SMS APIs
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get SIM Messages');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getSimMessages());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get SMS (DataShare)');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getSmsViaDataShare());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // MMS APIs
+            Text.create('MMS Permissions');
+            // MMS APIs
+            Text.fontSize(20);
+            // MMS APIs
+            Text.fontWeight(FontWeight.Bold);
+            // MMS APIs
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        // MMS APIs
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get MMS (DataShare)');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getMmsViaDataShare());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // Calendar APIs
+            Text.create('Calendar Permissions');
+            // Calendar APIs
+            Text.fontSize(20);
+            // Calendar APIs
+            Text.fontWeight(FontWeight.Bold);
+            // Calendar APIs
+            Text.margin({ top: 20, bottom: 10 });
+        }, Text);
+        // Calendar APIs
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Calendar (DataShare)');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getCalendarViaDataShare());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Calendar Whole (DataShare)');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getCalendarWholeViaDataShare());
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Get Calendar Events');
+            Button.width('80%');
+            Button.margin({ bottom: 10 });
+            Button.onClick(() => this.getCalendarEvents());
+        }, Button);
+        Button.pop();
+        Column.pop();
+        Scroll.pop();
+        Column.pop();
+    }
+    // æ–‡ä»¶é€‰æ‹©åŠŸèƒ½
+    async selectFile() {
+        if (this.isLoading)
+            return;
+        this.isLoading = true;
+        try {
+            let documentPicker = new picker.DocumentViewPicker(this.context);
+            let documentSelectOptions = new picker.DocumentSelectOptions();
+            // å…è®¸é€‰æ‹©çš„æœ€å¤§æ–‡ä»¶æ•°é‡
+            documentSelectOptions.maxSelectNumber = 1;
+            // æ–‡ä»¶åç¼€è¿‡æ»¤å™¨ ['åç¼€æè¿°|åç¼€'] (å¯é€‰) å¦‚æœæœ‰å¤šä¸ªåç¼€ï¼Œç”¨é€—å·åˆ†éš” (å¯é€‰)ï¼Œåç¼€åä¸èƒ½è¶…è¿‡100å­—ç¬¦ã€‚è¦é€‰æ‹©å…¨éƒ¨æ–‡ä»¶å¯ç”¨ï¼š'All files(*.*)|.*';
+            documentSelectOptions.fileSuffixFilters = ['Images(.png, .jpg)|.png,.jpg', 'Documents|.txt', 'Videos|.mp4', '.pdf'];
+            const result = await documentPicker.select(documentSelectOptions);
+            if (result && result.length > 0) {
+                const fileUri = result[0];
+                this.selectedFilePath = fileUri;
+                // è·å–æ–‡ä»¶å
+                this.fileName = fileUri.split('/').pop() || 'Unknown file';
+                // è·å–æ–‡ä»¶å¤§å°
+                try {
+                    let file = fs.openSync(fileUri, fs.OpenMode.READ_ONLY);
+                    const stat = fs.statSync(file.fd);
+                    this.fileSize = this.formatFileSize(stat.size);
+                    fs.closeSync(file);
+                }
+                catch (error) {
+                    console.error('Failed to get file size:', error);
+                    this.fileSize = 'Size unknown';
+                }
+                this.resultText = `File selected: ${this.fileName}`;
+                promptAction.showToast({ message: 'File selection successful', duration: 2000 });
+            }
+        }
+        catch (err) {
+            console.error('Failed to select file. Cause: ' + JSON.stringify(err));
+            this.resultText = `Error selecting file: ${JSON.stringify(err)}`;
+            promptAction.showToast({ message: 'File selection failed', duration: 2000 });
+        }
+        finally {
+            this.isLoading = false;
+        }
+    }
+    // æ ¼å¼åŒ–æ–‡ä»¶å¤§å°
+    formatFileSize(size) {
+        if (size < 1024) {
+            return size + ' B';
+        }
+        else if (size < 1024 * 1024) {
+            return (size / 1024).toFixed(2) + ' KB';
+        }
+        else if (size < 1024 * 1024 * 1024) {
+            return (size / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+        else {
+            return (size / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+        }
+    }
+    // è”ç³»äººç›¸å…³æ–¹æ³•
+    getContactsViaDataShare() {
+        this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///com.ohos.contactsdataability')\n` +
+            `Permission: ohos.permission.READ_CONTACTS\n` +
+            `Function: Retrieves contacts from the device's contact database`;
+    }
+    queryContact() {
+        try {
+            // æ ¹æ®å…³é”®å­—æŸ¥è¯¢è”ç³»äºº
+            contact.queryContact(this.context, 'name', (err, contactInfo) => {
+                if (err) {
+                    this.resultText = `Error querying contact: ${JSON.stringify(err)}`;
+                    return;
+                }
+                if (contactInfo) {
+                    this.resultText = `Contact found:\nName: ${JSON.stringify(contactInfo)}`;
+                }
+                else {
+                    this.resultText = "No contact found with the specified key";
+                }
+            });
+        }
+        catch (error) {
+            promptAction.showToast({
+                message: `Failed to query contact: ${error}`
+            });
+        }
+    }
+    queryAllContacts() {
+        try {
+            // æŸ¥è¯¢æ‰€æœ‰è”ç³»äºº
+            contact.queryContacts(this.context, (err, contactArray) => {
+                if (err) {
+                    this.resultText = `Error querying all contacts: ${JSON.stringify(err)}`;
+                    return;
+                }
+                if (contactArray && contactArray.length > 0) {
+                    let displayContent = `Found ${contactArray.length} contacts:\n`;
+                    // ä»…æ˜¾ç¤ºå‰5ä¸ªè”ç³»äºº
+                    const maxContacts = Math.min(contactArray.length, 5);
+                    for (let i = 0; i < maxContacts; i++) {
+                        const currentContact = contactArray[i];
+                        displayContent += `${i + 1}. ${JSON.stringify(currentContact)}\n`;
+                    }
+                    if (contactArray.length > 5) {
+                        displayContent += `...and ${contactArray.length - 5} more`;
+                    }
+                    this.resultText = displayContent;
+                }
+                else {
+                    this.resultText = "No contacts found on device";
+                }
+            });
+        }
+        catch (error) {
+            promptAction.showToast({
+                message: `Failed to query all contacts: ${error}`
+            });
+        }
+    }
+    queryContactsByPhoneNumber() {
+        try {
+            // æ ¹æ®ç”µè¯å·ç æŸ¥è¯¢è”ç³»äºº
+            const phoneNumber = "1234567890"; // ç¤ºä¾‹ç”µè¯å·ç 
+            contact.queryContactsByPhoneNumber(this.context, phoneNumber, (err, contactArray) => {
+                if (err) {
+                    this.resultText = `Error querying contacts by phone: ${JSON.stringify(err)}`;
+                    return;
+                }
+                if (contactArray && contactArray.length > 0) {
+                    let displayContent = `Found ${contactArray.length} contacts with phone ${phoneNumber}:\n`;
+                    // ä»…æ˜¾ç¤ºå‰5ä¸ªè”ç³»äºº
+                    const maxContacts = Math.min(contactArray.length, 5);
+                    for (let i = 0; i < maxContacts; i++) {
+                        const currentContact = contactArray[i];
+                        displayContent += `${i + 1}. ${JSON.stringify(currentContact)}\n`;
+                    }
+                    if (contactArray.length > 5) {
+                        displayContent += `...and ${contactArray.length - 5} more`;
+                    }
+                    this.resultText = displayContent;
+                }
+                else {
+                    this.resultText = `No contacts found with phone number ${phoneNumber}`;
+                }
+            });
+        }
+        catch (error) {
+            promptAction.showToast({
+                message: `Failed to query contacts by phone: ${error}`
+            });
+        }
+    }
+    queryContactsByEmail() {
+        try {
+            // æ ¹æ®ç”µå­é‚®ä»¶åœ°å€æŸ¥è¯¢è”ç³»äºº
+            const email = "example@email.com"; // ç¤ºä¾‹é‚®ç®±åœ°å€
+            contact.queryContactsByEmail(this.context, email, (err, contactArray) => {
+                if (err) {
+                    this.resultText = `Error querying contacts by email: ${JSON.stringify(err)}`;
+                    return;
+                }
+                if (contactArray && contactArray.length > 0) {
+                    let displayContent = `Found ${contactArray.length} contacts with email ${email}:\n`;
+                    // ä»…æ˜¾ç¤ºå‰5ä¸ªè”ç³»äºº
+                    const maxContacts = Math.min(contactArray.length, 5);
+                    for (let i = 0; i < maxContacts; i++) {
+                        const currentContact = contactArray[i];
+                        displayContent += `${i + 1}. ${JSON.stringify(currentContact)}\n`;
+                    }
+                    if (contactArray.length > 5) {
+                        displayContent += `...and ${contactArray.length - 5} more`;
+                    }
+                    this.resultText = displayContent;
+                }
+                else {
+                    this.resultText = `No contacts found with email ${email}`;
+                }
+            });
+        }
+        catch (error) {
+            promptAction.showToast({
+                message: `Failed to query contacts by email: ${error}`
+            });
+        }
+    }
+    queryGroups() {
+        try {
+            // æŸ¥è¯¢è”ç³»äººç¾¤ç»„
+            contact.queryGroups(this.context, (err, groupArray) => {
+                if (err) {
+                    this.resultText = `Error querying groups: ${JSON.stringify(err)}`;
+                    return;
+                }
+                if (groupArray && groupArray.length > 0) {
+                    let displayContent = `Found ${groupArray.length} contact groups:\n`;
+                    // ä»…æ˜¾ç¤ºå‰5ä¸ªç¾¤ç»„
+                    const maxGroups = Math.min(groupArray.length, 5);
+                    for (let i = 0; i < maxGroups; i++) {
+                        const currentGroup = groupArray[i];
+                        displayContent += `${i + 1}. ${JSON.stringify(currentGroup)}\n`;
+                    }
+                    if (groupArray.length > 5) {
+                        displayContent += `...and ${groupArray.length - 5} more`;
+                    }
+                    this.resultText = displayContent;
+                }
+                else {
+                    this.resultText = "No contact groups found";
+                }
+            });
+        }
+        catch (error) {
+            promptAction.showToast({
+                message: `Failed to query groups: ${error}`
+            });
+        }
+    }
+    // Call Log Methods
+    getCallLogs() {
+        this.resultText = `API: dataShare.createDataShareHelper(context, 'dataability://com.ohos.calllogability')\n` +
+            `Permission: ohos.permission.READ_CALL_LOG\n` +
+            `Function: Retrieves call logs from the device`;
+    }
+    // SMS Methods
+    getSimMessages() {
+        this.resultText = `API: telephony.sms.getAllSimMessages(slotId, callback)\n` +
+            `Permission: ohos.permission.READ_MESSAGES\n` +
+            `Function: Retrieves SMS messages stored on SIM card`;
+    }
+    getSmsViaDataShare() {
+        this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///com.ohos.smsmmsability')\n` +
+            `Permission: ohos.permission.READ_MESSAGES\n` +
+            `Function: Retrieves SMS messages from the device`;
+    }
+    // MMS Methods
+    getMmsViaDataShare() {
+        this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///com.ohos.smsmmsability')\n` +
+            `Permission: ohos.permission.READ_MESSAGES\n` +
+            `Function: Retrieves MMS messages from the device`;
+    }
+    // Calendar Methods
+    getCalendarViaDataShare() {
+        this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///calendardata')\n` +
+            `Permission: ohos.permission.READ_CALENDAR\n` +
+            `Function: Retrieves calendar events from the device`;
+    }
+    getCalendarWholeViaDataShare() {
+        this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///calendardata_whole')\n` +
+            `Permission: ohos.permission.READ_CALENDAR\n` +
+            `Function: Retrieves comprehensive calendar events from the device`;
+    }
+    getCalendarEvents() {
+        this.resultText = `API: calendarManager.Calendar.getEvents(callback)\n` +
+            `Permission: ohos.permission.READ_CALENDAR\n` +
+            `Function: Retrieves calendar events using Calendar API`;
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "PermissionsDemo";
+    }
+}
+registerNamedRoute(() => new PermissionsDemo(undefined, {}), "", { bundleName: "com.example.scenariofusionkit_codelab_functionalapi_arkts", moduleName: "entry", pagePath: "pages/PermissionsDemo", pageFullPath: "entry/src/main/ets/pages/PermissionsDemo", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=PermissionsDemo.js.mapÂ”Ùi hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.contact.d.tsÙn hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsÙm hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.file.picker.d.tsÙi hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.file.fs.d.tsÙRF:\HarmonyOS\final_api\03-codeLab_API\entry\src\main\ets\pages\PermissionsDemo.etsÔrBšªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ+F:\HarmonyOS\final_api\03-codeLab_API\entryÙ%F:\HarmonyOS\final_api\03-codeLab_API¥entry¥1.0.0Ô  Ù+F:\HarmonyOS\final_api\03-codeLab_API\entryÃÃÚ:-// å¯¼å…¥å¿…è¦æ¨¡å—
+import common from '@ohos.app.ability.common'
+import contact from '@ohos.contact'
+import promptAction from '@ohos.promptAction'
+import picker from '@ohos.file.picker'
+import fs from '@ohos.file.fs'
+
+@Entry
+@Component
+struct PermissionsDemo {
+  @State resultText: string = 'API Results will appear here';
+  @State selectedFilePath: string = '';
+  @State fileName: string = '';
+  @State fileSize: string = '';
+  @State isLoading: boolean = false;
+  private context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+
+  build() {
+    Column() {
+      Text('Permission API Demo')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 20 })
+
+      Text(this.resultText)
+        .fontSize(16)
+        .backgroundColor('#f0f0f0')
+        .padding(10)
+        .width('90%')
+        .height(120)
+        .margin({ bottom: 20 })
+        .textAlign(TextAlign.Start)
+        .borderRadius(8)
+
+      Scroll() {
+        Column() {
+          // æ–‡ä»¶é€‰æ‹©éƒ¨åˆ†
+          Text('File Operations')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20, bottom: 10 })
+
+          Button('Select File')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.selectFile())
+
+          // æ˜¾ç¤ºé€‰æ‹©çš„æ–‡ä»¶ä¿¡æ¯
+          if (this.selectedFilePath) {
+            Text(`Selected File: ${this.fileName}`)
+              .fontSize(16)
+              .margin({ top: 10, bottom: 5 })
+
+            Text(`File Size: ${this.fileSize}`)
+              .fontSize(16)
+              .margin({ bottom: 20 })
+          }
+
+          // Contacts APIs
+          Text('Contacts Permissions')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20, bottom: 10 })
+
+          Button('Get Contacts (DataShare)')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getContactsViaDataShare())
+
+          Button('Get Contacts (queryContact)')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.queryContact())
+
+          Button('Get All Contacts')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.queryAllContacts())
+
+          Button('Get Contacts By Phone')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.queryContactsByPhoneNumber())
+
+          Button('Get Contacts By Email')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.queryContactsByEmail())
+
+          Button('Get Groups')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.queryGroups())
+
+          // Call Log APIs
+          Text('Call Log Permissions')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20, bottom: 10 })
+
+          Button('Get Call Logs')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getCallLogs())
+
+          // SMS APIs
+          Text('SMS Permissions')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20, bottom: 10 })
+
+          Button('Get SIM Messages')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getSimMessages())
+
+          Button('Get SMS (DataShare)')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getSmsViaDataShare())
+
+          // MMS APIs
+          Text('MMS Permissions')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20, bottom: 10 })
+
+          Button('Get MMS (DataShare)')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getMmsViaDataShare())
+
+          // Calendar APIs
+          Text('Calendar Permissions')
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .margin({ top: 20, bottom: 10 })
+
+          Button('Get Calendar (DataShare)')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getCalendarViaDataShare())
+
+          Button('Get Calendar Whole (DataShare)')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getCalendarWholeViaDataShare())
+
+          Button('Get Calendar Events')
+            .width('80%')
+            .margin({ bottom: 10 })
+            .onClick(() => this.getCalendarEvents())
+        }
+      }
+      .width('100%')
+      .height('70%')
+    }
+    .width('100%')
+    .height('100%')
+    .padding(20)
+  }
+
+  // æ–‡ä»¶é€‰æ‹©åŠŸèƒ½
+  async selectFile() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    try {
+      let documentPicker = new picker.DocumentViewPicker(this.context);
+      let documentSelectOptions = new picker.DocumentSelectOptions();
+      // å…è®¸é€‰æ‹©çš„æœ€å¤§æ–‡ä»¶æ•°é‡
+      documentSelectOptions.maxSelectNumber = 1;
+      // æ–‡ä»¶åç¼€è¿‡æ»¤å™¨ ['åç¼€æè¿°|åç¼€'] (å¯é€‰) å¦‚æœæœ‰å¤šä¸ªåç¼€ï¼Œç”¨é€—å·åˆ†éš” (å¯é€‰)ï¼Œåç¼€åä¸èƒ½è¶…è¿‡100å­—ç¬¦ã€‚è¦é€‰æ‹©å…¨éƒ¨æ–‡ä»¶å¯ç”¨ï¼š'All files(*.*)|.*';
+      documentSelectOptions.fileSuffixFilters = ['Images(.png, .jpg)|.png,.jpg', 'Documents|.txt', 'Videos|.mp4', '.pdf'];
+
+      const result = await documentPicker.select(documentSelectOptions);
+
+      if (result && result.length > 0) {
+        const fileUri = result[0];
+        this.selectedFilePath = fileUri;
+
+        // è·å–æ–‡ä»¶å
+        this.fileName = fileUri.split('/').pop() || 'Unknown file';
+
+        // è·å–æ–‡ä»¶å¤§å°
+        try {
+          let file = fs.openSync(fileUri, fs.OpenMode.READ_ONLY);
+          const stat = fs.statSync(file.fd);
+          this.fileSize = this.formatFileSize(stat.size);
+          fs.closeSync(file);
+        } catch (error) {
+          console.error('Failed to get file size:', error);
+          this.fileSize = 'Size unknown';
+        }
+
+        this.resultText = `File selected: ${this.fileName}`;
+        promptAction.showToast({ message: 'File selection successful', duration: 2000 });
+      }
+    } catch (err) {
+      console.error('Failed to select file. Cause: ' + JSON.stringify(err));
+      this.resultText = `Error selecting file: ${JSON.stringify(err)}`;
+      promptAction.showToast({ message: 'File selection failed', duration: 2000 });
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  // æ ¼å¼åŒ–æ–‡ä»¶å¤§å°
+  formatFileSize(size: number): string {
+    if (size < 1024) {
+      return size + ' B';
+    } else if (size < 1024 * 1024) {
+      return (size / 1024).toFixed(2) + ' KB';
+    } else if (size < 1024 * 1024 * 1024) {
+      return (size / (1024 * 1024)).toFixed(2) + ' MB';
+    } else {
+      return (size / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+    }
+  }
+
+  // è”ç³»äººç›¸å…³æ–¹æ³•
+  private getContactsViaDataShare() {
+    this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///com.ohos.contactsdataability')\n` +
+      `Permission: ohos.permission.READ_CONTACTS\n` +
+      `Function: Retrieves contacts from the device's contact database`;
+  }
+
+  private queryContact() {
+    try {
+      // æ ¹æ®å…³é”®å­—æŸ¥è¯¢è”ç³»äºº
+      contact.queryContact(this.context, 'name', (err, contactInfo) => {
+        if (err) {
+          this.resultText = `Error querying contact: ${JSON.stringify(err)}`;
+          return;
+        }
+        
+        if (contactInfo) {
+          this.resultText = `Contact found:\nName: ${JSON.stringify(contactInfo)}`;
+        } else {
+          this.resultText = "No contact found with the specified key";
+        }
+      });
+    } catch (error) {
+      promptAction.showToast({
+        message: `Failed to query contact: ${error}`
+      });
+    }
+  }
+
+  private queryAllContacts() {
+    try {
+      // æŸ¥è¯¢æ‰€æœ‰è”ç³»äºº
+      contact.queryContacts(this.context, (err, contactArray) => {
+        if (err) {
+          this.resultText = `Error querying all contacts: ${JSON.stringify(err)}`;
+          return;
+        }
+        
+        if (contactArray && contactArray.length > 0) {
+          let displayContent: string = `Found ${contactArray.length} contacts:\n`;
+          // ä»…æ˜¾ç¤ºå‰5ä¸ªè”ç³»äºº
+          const maxContacts: number = Math.min(contactArray.length, 5);
+          for (let i = 0; i < maxContacts; i++) {
+            const currentContact = contactArray[i];
+            displayContent += `${i + 1}. ${JSON.stringify(currentContact)}\n`;
+          }
+          if (contactArray.length > 5) {
+            displayContent += `...and ${contactArray.length - 5} more`;
+          }
+          this.resultText = displayContent;
+        } else {
+          this.resultText = "No contacts found on device";
+        }
+      });
+    } catch (error) {
+      promptAction.showToast({
+        message: `Failed to query all contacts: ${error}`
+      });
+    }
+  }
+
+  private queryContactsByPhoneNumber() {
+    try {
+      // æ ¹æ®ç”µè¯å·ç æŸ¥è¯¢è”ç³»äºº
+      const phoneNumber: string = "1234567890"; // ç¤ºä¾‹ç”µè¯å·ç 
+      contact.queryContactsByPhoneNumber(this.context, phoneNumber, (err, contactArray) => {
+        if (err) {
+          this.resultText = `Error querying contacts by phone: ${JSON.stringify(err)}`;
+          return;
+        }
+        
+        if (contactArray && contactArray.length > 0) {
+          let displayContent: string = `Found ${contactArray.length} contacts with phone ${phoneNumber}:\n`;
+          // ä»…æ˜¾ç¤ºå‰5ä¸ªè”ç³»äºº
+          const maxContacts: number = Math.min(contactArray.length, 5);
+          for (let i = 0; i < maxContacts; i++) {
+            const currentContact = contactArray[i];
+            displayContent += `${i + 1}. ${JSON.stringify(currentContact)}\n`;
+          }
+          if (contactArray.length > 5) {
+            displayContent += `...and ${contactArray.length - 5} more`;
+          }
+          this.resultText = displayContent;
+        } else {
+          this.resultText = `No contacts found with phone number ${phoneNumber}`;
+        }
+      });
+    } catch (error) {
+      promptAction.showToast({
+        message: `Failed to query contacts by phone: ${error}`
+      });
+    }
+  }
+
+  private queryContactsByEmail() {
+    try {
+      // æ ¹æ®ç”µå­é‚®ä»¶åœ°å€æŸ¥è¯¢è”ç³»äºº
+      const email: string = "example@email.com"; // ç¤ºä¾‹é‚®ç®±åœ°å€
+      contact.queryContactsByEmail(this.context, email, (err, contactArray) => {
+        if (err) {
+          this.resultText = `Error querying contacts by email: ${JSON.stringify(err)}`;
+          return;
+        }
+        
+        if (contactArray && contactArray.length > 0) {
+          let displayContent: string = `Found ${contactArray.length} contacts with email ${email}:\n`;
+          // ä»…æ˜¾ç¤ºå‰5ä¸ªè”ç³»äºº
+          const maxContacts: number = Math.min(contactArray.length, 5);
+          for (let i = 0; i < maxContacts; i++) {
+            const currentContact = contactArray[i];
+            displayContent += `${i + 1}. ${JSON.stringify(currentContact)}\n`;
+          }
+          if (contactArray.length > 5) {
+            displayContent += `...and ${contactArray.length - 5} more`;
+          }
+          this.resultText = displayContent;
+        } else {
+          this.resultText = `No contacts found with email ${email}`;
+        }
+      });
+    } catch (error) {
+      promptAction.showToast({
+        message: `Failed to query contacts by email: ${error}`
+      });
+    }
+  }
+
+  private queryGroups() {
+    try {
+      // æŸ¥è¯¢è”ç³»äººç¾¤ç»„
+      contact.queryGroups(this.context, (err, groupArray) => {
+        if (err) {
+          this.resultText = `Error querying groups: ${JSON.stringify(err)}`;
+          return;
+        }
+        
+        if (groupArray && groupArray.length > 0) {
+          let displayContent: string = `Found ${groupArray.length} contact groups:\n`;
+          // ä»…æ˜¾ç¤ºå‰5ä¸ªç¾¤ç»„
+          const maxGroups: number = Math.min(groupArray.length, 5);
+          for (let i = 0; i < maxGroups; i++) {
+            const currentGroup = groupArray[i];
+            displayContent += `${i + 1}. ${JSON.stringify(currentGroup)}\n`;
+          }
+          if (groupArray.length > 5) {
+            displayContent += `...and ${groupArray.length - 5} more`;
+          }
+          this.resultText = displayContent;
+        } else {
+          this.resultText = "No contact groups found";
+        }
+      });
+    } catch (error) {
+      promptAction.showToast({
+        message: `Failed to query groups: ${error}`
+      });
+    }
+  }
+
+  // Call Log Methods
+  private getCallLogs() {
+    this.resultText = `API: dataShare.createDataShareHelper(context, 'dataability://com.ohos.calllogability')\n` +
+      `Permission: ohos.permission.READ_CALL_LOG\n` +
+      `Function: Retrieves call logs from the device`;
+  }
+
+  // SMS Methods
+  private getSimMessages() {
+    this.resultText = `API: telephony.sms.getAllSimMessages(slotId, callback)\n` +
+      `Permission: ohos.permission.READ_MESSAGES\n` +
+      `Function: Retrieves SMS messages stored on SIM card`;
+  }
+
+  private getSmsViaDataShare() {
+    this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///com.ohos.smsmmsability')\n` +
+      `Permission: ohos.permission.READ_MESSAGES\n` +
+      `Function: Retrieves SMS messages from the device`;
+  }
+
+  // MMS Methods
+  private getMmsViaDataShare() {
+    this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///com.ohos.smsmmsability')\n` +
+      `Permission: ohos.permission.READ_MESSAGES\n` +
+      `Function: Retrieves MMS messages from the device`;
+  }
+
+  // Calendar Methods
+  private getCalendarViaDataShare() {
+    this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///calendardata')\n` +
+      `Permission: ohos.permission.READ_CALENDAR\n` +
+      `Function: Retrieves calendar events from the device`;
+  }
+
+  private getCalendarWholeViaDataShare() {
+    this.resultText = `API: dataShare.createDataShareHelper(context, 'datashare:///calendardata_whole')\n` +
+      `Permission: ohos.permission.READ_CALENDAR\n` +
+      `Function: Retrieves comprehensive calendar events from the device`;
+  }
+
+  private getCalendarEvents() {
+    this.resultText = `API: calendarManager.Calendar.getEvents(callback)\n` +
+      `Permission: ohos.permission.READ_CALENDAR\n` +
+      `Function: Retrieves calendar events using Calendar API`;
+  }
+} ÀÔrC”­@ohos.contact²@ohos.promptAction±@ohos.file.picker­@ohos.file.fsÔrD—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙi hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.contact.d.tsÔrE‘¯hostModulesInfo‘ÔrF’²hostDependencyName®hostModuleName­@ohos.contact¥entryÃªoh-resolveÂDAÃÙn hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.promptAction.d.tsE‘F²@ohos.promptAction¥entryÃªoh-resolveÂDAÃÙm hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.file.picker.d.tsE‘F±@ohos.file.picker¥entryÃªoh-resolveÂDAÃÙi hvigor_ignore_F:_HarmonyOS_devecostudio_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.file.fs.d.tsE‘F­@ohos.file.fs¥entryÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings²PermissionsDemo.js ‘³PermissionsDemo.etsÜB–”   ” ” ” ”# #”$ #–”   ” ” ” ”- -”. -–”   ” ” ” ”& &”' &–”   ” ”	 	” ” ” ’” 	” 	‘”  ’”9 
+”ÌW 
+<’”? $”ÌA &’”7 ”9 ’”7 ”9 ’”8 ”= #•” -”! 7”" 8”& <”' ÌX‘” ’” 
+	” 
+’” 
+	” 
+’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ‘” ’” ” 
+–” ” 
+” Ì” Ì
+” Ì” Ì–” ” 
+” Ì” Ì” Ì”  Ì–” ” 
+” ÌŸ” ÌŸ” ÌŸ” ÌŸ”” ” 
+” ”-  –” ” 
+” 	” ” ” ˜” ” 
+” 	” ” ”& ”' ”+ #š” ” 
+” 	” ” ” ”  ”" ”$ ”& ’” ” 
+–” ” 
+” ” ” ”' –” ” 
+” 	” ” ” –” ” 
+” 	”  ”! ”* "–” ” 
+” 	” ” ” –” ” 
+” 	” ” ” –” ” 
+” 	” ” ” š” ” 
+” 	” ” ” ”  ”" ”$ ”& ˜” ” 
+” 	” ” ”$ ”% ”* "–” ” 
+”  	”  ”  ”  ’” ” 
+’” "” "–” "” "” Ìš” Ìš” Ìš” Ìš–” "” "” Ì›” Ì›” Ì›” Ì›’” #” #’” $
+” $”” %
+” %” %”) % ’” $
+” $–” %
+” %” &” &” &” &’” $
+” $˜” %
+” %” '” '” '”& '"”' '#”+ ''’” $
+” $” %
+” %” (” (” (” (” (” (”! (”# (”) (%”+ ('”- ()”/ (+’” $
+” $’” %
+” %”” *
+” *”# *”0 *–” *
+” *” +” +” +” +š” *
+” *” ,” ,” ,” ,”" ,”$ ,”& , ”( ,"œ” *
+” *” -” -” -” -”  -”! -”% -”& - ”0 -*”2 -,’” *
+” *’” /
+” /–” 0
+” 0” 0” 0”% 0#”' 0%˜” 1” 1”$ 1”6 1#”: 1'”; 1(”ÌC 10”ÌE 12–” 1” 1” 2”% 2”& 2”( 2” 1” 1” 3”# 3”$ 3”& 3”) 3”+ 3”- 3”/ 3!”5 3'”7 3)”8 3*”: 3,’” 1” 1˜” 5” 5”$ 5”2 5”6 5#”7 5$”? 5,”ÌA 5.–” 5” 5” 6”% 6”& 6”( 6š” 5” 5” 7”# 7”$ 7”& 7”, 7”. 7 ”0 7"”2 7$’” 5” 5‘” 8’” :
+” :‘” 8’” :
+” :”” ;
+” ;” ;”. ;%’” :
+” :–” ;
+” ;” <” <” <” <’” :
+” :˜” ;
+” ;” =” =” =”& ="”' =#”+ ='’” :
+” :” ;
+” ;” >” >” >” >” >” >”! >”# >”) >%”+ >'”- >)”/ >+’” :
+” :’” ;
+” ;”” Ì@
+” Ì@”# Ì@”= Ì@+–” Ì@
+” Ì@” ÌA” ÌA” ÌA” ÌAš” Ì@
+” Ì@” ÌB” ÌB” ÌB” ÌB”" ÌB”$ ÌB”& ÌB ”( ÌB"œ” Ì@
+” Ì@” ÌC” ÌC” ÌC” ÌC”  ÌC”! ÌC”% ÌC”& ÌC ”= ÌC7”? ÌC9’” Ì@
+” Ì@”” ÌE
+” ÌE”# ÌE”Ì@ ÌE.–” ÌE
+” ÌE” ÌF” ÌF” ÌF” ÌFš” ÌE
+” ÌE” ÌG” ÌG” ÌG” ÌG”" ÌG”$ ÌG”& ÌG ”( ÌG"œ” ÌE
+” ÌE” ÌH” ÌH” ÌH” ÌH”  ÌH”! ÌH”% ÌH”& ÌH ”2 ÌH,”4 ÌH.’” ÌE
+” ÌE”” ÌJ
+” ÌJ”# ÌJ”5 ÌJ#–” ÌJ
+” ÌJ” ÌK” ÌK” ÌK” ÌKš” ÌJ
+” ÌJ” ÌL” ÌL” ÌL” ÌL”" ÌL”$ ÌL”& ÌL ”( ÌL"œ” ÌJ
+” ÌJ” ÌM” ÌM” ÌM” ÌM”  ÌM”! ÌM”% ÌM”& ÌM ”6 ÌM0”8 ÌM2’” ÌJ
+” ÌJ”” ÌO
+” ÌO”# ÌO”: ÌO(–” ÌO
+” ÌO” ÌP” ÌP” ÌP” ÌPš” ÌO
+” ÌO” ÌQ” ÌQ” ÌQ” ÌQ”" ÌQ”$ ÌQ”& ÌQ ”( ÌQ"œ” ÌO
+” ÌO” ÌR” ÌR” ÌR” ÌR”  ÌR”! ÌR”% ÌR”& ÌR ”Ì@ ÌR:”ÌB ÌR<’” ÌO
+” ÌO”” ÌT
+” ÌT”# ÌT”: ÌT(–” ÌT
+” ÌT” ÌU” ÌU” ÌU” ÌUš” ÌT
+” ÌT” ÌV” ÌV” ÌV” ÌV”" ÌV”$ ÌV”& ÌV ”( ÌV"œ” ÌT
+” ÌT” ÌW” ÌW” ÌW” ÌW”  ÌW”! ÌW”% ÌW”& ÌW ”: ÌW4”< ÌW6’” ÌT
+” ÌT”” ÌY
+” ÌY”# ÌY”/ ÌY–” ÌY
+” ÌY” ÌZ” ÌZ” ÌZ” ÌZš” ÌY
+” ÌY” Ì[” Ì[” Ì[” Ì[”" Ì[”$ Ì[”& Ì[ ”( Ì["œ” ÌY
+” ÌY” Ì\” Ì\” Ì\” Ì\”  Ì\”! Ì\”% Ì\”& Ì\ ”1 Ì\+”3 Ì\-’” ÌY
+” ÌY’” Ì^
+” Ì^”” Ì_
+” Ì_” Ì_”. Ì_%’” Ì^
+” Ì^–” Ì_
+” Ì_” Ì`” Ì`” Ì`” Ì`’” Ì^
+” Ì^˜” Ì_
+” Ì_” Ìa” Ìa” Ìa”& Ìa"”' Ìa#”+ Ìa'’” Ì^
+” Ì^” Ì_
+” Ì_” Ìb” Ìb” Ìb” Ìb” Ìb” Ìb”! Ìb”# Ìb”) Ìb%”+ Ìb'”- Ìb)”/ Ìb+’” Ì^
+” Ì^’” Ì_
+” Ì_”” Ìd
+” Ìd”# Ìd”2 Ìd –” Ìd
+” Ìd” Ìe” Ìe” Ìe” Ìeš” Ìd
+” Ìd” Ìf” Ìf” Ìf” Ìf”" Ìf”$ Ìf”& Ìf ”( Ìf"œ” Ìd
+” Ìd” Ìg” Ìg” Ìg” Ìg”  Ìg”! Ìg”% Ìg”& Ìg ”1 Ìg+”3 Ìg-’” Ìd
+” Ìd’” Ìi
+” Ìi”” Ìj
+” Ìj” Ìj”) Ìj ’” Ìi
+” Ìi–” Ìj
+” Ìj” Ìk” Ìk” Ìk” Ìk’” Ìi
+” Ìi˜” Ìj
+” Ìj” Ìl” Ìl” Ìl”& Ìl"”' Ìl#”+ Ìl'’” Ìi
+” Ìi” Ìj
+” Ìj” Ìm” Ìm” Ìm” Ìm” Ìm” Ìm”! Ìm”# Ìm”) Ìm%”+ Ìm'”- Ìm)”/ Ìm+’” Ìi
+” Ìi’” Ìj
+” Ìj”” Ìo
+” Ìo”# Ìo”5 Ìo#–” Ìo
+” Ìo” Ìp” Ìp” Ìp” Ìpš” Ìo
+” Ìo” Ìq” Ìq” Ìq” Ìq”" Ìq”$ Ìq”& Ìq ”( Ìq"œ” Ìo
+” Ìo” Ìr” Ìr” Ìr” Ìr”  Ìr”! Ìr”% Ìr”& Ìr ”4 Ìr.”6 Ìr0’” Ìo
+” Ìo”” Ìt
+” Ìt”# Ìt”8 Ìt&–” Ìt
+” Ìt” Ìu” Ìu” Ìu” Ìuš” Ìt
+” Ìt” Ìv” Ìv” Ìv” Ìv”" Ìv”$ Ìv”& Ìv ”( Ìv"œ” Ìt
+” Ìt” Ìw” Ìw” Ìw” Ìw”  Ìw”! Ìw”% Ìw”& Ìw ”8 Ìw2”: Ìw4’” Ìt
+” Ìt’” Ìy
+” Ìy”” Ìz
+” Ìz” Ìz”) Ìz ’” Ìy
+” Ìy–” Ìz
+” Ìz” Ì{” Ì{” Ì{” Ì{’” Ìy
+” Ìy˜” Ìz
+” Ìz” Ì|” Ì|” Ì|”& Ì|"”' Ì|#”+ Ì|'’” Ìy
+” Ìy” Ìz
+” Ìz” Ì}” Ì}” Ì}” Ì}” Ì}” Ì}”! Ì}”# Ì}”) Ì}%”+ Ì}'”- Ì})”/ Ì}+’” Ìy
+” Ìy’” Ìz
+” Ìz”” Ì
+” Ì”# Ì”8 Ì&–” Ì
+” Ì” Ì€” Ì€” Ì€” Ì€š” Ì
+” Ì” Ì” Ì” Ì” Ì”" Ì”$ Ì”& Ì ”( Ì"œ” Ì
+” Ì” Ì‚” Ì‚” Ì‚” Ì‚”  Ì‚”! Ì‚”% Ì‚”& Ì‚ ”8 Ì‚2”: Ì‚4’” Ì
+” Ì’” Ì„
+” Ì„”” Ì…
+” Ì…” Ì…”. Ì…%’” Ì„
+” Ì„–” Ì…
+” Ì…” Ì†” Ì†” Ì†” Ì†’” Ì„
+” Ì„˜” Ì…
+” Ì…” Ì‡” Ì‡” Ì‡”& Ì‡"”' Ì‡#”+ Ì‡'’” Ì„
+” Ì„” Ì…
+” Ì…” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ”! Ìˆ”# Ìˆ”) Ìˆ%”+ Ìˆ'”- Ìˆ)”/ Ìˆ+’” Ì„
+” Ì„’” Ì…
+” Ì…”” ÌŠ
+” ÌŠ”# ÌŠ”= ÌŠ+–” ÌŠ
+” ÌŠ” Ì‹” Ì‹” Ì‹” Ì‹š” ÌŠ
+” ÌŠ” ÌŒ” ÌŒ” ÌŒ” ÌŒ”" ÌŒ”$ ÌŒ”& ÌŒ ”( ÌŒ"œ” ÌŠ
+” ÌŠ” Ì” Ì” Ì” Ì”  Ì”! Ì”% Ì”& Ì ”= Ì7”? Ì9’” ÌŠ
+” ÌŠ”” Ì
+” Ì”# Ì”ÌC Ì1–” Ì
+” Ì” Ì” Ì” Ì” Ìš” Ì
+” Ì” Ì‘” Ì‘” Ì‘” Ì‘”" Ì‘”$ Ì‘”& Ì‘ ”( Ì‘"œ” Ì
+” Ì” Ì’” Ì’” Ì’” Ì’”  Ì’”! Ì’”% Ì’”& Ì’ ”ÌB Ì’<”ÌD Ì’>’” Ì
+” Ì”” Ì”
+” Ì””# Ì””8 Ì”&–” Ì”
+” Ì”” Ì•” Ì•” Ì•” Ì•š” Ì”
+” Ì”” Ì–” Ì–” Ì–” Ì–”" Ì–”$ Ì–”& Ì– ”( Ì–"œ” Ì”
+” Ì”” Ì—” Ì—” Ì—” Ì—”  Ì—”! Ì—”% Ì—”& Ì— ”7 Ì—1”9 Ì—3’” Ì”
+” Ì”’” #” #’” "” "’” ” 
+‘” Ì ’” Ì¢” Ì¢”” Ì£”	 Ì£”
+ Ì£” Ì£•” Ì¤” Ì¤” Ì¤” Ì¤” Ì¤’” Ì¤” Ì¤—” Ì¦” Ì¦” Ì¦	” Ì¦” Ì¦” Ì¦” Ì¦’” Ì§” Ì§” Ì¨” Ì¨
+” Ì¨”! Ì¨”% Ì¨”+ Ì¨%”, Ì¨&”> Ì¨8”? Ì¨9”ÌC Ì¨=”ÌD Ì¨>”ÌK Ì¨ÌE”ÌL Ì¨ÌF”ÌM Ì¨ÌGš” Ì©” Ì©
+”% Ì©”( Ì©"”, Ì©&”2 Ì©,”3 Ì©-”ÌH Ì©ÌB”ÌJ Ì©ÌD”ÌK Ì©ÌE’” Ìª” Ìª—” Ì«”! Ì«”" Ì«”1 Ì«+”4 Ì«.”5 Ì«/”6 Ì«0’” Ì¬”Ìf Ì¬Ì`Ÿ” Ì­”! Ì­”" Ì­”3 Ì­-”6 Ì­0”7 Ì­1”ÌU Ì­ÌO”ÌW Ì­ÌQ”Ìg Ì­Ìa”Ìi Ì­Ìc”Ìv Ì­Ìp”Ìx Ì­Ìr”Ì~ Ì­Ìx”Ì Ì­Ìy”Ì€ Ì­Ìzœ” Ì¯” Ì¯” Ì¯” Ì¯”! Ì¯”/ Ì¯)”0 Ì¯*”6 Ì¯0”7 Ì¯1”ÌL Ì¯ÌF”ÌM Ì¯ÌG”ÌN Ì¯ÌHš” Ì±” Ì±
+” Ì±” Ì±”  Ì±”! Ì±”' Ì±!”* Ì±$”+ Ì±%”- Ì±'™” Ì²” Ì²” Ì²”  Ì²”& Ì²”' Ì²”( Ì² ”) Ì²!”* Ì²"—” Ì³” Ì³” Ì³”% Ì³”( Ì³ ”/ Ì³'”0 Ì³(’” Ìµ” ÌµÜ ” Ì¶” Ì¶” Ì¶” Ì¶”  Ì¶”' Ì¶”( Ì¶ ”- Ì¶%”. Ì¶&”1 Ì¶)”2 Ì¶*”3 Ì¶+”6 Ì¶.”8 Ì¶0”< Ì¶4”ÌJ Ì¶ÌB”ÌK Ì¶ÌC’” Ì¸” Ì¸’” Ì¹” Ì¹Ü ” Ìº
+” Ìº” Ìº” Ìº”! Ìº”" Ìº”* Ìº ”+ Ìº!”2 Ìº(”4 Ìº*”6 Ìº,”7 Ìº-”? Ìº5”Ì@ Ìº6”ÌI Ìº?”ÌJ ÌºÌ@”ÌK ÌºÌA” Ì»
+” Ì»” Ì»”! Ì»”# Ì»”$ Ì»”, Ì»"”- Ì»#”1 Ì»'”2 Ì»(”4 Ì»*”5 Ì»+”6 Ì»,” Ì¼
+” Ì¼” Ì¼”! Ì¼”$ Ì¼”( Ì¼”) Ì¼”7 Ì¼-”8 Ì¼.”< Ì¼2”= Ì¼3”ÌA Ì¼7”ÌB Ì¼8”ÌC Ì¼9˜” Ì½
+” Ì½” Ì½”  Ì½”! Ì½”% Ì½”& Ì½”' Ì½‘” Ì¾	”” Ì¾
+” Ì¾” Ì¾” Ì¾š” Ì¿
+” Ì¿” Ì¿”! Ì¿”" Ì¿”< Ì¿2”> Ì¿4”ÌC Ì¿9”ÌD Ì¿:”ÌE Ì¿;—” ÌÀ
+” ÌÀ” ÌÀ”! ÌÀ”$ ÌÀ”2 ÌÀ(”3 ÌÀ)‘” ÌÁ	›” ÌÃ” ÌÃ” ÌÃ” ÌÃ”" ÌÃ”4 ÌÃ,”8 ÌÃ0”9 ÌÃ1”ÌA ÌÃ9”ÌC ÌÃ;”ÌD ÌÃ<Ü ” ÌÄ” ÌÄ” ÌÄ”& ÌÄ”' ÌÄ”) ÌÄ!”0 ÌÄ(”2 ÌÄ*”ÌM ÌÄÌE”ÌO ÌÄÌG”ÌW ÌÄÌO”ÌY ÌÄÌQ”Ì] ÌÄÌU”Ì_ ÌÄÌW”Ì` ÌÄÌX”Ìa ÌÄÌY‘” ÌÅ‘”	 ÌÆ”” ÌÆ” ÌÆ” ÌÆ” ÌÆŸ” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ”: ÌÇ4”= ÌÇ7”ÌA ÌÇ;”ÌB ÌÇ<”ÌK ÌÇÌE”ÌL ÌÇÌF”ÌO ÌÇÌI”ÌP ÌÇÌJ”ÌQ ÌÇÌK”ÌR ÌÇÌL” ÌÈ” ÌÈ
+” ÌÈ” ÌÈ” ÌÈ”7 ÌÈ1”; ÌÈ5”< ÌÈ6”ÌE ÌÈ?”ÌF ÌÈÌ@”ÌI ÌÈÌC”ÌJ ÌÈÌD”ÌL ÌÈÌF”ÌM ÌÈÌGÜ ” ÌÉ” ÌÉ” ÌÉ”" ÌÉ”# ÌÉ”% ÌÉ”, ÌÉ&”. ÌÉ(”ÌE ÌÉ?”ÌG ÌÉÌA”ÌO ÌÉÌI”ÌQ ÌÉÌK”ÌU ÌÉÌO”ÌW ÌÉÌQ”ÌX ÌÉÌR”ÌY ÌÉÌS‘”	 ÌÊ‘” ÌÊ—” ÌË” ÌË
+” ÌË” ÌË” ÌË”" ÌË”# ÌË‘”	 ÌÌ’” ÌÍ” ÌÍ’” ÌÏ” ÌÏ”” ÌĞ” ÌĞ” ÌĞ” ÌĞ–” ÌÑ” ÌÑ” ÌÑ” ÌÑ” ÌÑ” ÌÑ–” ÌÒ” ÌÒ” ÌÒ” ÌÒ” ÌÒ” ÌÒ‘”	 ÌÓ˜” ÌÓ” ÌÓ” ÌÓ” ÌÓ” ÌÓ” ÌÓ”# ÌÓ!”% ÌÓ#Ÿ” ÌÔ” ÌÔ” ÌÔ” ÌÔ” ÌÔ” ÌÔ”  ÌÔ”! ÌÔ”( ÌÔ"”) ÌÔ#”* ÌÔ$”+ ÌÔ%”. ÌÔ(”3 ÌÔ-”4 ÌÔ.‘”	 ÌÕš” ÌÕ” ÌÕ” ÌÕ” ÌÕ” ÌÕ” ÌÕ”# ÌÕ!”& ÌÕ$”* ÌÕ(”, ÌÕ*Ü ” ÌÖ” ÌÖ” ÌÖ” ÌÖ” ÌÖ” ÌÖ”  ÌÖ”# ÌÖ”' ÌÖ!”( ÌÖ"”) ÌÖ#”* ÌÖ$”1 ÌÖ+”2 ÌÖ,”3 ÌÖ-”4 ÌÖ.”7 ÌÖ1”< ÌÖ6”= ÌÖ7‘”	 Ì×‘” Ì×Ü ” ÌØ” ÌØ” ÌØ” ÌØ” ÌØ” ÌØ”  ÌØ”# ÌØ”' ÌØ!”* ÌØ$”. ÌØ(”/ ÌØ)”0 ÌØ*”1 ÌØ+”8 ÌØ2”9 ÌØ3”: ÌØ4”; ÌØ5”> ÌØ8”ÌC ÌØ=”ÌD ÌØ>‘”	 ÌÙ’” ÌÚ” ÌÚ’” ÌÜ” ÌÜ’” Ìİ
+” Ìİ!–” ÌŞ” ÌŞ” ÌŞ	” ÌŞ” ÌŞ”Ìx ÌŞÌt’” Ìß”9 Ìß3“” Ìà”ÌM ÌàÌG”ÌN ÌàÌH’” Ìá” Ìá’” Ìã
+” Ìã’” Ìä” Ìä’” Ìå” ÌåÜ ” Ìæ” Ìæ” Ìæ”  Ìæ”! Ìæ”% Ìæ”& Ìæ ”- Ìæ'”/ Ìæ)”5 Ìæ/”7 Ìæ1”8 Ìæ2”; Ìæ5”= Ìæ7”ÌH ÌæÌB”ÌJ ÌæÌD”ÌL ÌæÌF”” Ìç” Ìç” Ìç” Ìç” Ìè
+” Ìè” Ìè”# Ìè”& Ìè”ÌA Ìè7”ÌE Ìè;”ÌF Ìè<”ÌO ÌèÌE”ÌP ÌèÌF”ÌS ÌèÌI”ÌT ÌèÌJ”ÌV ÌèÌL”ÌW ÌèÌM’” Ìé
+” Ìé‘” Ìê	”” Ìì” Ìì” Ìì”! Ìì” Ìí
+” Ìí” Ìí”# Ìí”& Ìí”? Ìí5”ÌC Ìí9”ÌD Ìí:”ÌM ÌíÌC”ÌN ÌíÌD”ÌY ÌíÌO”ÌZ ÌíÌP”Ì\ ÌíÌR”Ì] ÌíÌS‘” Ìî	‘” Ìî—” Ìï
+” Ìï” Ìï”# Ìï”& Ìï”ÌO ÌïÌE”ÌP ÌïÌF‘” Ìğ	”” Ìñ” Ìñ” Ìñ” Ìñ	‘”	 Ìò”” Ìò” Ìò” Ìò” Ìò•” Ìó” Ìó” Ìó”" Ìó”# Ìó–” Ìô” Ìô” Ìô”5 Ìô-”: Ìô2”< Ìô4“” Ìõ” Ìõ” Ìõ	‘”	 Ìö’” Ì÷” Ì÷’” Ìù
+” Ìù’” Ìú” Ìú’” Ìû” ÌûŸ” Ìü” Ìü” Ìü”! Ìü”" Ìü”& Ìü ”' Ìü!”. Ìü(”0 Ìü*”1 Ìü+”4 Ìü.”6 Ìü0”ÌB Ìü<”ÌD Ìü>”ÌF ÌüÌ@”” Ìı” Ìı” Ìı” Ìı” Ìş
+” Ìş” Ìş”# Ìş”& Ìş”ÌF Ìş<”ÌJ ÌşÌ@”ÌK ÌşÌA”ÌT ÌşÌJ”ÌU ÌşÌK”ÌX ÌşÌN”ÌY ÌşÌO”Ì[ ÌşÌQ”Ì\ ÌşÌR’” Ìÿ
+” Ìÿ‘” Í 	š” Í” Í”  Í”$ Í”0 Í(”1 Í)”7 Í/”: Í2”; Í3”= Í5š” Í
+” Í”& Í”) Í'”2 Í0”> Í<”? Í=”ÌE ÍÌC”ÌS ÍÌQ”ÌT ÍÌR’” Í
+”  ÍŸ” Í
+” Í”% Í”( Í&”, Í*”- Í+”0 Í.”1 Í/”= Í;”> Í<”ÌD ÍÌB”ÌF ÍÌD”ÌG ÍÌE”ÌH ÍÌF”ÌI ÍÌG” Í
+” Í” Í” Í”! Í”" Í”$ Í”% Í”( Í”3 Í)”5 Í+”6 Í,”8 Í.”: Í0™” Í” Í”, Í ”/ Í#”; Í/”< Í0”= Í1”> Í2”? Í3Ü ” Í”& Í”* Í”- Í!”. Í"”1 Í%”2 Í&”7 Í+”; Í/”< Í0”ÌE Í9”ÌF Í:”ÌT ÍÌH”ÌU ÍÌI”ÌY ÍÌM”ÌZ ÍÌN‘” Í	˜” Í
+
+” Í
+”$ Í
+”% Í
+”+ Í
+!”. Í
+$”/ Í
+%”1 Í
+'›” Í”& Í”* Í”4 Í(”Ì@ Í4”ÌA Í5”ÌG Í;”ÌJ Í>”ÌK Í?”ÌR ÍÌF”ÌS ÍÌG‘” Í—” Í
+” Í” Í”# Í”& Í”4 Í*”5 Í+‘” Í	‘” Í—” Í
+” Í” Í”# Í”& Í”ÌC Í9”ÌD Í:‘” Í	”” Í” Í” Í” Í	‘”	 Í”” Í” Í” Í” Í•” Í” Í” Í”" Í”# Í–” Í” Í” Í”: Í2”? Í7”ÌA Í9“” Í” Í” Í	‘”	 Í’” Í” Í’” Í
+” Í$’” Í” Í’” Í” Í˜” Í” Í” Í”  Í"”, Í.”- Í/”. Í0”7 Í9Ü ” Í” Í” Í”. Í(”/ Í)”3 Í-”4 Í.”; Í5”= Í7”ÌH ÍÌB”ÌJ ÍÌD”ÌK ÍÌE”ÌN ÍÌH”ÌP ÍÌJ”Ì\ ÍÌV”Ì^ ÍÌX”Ì` ÍÌZ”” Í” Í” Í” Í” Í
+” Í” Í”# Í”& Í”ÌK ÍÌA”ÌO ÍÌE”ÌP ÍÌF”ÌY ÍÌO”ÌZ ÍÌP”Ì] ÍÌS”Ì^ ÍÌT”Ì` ÍÌV”Ìa ÍÌW’” Í 
+” Í ‘” Í!	š” Í#” Í#”  Í#”$ Í#”0 Í#(”1 Í#)”7 Í#/”: Í#2”; Í#3”= Í#5œ” Í$
+” Í$”& Í$”) Í$'”2 Í$0”> Í$<”? Í$=”ÌE Í$ÌC”Ì] Í$Ì[”Ìh Í$Ìf”Ìm Í$Ìk”Ìn Í$Ìl’” Í%
+”  Í%Ÿ” Í&
+” Í&”% Í&”( Í&&”, Í&*”- Í&+”0 Í&.”1 Í&/”= Í&;”> Í&<”ÌD Í&ÌB”ÌF Í&ÌD”ÌG Í&ÌE”ÌH Í&ÌF”ÌI Í&ÌG” Í'
+” Í'” Í'” Í'”! Í'”" Í'”$ Í'”% Í'”( Í'”3 Í')”5 Í'+”6 Í',”8 Í'.”: Í'0™” Í(” Í(”, Í( ”/ Í(#”; Í(/”< Í(0”= Í(1”> Í(2”? Í(3Ü ” Í)”& Í)”* Í)”- Í)!”. Í)"”1 Í)%”2 Í)&”7 Í)+”; Í)/”< Í)0”ÌE Í)9”ÌF Í):”ÌT Í)ÌH”ÌU Í)ÌI”ÌY Í)ÌM”ÌZ Í)ÌN‘” Í*˜” Í+
+” Í+”$ Í+”% Í+”+ Í+!”. Í+$”/ Í+%”1 Í+'›” Í,”& Í,”* Í,”4 Í,(”Ì@ Í,4”ÌA Í,5”ÌG Í,;”ÌJ Í,>”ÌK Í,?”ÌR Í,ÌF”ÌS Í,ÌG‘” Í-—” Í.
+” Í.” Í.”# Í.”& Í.”4 Í.*”5 Í.+‘” Í/	‘” Í/™” Í0
+” Í0” Í0”# Í0”& Í0”ÌM Í0ÌC”ÌX Í0ÌN”ÌZ Í0ÌP”Ì[ Í0ÌQ‘” Í1	”” Í2” Í2” Í2” Í2	‘”	 Í3”” Í3” Í3” Í3” Í3•” Í4” Í4” Í4”" Í4”# Í4–” Í5” Í5” Í5”? Í57”ÌD Í5<”ÌF Í5>“” Í6” Í6” Í6	‘”	 Í7’” Í8” Í8’” Í:
+” Í:’” Í;” Í;’” Í<” Í<˜” Í=” Í=” Í=” Í=”- Í=/”. Í=0”/ Í=1”8 Í=:Ü ” Í>” Í>” Í>”( Í>"”) Í>#”- Í>'”. Í>(”5 Í>/”7 Í>1”< Í>6”> Í>8”? Í>9”ÌB Í><”ÌD Í>>”ÌP Í>ÌJ”ÌR Í>ÌL”ÌT Í>ÌN”” Í?” Í?” Í?” Í?” Í@
+” Í@” Í@”# Í@”& Í@”ÌK Í@ÌA”ÌO Í@ÌE”ÌP Í@ÌF”ÌY Í@ÌO”ÌZ Í@ÌP”Ì] Í@ÌS”Ì^ Í@ÌT”Ì` Í@ÌV”Ìa Í@ÌW’” ÍA
+” ÍA‘” ÍB	š” ÍD” ÍD”  ÍD”$ ÍD”0 ÍD(”1 ÍD)”7 ÍD/”: ÍD2”; ÍD3”= ÍD5œ” ÍE
+” ÍE”& ÍE”) ÍE'”2 ÍE0”> ÍE<”? ÍE=”ÌE ÍEÌC”Ì] ÍEÌ[”Ìb ÍEÌ`”Ìg ÍEÌe”Ìh ÍEÌf’” ÍF
+”  ÍFŸ” ÍG
+” ÍG”% ÍG”( ÍG&”, ÍG*”- ÍG+”0 ÍG.”1 ÍG/”= ÍG;”> ÍG<”ÌD ÍGÌB”ÌF ÍGÌD”ÌG ÍGÌE”ÌH ÍGÌF”ÌI ÍGÌG” ÍH
+” ÍH” ÍH” ÍH”! ÍH”" ÍH”$ ÍH”% ÍH”( ÍH”3 ÍH)”5 ÍH+”6 ÍH,”8 ÍH.”: ÍH0™” ÍI” ÍI”, ÍI ”/ ÍI#”; ÍI/”< ÍI0”= ÍI1”> ÍI2”? ÍI3Ü ” ÍJ”& ÍJ”* ÍJ”- ÍJ!”. ÍJ"”1 ÍJ%”2 ÍJ&”7 ÍJ+”; ÍJ/”< ÍJ0”ÌE ÍJ9”ÌF ÍJ:”ÌT ÍJÌH”ÌU ÍJÌI”ÌY ÍJÌM”ÌZ ÍJÌN‘” ÍK˜” ÍL
+” ÍL”$ ÍL”% ÍL”+ ÍL!”. ÍL$”/ ÍL%”1 ÍL'›” ÍM”& ÍM”* ÍM”4 ÍM(”Ì@ ÍM4”ÌA ÍM5”ÌG ÍM;”ÌJ ÍM>”ÌK ÍM?”ÌR ÍMÌF”ÌS ÍMÌG‘” ÍN—” ÍO
+” ÍO” ÍO”# ÍO”& ÍO”4 ÍO*”5 ÍO+‘” ÍP	‘” ÍP™” ÍQ
+” ÍQ” ÍQ”# ÍQ”& ÍQ”ÌF ÍQ<”ÌK ÍQÌA”ÌM ÍQÌC”ÌN ÍQÌD‘” ÍR	”” ÍS” ÍS” ÍS” ÍS	‘”	 ÍT”” ÍT” ÍT” ÍT” ÍT•” ÍU” ÍU” ÍU”" ÍU”# ÍU–” ÍV” ÍV” ÍV”? ÍV7”ÌD ÍV<”ÌF ÍV>“” ÍW” ÍW” ÍW	‘”	 ÍX’” ÍY” ÍY’” Í[
+” Í[’” Í\” Í\’” Í]” Í]Ÿ” Í^” Í^” Í^” Í^”  Í^”$ Í^”% Í^”, Í^&”. Í^(”/ Í^)”2 Í^,”4 Í^.”> Í^8”Ì@ Í^:”ÌB Í^<”” Í_” Í_” Í_” Í_” Í`
+” Í`” Í`”# Í`”& Í`”Ì@ Í`6”ÌD Í`:”ÌE Í`;”ÌN Í`ÌD”ÌO Í`ÌE”ÌR Í`ÌH”ÌS Í`ÌI”ÌU Í`ÌK”ÌV Í`ÌL’” Ía
+” Ía‘” Íb	š” Íd” Íd” Íd”" Íd”, Íd$”- Íd%”3 Íd+”6 Íd.”7 Íd/”9 Íd1š” Íe
+” Íe”& Íe”) Íe'”2 Íe0”< Íe:”= Íe;”ÌC ÍeÌA”ÌW ÍeÌU”ÌX ÍeÌV’” Íf
+” ÍfŸ” Íg
+” Íg”# Íg”& Íg$”* Íg(”+ Íg)”. Íg,”/ Íg-”9 Íg7”: Íg8”Ì@ Íg>”ÌB ÍgÌ@”ÌC ÍgÌA”ÌD ÍgÌB”ÌE ÍgÌC” Íh
+” Íh” Íh” Íh”! Íh”" Íh”$ Íh”% Íh”( Íh”1 Íh'”3 Íh)”4 Íh*”6 Íh,”8 Íh.™” Íi” Íi”* Íi”- Íi!”7 Íi+”8 Íi,”9 Íi-”: Íi.”; Íi/Ü ” Íj”& Íj”* Íj”- Íj!”. Íj"”1 Íj%”2 Íj&”7 Íj+”; Íj/”< Íj0”ÌE Íj9”ÌF Íj:”ÌR ÍjÌF”ÌS ÍjÌG”ÌW ÍjÌK”ÌX ÍjÌL‘” Ík˜” Íl
+” Íl”" Íl”# Íl”) Íl”, Íl"”- Íl#”/ Íl%›” Ím”& Ím”* Ím”4 Ím(”> Ím2”? Ím3”ÌE Ím9”ÌH Ím<”ÌI Ím=”ÌP ÍmÌD”ÌQ ÍmÌE‘” Ín—” Ío
+” Ío” Ío”# Ío”& Ío”4 Ío*”5 Ío+‘” Íp	‘” Íp—” Íq
+” Íq” Íq”# Íq”& Íq”? Íq5”Ì@ Íq6‘” Ír	”” Ís” Ís” Ís” Ís	‘”	 Ít”” Ít” Ít” Ít” Ít•” Íu” Íu” Íu”" Íu”# Íu–” Ív” Ív” Ív”4 Ív,”9 Ív1”; Ív3“” Íw” Íw” Íw	‘”	 Íx’” Íy” Íy’” Í{” Í{’” Í|
+” Í|–” Í}” Í}” Í}	” Í}” Í}”Ìt Í}Ìp’” Í~”9 Í~3“” Í”; Í5”< Í6’” Í€” Í€’” Í‚” Í‚’” Íƒ
+” Íƒ–” Í„” Í„” Í„	” Í„” Í„”ÌT Í„ÌP’” Í…”9 Í…3“” Í†”ÌA Í†;”ÌB Í†<’” Í‡” Í‡’” Í‰
+” Í‰–” ÍŠ” ÍŠ” ÍŠ	” ÍŠ” ÍŠ”Ìr ÍŠÌn’” Í‹”9 Í‹3“” ÍŒ”> ÍŒ8”? ÍŒ9’” Í” Í’” Í” Í’” Í
+” Í–” Í‘” Í‘” Í‘	” Í‘” Í‘”Ìr Í‘Ìn’” Í’”9 Í’3“” Í“”> Í“8”? Í“9’” Í”” Í”’” Í–” Í–’” Í—
+” Í—!–” Í˜” Í˜” Í˜	” Í˜” Í˜”Ìh Í˜Ìd’” Í™”9 Í™3“” Íš”ÌA Íš;”ÌB Íš<’” Í›” Í›’” Í
+”  Í&–” Í” Í” Í	” Í” Í”Ìn ÍÌj’” ÍŸ”9 ÍŸ3“” Í ”ÌO Í ÌI”ÌP Í ÌJ’” Í¡” Í¡’” Í£
+” Í£–” Í¤” Í¤” Í¤	” Í¤” Í¤”ÌO Í¤ÌK’” Í¥”9 Í¥3“” Í¦”ÌD Í¦>”ÌE Í¦?’” Í§” Í§ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜK‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache”ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì¤‘ÔrL”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡ÌÔrM”¤type¥start£end¤nameªIdentifierÌ‡Ì§contactÔrN•¤type¥start£end¥value£raw§LiteralÌ”Ì£­@ohos.contact¯'@ohos.contact'K±ImportDeclarationÌ¦ÌÔ‘L¶ImportDefaultSpecifierÌ­Ì¹MªIdentifierÌ­Ì¹¬promptActionN§LiteralÌ¿ÌÓ²@ohos.promptAction´'@ohos.promptAction'K±ImportDeclarationÌÖÌı‘L¶ImportDefaultSpecifierÌİÌãMªIdentifierÌİÌã¦pickerN§LiteralÌéÌü±@ohos.file.picker³'@ohos.file.picker'K±ImportDeclarationÌÿÍ‘L¶ImportDefaultSpecifierÍÍMªIdentifierÍÍ¢fsN§LiteralÍÍ­@ohos.file.fs¯'@ohos.file.fs'

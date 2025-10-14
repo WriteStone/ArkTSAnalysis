@@ -1,0 +1,1729 @@
+[2025-09-19T12:41:19.652] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-09-19T12:41:20.251] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: false,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2025-09-19T12:41:20.274] [DEBUG] debug-file - hvigorfile, resolving F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:41:23.747] [DEBUG] debug-file - hvigorfile, require result:  { default: { system: [Function: appTasks], plugins: [] } }
+[2025-09-19T12:41:23.961] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-09-19T12:41:23.967] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2025-09-19T12:41:23.980] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-09-19T12:41:23.986] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-09-19T12:41:23.995] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-09-19T12:41:24.034] [DEBUG] debug-file - Sdk init in 58 ms 
+[2025-09-19T12:41:24.066] [DEBUG] debug-file - Project task initialization takes 30 ms 
+[2025-09-19T12:41:24.076] [DEBUG] debug-file - hvigorfile, resolving F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:41:24.099] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-09-19T12:41:24.111] [DEBUG] debug-file - Module entry task initialization takes 6 ms 
+[2025-09-19T12:41:24.114] [DEBUG] debug-file - project has submodules:entry
+[2025-09-19T12:41:24.138] [DEBUG] debug-file - Configuration task cost before running: 3 s 910 ms 
+[2025-09-19T12:41:24.141] [DEBUG] debug-file - Executing task :entry:clean
+[2025-09-19T12:41:24.144] [DEBUG] debug-file - entry : clean cost memory 0.4857635498046875
+[2025-09-19T12:41:24.161] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+} in this build.
+[2025-09-19T12:41:19.654] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.0',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-09-19T12:41:20.253] [DEBUG] debug-file - Since current hvigor version 5.18.5 differs from last hvigor version 
+      undefined, delete file-cache.json and task-cache.json.
+[2025-09-19T12:41:24.185] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-09-19T12:41:23.747] [DEBUG] debug-file - hvigorfile, binding system plugins [Function: appTasks]
+[2025-09-19T12:41:23.962] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-09-19T12:41:23.968] [DEBUG] debug-file - not found resModel json file in : F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\ohosTest\module.json5
+[2025-09-19T12:41:24.066] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-09-19T12:41:24.083] [DEBUG] debug-file - hvigorfile, require result:  { default: { system: [Function: hapTasks], plugins: [] } }
+[2025-09-19T12:41:24.100] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:41:24.111] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-09-19T12:41:24.116] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-09-19T12:41:24.141] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2025-09-19T12:41:24.144] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 917 ms 
+[2025-09-19T12:41:24.165] [DEBUG] debug-file - Module 'entry' target 'ohosTest' using build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+} in this build.
+[2025-09-19T12:41:19.656] [DEBUG] debug-file - env: daemon=false
+[2025-09-19T12:41:20.254] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2025-09-19T12:41:24.187] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-09-19T12:41:23.962] [DEBUG] debug-file - Product 'default' build option: {}
+[2025-09-19T12:41:23.975] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-09-19T12:41:24.066] [DEBUG] debug-file - hvigorfile, no custom plugins were found in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:41:24.083] [DEBUG] debug-file - hvigorfile, binding system plugins [Function: hapTasks]
+[2025-09-19T12:41:24.100] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:41:24.111] [DEBUG] debug-file - hvigorfile, no custom plugins were found in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:41:24.120] [DEBUG] debug-file - load to the disk finished
+[2025-09-19T12:41:24.145] [INFO] debug-file - Finished :entry:clean... after 4 ms 
+[2025-09-19T12:41:24.182] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-09-19T12:41:19.657] [DEBUG] debug-file - no-daemon, use the parent process.execArgv --max-old-space-size=8192,--max-semi-space-size=16,--expose-gc
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Current worker pool is stopped or closed.
+[2025-09-19T12:41:23.962] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-09-19T12:41:24.066] [DEBUG] debug-file - hvigorfile, resolve finished F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+}
+[2025-09-19T12:41:24.111] [DEBUG] debug-file - hvigorfile, resolve finished F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:41:24.120] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-09-19T12:41:24.146] [DEBUG] debug-file - Executing task ::clean
+[2025-09-19T12:41:24.183] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Clear worker 0.
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:41:24.125] [DEBUG] debug-file - Module 02-AdsKit-Codelab-Interstitial-ArkTS Collected Dependency: 
+[2025-09-19T12:41:24.146] [DEBUG] debug-file - clean: Worker pool is inactive.
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Worker 0 has been cleared.
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:41:24.125] [DEBUG] debug-file - Module 02-AdsKit-Codelab-Interstitial-ArkTS's total dependency: 0
+[2025-09-19T12:41:24.146] [DEBUG] debug-file - 02-AdsKit-Codelab-Interstitial-ArkTS : clean cost memory 0.0303802490234375
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-09-19T12:41:24.126] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-09-19T12:41:24.146] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 919 ms 
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Current busy worker size: 0.
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:41:24.129] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-09-19T12:41:24.147] [INFO] debug-file - Finished ::clean... after 1 ms 
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Clear worker 1.
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:41:24.129] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Worker 1 has been cleared.
+[2025-09-19T12:41:24.147] [DEBUG] debug-file - Executing task :entry:init
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": false,
+  "copyFrom": "default",
+  "arkOptions": {
+    "obfuscation": {
+      "ruleOptions": {
+        "enable": true,
+        "files": [
+          "./obfuscation-rules.txt"
+        ]
+      }
+    }
+  },
+  "name": "release"
+}
+[2025-09-19T12:41:24.134] [DEBUG] debug-file - Configuration phase cost:3 s 872 ms 
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Current idle worker size: 0.
+[2025-09-19T12:41:24.147] [DEBUG] debug-file - entry : init cost memory 0.01016998291015625
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:41:24.190] [DEBUG] debug-file - Current busy worker size: 0.
+[2025-09-19T12:41:24.147] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 919 ms 
+[2025-09-19T12:41:24.101] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:41:24.191] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-09-19T12:41:24.147] [INFO] debug-file - Finished :entry:init... after 1 ms 
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-09-19T12:41:24.198] [DEBUG] debug-file - worker[0] exits with exit code 0.
+[2025-09-19T12:41:24.147] [DEBUG] debug-file - Executing task ::init
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:41:24.199] [DEBUG] debug-file - worker[1] exits with exit code 0.
+[2025-09-19T12:41:24.148] [DEBUG] debug-file - 02-AdsKit-Codelab-Interstitial-ArkTS : init cost memory 0.00894927978515625
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:41:24.148] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 920 ms 
+[2025-09-19T12:41:24.205] [DEBUG] debug-file - Current worker pool is terminated.
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+}
+[2025-09-19T12:41:24.148] [INFO] debug-file - Finished ::init... after 1 ms 
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:41:24.102] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+} in this build.
+[2025-09-19T12:43:52.261] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-09-19T12:43:52.338] [DEBUG] debug-file - env: daemon=true
+[2025-09-19T12:43:52.264] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.0',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-09-19T12:43:53.267] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2025-09-19T12:43:53.287] [DEBUG] debug-file - java daemon started at port 45050 pid 11544
+[2025-09-19T12:43:53.335] [DEBUG] debug-file - session manager: set active socket. socketId=NKLSWTh0_BZKJlLNAAAB
+[2025-09-19T12:43:54.449] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-09-19T12:43:54.468] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2025-09-19T12:43:54.471] [DEBUG] debug-file - Cache service initialization finished in 2 ms 
+[2025-09-19T12:43:54.485] [DEBUG] debug-file - hvigorfile, resolving F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:43:56.946] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-09-19T12:43:56.947] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-09-19T12:43:57.269] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-09-19T12:43:57.270] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-09-19T12:43:57.270] [DEBUG] debug-file - Product 'default' build option: {}
+[2025-09-19T12:43:57.270] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-09-19T12:43:57.274] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2025-09-19T12:43:57.276] [DEBUG] debug-file - not found resModel json file in : F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\ohosTest\module.json5
+[2025-09-19T12:43:57.286] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-09-19T12:43:57.292] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2025-09-19T12:43:57.297] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2025-09-19T12:43:57.309] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-09-19T12:43:57.378] [DEBUG] debug-file - Sdk init in 90 ms 
+[2025-09-19T12:43:57.414] [DEBUG] debug-file - Project task initialization takes 33 ms 
+[2025-09-19T12:43:57.415] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-09-19T12:43:57.415] [DEBUG] debug-file - hvigorfile, no custom plugins were found in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:43:57.415] [DEBUG] debug-file - hvigorfile, resolve finished F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:43:57.428] [DEBUG] debug-file - hvigorfile, resolving F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:43:57.438] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-09-19T12:43:57.439] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-09-19T12:43:57.460] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-09-19T12:43:57.461] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:43:57.462] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:43:57.462] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+}
+[2025-09-19T12:43:57.462] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:43:57.463] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:43:57.463] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-09-19T12:43:57.463] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:43:57.464] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:43:57.464] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": false,
+  "copyFrom": "default",
+  "arkOptions": {
+    "obfuscation": {
+      "ruleOptions": {
+        "enable": true,
+        "files": [
+          "./obfuscation-rules.txt"
+        ]
+      }
+    }
+  },
+  "name": "release"
+}
+[2025-09-19T12:43:57.464] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:43:57.464] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:43:57.464] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-09-19T12:43:57.465] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:43:57.465] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:43:57.465] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+}
+[2025-09-19T12:43:57.465] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:43:57.465] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:43:57.466] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+} in this build.
+[2025-09-19T12:43:57.484] [DEBUG] debug-file - Module entry task initialization takes 15 ms 
+[2025-09-19T12:43:57.484] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-09-19T12:43:57.484] [DEBUG] debug-file - hvigorfile, no custom plugins were found in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:43:57.484] [DEBUG] debug-file - hvigorfile, resolve finished F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:43:57.528] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 42 ms 
+[2025-09-19T12:43:57.529] [DEBUG] debug-file - project has submodules:entry
+[2025-09-19T12:43:57.532] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-09-19T12:43:57.549] [DEBUG] debug-file - load to the disk finished
+[2025-09-19T12:43:57.550] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-09-19T12:43:57.568] [DEBUG] debug-file - Module 02-AdsKit-Codelab-Interstitial-ArkTS Collected Dependency: 
+[2025-09-19T12:43:57.569] [DEBUG] debug-file - Module 02-AdsKit-Codelab-Interstitial-ArkTS's total dependency: 0
+[2025-09-19T12:43:57.570] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-09-19T12:43:57.575] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-09-19T12:43:57.575] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-09-19T12:43:57.583] [DEBUG] debug-file - Configuration phase cost:3 s 107 ms 
+[2025-09-19T12:43:57.589] [DEBUG] debug-file - Configuration task cost before running: 3 s 136 ms 
+[2025-09-19T12:43:57.594] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.594] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.594] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.594] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.602] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-09-19T12:43:57.610] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.610] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.610] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.610] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.821] [DEBUG] debug-file - current product is not Atomic service.
+[2025-09-19T12:43:57.821] [DEBUG] debug-file - Use tool [win32: JAVA_HOME, CLASSPATH]
+ [
+  { JAVA_HOME: 'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\jbr' },
+  { CLASSPATH: undefined }
+]
+[2025-09-19T12:43:57.821] [DEBUG] debug-file - Use tool [win32: NODE_HOME]
+ [
+  {
+    NODE_HOME: 'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\tools\\node'
+  }
+]
+[2025-09-19T12:43:57.822] [DEBUG] debug-file - entry : default@PreBuild cost memory -2.0342178344726562
+[2025-09-19T12:43:57.822] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 369 ms 
+[2025-09-19T12:43:57.825] [INFO] debug-file - Finished :entry:default@PreBuild... after 221 ms 
+[2025-09-19T12:43:57.829] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.829] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.829] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.829] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.830] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-09-19T12:43:57.831] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:43:57.832] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.205810546875
+[2025-09-19T12:43:57.832] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 379 ms 
+[2025-09-19T12:43:57.833] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 3 ms 
+[2025-09-19T12:43:57.837] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.837] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.837] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.837] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.838] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-09-19T12:43:57.840] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 2 ms 
+[2025-09-19T12:43:57.840] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.840] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.840] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.840] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.847] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.13489532470703125
+[2025-09-19T12:43:57.848] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 394 ms 
+[2025-09-19T12:43:57.848] [INFO] debug-file - Finished :entry:default@GenerateMetadata... after 10 ms 
+[2025-09-19T12:43:57.852] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.852] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.852] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.853] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.853] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-09-19T12:43:57.854] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.854] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.854] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.854] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.854] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.05768585205078125
+[2025-09-19T12:43:57.854] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 401 ms 
+[2025-09-19T12:43:57.854] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-09-19T12:43:57.857] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.858] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.858] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.858] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.859] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-09-19T12:43:57.860] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.860] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.860] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.860] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.861] [DEBUG] debug-file - Change app api release type with 'Release'
+[2025-09-19T12:43:57.861] [DEBUG] debug-file - Change app compile API version with '5.1.0.125'
+[2025-09-19T12:43:57.862] [DEBUG] debug-file - Change app target API version with '50000012'
+[2025-09-19T12:43:57.862] [DEBUG] debug-file - Change app minimum API version with '50000012'
+[2025-09-19T12:43:57.862] [DEBUG] debug-file - Use cli appEnvironment
+[2025-09-19T12:43:57.865] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.23101043701171875
+[2025-09-19T12:43:57.866] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 412 ms 
+[2025-09-19T12:43:57.867] [INFO] debug-file - Finished :entry:default@MergeProfile... after 7 ms 
+[2025-09-19T12:43:57.870] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.871] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.871] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.871] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.873] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-09-19T12:43:57.874] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 2 ms 
+[2025-09-19T12:43:57.874] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.875] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.875] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.875] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.877] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.13852691650390625
+[2025-09-19T12:43:57.878] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 424 ms 
+[2025-09-19T12:43:57.878] [INFO] debug-file - Finished :entry:default@CreateBuildProfile... after 5 ms 
+[2025-09-19T12:43:57.882] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.882] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.882] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.882] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.883] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-09-19T12:43:57.883] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.883] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.883] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.883] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.884] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.057891845703125
+[2025-09-19T12:43:57.884] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 431 ms 
+[2025-09-19T12:43:57.884] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-09-19T12:43:57.888] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.888] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.888] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.889] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.891] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-09-19T12:43:57.899] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:43:57.900] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.4427642822265625
+[2025-09-19T12:43:57.900] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 447 ms 
+[2025-09-19T12:43:57.900] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 10 ms 
+[2025-09-19T12:43:57.904] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.904] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.904] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.904] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.910] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-09-19T12:43:57.911] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.911] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.911] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.912] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.912] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.095947265625
+[2025-09-19T12:43:57.912] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 459 ms 
+[2025-09-19T12:43:57.913] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 3 ms 
+[2025-09-19T12:43:57.917] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.917] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.917] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.917] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.918] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-09-19T12:43:57.919] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.919] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.919] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.919] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.919] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.058990478515625
+[2025-09-19T12:43:57.919] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 466 ms 
+[2025-09-19T12:43:57.919] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-09-19T12:43:57.922] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.922] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.922] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.923] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.924] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-09-19T12:43:57.926] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.926] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.926] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.926] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.929] [DEBUG] debug-file - Module Pack Info:  {
+  summary: {
+    app: { bundleName: 'c***l', bundleType: 'app', version: [Object] },
+    modules: [ [Object] ]
+  },
+  packages: [
+    {
+      deviceType: [Array],
+      moduleType: 'entry',
+      deliveryWithInstall: true,
+      name: 'entry-default'
+    }
+  ]
+}
+[2025-09-19T12:43:57.931] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.1787109375
+[2025-09-19T12:43:57.931] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 478 ms 
+[2025-09-19T12:43:57.932] [INFO] debug-file - Finished :entry:default@MakePackInfo... after 8 ms 
+[2025-09-19T12:43:57.936] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.936] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.936] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.936] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.938] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-09-19T12:43:57.938] [DEBUG] debug-file - File: 'F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-09-19T12:43:57.939] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 2 ms 
+[2025-09-19T12:43:57.939] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.940] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.940] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.940] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.940] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.102203369140625
+[2025-09-19T12:43:57.940] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 487 ms 
+[2025-09-19T12:43:57.941] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 3 ms 
+[2025-09-19T12:43:57.944] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.944] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.944] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.944] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.946] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-09-19T12:43:57.948] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.948] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.949] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:57.949] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:57.951] [DEBUG] debug-file - [
+  'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\tools\\node\\node.exe',
+  'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\bin\\ark\\ts2abc.js',
+  '--target-api-version',
+  '12',
+  '--target-api-sub-version',
+  'beta1'
+]
+[2025-09-19T12:43:58.284] [DEBUG] debug-file - 12.0.2.0
+[2025-09-19T12:43:58.289] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 1.9500732421875
+[2025-09-19T12:43:58.290] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 836 ms 
+[2025-09-19T12:43:58.290] [INFO] debug-file - Finished :entry:default@ProcessProfile... after 344 ms 
+[2025-09-19T12:43:58.294] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.294] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.294] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.294] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.296] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-09-19T12:43:58.298] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.298] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.298] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.298] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.302] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.14984130859375
+[2025-09-19T12:43:58.302] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 849 ms 
+[2025-09-19T12:43:58.303] [INFO] debug-file - Finished :entry:default@ProcessRouterMap... after 6 ms 
+[2025-09-19T12:43:58.306] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.306] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.307] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.307] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.307] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-09-19T12:43:58.308] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:43:58.310] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.310] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.310] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.310] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.311] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.14239501953125
+[2025-09-19T12:43:58.311] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 858 ms 
+[2025-09-19T12:43:58.312] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 5 ms 
+[2025-09-19T12:43:58.315] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.315] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.315] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.315] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.316] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-09-19T12:43:58.316] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.316] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.316] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.316] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.318] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.08343505859375
+[2025-09-19T12:43:58.319] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 865 ms 
+[2025-09-19T12:43:58.320] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 3 ms 
+[2025-09-19T12:43:58.323] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.323] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.323] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.323] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.324] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-09-19T12:43:58.329] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-09-19T12:43:58.331] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.331] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.331] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.331] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.334] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.44654083251953125
+[2025-09-19T12:43:58.336] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 882 ms 
+[2025-09-19T12:43:58.339] [INFO] debug-file - Finished :entry:default@ProcessResource... after 8 ms 
+[2025-09-19T12:43:58.343] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.344] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.345] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.346] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.352] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-09-19T12:43:58.372] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.6972732543945312
+[2025-09-19T12:43:58.373] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 919 ms 
+[2025-09-19T12:43:58.378] [INFO] debug-file - Finished :entry:default@GenerateLoaderJson... after 21 ms 
+[2025-09-19T12:43:58.381] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.381] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.381] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.381] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.382] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-09-19T12:43:58.386] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.386] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.386] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.386] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.392] [DEBUG] debug-file - Worker dispatch failed, running processLibs on main thread.
+[2025-09-19T12:43:58.394] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.6523590087890625
+[2025-09-19T12:43:58.394] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 941 ms 
+[2025-09-19T12:43:58.395] [INFO] debug-file - Finished :entry:default@ProcessLibs... after 12 ms 
+[2025-09-19T12:43:58.398] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.398] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.398] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:58.398] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:58.399] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-09-19T12:43:58.402] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-09-19T12:43:58.418] [DEBUG] debug-file - Use tool [F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\openharmony\toolchains\restool.exe]
+ [
+  'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\sdk\\default\\openharmony\\toolchains\\restool.exe',
+  '-l',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\resConfig.json'
+]
+[2025-09-19T12:43:58.422] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 202313728,
+  heapTotal: 160845824,
+  heapUsed: 127540528,
+  external: 3180333,
+  arrayBuffers: 232489
+} os memoryUsage :12.231986999511719
+[2025-09-19T12:43:58.655] [DEBUG] debug-file - Info: Pack: normal pack mode
+
+[2025-09-19T12:43:58.950] [DEBUG] debug-file - Info: hardware concurrency count is : 8
+Info: thread count is : 8
+
+[2025-09-19T12:43:58.950] [DEBUG] debug-file - Info: thread pool is started
+
+[2025-09-19T12:43:58.952] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2025-09-19T12:43:58.957] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2025-09-19T12:43:58.964] [DEBUG] debug-file - 09-19 12:43:58.965 18048 18040 E C01400/ImageTranscoderUtils: DecodeToRGBA IN
+
+[2025-09-19T12:43:58.965] [DEBUG] debug-file - 09-19 12:43:58.965 18048 18040 E C01400/ImageTranscoderUtils: ImageFilter IN F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\resources\base\media\ic_launcher.png
+
+[2025-09-19T12:43:58.967] [DEBUG] debug-file - 09-19 12:43:58.967 18048 18040 E C01400/ImageTranscoder: TranscodeSLR ScalePixelsWithSLR failed
+
+[2025-09-19T12:43:58.967] [DEBUG] debug-file - Warning: ScaleImage failed, file path = F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\resources\base\media\ic_launcher.png
+
+[2025-09-19T12:43:58.968] [DEBUG] debug-file - Warning: The width or height of the png file referenced by the icon exceeds the limit (41 pixels)
+at F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\resources\base\media\ic_launcher.png
+
+[2025-09-19T12:43:58.968] [DEBUG] debug-file - Warning: The width or height of the png file referenced by the startWindowIcon exceeds the limit (144 pixels)
+at F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\resources\base\media\ic_launcher.png
+
+[2025-09-19T12:43:58.969] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2025-09-19T12:43:58.970] [DEBUG] debug-file - Info: thread pool is stopped
+
+[2025-09-19T12:43:58.970] [DEBUG] debug-file - astcenc customized so is not be opened when dlclose!
+
+[2025-09-19T12:43:59.088] [DEBUG] debug-file - entry : default@CompileResource cost memory -11.752677917480469
+[2025-09-19T12:43:59.088] [DEBUG] debug-file - runTaskFromQueue task cost before running: 4 s 635 ms 
+[2025-09-19T12:43:59.090] [INFO] debug-file - Finished :entry:default@CompileResource... after 687 ms 
+[2025-09-19T12:43:59.093] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.093] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.093] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.093] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:59.096] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-09-19T12:43:59.097] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:43:59.097] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.097] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.097] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.097] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:59.100] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.104339599609375
+[2025-09-19T12:43:59.100] [DEBUG] debug-file - runTaskFromQueue task cost before running: 4 s 647 ms 
+[2025-09-19T12:43:59.101] [INFO] debug-file - Finished :entry:default@DoNativeStrip... after 5 ms 
+[2025-09-19T12:43:59.104] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.104] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.105] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.105] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:59.110] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-09-19T12:43:59.110] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-09-19T12:43:59.142] [DEBUG] debug-file - build config:
+[2025-09-19T12:43:59.142] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  watchMode: 'false',
+  aceProfilePath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS',
+  compileSdkVersion: 18,
+  compatibleSdkVersion: 12,
+  compatibleSdkVersionStage: 'beta1',
+  bundleName: 'c***l',
+  etsLoaderVersion: '5.1.0.125',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: '0ce72c41971ea38fcbeb9f0d60ef5ca6',
+  externalApiPaths: [
+    'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\sdk\\default\\hms\\ets'
+  ],
+  compilerTypes: undefined,
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 18,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  strictMode: undefined,
+  buildDir: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build',
+  deviceTypes: [ 'phone', 'tablet' ],
+  useNormalizedOHMUrl: false,
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: {
+    requestPermissions: [ [Object], [Object], [Object] ],
+    definePermissions: undefined
+  },
+  integratedHsp: false,
+  projectArkOption: {},
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  caseSensitiveCheck: false,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [ 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS' ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck'
+  },
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  arkCompileCachePath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  aceModuleJsonPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '957b9e0e445cb46ca7fd881b6be53e5e',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:18:5.1.0.125:Release',
+  aceModuleRoot: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry',
+      belongProjectPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS'
+    },
+    'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\src\\ohosTest\\ets': {
+      moduleName: 'entry',
+      modulePkgPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry',
+      belongProjectPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS'
+    },
+    'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\src\\ohosTest': {
+      moduleName: 'entry',
+      modulePkgPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry',
+      belongProjectPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS'
+    },
+    'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry',
+      belongProjectPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS'
+    },
+    'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS': {
+      moduleName: '02-AdsKit-Codelab-Interstitial-ArkTS',
+      modulePkgPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS',
+      belongProjectPath: 'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS'
+    }
+  },
+  pkgJsonFileHash: '861dd95a630928ab89d50c382c76a0fd',
+  allModulePaths: [
+    'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry'
+  ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  uiTransformOptimization: false,
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2025-09-19T12:43:59.143] [DEBUG] debug-file - Compile arkts with external api path: F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\hms\ets
+[2025-09-19T12:43:59.145] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-09-19T12:43:59.146] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-09-19T12:43:59.147] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-09-19T12:43:59.151] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-09-19T12:43:59.156] [DEBUG] debug-file - default@CompileArkTS work[0] is submitted.
+[2025-09-19T12:43:59.159] [DEBUG] debug-file - default@CompileArkTS work[0] is pushed to ready queue.
+[2025-09-19T12:43:59.159] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-09-19T12:43:59.160] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-09-19T12:43:59.160] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-09-19T12:43:59.160] [DEBUG] debug-file - Create  resident worker with id: 4.
+[2025-09-19T12:43:59.162] [DEBUG] debug-file - default@CompileArkTS work[0] has been dispatched to worker[4].
+[2025-09-19T12:43:59.163] [DEBUG] debug-file - default@CompileArkTS work[0] is dispatched.
+[2025-09-19T12:43:59.163] [DEBUG] debug-file - CopyResources startTime: 1371000058100
+[2025-09-19T12:43:59.163] [DEBUG] debug-file - default@CompileArkTS work[1] is submitted.
+[2025-09-19T12:43:59.164] [DEBUG] debug-file - default@CompileArkTS work[1] is pushed to ready queue.
+[2025-09-19T12:43:59.165] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-09-19T12:43:59.165] [DEBUG] debug-file - Create  resident worker with id: 6.
+[2025-09-19T12:43:59.167] [DEBUG] debug-file - default@CompileArkTS work[1] has been dispatched to worker[6].
+[2025-09-19T12:43:59.167] [DEBUG] debug-file - default@CompileArkTS work[1] is dispatched.
+[2025-09-19T12:43:59.167] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 2.2168045043945312
+[2025-09-19T12:43:59.171] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.172] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.172] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.172] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:59.178] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-09-19T12:43:59.182] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.13214111328125
+[2025-09-19T12:43:59.183] [DEBUG] debug-file - runTaskFromQueue task cost before running: 4 s 729 ms 
+[2025-09-19T12:43:59.184] [INFO] debug-file - Finished :entry:default@BuildJS... after 5 ms 
+[2025-09-19T12:43:59.192] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.193] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.194] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.194] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:59.198] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-09-19T12:43:59.200] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 2 ms 
+[2025-09-19T12:43:59.201] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.201] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.201] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:43:59.202] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:43:59.202] [DEBUG] debug-file - default@CacheNativeLibs work[2] is submitted.
+[2025-09-19T12:43:59.204] [DEBUG] debug-file - default@CacheNativeLibs work[2] is pushed to ready queue.
+[2025-09-19T12:43:59.204] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2025-09-19T12:43:59.204] [DEBUG] debug-file - A work dispatched to worker[6] failed because of worker busy.
+[2025-09-19T12:43:59.204] [DEBUG] debug-file - Create  resident worker with id: 5.
+[2025-09-19T12:43:59.206] [DEBUG] debug-file - default@CacheNativeLibs work[2] has been dispatched to worker[5].
+[2025-09-19T12:43:59.206] [DEBUG] debug-file - default@CacheNativeLibs work[2] is dispatched.
+[2025-09-19T12:43:59.206] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.28699493408203125
+[2025-09-19T12:44:00.608] [DEBUG] debug-file - worker[6] has one work done.
+[2025-09-19T12:44:00.608] [DEBUG] debug-file - CopyResources is end, endTime: 1372445327100
+[2025-09-19T12:44:00.608] [DEBUG] debug-file - default@CompileArkTS work[1] done.
+[2025-09-19T12:44:00.611] [DEBUG] debug-file - worker[5] has one work done.
+[2025-09-19T12:44:00.611] [DEBUG] debug-file - default@CacheNativeLibs work[2] done.
+[2025-09-19T12:44:00.612] [INFO] debug-file - Finished :entry:default@CacheNativeLibs... after 16 ms 
+[2025-09-19T12:44:00.713] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2025-09-19T12:44:00.713] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2025-09-19T12:44:09.712] [INFO] debug-file - [33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:229:29
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:229:41
+ 'isLocationEnabled' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:237:13
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:237:25
+ 'requestEnableLocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:240:25
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:240:37
+ 'isLocationEnabled' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:258:29
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:258:41
+ 'isLocationEnabled' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:261:15
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:261:27
+ 'requestEnableLocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:264:19
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:264:31
+ 'LocationRequestPriority' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:264:55
+ 'ACCURACY' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:267:30
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:267:42
+ 'getCurrentLocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:268:68
+ 'latitude' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:268:101
+ 'longitude' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:279:29
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:279:41
+ 'isLocationEnabled' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:282:15
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:282:27
+ 'requestEnableLocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:284:30
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:284:42
+ 'getLastLocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:285:65
+ 'latitude' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:285:98
+ 'longitude' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:296:29
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:296:41
+ 'isLocationEnabled' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:299:15
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:299:27
+ 'requestEnableLocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:302:19
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:302:31
+ 'LocationRequestPriority' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:302:55
+ 'ACCURACY' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:303:19
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:303:31
+ 'LocationRequestScenario' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:303:55
+ 'UNSET' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:308:7
+ 'geolocation' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:308:19
+ 'on' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:309:69
+ 'latitude' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:309:102
+ 'longitude' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:332:5
+ The system capacity of this api 'sim' is not supported on all devices
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:332:9
+ The system capacity of this api 'getSimAccountInfo' is not supported on all devices
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:332:9
+ To use this API, you need to apply for the permissions: ohos.permission.GET_TELEPHONY_STATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:339:26
+ The system capacity of this api 'iccId' is not supported on all devices
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:345:5
+ The system capacity of this api 'sim' is not supported on all devices
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:345:9
+ The system capacity of this api 'getActiveSimAccountInfoList' is not supported on all devices
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:345:9
+ To use this API, you need to apply for the permissions: ohos.permission.GET_TELEPHONY_STATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: F:/HarmonyOS/final_api/02-AdsKit-Codelab-Interstitial-ArkTS/entry/src/main/ets/pages/Index.ets:353:77
+ The system capacity of this api 'iccId' is not supported on all devices
+[39m[39m
+
+[2025-09-19T12:44:09.713] [DEBUG] debug-file - Ark compile task finished.finished time is 1381550060200
+[2025-09-19T12:44:09.714] [DEBUG] debug-file - worker[4] has one work done.
+[2025-09-19T12:44:09.721] [DEBUG] debug-file - default@CompileArkTS work[0] done.
+[2025-09-19T12:44:09.722] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2025-09-19T12:44:09.724] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 7 s 587 ms 
+[2025-09-19T12:44:09.726] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.726] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.726] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.726] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:09.727] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-09-19T12:44:09.727] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:44:09.727] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.727] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.727] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.728] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:09.730] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.10723876953125
+[2025-09-19T12:44:09.730] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 276 ms 
+[2025-09-19T12:44:09.730] [INFO] debug-file - Finished :entry:default@GeneratePkgModuleJson... after 3 ms 
+[2025-09-19T12:44:09.733] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.733] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.733] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.733] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:09.739] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-09-19T12:44:09.743] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.743] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.743] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:09.743] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:09.746] [DEBUG] debug-file - Use tool [F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'F:\\HarmonyOS\\devecostudio\\DevEco Studio\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'F:\\HarmonyOS\\final_api\\02-AdsKit-Codelab-Interstitial-ArkTS\\entry\\build\\default\\intermediates\\loader_out\\default\\ets'
+]
+[2025-09-19T12:44:10.207] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2025-09-19T12:44:10.212] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.8825454711914062
+[2025-09-19T12:44:10.212] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 759 ms 
+[2025-09-19T12:44:10.213] [INFO] debug-file - Finished :entry:default@PackageHap... after 474 ms 
+[2025-09-19T12:44:10.215] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.216] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.216] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.216] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:10.218] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-09-19T12:44:10.219] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5.
+[2025-09-19T12:44:10.220] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.220] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.220] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.220] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:10.221] [DEBUG] debug-file - entry : default@SignHap cost memory 0.10266876220703125
+[2025-09-19T12:44:10.221] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 767 ms 
+[2025-09-19T12:44:10.221] [INFO] debug-file - Finished :entry:default@SignHap... after 3 ms 
+[2025-09-19T12:44:10.224] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.224] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.224] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.224] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:10.225] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-09-19T12:44:10.229] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.229] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.229] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:44:10.229] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:44:10.229] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.244781494140625
+[2025-09-19T12:44:10.229] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 776 ms 
+[2025-09-19T12:44:10.230] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 5 ms 
+[2025-09-19T12:44:10.231] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-09-19T12:44:10.232] [DEBUG] debug-file - entry : assembleHap cost memory 0.011962890625
+[2025-09-19T12:44:10.232] [DEBUG] debug-file - runTaskFromQueue task cost before running: 15 s 778 ms 
+[2025-09-19T12:44:10.232] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-09-19T12:44:10.241] [DEBUG] debug-file - BUILD SUCCESSFUL in 15 s 787 ms 
+[2025-09-19T12:44:10.243] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\app.json5 cache by regenerate.
+[2025-09-19T12:44:10.244] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\module.json5 cache by regenerate.
+[2025-09-19T12:44:10.244] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.245] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.245] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\resources\base\profile\main_pages.json cache by regenerate.
+[2025-09-19T12:44:10.245] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigor\hvigor-config.json5 cache by regenerate.
+[2025-09-19T12:44:10.245] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\oh-package.json5 cache by regenerate.
+[2025-09-19T12:44:10.246] [DEBUG] debug-file - Update task entry:default@PreBuild input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\oh-package.json5 cache by regenerate.
+[2025-09-19T12:44:10.246] [DEBUG] debug-file - Incremental task entry:default@PreBuild post-execution cost:5 ms .
+[2025-09-19T12:44:10.246] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-09-19T12:44:10.247] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-09-19T12:44:10.247] [DEBUG] debug-file - Update task entry:default@GenerateMetadata input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\module.json5 cache by regenerate.
+[2025-09-19T12:44:10.247] [DEBUG] debug-file - Update task entry:default@GenerateMetadata output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\hap_metadata\default\output_metadata.json cache.
+[2025-09-19T12:44:10.247] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata post-execution cost:1 ms .
+[2025-09-19T12:44:10.247] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\app.json5 cache by regenerate.
+[2025-09-19T12:44:10.248] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.248] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\module.json5 cache by regenerate.
+[2025-09-19T12:44:10.248] [DEBUG] debug-file - Update task entry:default@MergeProfile output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\merge_profile\default\module.json cache.
+[2025-09-19T12:44:10.248] [DEBUG] debug-file - Incremental task entry:default@MergeProfile post-execution cost:2 ms .
+[2025-09-19T12:44:10.249] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\app.json5 cache by regenerate.
+[2025-09-19T12:44:10.249] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.249] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\profile\default\BuildProfile.ets cache.
+[2025-09-19T12:44:10.249] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile post-execution cost:1 ms .
+[2025-09-19T12:44:10.249] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2025-09-19T12:44:10.249] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-09-19T12:44:10.250] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-09-19T12:44:10.250] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2025-09-19T12:44:10.250] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\app.json5 cache by regenerate.
+[2025-09-19T12:44:10.250] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\module.json5 cache by regenerate.
+[2025-09-19T12:44:10.251] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.251] [DEBUG] debug-file - Update task entry:default@MakePackInfo output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\pack.info cache.
+[2025-09-19T12:44:10.251] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo post-execution cost:2 ms .
+[2025-09-19T12:44:10.251] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-09-19T12:44:10.252] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-09-19T12:44:10.253] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-09-19T12:44:10.253] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:2 ms .
+[2025-09-19T12:44:10.253] [DEBUG] debug-file - Update task entry:default@ProcessProfile input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\merge_profile\default\module.json cache by regenerate.
+[2025-09-19T12:44:10.253] [DEBUG] debug-file - Update task entry:default@ProcessProfile output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\process_profile\default\module.json cache.
+[2025-09-19T12:44:10.254] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile post-execution cost:1 ms .
+[2025-09-19T12:44:10.254] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\oh-package.json5 cache by regenerate.
+[2025-09-19T12:44:10.255] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\oh-package.json5 cache by regenerate.
+[2025-09-19T12:44:10.255] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\module.json5 cache by regenerate.
+[2025-09-19T12:44:10.255] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\router_map\default\temp-router-map.json cache.
+[2025-09-19T12:44:10.255] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\router_map\default\loader-router-map.json cache.
+[2025-09-19T12:44:10.255] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap post-execution cost:2 ms .
+[2025-09-19T12:44:10.256] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-09-19T12:44:10.256] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-09-19T12:44:10.256] [DEBUG] debug-file - Update task entry:default@ProcessResource output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resConfig.json cache.
+[2025-09-19T12:44:10.256] [DEBUG] debug-file - Update task entry:default@ProcessResource output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\opt-compression.json cache.
+[2025-09-19T12:44:10.257] [DEBUG] debug-file - Incremental task entry:default@ProcessResource post-execution cost:1 ms .
+[2025-09-19T12:44:10.258] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\router_map\default\temp-router-map.json cache by regenerate.
+[2025-09-19T12:44:10.258] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader\default\loader.json cache.
+[2025-09-19T12:44:10.259] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson post-execution cost:2 ms .
+[2025-09-19T12:44:10.259] [DEBUG] debug-file - Update task entry:default@ProcessLibs input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.259] [DEBUG] debug-file - Update task entry:default@ProcessLibs input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build-profile.json5 cache by regenerate.
+[2025-09-19T12:44:10.259] [DEBUG] debug-file - Update task entry:default@ProcessLibs output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\libs\default cache.
+[2025-09-19T12:44:10.260] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs post-execution cost:1 ms .
+[2025-09-19T12:44:10.260] [DEBUG] debug-file - Update task entry:default@CompileResource input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\resources cache by regenerate.
+[2025-09-19T12:44:10.262] [DEBUG] debug-file - Update task entry:default@CompileResource input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\AppScope\resources cache by regenerate.
+[2025-09-19T12:44:10.263] [DEBUG] debug-file - Update task entry:default@CompileResource input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\process_profile\default\module.json cache by regenerate.
+[2025-09-19T12:44:10.263] [DEBUG] debug-file - Update task entry:default@CompileResource input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resConfig.json cache by regenerate.
+[2025-09-19T12:44:10.263] [DEBUG] debug-file - Update task entry:default@CompileResource output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default cache.
+[2025-09-19T12:44:10.266] [DEBUG] debug-file - Update task entry:default@CompileResource output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\r\default\ResourceTable.h cache.
+[2025-09-19T12:44:10.266] [DEBUG] debug-file - Update task entry:default@CompileResource output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\r\default cache.
+[2025-09-19T12:44:10.266] [DEBUG] debug-file - Incremental task entry:default@CompileResource post-execution cost:7 ms .
+[2025-09-19T12:44:10.266] [DEBUG] debug-file - Update task entry:default@DoNativeStrip input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-09-19T12:44:10.267] [DEBUG] debug-file - Update task entry:default@DoNativeStrip output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\stripped_native_libs\default cache.
+[2025-09-19T12:44:10.267] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip post-execution cost:1 ms .
+[2025-09-19T12:44:10.268] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-09-19T12:44:10.269] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-09-19T12:44:10.269] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-09-19T12:44:10.269] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-09-19T12:44:10.270] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\ets cache by regenerate.
+[2025-09-19T12:44:10.271] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-09-19T12:44:10.271] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\ets cache.
+[2025-09-19T12:44:10.271] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:5 ms .
+[2025-09-19T12:44:10.272] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-09-19T12:44:10.273] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-09-19T12:44:10.273] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-09-19T12:44:10.274] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-09-19T12:44:10.274] [DEBUG] debug-file - Update task entry:default@BuildJS output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-09-19T12:44:10.275] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:3 ms .
+[2025-09-19T12:44:10.275] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-09-19T12:44:10.275] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-09-19T12:44:10.275] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\patch\default\base_native_libs.json cache.
+[2025-09-19T12:44:10.276] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs post-execution cost:2 ms .
+[2025-09-19T12:44:10.276] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-09-19T12:44:10.276] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\package\default\module.json cache.
+[2025-09-19T12:44:10.277] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson post-execution cost:1 ms .
+[2025-09-19T12:44:10.277] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2025-09-19T12:44:10.278] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\module.json cache by regenerate.
+[2025-09-19T12:44:10.278] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2025-09-19T12:44:10.279] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2025-09-19T12:44:10.280] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2025-09-19T12:44:10.280] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\ets cache by regenerate.
+[2025-09-19T12:44:10.280] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-09-19T12:44:10.281] [DEBUG] debug-file - Update task entry:default@PackageHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2025-09-19T12:44:10.281] [DEBUG] debug-file - Update task entry:default@PackageHap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2025-09-19T12:44:10.282] [DEBUG] debug-file - Update task entry:default@PackageHap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2025-09-19T12:44:10.282] [DEBUG] debug-file - Update task entry:default@PackageHap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2025-09-19T12:44:10.282] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:6 ms .
+[2025-09-19T12:44:10.282] [DEBUG] debug-file - Update task entry:default@SignHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\entry-default-unsigned.hap cache by regenerate.
+[2025-09-19T12:44:10.283] [DEBUG] debug-file - Update task entry:default@SignHap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-09-19T12:44:10.283] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2025-09-19T12:44:10.285] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-09-19T12:44:10.285] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-09-19T12:44:10.285] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\symbol cache.
+[2025-09-19T12:44:10.286] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:3 ms .
+[2025-09-19T12:44:10.315] [DEBUG] debug-file - Cleanup worker 0.
+[2025-09-19T12:44:10.315] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2025-09-19T12:44:10.315] [DEBUG] debug-file - Current idle worker size: 4.
+[2025-09-19T12:44:10.315] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-09-19T12:44:10.315] [DEBUG] debug-file - Cleanup worker 1.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Current idle worker size: 3.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Cleanup worker 6.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Worker 6 has been cleaned up.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Current idle worker size: 2.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-09-19T12:44:10.320] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-09-19T12:44:10.321] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Cleanup worker 5.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Worker 5 has been cleaned up.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-09-19T12:44:10.316] [DEBUG] debug-file - Current resident worker size: 5.
+[2025-09-19T12:44:10.318] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-09-19T12:44:10.318] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2025-09-19T12:44:10.322] [DEBUG] debug-file - worker[0] exits with exit code 1.
+[2025-09-19T12:44:10.323] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-09-19T12:44:10.323] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-09-19T12:44:10.324] [DEBUG] debug-file - worker[1] exits with exit code 1.
+[2025-09-19T12:44:10.329] [DEBUG] debug-file - worker[5] exits with exit code 1.
+[2025-09-19T12:44:10.334] [DEBUG] debug-file - worker[6] exits with exit code 1.
+[2025-09-19T12:45:45.749] [DEBUG] debug-file - session manager: set active socket. socketId=g26Qo6Cnx537JBGtAAAD
+[2025-09-19T12:45:45.755] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-09-19T12:45:45.769] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2025-09-19T12:45:45.776] [DEBUG] debug-file - Cache service initialization finished in 7 ms 
+[2025-09-19T12:45:45.788] [DEBUG] debug-file - hvigorfile, resolving F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:45:45.794] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-09-19T12:45:45.794] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-09-19T12:45:45.800] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2025-09-19T12:45:45.800] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2025-09-19T12:45:45.800] [DEBUG] debug-file - Product 'default' build option: {}
+[2025-09-19T12:45:45.800] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2025-09-19T12:45:45.801] [DEBUG] debug-file - Product 'default' using build option: {
+  "debuggable": true
+} in this build.
+[2025-09-19T12:45:45.802] [DEBUG] debug-file - not found resModel json file in : F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\ohosTest\module.json5
+[2025-09-19T12:45:45.805] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2025-09-19T12:45:45.814] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2025-09-19T12:45:45.850] [DEBUG] debug-file - Sdk init in 43 ms 
+[2025-09-19T12:45:45.866] [DEBUG] debug-file - Project task initialization takes 15 ms 
+[2025-09-19T12:45:45.866] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-09-19T12:45:45.866] [DEBUG] debug-file - hvigorfile, no custom plugins were found in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:45:45.866] [DEBUG] debug-file - hvigorfile, resolve finished F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-19T12:45:45.871] [DEBUG] debug-file - hvigorfile, resolving F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:45:45.876] [DEBUG] debug-file - hvigorfile, require result:  { default: { plugins: [] } }
+[2025-09-19T12:45:45.876] [DEBUG] debug-file - hvigorfile, binding system plugins null
+[2025-09-19T12:45:45.881] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-09-19T12:45:45.881] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:45:45.882] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:45:45.882] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+}
+[2025-09-19T12:45:45.882] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:45:45.882] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:45:45.882] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2025-09-19T12:45:45.882] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:45:45.883] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:45:45.883] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": false,
+  "copyFrom": "default",
+  "arkOptions": {
+    "obfuscation": {
+      "ruleOptions": {
+        "enable": true,
+        "files": [
+          "./obfuscation-rules.txt"
+        ]
+      }
+    }
+  },
+  "name": "release"
+}
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Target 'default' config: {}
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Target 'ohosTest' config: {}
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Module 'entry' target 'default' build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+}
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Module 'entry' target 'ohosTest' build option: {
+  "debuggable": true,
+  "arkOptions": {},
+  "name": "default"
+}
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2025-09-19T12:45:45.884] [DEBUG] debug-file - Module 'entry' target 'default' using build option: {
+  "debuggable": true,
+  "copyFrom": "default",
+  "arkOptions": {},
+  "name": "debug"
+} in this build.
+[2025-09-19T12:45:45.887] [DEBUG] debug-file - Module entry task initialization takes 1 ms 
+[2025-09-19T12:45:45.887] [DEBUG] debug-file - hvigorfile, binding custom plugins []
+[2025-09-19T12:45:45.887] [DEBUG] debug-file - hvigorfile, no custom plugins were found in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:45:45.887] [DEBUG] debug-file - hvigorfile, resolve finished F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\hvigorfile.ts
+[2025-09-19T12:45:45.913] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 26 ms 
+[2025-09-19T12:45:45.914] [DEBUG] debug-file - project has submodules:entry
+[2025-09-19T12:45:45.915] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2025-09-19T12:45:45.919] [DEBUG] debug-file - load to the disk finished
+[2025-09-19T12:45:45.920] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-09-19T12:45:45.922] [DEBUG] debug-file - Module 02-AdsKit-Codelab-Interstitial-ArkTS Collected Dependency: 
+[2025-09-19T12:45:45.922] [DEBUG] debug-file - Module 02-AdsKit-Codelab-Interstitial-ArkTS's total dependency: 0
+[2025-09-19T12:45:45.922] [DEBUG] debug-file - Start to initialize dependency information.
+[2025-09-19T12:45:45.924] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2025-09-19T12:45:45.924] [DEBUG] debug-file - Module entry's total dependency: 0
+[2025-09-19T12:45:45.926] [DEBUG] debug-file - Configuration phase cost:145 ms 
+[2025-09-19T12:45:45.928] [DEBUG] debug-file - Configuration task cost before running: 171 ms 
+[2025-09-19T12:45:45.929] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.929] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.930] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.930] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.932] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2025-09-19T12:45:45.938] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 4 ms .
+[2025-09-19T12:45:45.938] [DEBUG] debug-file - entry : default@PreBuild cost memory 0.30277252197265625
+[2025-09-19T12:45:45.939] [INFO] debug-file - UP-TO-DATE :entry:default@PreBuild...  
+[2025-09-19T12:45:45.942] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.942] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.942] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.942] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.942] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2025-09-19T12:45:45.943] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:45.944] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.05859375
+[2025-09-19T12:45:45.944] [DEBUG] debug-file - runTaskFromQueue task cost before running: 187 ms 
+[2025-09-19T12:45:45.944] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 2 ms 
+[2025-09-19T12:45:45.946] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.946] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.946] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.947] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.947] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2025-09-19T12:45:45.948] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:45.949] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2025-09-19T12:45:45.949] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.09868621826171875
+[2025-09-19T12:45:45.949] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateMetadata...  
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.952] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.953] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.953] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.05751800537109375
+[2025-09-19T12:45:45.953] [DEBUG] debug-file - runTaskFromQueue task cost before running: 196 ms 
+[2025-09-19T12:45:45.953] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2025-09-19T12:45:45.955] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.955] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.955] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.955] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.956] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2025-09-19T12:45:45.957] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 2 ms .
+[2025-09-19T12:45:45.957] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.1202545166015625
+[2025-09-19T12:45:45.957] [INFO] debug-file - UP-TO-DATE :entry:default@MergeProfile...  
+[2025-09-19T12:45:45.959] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.959] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.959] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.960] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.960] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2025-09-19T12:45:45.961] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:45.961] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2025-09-19T12:45:45.962] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.105987548828125
+[2025-09-19T12:45:45.962] [INFO] debug-file - UP-TO-DATE :entry:default@CreateBuildProfile...  
+[2025-09-19T12:45:45.963] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.963] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.963] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.963] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.05776214599609375
+[2025-09-19T12:45:45.964] [DEBUG] debug-file - runTaskFromQueue task cost before running: 208 ms 
+[2025-09-19T12:45:45.965] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2025-09-19T12:45:45.966] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.966] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.966] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.966] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.967] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2025-09-19T12:45:45.970] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:45.971] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory -1.4122085571289062
+[2025-09-19T12:45:45.971] [DEBUG] debug-file - runTaskFromQueue task cost before running: 214 ms 
+[2025-09-19T12:45:45.971] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 4 ms 
+[2025-09-19T12:45:45.973] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.973] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.973] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.973] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.975] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2025-09-19T12:45:45.976] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.13582611083984375
+[2025-09-19T12:45:45.977] [DEBUG] debug-file - runTaskFromQueue task cost before running: 220 ms 
+[2025-09-19T12:45:45.977] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 2 ms 
+[2025-09-19T12:45:45.980] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.980] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.980] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.980] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.05859375
+[2025-09-19T12:45:45.981] [DEBUG] debug-file - runTaskFromQueue task cost before running: 225 ms 
+[2025-09-19T12:45:45.982] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2025-09-19T12:45:45.984] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.984] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.984] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.984] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.985] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2025-09-19T12:45:45.987] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 2 ms .
+[2025-09-19T12:45:45.987] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.142181396484375
+[2025-09-19T12:45:45.988] [INFO] debug-file - UP-TO-DATE :entry:default@MakePackInfo...  
+[2025-09-19T12:45:45.990] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.990] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.990] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.990] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.991] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2025-09-19T12:45:45.991] [DEBUG] debug-file - File: 'F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2025-09-19T12:45:45.992] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 2 ms .
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - entry : default@SyscapTransform cost memory -1.4746322631835938
+[2025-09-19T12:45:45.994] [DEBUG] debug-file - runTaskFromQueue task cost before running: 238 ms 
+[2025-09-19T12:45:45.994] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 4 ms 
+[2025-09-19T12:45:45.997] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.997] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.997] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:45.997] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:45.998] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2025-09-19T12:45:46.000] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2025-09-19T12:45:46.000] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 0.1264190673828125
+[2025-09-19T12:45:46.000] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessProfile...  
+[2025-09-19T12:45:46.003] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.003] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.003] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.003] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.004] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2025-09-19T12:45:46.007] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 3 ms .
+[2025-09-19T12:45:46.007] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.160400390625
+[2025-09-19T12:45:46.008] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessRouterMap...  
+[2025-09-19T12:45:46.010] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.010] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.010] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.010] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.010] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2025-09-19T12:45:46.011] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:46.012] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2025-09-19T12:45:46.012] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2025-09-19T12:45:46.012] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.012] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.012] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.012] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.013] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.18732452392578125
+[2025-09-19T12:45:46.013] [DEBUG] debug-file - runTaskFromQueue task cost before running: 256 ms 
+[2025-09-19T12:45:46.013] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 3 ms 
+[2025-09-19T12:45:46.016] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.016] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.016] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.016] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.016] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2025-09-19T12:45:46.017] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.017] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.017] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.017] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.018] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory -1.6050491333007812
+[2025-09-19T12:45:46.018] [DEBUG] debug-file - runTaskFromQueue task cost before running: 262 ms 
+[2025-09-19T12:45:46.019] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 2 ms 
+[2025-09-19T12:45:46.021] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.021] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.021] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.022] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.023] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2025-09-19T12:45:46.024] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2025-09-19T12:45:46.027] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 2 ms .
+[2025-09-19T12:45:46.027] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.165985107421875
+[2025-09-19T12:45:46.032] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessResource...  
+[2025-09-19T12:45:46.036] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.037] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.037] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.038] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.042] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2025-09-19T12:45:46.060] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 13 ms .
+[2025-09-19T12:45:46.060] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.6341094970703125
+[2025-09-19T12:45:46.066] [INFO] debug-file - UP-TO-DATE :entry:default@GenerateLoaderJson...  
+[2025-09-19T12:45:46.070] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.070] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.070] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.070] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.071] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2025-09-19T12:45:46.075] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 2 ms .
+[2025-09-19T12:45:46.075] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.13596343994140625
+[2025-09-19T12:45:46.076] [INFO] debug-file - UP-TO-DATE :entry:default@ProcessLibs...  
+[2025-09-19T12:45:46.080] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.080] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.081] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.081] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.082] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2025-09-19T12:45:46.085] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2025-09-19T12:45:46.097] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 12 ms .
+[2025-09-19T12:45:46.097] [DEBUG] debug-file - entry : default@CompileResource cost memory 0.5445709228515625
+[2025-09-19T12:45:46.099] [INFO] debug-file - UP-TO-DATE :entry:default@CompileResource...  
+[2025-09-19T12:45:46.103] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.103] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.104] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.104] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.107] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2025-09-19T12:45:46.107] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:46.109] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 2 ms .
+[2025-09-19T12:45:46.109] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory -1.7002029418945312
+[2025-09-19T12:45:46.110] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2025-09-19T12:45:46.113] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.113] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.113] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.113] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.116] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2025-09-19T12:45:46.117] [DEBUG] debug-file - obfuscationOptions: undefined
+[2025-09-19T12:45:46.129] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 9 ms .
+[2025-09-19T12:45:46.129] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 0.5358123779296875
+[2025-09-19T12:45:46.132] [INFO] debug-file - UP-TO-DATE :entry:default@CompileArkTS...  
+[2025-09-19T12:45:46.135] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.135] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.135] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.135] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.140] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2025-09-19T12:45:46.146] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.1278533935546875
+[2025-09-19T12:45:46.146] [DEBUG] debug-file - runTaskFromQueue task cost before running: 389 ms 
+[2025-09-19T12:45:46.146] [INFO] debug-file - Finished :entry:default@BuildJS... after 7 ms 
+[2025-09-19T12:45:46.150] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.150] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.151] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.151] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.157] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2025-09-19T12:45:46.158] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:46.161] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 3 ms .
+[2025-09-19T12:45:46.162] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.10094451904296875
+[2025-09-19T12:45:46.162] [INFO] debug-file - UP-TO-DATE :entry:default@CacheNativeLibs...  
+[2025-09-19T12:45:46.170] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.170] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.170] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.170] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.172] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2025-09-19T12:45:46.172] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 1 ms 
+[2025-09-19T12:45:46.174] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 2 ms .
+[2025-09-19T12:45:46.174] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.07727813720703125
+[2025-09-19T12:45:46.175] [INFO] debug-file - UP-TO-DATE :entry:default@GeneratePkgModuleJson...  
+[2025-09-19T12:45:46.179] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.180] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.180] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.180] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.189] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2025-09-19T12:45:46.211] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 20 ms .
+[2025-09-19T12:45:46.212] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.44469451904296875
+[2025-09-19T12:45:46.214] [INFO] debug-file - UP-TO-DATE :entry:default@PackageHap...  
+[2025-09-19T12:45:46.220] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.220] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.221] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.221] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.226] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2025-09-19T12:45:46.227] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build-profile.json5.
+[2025-09-19T12:45:46.229] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the output file 'F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\entry-default-signed.hap' does not exist.
+[2025-09-19T12:45:46.230] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 2 ms .
+[2025-09-19T12:45:46.230] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.230] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.230] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.230] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.231] [DEBUG] debug-file - entry : default@SignHap cost memory 0.14310455322265625
+[2025-09-19T12:45:46.232] [DEBUG] debug-file - runTaskFromQueue task cost before running: 474 ms 
+[2025-09-19T12:45:46.233] [INFO] debug-file - Finished :entry:default@SignHap... after 5 ms 
+[2025-09-19T12:45:46.240] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.241] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.241] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.241] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.244] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2025-09-19T12:45:46.253] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.253] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.253] [DEBUG] debug-file - jsonObjWithoutParam {} at undefined
+[2025-09-19T12:45:46.254] [DEBUG] debug-file - jsonObjWithoutParam {"license":"","devDependencies":{},"author":"","name":"entry","description":"Please describe the basic information.","main":"","version":"1.0.0","dynamicDependencies":{},"dependencies":{}} at undefined
+[2025-09-19T12:45:46.254] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.2412567138671875
+[2025-09-19T12:45:46.254] [DEBUG] debug-file - runTaskFromQueue task cost before running: 497 ms 
+[2025-09-19T12:45:46.254] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 10 ms 
+[2025-09-19T12:45:46.256] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2025-09-19T12:45:46.256] [DEBUG] debug-file - entry : assembleHap cost memory 0.011749267578125
+[2025-09-19T12:45:46.257] [DEBUG] debug-file - runTaskFromQueue task cost before running: 500 ms 
+[2025-09-19T12:45:46.257] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2025-09-19T12:45:46.268] [DEBUG] debug-file - BUILD SUCCESSFUL in 512 ms 
+[2025-09-19T12:45:46.269] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PreBuild is up-to-date.
+[2025-09-19T12:45:46.269] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2025-09-19T12:45:46.269] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2025-09-19T12:45:46.270] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateMetadata is up-to-date.
+[2025-09-19T12:45:46.270] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MergeProfile is up-to-date.
+[2025-09-19T12:45:46.270] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CreateBuildProfile is up-to-date.
+[2025-09-19T12:45:46.272] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2025-09-19T12:45:46.273] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2025-09-19T12:45:46.274] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2025-09-19T12:45:46.275] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:2 ms .
+[2025-09-19T12:45:46.275] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@MakePackInfo is up-to-date.
+[2025-09-19T12:45:46.275] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2025-09-19T12:45:46.276] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:F:\HarmonyOS\devecostudio\DevEco Studio\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2025-09-19T12:45:46.277] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2025-09-19T12:45:46.278] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:3 ms .
+[2025-09-19T12:45:46.278] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessProfile is up-to-date.
+[2025-09-19T12:45:46.278] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessRouterMap is up-to-date.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:1 ms .
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessResource is up-to-date.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GenerateLoaderJson is up-to-date.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@ProcessLibs is up-to-date.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileResource is up-to-date.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2025-09-19T12:45:46.279] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CompileArkTS is up-to-date.
+[2025-09-19T12:45:46.281] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader\default cache by regenerate.
+[2025-09-19T12:45:46.281] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2025-09-19T12:45:46.282] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2025-09-19T12:45:46.282] [DEBUG] debug-file - Update task entry:default@BuildJS input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2025-09-19T12:45:46.283] [DEBUG] debug-file - Update task entry:default@BuildJS output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\js cache.
+[2025-09-19T12:45:46.283] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:4 ms .
+[2025-09-19T12:45:46.283] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@CacheNativeLibs is up-to-date.
+[2025-09-19T12:45:46.283] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@GeneratePkgModuleJson is up-to-date.
+[2025-09-19T12:45:46.283] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@PackageHap is up-to-date.
+[2025-09-19T12:45:46.284] [DEBUG] debug-file - Update task entry:default@SignHap input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\entry-default-unsigned.hap cache by regenerate.
+[2025-09-19T12:45:46.284] [DEBUG] debug-file - Update task entry:default@SignHap output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2025-09-19T12:45:46.284] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:2 ms .
+[2025-09-19T12:45:46.289] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2025-09-19T12:45:46.289] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\intermediates\libs\default cache by regenerate.
+[2025-09-19T12:45:46.289] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:F:\HarmonyOS\final_api\02-AdsKit-Codelab-Interstitial-ArkTS\entry\build\default\outputs\default\symbol cache.
+[2025-09-19T12:45:46.290] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:6 ms .
+[2025-09-19T12:45:46.309] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-09-19T12:45:46.317] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-09-19T12:45:46.318] [DEBUG] debug-file - session manager: send message to worker process.
+[2025-09-19T12:45:46.318] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-09-19T12:45:46.319] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2025-09-29T20:59:11.064] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2025-09-29T20:59:11.696] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: false,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' }
+}
+[2025-09-29T20:59:11.726] [DEBUG] debug-file - hvigorfile, resolving F:\final_code\2、AdsKit-Codelab-Interstitial-ArkTS\hvigorfile.ts
+[2025-09-29T20:59:13.887] [DEBUG] debug-file - hvigor build process will be closed with an error.
+[2025-09-29T20:59:13.661] [DEBUG] debug-file - hvigorfile, require result:  { default: { system: [Function: appTasks], plugins: [] } }
+[2025-09-29T20:59:13.900] [WARN] debug-file - BUILD FAILED in 2 s 225 ms 
+[2025-09-29T20:59:11.066] [DEBUG] debug-file - env: hvigor-config.json5 content = {
+  modelVersion: '5.0.0',
+  dependencies: {},
+  execution: {},
+  logging: {},
+  debugging: {}
+}
+[2025-09-29T20:59:13.926] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2025-09-29T20:59:11.697] [DEBUG] debug-file - Since current hvigor version 5.18.6 differs from last hvigor version 
+      5.18.5, delete file-cache.json and task-cache.json.
+[2025-09-29T20:59:13.889] [DEBUG] debug-file - ERROR: stacktrace = Error: Invalid project path.
+	 Detail: Please move the project to a valid path
+    at OhosLogger.errorMessageExit (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\log\hvigor-log.js:1:3224)
+    at OhosLogger._printAllExit (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\utils\log\ohos-logger.js:1:1274)
+    at ProjectInspection.exitOnError (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\tasks\inspection\project-inspection.js:1:672)
+    at AppPlugin.doProjectInspection (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\common\abstract-project-plugin.js:1:1585)
+    at PluginFactory.getAppPlugin (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js:1:2159)
+    at appTasks (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js:1:593)
+    at bindSystemPlugins (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js:1:6210)
+    at evaluateNodeVigorFile (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js:1:9024)
+    at evalProject (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js:1:3542)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[2025-09-29T20:59:13.662] [DEBUG] debug-file - hvigorfile, binding system plugins [Function: appTasks]
+[2025-09-29T20:59:13.922] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2025-09-29T20:59:11.068] [DEBUG] debug-file - env: daemon=false
+[2025-09-29T20:59:13.929] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2025-09-29T20:59:11.700] [DEBUG] debug-file - Cache service initialization finished in 4 ms 
+[2025-09-29T20:59:13.889] [ERROR] debug-file - Error: Invalid project path.
+	 Detail: Please move the project to a valid path
+    at OhosLogger.errorMessageExit (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\log\hvigor-log.js:1:3224)
+    at OhosLogger._printAllExit (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\utils\log\ohos-logger.js:1:1274)
+    at ProjectInspection.exitOnError (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\tasks\inspection\project-inspection.js:1:672)
+    at AppPlugin.doProjectInspection (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\common\abstract-project-plugin.js:1:1585)
+    at PluginFactory.getAppPlugin (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js:1:2159)
+    at appTasks (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js:1:593)
+    at bindSystemPlugins (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js:1:6210)
+    at evaluateNodeVigorFile (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js:1:9024)
+    at evalProject (F:\HarmonyOS\devecostudio\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js:1:3542)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[2025-09-29T20:59:13.922] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2025-09-29T20:59:11.068] [DEBUG] debug-file - no-daemon, use the parent process.execArgv --max-old-space-size=8192,--max-semi-space-size=16,--expose-gc
+[2025-09-29T20:59:13.932] [DEBUG] debug-file - Current worker pool is stopped or closed.
+[2025-09-29T20:59:13.933] [DEBUG] debug-file - Clear worker 0.
+[2025-09-29T20:59:13.933] [DEBUG] debug-file - Worker 0 has been cleared.
+[2025-09-29T20:59:13.934] [DEBUG] debug-file - Current idle worker size: 1.
+[2025-09-29T20:59:13.934] [DEBUG] debug-file - Current busy worker size: 0.
+[2025-09-29T20:59:13.934] [DEBUG] debug-file - Clear worker 1.
+[2025-09-29T20:59:13.934] [DEBUG] debug-file - Worker 1 has been cleared.
+[2025-09-29T20:59:13.934] [DEBUG] debug-file - Current idle worker size: 0.
+[2025-09-29T20:59:13.934] [DEBUG] debug-file - Current busy worker size: 0.
+[2025-09-29T20:59:13.945] [DEBUG] debug-file - hvigor build process will be closed.
+[2025-09-29T20:59:13.951] [DEBUG] debug-file - worker[0] exits with exit code 0.
+[2025-09-29T20:59:13.952] [DEBUG] debug-file - worker[1] exits with exit code 0.
+[2025-09-29T20:59:13.952] [DEBUG] debug-file - Current worker pool is terminated.

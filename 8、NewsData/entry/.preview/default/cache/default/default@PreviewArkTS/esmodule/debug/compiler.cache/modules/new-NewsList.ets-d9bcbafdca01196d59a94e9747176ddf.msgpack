@@ -1,0 +1,595 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚOFif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import { CommonConstant as Const } from '../common/constant/CommonConstant';
+import NewsItem from './NewsItem';
+import LoadMoreLayout from './LoadMoreLayout';
+import RefreshLayout from './RefreshLayout';
+import CustomRefreshLoadLayout from './CustomRefreshLoadLayout';
+import { CustomRefreshLoadLayoutClass } from '../viewmodel/NewsData';
+import { listTouchEvent } from '../common/utils/PullDownRefresh';
+import NewsViewModel from '../viewmodel/NewsViewModel';
+import NoMoreLayout from './NoMoreLayout';
+import NewsModel from '../viewmodel/NewsModel';
+export default class NewsList extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__newsModel = new ObservedPropertyObjectPU(new NewsModel(), this, "newsModel");
+        this.__customRefreshLoadClass = new ObservedPropertyObjectPU(new CustomRefreshLoadLayoutClass(true, { "id": 16777235, "type": 20000, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" }, { "id": 16777226, "type": 10003, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" }, this.newsModel.pullDownRefreshHeight), this, "customRefreshLoadClass");
+        this.__refreshLayoutClass = new ObservedPropertyObjectPU(new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullDown, this.newsModel.pullDownRefreshImage, this.newsModel.pullDownRefreshText, this.newsModel.pullDownRefreshHeight), this, "refreshLayoutClass");
+        this.__loadMoreLayoutClass = new ObservedPropertyObjectPU(new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullUpLoad, this.newsModel.pullUpLoadImage, this.newsModel.pullUpLoadText, this.newsModel.pullUpLoadHeight), this, "loadMoreLayoutClass");
+        this.__currentIndex = new SynchedPropertySimpleTwoWayPU(params.currentIndex, this, "currentIndex");
+        this.setInitiallyProvidedValue(params);
+        this.declareWatch("newsModel", this.newCustom);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.newsModel !== undefined) {
+            this.newsModel = params.newsModel;
+        }
+        if (params.customRefreshLoadClass !== undefined) {
+            this.customRefreshLoadClass = params.customRefreshLoadClass;
+        }
+        if (params.refreshLayoutClass !== undefined) {
+            this.refreshLayoutClass = params.refreshLayoutClass;
+        }
+        if (params.loadMoreLayoutClass !== undefined) {
+            this.loadMoreLayoutClass = params.loadMoreLayoutClass;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__newsModel.purgeDependencyOnElmtId(rmElmtId);
+        this.__customRefreshLoadClass.purgeDependencyOnElmtId(rmElmtId);
+        this.__refreshLayoutClass.purgeDependencyOnElmtId(rmElmtId);
+        this.__loadMoreLayoutClass.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentIndex.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__newsModel.aboutToBeDeleted();
+        this.__customRefreshLoadClass.aboutToBeDeleted();
+        this.__refreshLayoutClass.aboutToBeDeleted();
+        this.__loadMoreLayoutClass.aboutToBeDeleted();
+        this.__currentIndex.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get newsModel() {
+        return this.__newsModel.get();
+    }
+    set newsModel(newValue) {
+        this.__newsModel.set(newValue);
+    }
+    get customRefreshLoadClass() {
+        return this.__customRefreshLoadClass.get();
+    }
+    set customRefreshLoadClass(newValue) {
+        this.__customRefreshLoadClass.set(newValue);
+    }
+    get refreshLayoutClass() {
+        return this.__refreshLayoutClass.get();
+    }
+    set refreshLayoutClass(newValue) {
+        this.__refreshLayoutClass.set(newValue);
+    }
+    get loadMoreLayoutClass() {
+        return this.__loadMoreLayoutClass.get();
+    }
+    set loadMoreLayoutClass(newValue) {
+        this.__loadMoreLayoutClass.set(newValue);
+    }
+    get currentIndex() {
+        return this.__currentIndex.get();
+    }
+    set currentIndex(newValue) {
+        this.__currentIndex.set(newValue);
+    }
+    newCustom() {
+        this.refreshLayoutClass =
+            new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullDown, this.newsModel.pullDownRefreshImage, this.newsModel.pullDownRefreshText, this.newsModel.pullDownRefreshHeight);
+        this.loadMoreLayoutClass =
+            new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullUpLoad, this.newsModel.pullUpLoadImage, this.newsModel.pullUpLoadText, this.newsModel.pullUpLoadHeight);
+    }
+    changeCategory() {
+        this.newsModel.currentPage = 1;
+        NewsViewModel.getNewsList(this.newsModel.currentPage, this.newsModel.pageSize, Const.GET_NEWS_LIST)
+            .then((data) => {
+            this.newsModel.pageState = 1 /* PageState.Success */;
+            if (data.length === this.newsModel.pageSize) {
+                this.newsModel.currentPage++;
+                this.newsModel.hasMore = true;
+            }
+            else {
+                this.newsModel.hasMore = false;
+            }
+            this.newsModel.newsData = data;
+        })
+            .catch((err) => {
+            this.getUIContext().getPromptAction().showToast({
+                message: err,
+                duration: Const.ANIMATION_DURATION
+            });
+            this.newsModel.pageState = 2 /* PageState.Fail */;
+        });
+    }
+    aboutToAppear() {
+        // Request news data.
+        this.changeCategory();
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.debugLine("entry/src/main/ets/view/NewsList.ets(85:5)", "entry");
+            Column.width(Const.FULL_WIDTH);
+            Column.height(Const.FULL_HEIGHT);
+            Column.justifyContent(FlexAlign.Center);
+            Column.onTouch((event) => {
+                if (event) {
+                    if (this.newsModel.pageState === 1 /* PageState.Success */) {
+                        listTouchEvent(this.newsModel, event);
+                    }
+                }
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.newsModel.pageState === 1 /* PageState.Success */) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.ListLayout.bind(this)();
+                });
+            }
+            else if (this.newsModel.pageState === 0 /* PageState.Loading */) {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.LoadingLayout.bind(this)();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(2, () => {
+                    this.FailLayout.bind(this)();
+                });
+            }
+        }, If);
+        If.pop();
+        Column.pop();
+    }
+    LoadingLayout(parent = null) {
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new CustomRefreshLoadLayout(this, { customRefreshLoadClass: this.customRefreshLoadClass }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/NewsList.ets", line: 108, col: 5 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            customRefreshLoadClass: this.customRefreshLoadClass
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        customRefreshLoadClass: this.customRefreshLoadClass
+                    });
+                }
+            }, { name: "CustomRefreshLoadLayout" });
+        }
+    }
+    ListLayout(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            List.create();
+            List.debugLine("entry/src/main/ets/view/NewsList.ets(113:5)", "entry");
+            List.width(Const.NewsListConstant_LIST_WIDTH);
+            List.height(Const.FULL_HEIGHT);
+            List.margin({ left: Const.NewsListConstant_LIST_MARGIN_LEFT, right: Const.NewsListConstant_LIST_MARGIN_RIGHT });
+            List.backgroundColor({ "id": 16777245, "type": 10001, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" });
+            List.divider({
+                color: { "id": 16777240, "type": 10001, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" },
+                strokeWidth: Const.NewsListConstant_LIST_DIVIDER_STROKE_WIDTH,
+                endMargin: Const.NewsListConstant_LIST_MARGIN_RIGHT
+            });
+            List.edgeEffect(EdgeEffect.None);
+            List.offset({ x: 0, y: `${this.newsModel.offsetY}px` });
+            List.onScrollIndex((start, end) => {
+                // Listen to the first index of the current list.
+                this.newsModel.startIndex = start;
+                this.newsModel.endIndex = end;
+            });
+        }, List);
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+                ListItem.debugLine("entry/src/main/ets/view/NewsList.ets(114:7)", "entry");
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        if (isInitialRender) {
+                            let componentCall = new RefreshLayout(this, {
+                                refreshLayoutClass: this.refreshLayoutClass
+                            }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/NewsList.ets", line: 115, col: 9 });
+                            ViewPU.create(componentCall);
+                            let paramsLambda = () => {
+                                return {
+                                    refreshLayoutClass: this.refreshLayoutClass
+                                };
+                            };
+                            componentCall.paramsGenerator_ = paramsLambda;
+                        }
+                        else {
+                            this.updateStateVarsOfChildByElmtId(elmtId, {
+                                refreshLayoutClass: this.refreshLayoutClass
+                            });
+                        }
+                    }, { name: "RefreshLayout" });
+                }
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const item = _item;
+                {
+                    const itemCreation = (elmtId, isInitialRender) => {
+                        ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                        ListItem.create(deepRenderFunction, true);
+                        if (!isInitialRender) {
+                            // Pull-down refresh layout
+                            ListItem.pop();
+                        }
+                        ViewStackProcessor.StopGetAccessRecording();
+                    };
+                    const itemCreation2 = (elmtId, isInitialRender) => {
+                        ListItem.create(deepRenderFunction, true);
+                        // Pull-down refresh layout
+                        ListItem.height(Const.NewsListConstant_ITEM_HEIGHT);
+                        // Pull-down refresh layout
+                        ListItem.backgroundColor({ "id": 16777247, "type": 10001, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" });
+                        // Pull-down refresh layout
+                        ListItem.margin({ top: Const.NewsListConstant_ITEM_MARGIN_TOP });
+                        // Pull-down refresh layout
+                        ListItem.borderRadius(Const.NewsListConstant_ITEM_BORDER_RADIUS);
+                        ListItem.debugLine("entry/src/main/ets/view/NewsList.ets(122:9)", "entry");
+                    };
+                    const deepRenderFunction = (elmtId, isInitialRender) => {
+                        itemCreation(elmtId, isInitialRender);
+                        {
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                if (isInitialRender) {
+                                    let componentCall = new NewsItem(this, { newsData: item }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/NewsList.ets", line: 123, col: 11 });
+                                    ViewPU.create(componentCall);
+                                    let paramsLambda = () => {
+                                        return {
+                                            newsData: item
+                                        };
+                                    };
+                                    componentCall.paramsGenerator_ = paramsLambda;
+                                }
+                                else {
+                                    this.updateStateVarsOfChildByElmtId(elmtId, {});
+                                }
+                            }, { name: "NewsItem" });
+                        }
+                        // Pull-down refresh layout
+                        ListItem.pop();
+                    };
+                    this.observeComponentCreation2(itemCreation2, ListItem);
+                    // Pull-down refresh layout
+                    ListItem.pop();
+                }
+            };
+            this.forEachUpdateFunction(elmtId, this.newsModel.newsData, forEachItemGenFunction, (item, index) => JSON.stringify(item) + index, false, true);
+        }, ForEach);
+        ForEach.pop();
+        {
+            const itemCreation = (elmtId, isInitialRender) => {
+                ViewStackProcessor.StartGetAccessRecordingFor(elmtId);
+                ListItem.create(deepRenderFunction, true);
+                if (!isInitialRender) {
+                    ListItem.pop();
+                }
+                ViewStackProcessor.StopGetAccessRecording();
+            };
+            const itemCreation2 = (elmtId, isInitialRender) => {
+                ListItem.create(deepRenderFunction, true);
+                ListItem.debugLine("entry/src/main/ets/view/NewsList.ets(131:7)", "entry");
+            };
+            const deepRenderFunction = (elmtId, isInitialRender) => {
+                itemCreation(elmtId, isInitialRender);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    If.create();
+                    if (this.newsModel.hasMore) {
+                        this.ifElseBranchUpdateFunction(0, () => {
+                            {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    if (isInitialRender) {
+                                        let componentCall = new LoadMoreLayout(this, {
+                                            loadMoreLayoutClass: this.loadMoreLayoutClass
+                                        }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/NewsList.ets", line: 133, col: 11 });
+                                        ViewPU.create(componentCall);
+                                        let paramsLambda = () => {
+                                            return {
+                                                loadMoreLayoutClass: this.loadMoreLayoutClass
+                                            };
+                                        };
+                                        componentCall.paramsGenerator_ = paramsLambda;
+                                    }
+                                    else {
+                                        this.updateStateVarsOfChildByElmtId(elmtId, {
+                                            loadMoreLayoutClass: this.loadMoreLayoutClass
+                                        });
+                                    }
+                                }, { name: "LoadMoreLayout" });
+                            }
+                        });
+                    }
+                    else {
+                        this.ifElseBranchUpdateFunction(1, () => {
+                            {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    if (isInitialRender) {
+                                        let componentCall = new NoMoreLayout(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/view/NewsList.ets", line: 137, col: 11 });
+                                        ViewPU.create(componentCall);
+                                        let paramsLambda = () => {
+                                            return {};
+                                        };
+                                        componentCall.paramsGenerator_ = paramsLambda;
+                                    }
+                                    else {
+                                        this.updateStateVarsOfChildByElmtId(elmtId, {});
+                                    }
+                                }, { name: "NoMoreLayout" });
+                            }
+                        });
+                    }
+                }, If);
+                If.pop();
+                ListItem.pop();
+            };
+            this.observeComponentCreation2(itemCreation2, ListItem);
+            ListItem.pop();
+        }
+        List.pop();
+    }
+    FailLayout(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Image.create({ "id": 16777236, "type": 20000, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" });
+            Image.debugLine("entry/src/main/ets/view/NewsList.ets(162:5)", "entry");
+            Image.height(Const.NewsListConstant_NONE_IMAGE_SIZE);
+            Image.width(Const.NewsListConstant_NONE_IMAGE_SIZE);
+        }, Image);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create({ "id": 16777223, "type": 10003, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" });
+            Text.debugLine("entry/src/main/ets/view/NewsList.ets(165:5)", "entry");
+            Text.opacity(Const.NewsListConstant_NONE_TEXT_opacity);
+            Text.fontSize(Const.NewsListConstant_NONE_TEXT_size);
+            Text.fontColor({ "id": 16777244, "type": 10001, params: [], "bundleName": "com.example.newsdataarkts", "moduleName": "entry" });
+            Text.margin({ top: Const.NewsListConstant_NONE_TEXT_margin });
+        }, Text);
+        Text.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+}
+//# sourceMappingURL=NewsList.js.mapÂšÙmC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\common\constant\CommonConstant.etsÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NewsItem.etsÙbC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\LoadMoreLayout.etsÙaC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\RefreshLayout.etsÙkC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\CustomRefreshLoadLayout.etsÙaC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsData.etsÙkC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\common\utils\PullDownRefresh.etsÙfC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsViewModel.etsÙ`C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NoMoreLayout.etsÙbC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsModel.etsÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NewsList.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath¬shouldEmitJs¥entryÃÂÙ=C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entryÙ7C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleName°../view/NewsList¥entryÙ=C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entryÃÃÚ/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { promptAction } from '@kit.ArkUI';
+import { CommonConstant as Const, PageState } from '../common/constant/CommonConstant';
+import NewsItem from './NewsItem';
+import LoadMoreLayout from './LoadMoreLayout';
+import RefreshLayout from './RefreshLayout';
+import CustomRefreshLoadLayout from './CustomRefreshLoadLayout';
+import { CustomRefreshLoadLayoutClass, NewsData } from '../viewmodel/NewsData';
+import { listTouchEvent } from '../common/utils/PullDownRefresh';
+import NewsViewModel from '../viewmodel/NewsViewModel';
+import NoMoreLayout from './NoMoreLayout';
+import NewsModel from '../viewmodel/NewsModel';
+
+/**
+ * The news list component.
+ */
+@Component
+export default struct NewsList {
+  @State @Watch('newCustom') newsModel: NewsModel = new NewsModel();
+  @State customRefreshLoadClass: CustomRefreshLoadLayoutClass = new CustomRefreshLoadLayoutClass(true,
+    $r('app.media.ic_pull_up_load'), $r('app.string.pull_up_load_text'), this.newsModel.pullDownRefreshHeight);
+  @State refreshLayoutClass: CustomRefreshLoadLayoutClass =
+    new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullDown,
+      this.newsModel.pullDownRefreshImage, this.newsModel.pullDownRefreshText,
+      this.newsModel.pullDownRefreshHeight);
+  @State loadMoreLayoutClass: CustomRefreshLoadLayoutClass =
+    new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullUpLoad,
+      this.newsModel.pullUpLoadImage,
+      this.newsModel.pullUpLoadText, this.newsModel.pullUpLoadHeight);
+  @Link currentIndex: number;
+
+  newCustom() {
+    this.refreshLayoutClass =
+      new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullDown,
+        this.newsModel.pullDownRefreshImage, this.newsModel.pullDownRefreshText,
+        this.newsModel.pullDownRefreshHeight);
+    this.loadMoreLayoutClass =
+      new CustomRefreshLoadLayoutClass(this.newsModel.isVisiblePullUpLoad,
+        this.newsModel.pullUpLoadImage,
+        this.newsModel.pullUpLoadText, this.newsModel.pullUpLoadHeight);
+  }
+
+  changeCategory() {
+    this.newsModel.currentPage = 1;
+    NewsViewModel.getNewsList(this.newsModel.currentPage, this.newsModel.pageSize, Const.GET_NEWS_LIST)
+      .then((data: NewsData[]) => {
+        this.newsModel.pageState = PageState.Success;
+        if (data.length === this.newsModel.pageSize) {
+          this.newsModel.currentPage++;
+          this.newsModel.hasMore = true;
+        } else {
+          this.newsModel.hasMore = false;
+        }
+        this.newsModel.newsData = data;
+      })
+      .catch((err: string | Resource) => {
+        this.getUIContext().getPromptAction().showToast({
+          message: err,
+          duration: Const.ANIMATION_DURATION
+        });
+        this.newsModel.pageState = PageState.Fail;
+      });
+  }
+
+  aboutToAppear() {
+    // Request news data.
+    this.changeCategory();
+  }
+
+  build() {
+    Column() {
+      if (this.newsModel.pageState === PageState.Success) {
+        this.ListLayout()
+      } else if (this.newsModel.pageState === PageState.Loading) {
+        this.LoadingLayout()
+      } else {
+        this.FailLayout()
+      }
+    }
+    .width(Const.FULL_WIDTH)
+    .height(Const.FULL_HEIGHT)
+    .justifyContent(FlexAlign.Center)
+    .onTouch((event: TouchEvent | undefined) => {
+      if (event) {
+        if (this.newsModel.pageState === PageState.Success) {
+          listTouchEvent(this.newsModel, event);
+        }
+      }
+    })
+  }
+
+  @Builder
+  LoadingLayout() {
+    CustomRefreshLoadLayout({ customRefreshLoadClass: this.customRefreshLoadClass })
+  }
+
+  @Builder
+  ListLayout() {
+    List() {
+      ListItem() {
+        RefreshLayout({
+          refreshLayoutClass: this.refreshLayoutClass
+        })
+      }
+
+      ForEach(this.newsModel.newsData, (item: NewsData) => {
+        // Pull-down refresh layout
+        ListItem() {
+          NewsItem({ newsData: item })
+        }
+        .height(Const.NewsListConstant_ITEM_HEIGHT)
+        .backgroundColor($r('app.color.white'))
+        .margin({ top: Const.NewsListConstant_ITEM_MARGIN_TOP })
+        .borderRadius(Const.NewsListConstant_ITEM_BORDER_RADIUS)
+      }, (item: NewsData, index?: number) => JSON.stringify(item) + index)
+
+      ListItem() {
+        if (this.newsModel.hasMore) {
+          LoadMoreLayout({
+            loadMoreLayoutClass: this.loadMoreLayoutClass
+          })
+        } else {
+          NoMoreLayout()
+        }
+      }
+    }
+    .width(Const.NewsListConstant_LIST_WIDTH)
+    .height(Const.FULL_HEIGHT)
+    .margin({ left: Const.NewsListConstant_LIST_MARGIN_LEFT, right: Const.NewsListConstant_LIST_MARGIN_RIGHT })
+    .backgroundColor($r('app.color.listColor'))
+    .divider({
+      color: $r('app.color.dividerColor'),
+      strokeWidth: Const.NewsListConstant_LIST_DIVIDER_STROKE_WIDTH,
+      endMargin: Const.NewsListConstant_LIST_MARGIN_RIGHT
+    })
+    // Remove the rebound effect.
+    .edgeEffect(EdgeEffect.None)
+    .offset({ x: 0, y: `${this.newsModel.offsetY}px` })
+    .onScrollIndex((start: number, end: number) => {
+      // Listen to the first index of the current list.
+      this.newsModel.startIndex = start;
+      this.newsModel.endIndex = end;
+    })
+  }
+
+  @Builder
+  FailLayout() {
+    Image($r('app.media.none'))
+      .height(Const.NewsListConstant_NONE_IMAGE_SIZE)
+      .width(Const.NewsListConstant_NONE_IMAGE_SIZE)
+    Text($r('app.string.page_none_msg'))
+      .opacity(Const.NewsListConstant_NONE_TEXT_opacity)
+      .fontSize(Const.NewsListConstant_NONE_TEXT_size)
+      .fontColor($r('app.color.fontColor_text3'))
+      .margin({ top: Const.NewsListConstant_NONE_TEXT_margin })
+  }
+}ÀÔrDšÙ!../common/constant/CommonConstantª./NewsItem°./LoadMoreLayout¹./CustomRefreshLoadLayoutº../viewmodel/NewsViewModel¯./RefreshLayoutµ../viewmodel/NewsData¿../common/utils/PullDownRefresh®./NoMoreLayout¶../viewmodel/NewsModelÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙmC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\common\constant\CommonConstant.etsAÃªoh-resolveÂEAÂÙ\C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NewsItem.etsAÃªoh-resolveÂEAÂÙbC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\LoadMoreLayout.etsAÃªoh-resolveÂEAÂÙkC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\CustomRefreshLoadLayout.etsAÃªoh-resolveÂEAÂÙfC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsViewModel.etsAÃªoh-resolveÂEAÂÙaC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\RefreshLayout.etsAÃªoh-resolveÂEAÂÙaC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsData.etsAÃªoh-resolveÂEAÂÙkC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\common\utils\PullDownRefresh.etsAÃªoh-resolveÂEAÂÙ`C:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\view\NoMoreLayout.etsAÃªoh-resolveÂEAÂÙbC:\Users\1\DevEcoStudioProjects\renwu\quanxian\NewsData\entry\src\main\ets\viewmodel\NewsModel.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings«NewsList.js ‘¬NewsList.etsÜ€š”   ” ”	 	” ” ”   ”" -”( 3”ÌK ÌV”ÌL ÌW–”   ” ” ” ”! !”" "–”   ” ” ” ”- -”. .–”   ” ” ” ”+ +”, ,–”   ” ” ”$ $”? ?”Ì@ Ì@˜”   ” ”	 	”% %”' 1”- 7”ÌD ÌN”ÌE ÌO˜”   ” ”	 	” ” ” ”Ì@ Ì@”ÌA ÌA–”   ” ” ” ”6 6”7 7–”   ” ” ” ”) )”* *–”   ” ” ” ”. .”/ /–”   ” ” ” ” ” ‘”  ””8  4”<  8”ÌE  ÌA”ÌG  ÌCœ”ÌE !Ì@”ÌI !ÌD”Ìe !Ì`”Ìf !Ìa”Ìj !Ìe”ÍN "ÌI”ÍR "ÌM”ÍS "ÌN”Í\ "ÌW”Í] "ÌX”Ír "Ìm”Ís "ÌnÜ ”ÌA $”ÌE $”Ìa $$”Ìb $%”Ìf $)”Ìg $*”Ìp $3”Ìq $4”Ì‚ $ÌE”Ì„ %”Ìˆ %
+”Ì‰ %”Ì’ %”Ì“ %”Ì§ %)”Ì© %+”Ì­ %/”Ì® %0”Ì· %9”Ì¸ %:”ÌË %ÌM”ÌÍ &”ÌÑ &
+”ÌÒ &”ÌÛ &”ÌÜ &”Ìñ &*”Ìò &+Ü ”ÌB (”ÌF (”Ìb ($”Ìc (%”Ìg ()”Ìh (*”Ìq (3”Ìr (4”Ì… (ÌG”Ì‡ )”Ì‹ )
+”ÌŒ )”Ì• )”Ì– )”Ì¥ )$”Ì§ *”Ì« *
+”Ì¬ *”Ìµ *”Ì¶ *”ÌÄ *#”ÌÆ *%”ÌÊ *)”ÌË **”ÌÔ *3”ÌÕ *4”Ìå *ÌD”Ìæ *ÌE‘” /’”  ”  &’”  ”  &’” !	” !’” !	” !’” #	” #’” #	” #’” '	” '’” '	” '’” +” +’” +” +’” -” -”” .” .” .	” .Ü ” /” /
+”, /&”- /'”1 /+”2 /,”; /5”< /6”ÌM /ÌG”ÌO 0”ÌS 0”ÌT 0”Ì] 0”Ì^ 0”Ìr 0+”Ìt 0-”Ìx 01”Ìy 02”Ì‚ 0;”Ìƒ 0<”Ì– 0ÌO”Ì˜ 1”Ìœ 1”Ì 1”Ì¦ 1”Ì§ 1”Ì¼ 1,”Ì½ 1-”Ì¾ 1.”” 2” 2” 2	”  2Ü ” 3” 3
+”, 3&”- 3'”1 3+”2 3,”; 35”< 36”ÌO 3ÌI”ÌQ 4”ÌU 4”ÌV 4”Ì_ 4”Ì` 4”Ìo 4&”Ìq 5”Ìu 5”Ìv 5”Ì 5”Ì€ 5”Ì 5%”Ì 5'”Ì” 5+”Ì• 5,”Ì 55”ÌŸ 56”Ì¯ 5ÌF”Ì° 5ÌG”Ì± 5ÌH’” 6” 6’” 8” 8™” 9” 9” 9	” 9” 9”" 9”% 9!”& 9"”' 9#Ü ” :” :” :”! :”" :”& :"”' :#”0 :,”1 :-”< :8”> ::”ÌB :>”ÌC :?”ÌL :ÌH”ÌM :ÌI”ÌU :ÌQ”ÌW :ÌS”Ì\ :ÌX”Ì] :ÌY”Ìj :Ìf”Ìk :Ìg—” ;” ;” ;” ;” ;” ;” ;!˜” <” <” <” <” <”$ < ”Ì@ <4”ÌA <5œ” =” =” =” =” =”  =”$ = ”% =!”. =*”/ =+”7 =3”9 =5˜” >
+” >” >” >” >”* >$”, >&”- >'™” ?
+” ?” ?” ?” ?”& ? ”) ?#”- ?'”. ?(‘” Ì@	‘” Ì@™” ÌA
+” ÌA” ÌA” ÌA” ÌA”& ÌA ”) ÌA#”. ÌA(”/ ÌA)‘” ÌB	™” ÌC” ÌC” ÌC” ÌC” ÌC”# ÌC”& ÌC"”* ÌC&”+ ÌC'“” ÌD”	 ÌD”
+ ÌD—” ÌE” ÌE” ÌE” ÌE” ÌE$” ÌE&” ÌE(›” ÌF” ÌF” ÌF” ÌF” ÌF”  ÌF”/ ÌF+”1 ÌF-”2 ÌF.”; ÌF7”< ÌF8”” ÌG
+” ÌG” ÌG” ÌG–” ÌH
+” ÌH” ÌH” ÌH”  ÌH”2 ÌH,“” ÌI	” ÌI
+” ÌI˜” ÌJ” ÌJ” ÌJ” ÌJ” ÌJ”$ ÌJ ”= ÌJ1”> ÌJ2”” ÌK”	 ÌK”
+ ÌK” ÌK	’” ÌL” ÌL’” ÌN” ÌN’” ÌO” ÌO–” ÌP” ÌP” ÌP	” ÌP” ÌP” ÌP’” ÌQ” ÌQ‘” ÌS’” ÌT” ÌT
+˜” ÌT” ÌT
+” Ì]” Ì]
+” Ì]” Ì]” Ì]”) Ì]˜” ÌT” ÌT
+” Ì^” Ì^” Ì^” Ì^”  Ì^”+ Ì^˜” ÌT” ÌT
+” Ì_”! Ì_”" Ì_”+ Ì_”, Ì_”2 Ì_$™” ÌT” ÌT
+” Ì`” Ì`” Ì`” Ì`”! Ì`+”# Ì`-”% Ì`/”” Ìa” Ìa
+” Ìa” Ìa™” Ìb” Ìb” Ìb” Ìb”& Ìb”' Ìb”0 Ìb$”ÌN Ìb:”ÌP Ìb<š” Ìc
+”& Ìc”' Ìc”+ Ìc”, Ìc”5 Ìc'”7 Ìc)”< Ìc.”= Ìc/”> Ìc0‘” Ìd	‘” Ìe’” Ìf” Ìf™” ÌU” ÌU
+” ÌU” ÌU” ÌU” ÌU”( ÌU"”ÌF ÌU8”ÌH ÌU:•” ÌV” ÌV” ÌV”# ÌV”0 ÌV‘” ÌW™” ÌW” ÌW” ÌW” ÌW”# ÌW”$ ÌW ”- ÌW)”ÌK ÌW?”ÌM ÌWÌA•” ÌX” ÌX” ÌX”& ÌX”3 ÌX‘” ÌY‘” ÌY•” ÌZ” ÌZ” ÌZ”# ÌZ”0 ÌZ‘” Ì[’” ÌT” ÌT
+‘” Ìg’” Ìj” Ìjš”, Ìk”ÌC Ìk”ÌJ Ìk”ÌL Ìk”Ìb Ìk4”Ìd Ìk6”Ìh Ìk:”Ìi Ìk;”Ì ÌkÌQ”Ì ÌkÌS–” Ìk”2 Ìk4”4 Ìk6”8 Ìk:”9 Ìk;”ÌO ÌkÌQ–” Ìk”. Ìk4”0 Ìk6”4 Ìk:”5 Ìk;”ÌK ÌkÌQ‘” Ìl’” Ìo” Ìo’” Ìp” Ìp˜” Ìp” Ìp” ÌŒ” ÌŒ
+” ÌŒ” ÌŒ” ÌŒ”8 ÌŒ,˜” Ìp” Ìp” Ì” Ì” Ì” Ì” Ì”) ÌÜ ” Ìp” Ìp” Ì” Ì” Ì” Ì” Ì”  Ì”% Ì”& Ì”ÌG Ì;”ÌI Ì=”ÌN ÌÌB”ÌP ÌÌD”ÌU ÌÌI”ÌV ÌÌJ”Ìx ÌÌl”Ìz ÌÌn”” Ìp” Ìp” Ì”  Ì•” Ìp” Ìp” Ì” Ì” Ì“” Ì‘” Ì‘”Ì† Ì‘)–” Ì’” Ì’” Ì’”" Ì’”# Ì’”ÌM Ì’ÌC–” Ì“” Ì“” Ì“”  Ì“”! Ì“”ÌC Ì“9‘” Ì”˜” Ìp” Ìp” Ì–” Ì–” Ì–”& Ì–”' Ì–”+ Ì–Ü ” Ìp” Ìp” Ì—” Ì—” Ì—” Ì—” Ì—” Ì—” Ì—”  Ì—”! Ì—”# Ì—”& Ì—”* Ì—”+ Ì—”4 Ì—(”5 Ì—)”< Ì—0”Ì@ Ì—4”ÌB Ì—6›” Ìp” Ìp” Ì˜” Ì˜” Ì˜”  Ì˜”% Ì˜!”' Ì˜#”* Ì˜.”, Ì˜0”. Ì˜2’” Ì™”ÌA Ì™7™” Ìš” Ìš
+” Ìš” Ìš” Ìš”) Ìš”, Ìš"”1 Ìš'”2 Ìš(™” Ì›” Ì›
+” Ì›” Ì›” Ì›”' Ì›”* Ì› ”- Ì›#”. Ì›$’” Ìœ” Ìœ’” Ìq” Ìq“”4 Ìr”ÌA Ìr”ÌH Ìr–”  Ìs
+”2 Ìs”4 Ìs”8 Ìs"”9 Ìs#”ÌK Ìs5‘” Ìt	–”$ Ìs
+”6 Ìs”8 Ìs”< Ìs"”= Ìs#”ÌO Ìs5–”  Ìs
+”2 Ìs”4 Ìs”8 Ìs"”9 Ìs#”ÌK Ìs5’” Ìq” Ìq’” Ìq” Ìq’” Ìw” Ìw’” Ìx”7 Ìx#’” Ìy”$ Ìy’” Ìx”3 Ìx#˜” Ìy”  Ìy”! Ì|	”' Ì|”( Ì|”- Ì|”. Ì|”ÌJ Ì|2’” Ìx”3 Ìx#”” Ìy”  Ìy”! Ì}	”0 Ì}’” Ìx”3 Ìx#œ” Ìy”  Ìy”! Ì~	”' Ì~”( Ì~”* Ì~”- Ì~”/ Ì~”4 Ì~”5 Ì~”ÌU Ì~=”ÌW Ì~?’” Ìx”3 Ìx#˜” Ìy”  Ìy”! Ì	”- Ì”. Ì”3 Ì”4 Ì”ÌW Ì?˜”< Ìz
+”ÌD Ìz”ÌK Ìz”ÌM Ìz”ÌU Ìz”ÌW Ìz”Ì[ Ìz#”Ì] Ìz%””, Ìz”4 Ìz”6 Ìz”: Ìz#’” Ìx”3 Ìx#’” Ìy”  Ìy’” Ìx”/ Ìx#’” Ìy” ÌyÜ ”/ Ìw”3 Ìw”4 Ìw”= Ìw”> Ìw”ÌF Ìw%”Ì` Ì€	”Ìa Ì€
+”Ìe Ì€”Ìg Ì€”Ìl Ì€(”Ìn Ì€*”Ìp Ì€,”Ìq Ì€-”Ìu Ì€1”Ìv Ì€2”Ì Ì€;”Ì€ Ì€<”Ì„ Ì€Ì@”Ì… Ì€ÌA”Ìˆ Ì€ÌD”Ì Ì€ÌI’” Ìw” Ìw’” Ì‚” Ì‚˜” Ìƒ” Ìƒ” Ìƒ” Ìƒ”& Ìƒ”' Ìƒ”. Ìƒ"”0 Ìƒ$“”Ì@ Ì„
+”ÌN Ì„”ÌU Ì„–”, Ì…”? Ì…”ÌA Ì…!”ÌE Ì…%”ÌF Ì…&”ÌY Ì…9‘”) Ì†–”0 Ì…”ÌC Ì…”ÌE Ì…!”ÌI Ì…%”ÌJ Ì…&”Ì] Ì…9–”, Ì…”? Ì…”ÌA Ì…!”ÌE Ì…%”ÌF Ì…&”ÌY Ì…9‘” Ì‡	‘” Ì‡’”Ì@ Ìˆ
+”ÌL Ìˆ‘” Ì‰	’” Ì‚” Ì‚’” Ì‚” Ì‚’” Ìp” Ìp‘” Ì’” Ì ” Ì ’” Ì¡” Ì¡	˜” Ì¡” Ì¡	” Ì¢” Ì¢” Ì¢” Ì¢” Ì¢”? Ì¢4˜” Ì¡” Ì¡	” Ì£” Ì£” Ì£” Ì£” Ì£”> Ì£3’” Ì¤” Ì¤˜” Ì¤” Ì¤” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥”ÌA Ì¥7˜” Ì¤” Ì¤” Ì¦” Ì¦” Ì¦” Ì¦”  Ì¦”? Ì¦5”” Ì¤” Ì¤” Ì§” Ì§œ” Ì¤” Ì¤” Ì¨” Ì¨” Ì¨” Ì¨” Ì¨” Ì¨”$ Ì¨”% Ì¨”ÌF Ì¨<”ÌH Ì¨>’” Ì¤” Ì¤‘” Ì©ÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ…‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCachešÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€ÌÌ‘ÔrK•¤type¥start£end¨imported¥local¯ImportSpecifierÌ‰Ì ÔrL”¤type¥start£end¤nameªIdentifierÌ‰Ì—®CommonConstantLªIdentifierÌ›Ì ¥ConstÔrM•¤type¥start£end¥value£raw§LiteralÌ¨ÌËÙ!../common/constant/CommonConstantÙ#'../common/constant/CommonConstant'J±ImportDeclarationÌÎÌğ‘ÔrN”¤type¥start£end¥local¶ImportDefaultSpecifierÌÕÌİLªIdentifierÌÕÌİ¨NewsItemM§LiteralÌãÌïª./NewsItem¬'./NewsItem'J±ImportDeclarationÌòÍ ‘N¶ImportDefaultSpecifierÌùÍLªIdentifierÌùÍ®LoadMoreLayoutM§LiteralÍÍ°./LoadMoreLayout²'./LoadMoreLayout'J±ImportDeclarationÍ"ÍN‘N¶ImportDefaultSpecifierÍ)Í6LªIdentifierÍ)Í6­RefreshLayoutM§LiteralÍ<ÍM¯./RefreshLayout±'./RefreshLayout'J±ImportDeclarationÍPÍ‘N¶ImportDefaultSpecifierÍWÍnLªIdentifierÍWÍn·CustomRefreshLoadLayoutM§LiteralÍtÍ¹./CustomRefreshLoadLayout»'./CustomRefreshLoadLayout'J±ImportDeclarationÍ’Í×‘K¯ImportSpecifierÍ›Í·LªIdentifierÍ›Í·¼CustomRefreshLoadLayoutClassLªIdentifierÍ›Í·¼CustomRefreshLoadLayoutClassM§LiteralÍ¿ÍÖµ../viewmodel/NewsData·'../viewmodel/NewsData'J±ImportDeclarationÍÙÍ‘K¯ImportSpecifierÍâÍğLªIdentifierÍâÍğ®listTouchEventLªIdentifierÍâÍğ®listTouchEventM§LiteralÍøÍ¿../common/utils/PullDownRefreshÙ!'../common/utils/PullDownRefresh'J±ImportDeclarationÍÍS‘N¶ImportDefaultSpecifierÍ#Í0LªIdentifierÍ#Í0­NewsViewModelM§LiteralÍ6ÍRº../viewmodel/NewsViewModel¼'../viewmodel/NewsViewModel'J±ImportDeclarationÍUÍ‘N¶ImportDefaultSpecifierÍ\ÍhLªIdentifierÍ\Íh¬NoMoreLayoutM§LiteralÍnÍ~®./NoMoreLayout°'./NoMoreLayout'J±ImportDeclarationÍÍ°‘N¶ImportDefaultSpecifierÍˆÍ‘LªIdentifierÍˆÍ‘©NewsModelM§LiteralÍ—Í¯¶../viewmodel/NewsModel¸'../viewmodel/NewsModel'
