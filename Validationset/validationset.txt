@@ -1,0 +1,10 @@
+1.广告竞价
+https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_AdsKit-Bidding-ArkTS
+2.鸿蒙天气
+https://gitee.com/ericple/ohos-weather
+3.华为分享功能
+https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_NEXT-ShareKit
+4.F-OH 应用下载中心
+https://gitee.com/westinyang/f-oh
+5.游戏登录
+https://developer.huawei.com/consumer/cn/codelabsPortal/carddetails/tutorials_NEXT-GameService-UnionLogin
